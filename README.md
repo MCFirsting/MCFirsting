@@ -19,6 +19,11 @@ I've been learning to code for 6 years from developing a Minecraft Add-on conten
 <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript" target="_blank" rel="noreferrer"><img src="https://raw.githubusercontent.com/danielcranney/readme-generator/main/public/icons/skills/javascript-colored.svg" width="36" height="36" alt="JavaScript" /></a><a href="https://code.visualstudio.com/" target="_blank" rel="noreferrer"><img src="https://code.visualstudio.com/assets/images/code-stable.png" width="36" height="36" alt="VS Code" /></a>
 </p>
 
+### Badges
+
+<a href="https://github.com//MCFirsting" align="left"><img src="https://github-readme-stats.vercel.app/api/top-langs/?username=/MCFirsting&langs_count=10&title_color=0891b2&text_color=ffffff&icon_color=0891b2&bg_color=1c1917&hide_border=true&locale=en&custom_title=Top%20%Languages" alt="Top Languages" /></a>
+
+
 
 ### Socials
 
