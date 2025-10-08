@@ -1,0 +1,98 @@
+body {
+    background-color: #313131;
+}
+
+#logo_mcfirsting {
+    filter: drop-shadow(0px 3px 4px #000000);
+    padding: 10%;
+}
+
+.navbar {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    display: flex;
+    align-items: center;
+    font-family: "MinecraftTen";
+    justify-content: space-between;
+    background-image: linear-gradient(to bottom, rgb(255, 106, 0), rgb(255, 149, 0));
+    padding: 3px 3px;
+    z-index: 1000;
+    filter: drop-shadow(0px 3px 4px #000000);
+}
+
+.logo img {
+    height: 45px;
+}
+
+.nav-links {
+    list-style: none;
+    display: flex;
+    margin: 0;
+}
+
+.nav-links li {
+    margin: 4px;
+}
+
+.nav-links a {
+    padding: 10px;
+    text-decoration: none;
+    color: rgb(0, 0, 0);
+    font-size: 24px;
+    line-height: 65px;
+    transition: color 0.3s;
+}
+
+.nav-links a:hover {
+    padding: 10px;
+    color: #ffffff;
+    transition: 0.3s;
+}
+
+.content {
+    margin-top: 70px;
+}
+
+section {
+    padding: 100px 20px;
+    border-bottom: 2px solid #ccc;
+}
+
+.page {
+    font-family: "MinecraftTen";
+    color: #ffffff;
+    font-size: 30px
+}
+
+p {
+    color: #ffff;
+    font-size: 20px;
+    padding: 10px;
+}
+
+.project {
+    color: #ffffff;
+    font-family: "MinecraftTen";
+}
+
+.footer {
+    background-color: #000000;
+    color: white;
+    position: fixed;
+    width: 100%;
+    left: 1px;
+    bottom: 0;
+    top: 80%;
+    text-align: center;
+    font-size: 15px;
+    align-items: center;
+    z-index: 1000;
+    justify-content: space-between;
+}
+
+@font-face {
+    font-family: "MinecraftTen";
+    src: url("fonts/MinecraftTen-VGORe.ttf");
+}

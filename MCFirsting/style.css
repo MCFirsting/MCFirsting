@@ -1,0 +1,139 @@
+body {
+    background-color: #313131;
+}
+
+#logo_mcfirsting {
+    filter: drop-shadow(0px 3px 4px #000000);
+    padding: 10%;
+}
+
+.navbar {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    display: flex;
+    align-items: center;
+    font-family: "MinecraftTen";
+    justify-content: space-between;
+    background-image: linear-gradient(to bottom, rgb(255, 106, 0), rgb(255, 149, 0));
+    padding: 3px 3px;
+    z-index: 1000;
+    filter: drop-shadow(0px 3px 4px #000000);
+}
+
+.logo img {
+    height: 45px;
+}
+
+.nav-links {
+    list-style: none;
+    display: flex;
+    margin: 0;
+}
+
+.nav-links li {
+    margin: 4px;
+}
+
+.nav-links a {
+    padding: 10px;
+    text-decoration: none;
+    color: rgb(0, 0, 0);
+    font-size: 24px;
+    line-height: 65px;
+    transition: color 0.3s;
+}
+
+.nav-links a:hover {
+    padding: 10px;
+    color: #ffffff;
+    transition: 0.3s;
+}
+
+.content {
+    margin-top: 70px;
+}
+
+section {
+    padding: 100px 20px;
+    border-bottom: 2px solid #ccc;
+}
+
+.page {
+    color: #ffffff;
+    font-family: "MinecraftTen";
+}
+
+p {
+    color: #ffff;
+    font-family: "MinecraftTen"
+}
+
+.project {
+    color: #ffffff;
+    font-family: "MinecraftTen";
+}
+
+.footer {
+    background-color: #000000;
+    color: white;
+    position: fixed;
+    width: 100%;
+    left: 1px;
+    bottom: 0;
+    top: 80%;
+    text-align: center;
+    font-size: 15px;
+    align-items: center;
+    z-index: 1000;
+    justify-content: space-between;
+}
+
+.box {
+    background: #474747;
+    padding-bottom: 15%;
+}
+
+@font-face {
+    font-family: "MinecraftTen";
+    src: url("fonts/MinecraftTen-VGORe.ttf");
+}
+
+.category-container {
+    font-family: "MinecraftTen";
+    font-size: larger;
+    display: flex;
+    justify-content: center;
+    margin: 40px 0;
+    flex-wrap: wrap;
+    gap: 20px;
+    max-width: 1200px;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.topic-box {
+    width: 200px;
+    height: 80px;
+    background-color: #454545;
+    border-radius: 8px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    box-shadow: 3px 3px 10px rgba(0, 0, 0, 0.2);
+    text-decoration: none;
+    color: #ffffff;
+    transition: transform 0.2s, box-shadow 0.2s;
+}
+
+.topic-box h2 {
+    font-size: 1.2em;
+    margin: 0;
+}
+
+.topic-box:hover {
+    transform: translateY(-5px);
+    background-color: #e68a00;
+    box-shadow: 5px 5px 15px rgba(0, 0, 0, 0.3);
+}
