@@ -1,5 +1,13 @@
 body {
     background-color: #313131;
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
+    margin: 0;
+}
+
+body>div:first-child {
+    flex-grow: 1;
 }
 
 #logo_mcfirsting {
@@ -11,7 +19,7 @@ body {
     position: fixed;
     top: 0;
     left: 0;
-    width: 100%;
+    width: 99%;
     display: flex;
     align-items: center;
     font-family: "MinecraftTen";
@@ -33,7 +41,7 @@ body {
 }
 
 .nav-links li {
-    margin: 4px;
+    margin: -5px;
 }
 
 .nav-links a {
@@ -75,19 +83,24 @@ p {
     font-family: "MinecraftTen";
 }
 
-.footer {
-    background-color: #000000;
-    color: white;
-    position: fixed;
-    width: 100%;
-    left: 1px;
-    bottom: 0;
-    top: 80%;
-    text-align: center;
-    font-size: 15px;
+footer {
+    display: flex;
+    flex-direction: column;
     align-items: center;
-    z-index: 1000;
-    justify-content: space-between;
+    background-color: #000000;
+    color: #ffffff;
+    padding: 2px;
+}
+
+footer h2 {
+    text-align: center;
+    margin-bottom: 20px;
+}
+
+.social-icons {
+    display: flex;
+    justify-content: center;
+    gap: 15px;
 }
 
 .box {
@@ -136,4 +149,75 @@ p {
     transform: translateY(-5px);
     background-color: #e68a00;
     box-shadow: 5px 5px 15px rgba(0, 0, 0, 0.3);
+}
+
+
+.news-slider-section {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 100%;
+    margin-top: 20px;
+}
+
+#newsSliderContainer {
+    position: relative;
+    width: 370px;
+    overflow: hidden;
+}
+
+#newsWrapper {
+    display: flex;
+    transition: transform 0.5s ease;
+}
+
+.news-slide-item {
+    width: 350px;
+    margin: 0 10px;
+    flex-shrink: 0;
+    text-decoration: none;
+}
+
+.news-card {
+    position: relative;
+    overflow: hidden;
+    width: 350px;
+    height: 240px;
+}
+
+.news-slide-item:hover .card-overlay {
+    background: linear-gradient(to top, rgba(0, 0, 0, 0.95), rgba(0, 0, 0, 0.1));
+}
+
+.slide-button {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    background-color: rgba(0, 0, 0, 0.5);
+    color: white;
+    border: none;
+    width: 40px;
+    height: 40px;
+    font-size: 20px;
+    font-weight: bold;
+    cursor: pointer;
+    z-index: 10;
+    transition: background-color 0.3s;
+}
+
+.slide-button:hover {
+    background-color: rgba(0, 0, 0, 0.8);
+}
+
+.slide-button:disabled {
+    opacity: 0.3;
+    cursor: not-allowed;
+}
+
+#prevNewsButton {
+    left: 10px;
+}
+
+#nextNewsButton {
+    right: 10px;
 }
