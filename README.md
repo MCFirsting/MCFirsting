@@ -7,7 +7,7 @@ Add-on Developer
 I've been learning to code for 6 years from developing a Minecraft Add-on content and currently I'm working as a freelancer.
 
 * 🌍  I'm based in Thailand
-* 🖥️  See my portfolio at [Thai Festival Add-on](http://www.curseforge.com/minecraft-bedrock/addons/thai-festival-addon)
+* 🖥️  See my portfolio at [MCFirsting](https://mcfirsting.netlify.app/)
 * ✉️  You can contact me at [tirawat2546somkhan@gmail.com](mailto:tirawat2546somkhan@gmail.com)
 * 🚀  I'm currently working on [YouTubers](http://youtube.com/@mcfirsting)
 
