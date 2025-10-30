@@ -1,0 +1,162 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>MCFirsting</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+    <div>
+        <nav class="navbar">
+            <div class="logo">
+                <a href="\"><img id="logo_mcfirsting" src="image/mcfirsting_logo.png" height="50"></a>
+            </div>
+            <ul class="nav-links">
+                <li><a href="\tutorial.html">Tutorial</a></li>
+                <li><a href="\shop.html">Shop</a></li>
+            </ul>
+        </nav>
+        <section>
+            <center>
+                <p class="page">พื้นฐานการเริ่มต้นสำหรับพัฒนา Add-ons</p>
+            </center>
+            <p>ไม่ว่าทุกคนจะสร้างสรรค์ด้วยตนเองหรือเป็นแรงบันดาลใจจากเหล่าผู้สร้างคนอื่นๆ
+                เป็นก้าวแรกสู่การยกระดับการปรับแต่งให้กับ
+                Minecraft: Bedrock Edition Add-ons ช่วยให้ผู้เล่นสามารถปรับเปลี่ยนรูปลักษณ์ของโลก
+                หรือแม้แต่พฤติกรรมของ
+                Entity อย่างเช่นทุกคนสามารถเปลี่ยนรัศมีการระเบิดของ Creeper ได้</p>
+            <center>
+                <img class="page"
+                    src="https://learn.microsoft.com/en-us/minecraft/creator/documents/media/gettingstarted/getting-started.jpg?view=minecraft-bedrock-stable"
+                    height="230" width="330">
+            </center>
+            <p class="page">ประโยชน์ที่ได้รับ</p>
+            <p>· วิธีการดาวน์โหลด Add-ons สำหรับอุปกรณ์ต่างๆ<br>· โครงสร้างไฟล์ที่ใช้ใน Minecraft Add-ons<br>·
+                ใช้โปรแกรมเขียนโค้ดอะไร?</p>
+            <p class="page">การติดตั้ง Add-ons</p>
+            <p>สามารถติดตั้ง Add-ons บนแพลตฟอร์มต่างๆที่ใช้ Minecraft ดังต่อไปนี้</p>
+            <div class="tabs-container">
+                <div class="tab-links">
+                    <button class="tab-link active" data-tab="windows">Windows 10/11</button>
+                    <button class="tab-link" data-tab="android">Android</button>
+                    <button class="tab-link" data-tab="ios">iOS</button>
+                </div>
+                <div class="tab-content-container">
+                    <div class="tab-content active" data-tab="windows">
+                        <ol>
+                            <li>อย่างแรกทุกคนต้องติดตั้ง Minecraft: Bedrock Edition ลงคอมพิวเตอร์ก่อน
+                            </li>
+                            <li>ดาวน์โหลดไฟล์ของ Add-ons จากแหล่งที่มา</li>
+                            <li>ไปที่ไดเร็กทอรีที่ทุกคนดาวน์โหลดไฟล์ หากไฟล์ดาวน์โหลดเป็นไฟล์ .zip
+                                ให้เปลี่ยนชื่อนามสกุลไฟล์เป็น .mcpack หรือ .mcaddon</li>
+                            <li>ลองเปิดไฟล์ ซึ่งควรจะเปิดขึ้นในเกม "Minecraft"</li>
+                        </ol>
+                        <ul>
+                            <li>ถ้าทุกคนเปิดจากไฟล์ในเกมจะมีการแจ้งเตือนแบบป๊อปอัปว่า "Successfully imported" </li>
+                            <li>จากนั้นเปิดใช้งานผ่าน Resource Pack และ Behavior Pack ในโลกของคุณ</li>
+                        </ul>
+                    </div>
+                    <div class="tab-content" data-tab="android">
+                        <ol>
+                            <li>อย่างแรกทุกคนต้องติดตั้ง Minecraft: Bedrock Edition ลงบนมือถือก่อน
+                            </li>
+                            <li>ไปที่แอปตัวจัดการไฟล์แล้วเลือก "พื้นที่เก็บข้อมูลภายใน"
+                                หากไม่มีให้ดาวน์โหลดแอปตัวจัดการไฟล์อื่นๆอย่างเช่น "RS File Explorer"
+                            <li>ดาวน์โหลดไฟล์ของ Add-ons จากแหล่งที่มา</li>
+                            </li>
+                            <li>ไปที่ไดเร็กทอรีที่ทุกคนดาวน์โหลดไฟล์ หากไฟล์ดาวน์โหลดเป็นไฟล์ .zip
+                                ให้เปลี่ยนชื่อนามสกุลไฟล์เป็น .mcpack หรือ .mcaddon</li>
+                            <li>ลองเปิดไฟล์ ถ้ามีตัวเลือกแอพพลิเคชั่นให้เลือกเปิดขึ้นในเกม "Minecraft"</li>
+                        </ol>
+                        <ul>
+                            <li>ข้อควรจำว่าถ้าทุกคนมีพื้นที่ข้อมูลในเกมตั้งต้นคือ "Application"
+                                แนะนำให้สำรองข้อมูลก่อนจะสลับเป็น "External"</li>
+                            <img src="image/Screenshot2.png" height="50px">
+                            <img src="image/Screenshot1.png" height="100px">
+                            <li>ถ้าทุกคนเปิดจากไฟล์ในเกมจะมีการแจ้งเตือนแบบป๊อปอัปว่า "Successfully imported" </li>
+                            <li>จากนั้นเปิดใช้งานผ่าน Resource Pack และ Behavior Pack ในโลกของคุณ</li>
+                        </ul>
+                    </div>
+                    <div class="tab-content" data-tab="ios">
+                        <ol>
+                            <li>อย่างแรกทุกคนต้องติดตั้ง Minecraft: Bedrock Edition ลงบนมือถือก่อน
+                            </li>
+                            <li>ดาวน์โหลดไฟล์ของ Add-ons จากแหล่งที่มา</li>
+                            </li>
+                            <li>ไปที่ไดเร็กทอรีที่ทุกคนดาวน์โหลดไฟล์ หากไฟล์ดาวน์โหลดเป็นไฟล์ .zip
+                                ให้เปลี่ยนชื่อนามสกุลไฟล์เป็น .mcpack หรือ .mcaddon</li>
+                            <li>ลองเปิดไฟล์ ถ้ามีตัวเลือกแอพพลิเคชั่นให้เลือกเปิดขึ้นในเกม "Minecraft"</li>
+                        </ol>
+                        <ul>
+                            <li>ข้อควรจำว่าถ้าทุกคนมีพื้นที่ข้อมูลในเกมตั้งต้นคือ "Application"
+                                แนะนำให้สำรองข้อมูลก่อนจะสลับเป็น "External"</li>
+                            <img src="image/Screenshot2.png" height="50px">
+                            <img src="image/Screenshot1.png" height="100px">
+                            <li>ถ้าทุกคนเปิดจากไฟล์ในเกมจะมีการแจ้งเตือนแบบป๊อปอัปว่า "Successfully imported" </li>
+                            <li>จากนั้นเปิดใช้งานผ่าน Resource Pack และ Behavior Pack ในโลกของคุณ</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+            <p class="page">โฟลเดอร์ com.mojang</p>
+            <p>มีการเพิ่มโฟลเดอร์ชื่อ "com.mojang" ระหว่างการติดตั้ง Minecraft
+                ทุกคนต้องหาโฟลเดอร์นี้ก่อนจึงจะสามารถเพิ่มเนื้อหาลงไปได้ สำหรับบน Windows
+                แนะนำให้เปิดแสดงรายการที่ซ่อนก่อนจะเข้าถึงโฟลเดอร์</p>
+            <p class="page">กด Win+R เพื่อเปิด Run
+            </p>
+            <p class="page">แนะนำให้คัดลอกคำสั่งในช่องเปิดเพื่อนำทาง
+            </p>
+            <p>%appdata%\Minecraft Bedrock\users\shared\games\com.mojang</p>
+            <p>ในภาพจะแสดงเนื้อหาไดเร็กทอรีย่อยหลายรายการอยู่ในโฟลเดอร์ทั้งหมด<br>มีโฟลเดอร์สามโฟลเดอร์ชื่อ
+                behavior_packs,resource_packs และ skin_packs จะเก็บเนื้อหาแบบกำหนดเองที่จะถูกเพิ่มเข้าไปใน
+                Minecraft:Bedrock
+                Edition</p>
+            <center>
+                <img class="page" src="image/Screenshot3.png">
+            </center>
+            <p class="page">ชุดแพ็คสำหรับนักพัฒนา</p>
+            <p>ทุกคนสามารถใช้โฟลเดอร์ development_resource_packs และ development_behavior_packs
+                จะเป็นการรีโหลดโดยอัตโนมัติเมื่อสลับหน้าไปยังเกม Minecraft ระหว่างบันทึกไฟล์</p>
+            <p class="page">โปรแกรมเขียนโค้ด</p>
+            <p>หากทุกคนต้องการใช้งานโปรแกรมสำหรับเขียนโค้ดอย่างน้อยต้องมีตัวช่วย IDE
+                ที่เพิ่มความสะดวกให้โปรแกรมเข้าใจในการทำงานขององค์ประกอบ</p>
+            <p class="page">bridge. v2</p>
+            <p>โปรแกรมเขียนโค้ดที่ทรงพลังออกแบบมาเพื่อให้กระบวนการทำงานที่หลากหลาย
+                ไม่ว่าจะเป็นเทมเพลตสำเร็จรูปหรือการเพิ่มโค้ดที่โต้ตอบได้ง่าย เหมาะสำหรับผู้เริ่มต้นที่มีอุปกรณ์มือถือและ
+                PC</p>
+            <p class="page">Visual Studio Code</p>
+            <p>โปรแกรมเขียนโค้ดที่ใช้การปรับแต่งในการพัฒนา Add-ons ให้ซับซ้อนขึ้นสำหรับ Minecraft: Bedrock Edition
+                โดยการเขียนรูปแบบภาษา JSON ที่สามารถแก้ไขข้อความใดๆใน Notepad หรือ Word
+                แต่มันไม่ได้ง่ายสำหรับการเป็นโปรแกรมเมอร์จะทำความเข้าใจในโครงสร้าง JSON แต่โชคดีที่ Microsoft
+                ได้เปิดให้โปรแกรมฟรีที่ทุกคนสามารถดาวน์โหลดบน PC รวมถึงการรองรับ Extension สำหรับการพัฒนา Minecraft:
+                Bedrock Edition โดยเฉพาะ
+            </p>
+        </section>
+    </div>
+    <footer>
+        <h2>ช่องทางติดต่อ</h2>
+        <div>
+            <a class="social-icons" href="https://www.facebook.com/FPGTVMC/">
+                <img src="image/facebook-svgrepo-com.png" height="40">
+            </a>
+            <a class="social-icons" href="https://www.youtube.com/@MCFirsting">
+                <img src="image/youtube-fill-svgrepo-com.png" height="40">
+            </a>
+            <a class="social-icons" class="social-icons" href="https://discord.gg/3j8Dk9p79r">
+                <img src="image/discord-svgrepo-com.png" height="40">
+            </a>
+            <a class="social-icons" href="https://github.com/MCFirsting/MCFirsting">
+                <img src="image/github-svgrepo-com.png" height="40">
+            </a>
+            <a class="social-icons" href="https://www.tiktok.com/@mc_firsting">
+                <img src="image/tiktok-svgrepo-com.png" height="40">
+            </a>
+    </footer>
+</body>
+
+<script src="getting_started.js"></script>
+
+</html>

@@ -70,16 +70,18 @@ section {
 .page {
     color: #ffffff;
     font-family: "MinecraftTen";
+    font-size: 160%
 }
 
 p {
     color: #ffff;
-    font-family: "MinecraftTen"
+    font-family: "MinecraftTen";
 }
 
 .project {
     color: #ffffff;
     font-family: "MinecraftTen";
+    text-align: center;
 }
 
 footer {

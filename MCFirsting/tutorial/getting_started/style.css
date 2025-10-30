@@ -121,3 +121,102 @@ footer h2 {
     font-family: "MinecraftTen";
     src: url("fonts/MinecraftTen-VGORe.ttf");
 }
+
+
+.tabs-container {
+    margin-left: 10%;
+    max-width: 400px;
+    background-color: #252525;
+    border-radius: 8px;
+    overflow: hidden;
+}
+
+.tab-links {
+    display: flex;
+    background-color: #1e1e1e;
+    border-bottom: 2px solid #4a4a4a;
+}
+
+.tab-link {
+    padding: 12px 20px;
+    cursor: pointer;
+    background: none;
+    border: none;
+    color: #9e9e9e;
+    font-family: "MinecraftTen";
+    font-size: 1em;
+    transition: color 0.3s, border-color 0.3s;
+    border-bottom: 3px solid transparent;
+    margin-bottom: -2px;
+}
+
+.tab-link.active {
+    color: #ffffff;
+    border-bottom: 3px solid #ffffff;
+}
+
+.tab-link:hover {
+    color: #ffffff;
+}
+
+.tab-content {
+    display: none;
+    padding: 25px;
+    line-height: 1.6;
+}
+
+.tab-content.active {
+    display: block;
+    color: #ffffff;
+}
+
+.tab-content ol {
+    padding-left: 20px;
+}
+
+.tab-content ol li {
+    margin-bottom: 15px;
+}
+
+.tab-content ul {
+    padding-left: 20px;
+    list-style-type: disc;
+}
+
+.tab-content ul li {
+    margin-bottom: 10px;
+}
+
+
+.code-container {
+    position: relative;
+    background-color: #1e1e1e;
+    border-radius: 5px;
+    padding: 10px;
+    padding-right: 80px;
+}
+
+.code-container pre {
+    color: #f0f0f0;
+    margin: 5%;
+    overflow-x: auto;
+    white-space: pre;
+}
+
+.copy-btn {
+    position: relative;
+    top: 10px;
+    right: 10px;
+    background-color: #ffffff;
+    color: #000000;
+    border: none;
+    padding: 5px 10px;
+    border-radius: 3px;
+    cursor: pointer;
+    font-family: "MinecraftTen";
+    font-size: 0.9em;
+}
+
+.copy-btn:hover {
+    background-color: #c8c8c8;
+}
