@@ -4,7 +4,7 @@ Hi ![](https://user-images.githubusercontent.com/18350557/176309783-0785949b-912
 Add-on Developer
 ----------------
 
-I've been learning to code for 6 years from developing a Minecraft Add-on content and currently I'm working as a freelancer.
+I've been learning to code for many years from developing a Minecraft Add-on content and currently I'm working as a freelancer.
 
 * 🌍  I'm based in Thailand
 * 🖥️  See my portfolio at [MCFirsting](https://mcfirsting.netlify.app/)
