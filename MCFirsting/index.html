@@ -8,84 +8,91 @@
     <link rel="stylesheet" href="style.css">
 </head>
 
-<script src="main.js"></script>
-
 <body>
-    <div>
-        <nav class="navbar">
-            <div class="logo">
-                <a href="index.html"><img id="logo_mcfirsting" src="image/mcfirsting_logo.png" height="50"></a>
+    <nav class="navbar">
+        <div class="logo">
+            <a href="index.html"><img id="logo_mcfirsting" src="image/mcfirsting_logo.png" alt="Logo"></a>
+        </div>
+        <ul class="nav-links">
+            <li><a href="tutorial.html">Tutorial</a></li>
+            <li><a href="shop.html">Shop</a></li>
+        </ul>
+    </nav>
+
+    <header class="hero-section">
+        <div class="container">
+            <h1 class="hero-title">เติมไฟสร้างสรรค์</h1>
+            <p class="hero-subtitle">จากประสบการณ์ Add-ons Creator<br>พร้อมให้ทุกคนโชว์ศักยภาพความสร้างสรรค์ไร้ขีดจำกัด
+            </p>
+        </div>
+    </header>
+
+    <section class="section-content">
+        <div class="container">
+            <h2 class="section-title">ผลงานโปรเจคล่าสุด</h2>
+            <div class="project-showcase">
+                <a href="https://www.curseforge.com/minecraft-bedrock/addons/thai-festival-addon" target="_blank">
+                    <img src="https://media.forgecdn.net/attachments/1027/322/img_20241128_153736.png"
+                        alt="Latest Project">
+                </a>
             </div>
-            <ul class="nav-links">
-                <li><a href="tutorial.html">Tutorial</a></li>
-                <li><a href="shop.html">Shop</a></li>
-            </ul>
-        </nav>
-        <section>
-            <center class="page">
-                <div>
-                    <h2 class="page">เติมไฟสร้างสรรค์</h2>
-                    <p>จากประสบการณ์<br>Add-ons Creator<br>พร้อมให้ทุกคนโชว์ศักยภาพความสร้างสรรค์ไร้ขีดจำกัด</p>
-                    <div>
-                        <h2 class="project">ผลงานโปรเจคล่าสุด</h2>
-                        <a href="https://www.curseforge.com/minecraft-bedrock/addons/thai-festival-addon">
-                            <img src="https://media.forgecdn.net/attachments/1027/322/img_20241128_153736.png"
-                                height="190">
+        </div>
+    </section>
+
+    <section class="section-content bg-darker">
+        <div class="container">
+            <h2 class="section-title">ข่าวสารวงการ Add-ons</h2>
+            <div class="news-slider-section">
+                <div id="newsSliderContainer">
+                    <button class="slide-button" id="prevNewsButton">&lt;</button>
+                    <div id="newsWrapper">
+                        <a href="news/news1/news1.html" class="news-slide-item">
+                            <div class="news-card">
+                                <img src="image/news1.jpg" alt="News 1">
+                                <div class="card-overlay"></div>
+                            </div>
+                        </a>
+                        <a href="news/news2/news2.html" class="news-slide-item">
+                            <div class="news-card">
+                                <img src="image/news2.jpg" alt="News 2">
+                                <div class="card-overlay"></div>
+                            </div>
+                        </a>
+                        <a href="news/news3/news3.html" class="news-slide-item">
+                            <div class="news-card">
+                                <img src="image/news3.jpg" alt="News 3">
+                                <div class="card-overlay"></div>
+                            </div>
                         </a>
                     </div>
-                    <div class="news-slider-section">
-                        <h2 class="project">ข่าวสารวงการ Add-ons</h2>
-                        <div id="newsSliderContainer">
-                            <button class="slide-button" id="prevNewsButton">&lt;</button>
-                            <div id="newsWrapper">
-                                <a href="news/news1/news1.html" class="news-slide-item">
-                                    <div class="news-card">
-                                        <img src="image/news1.jpg" height="240">
-                                        <div class="card-overlay">
-                                        </div>
-                                    </div>
-                                </a>
-                                <a href="news/news2/news2.html" class="news-slide-item">
-                                    <div class="news-card">
-                                        <img src="image/news2.jpg" height="240">
-                                        <div class="card-overlay">
-                                        </div>
-                                    </div>
-                                </a>
-                                <a href="news/news3/news3.html" class="news-slide-item">
-                                    <div class="news-card">
-                                        <img src="image/news3.jpg" height="240">
-                                        <div class="card-overlay">
-                                        </div>
-                                    </div>
-                                </a>
-                            </div>
-                            <button class="slide-button" id="nextNewsButton">&gt;</button>
-                        </div>
-                    </div>
-            </center>
-        </section>
-    </div>
-    </div>
+                    <button class="slide-button" id="nextNewsButton">&gt;</button>
+                </div>
+            </div>
+        </div>
+    </section>
+
     <footer>
         <h2>ช่องทางติดต่อ</h2>
-        <div>
+        <div class="social-container">
             <a class="social-icons" href="https://www.facebook.com/FPGTVMC/">
-                <img src="image/facebook-svgrepo-com.png" height="40">
+                <img src="image/facebook-svgrepo-com.png" alt="Facebook">
             </a>
             <a class="social-icons" href="https://www.youtube.com/@MCFirsting">
-                <img src="image/youtube-fill-svgrepo-com.png" height="40">
+                <img src="image/youtube-fill-svgrepo-com.png" alt="YouTube">
             </a>
-            <a class="social-icons" class="social-icons" href="https://discord.gg/3j8Dk9p79r">
-                <img src="image/discord-svgrepo-com.png" height="40">
+            <a class="social-icons" href="https://discord.gg/tnqZCfz4wz">
+                <img src="image/discord-svgrepo-com.png" alt="Discord">
             </a>
             <a class="social-icons" href="https://github.com/MCFirsting">
-                <img src="image/github-svgrepo-com.png" height="40">
+                <img src="image/github-svgrepo-com.png" alt="GitHub">
             </a>
             <a class="social-icons" href="https://www.tiktok.com/@mc_firsting">
-                <img src="image/tiktok-svgrepo-com.png" height="40">
+                <img src="image/tiktok-svgrepo-com.png" alt="TikTok">
             </a>
+        </div>
     </footer>
+
+    <script src="main.js"></script>
 </body>
 
 </html>

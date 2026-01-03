@@ -1,0 +1,156 @@
+<!DOCTYPE html>
+<html lang="th">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Introduction to Resource Packs - MCFirsting</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+    <nav class="navbar">
+        <div class="logo">
+            <a href="../../index.html"><img id="logo_mcfirsting" src="../../image/mcfirsting_logo.png" alt="Logo"></a>
+        </div>
+        <ul class="nav-links">
+            <li><a href="../../tutorial.html">Tutorial</a></li>
+            <li><a href="../../shop.html">Shop</a></li>
+        </ul>
+    </nav>
+
+    <header class="doc-header">
+        <div class="container">
+            <h1>Resource Packs เบื้องต้น</h1>
+            <p style="text-align: center; color: #aaa;">เปลี่ยนหน้าตาโลก Minecraft ของคุณด้วยการปรับแต่ง Texture ง่ายๆ
+            </p>
+        </div>
+    </header>
+
+    <article class="article-container">
+
+        <p>
+            ก่อนที่คุณจะเริ่มสร้าง Add-On ที่ซับซ้อน สิ่งแรกที่ต้องทำความเข้าใจคือการสร้าง "Pack" เพื่อเก็บข้อมูลของคุณ
+            ใน Minecraft: Bedrock Edition จะมี 2 ประเภทหลักคือ <strong>Resource Packs</strong> และ <strong>Behavior
+                Packs</strong>
+        </p>
+        <p>
+            <strong>Resource Pack</strong> คือโครงสร้างโฟลเดอร์ที่เก็บไฟล์ปรับแต่งรูปลักษณ์ทั้งหมด เช่น โมเดล (Models),
+            เสียง (Sounds), และพื้นผิว (Textures) ในบทเรียนนี้เราจะมาลองเปลี่ยนลายของบล็อกหญ้ากัน!
+        </p>
+        <img class="article-image" src="image/Screenshot Dirt.png" alt="Getting Started Minecraft">
+
+        <h2>โครงสร้างไฟล์และโฟลเดอร์</h2>
+        <p>
+            เพื่อให้ Minecraft หาไฟล์ของคุณเจอ เราต้องสร้างโฟลเดอร์และไฟล์ตามโครงสร้างที่กำหนด
+            เริ่มจากเข้าไปที่โฟลเดอร์ <code>com.mojang</code> (ดูวิธีเข้าได้ที่หน้า <a
+                href="../getting_started/getting_started.html" style="color:#ff9500;">พื้นฐานการเริ่มต้น</a>)
+        </p>
+
+        <h3>1. สร้างโฟลเดอร์ Pack</h3>
+        <p>
+            เข้าไปที่โฟลเดอร์ <code>development_resource_packs</code> แล้วสร้างโฟลเดอร์ใหม่ตั้งชื่อว่า:
+        </p>
+        <div class="code-wrapper">
+            <pre>My_RESOURCE_Pack</pre>
+            <button class="copy-btn">คัดลอก</button>
+        </div>
+        <p style="font-size: 0.9rem; color: #888;">*คุณสามารถตั้งชื่ออื่นได้ แต่ในบทเรียนนี้จะใช้ชื่อนี้เพื่อไม่งงครับ
+        </p>
+
+        <h3>2. สร้างไฟล์ Manifest</h3>
+        <p>
+            ไฟล์ <code>manifest.json</code> เปรียบเสมือนบัตรประชาชนของ Pack ที่บอกเกมว่า Pack นี้ชื่ออะไร เวอร์ชั่นไหน
+            ให้สร้างไฟล์ text ขึ้นมาในโฟลเดอร์ <code>My_RESOURCE_Pack</code> แล้วเปลี่ยนชื่อเป็น
+            <code>manifest.json</code>
+        </p>
+
+        <p>จากนั้นเปิดไฟล์และวางโค้ดนี้ลงไป:</p>
+
+        <div class="code-wrapper">
+            <pre><span class="token-punct">{</span>
+            <span class="token-key">"format_version"</span><span class="token-punct">:</span> <span class="token-number">2</span><span class="token-punct">,</span>
+            <span class="token-key">"header"</span><span class="token-punct">:</span> <span class="token-punct">{</span>
+                <span class="token-key">"description"</span><span class="token-punct">:</span> <span class="token-string">"My dirt resource pack Add-On!"</span><span class="token-punct">,</span>
+                <span class="token-key">"name"</span><span class="token-punct">:</span> <span class="token-string">"My Resource Pack"</span><span class="token-punct">,</span>
+                <span class="token-key">"uuid"</span><span class="token-punct">:</span> <span class="token-string">"&lt;วาง UUID ที่ 1 ตรงนี้&gt;"</span><span class="token-punct">,</span>
+                <span class="token-key">"version"</span><span class="token-punct">:</span> <span class="token-punct">[</span><span class="token-number">1</span><span class="token-punct">,</span> <span class="token-number">0</span><span class="token-punct">,</span> <span class="token-number">0</span><span class="token-punct">]</span><span class="token-punct">,</span>
+                <span class="token-key">"min_engine_version"</span><span class="token-punct">:</span> <span class="token-punct">[</span><span class="token-number">1</span><span class="token-punct">,</span> <span class="token-number">16</span><span class="token-punct">,</span> <span class="token-number">0</span><span class="token-punct">]</span>
+            <span class="token-punct">}</span><span class="token-punct">,</span>
+            <span class="token-key">"modules"</span><span class="token-punct">:</span> <span class="token-punct">[</span>
+                <span class="token-punct">{</span>
+                    <span class="token-key">"description"</span><span class="token-punct">:</span> <span class="token-string">"My First Add-On!"</span><span class="token-punct">,</span>
+                    <span class="token-key">"type"</span><span class="token-punct">:</span> <span class="token-string">"resources"</span><span class="token-punct">,</span>
+                    <span class="token-key">"uuid"</span><span class="token-punct">:</span> <span class="token-string">"&lt;วาง UUID ที่ 2 ตรงนี้&gt;"</span><span class="token-punct">,</span>
+                    <span class="token-key">"version"</span><span class="token-punct">:</span> <span class="token-punct">[</span><span class="token-number">1</span><span class="token-punct">,</span> <span class="token-number">0</span><span class="token-punct">,</span> <span class="token-number">0</span><span class="token-punct">]</span>
+                <span class="token-punct">}</span>
+            <span class="token-punct">]</span>
+        <span class="token-punct">}</span></pre>
+            <button class="copy-btn">คัดลอก</button>
+        </div>
+        <div style="background:#333; padding:15px; border-radius:5px; margin-top:20px;">
+            <h4 style="margin-top:0; color:#ff9500;">สำคัญ: เรื่อง UUID</h4>
+            <p style="font-size: 0.95rem;">
+                UUID คือรหัสตัวเลขที่ไม่ซ้ำกัน คุณต้องสร้างรหัสใหม่ 2 รหัสจากเว็บ <a
+                    href="https://www.uuidgenerator.net/" target="_blank" style="color:#4facfe;">uuidgenerator.net</a>
+                แล้วนำมาวางแทนที่ <code>&lt;วาง UUID ...&gt;</code> ในโค้ดด้านบน (ต้องใช้คนละรหัสกันระหว่าง Header และ
+                Modules)
+            </p>
+        </div>
+
+        <h2>เปลี่ยนลายบล็อกดิน (Dirt Block)</h2>
+        <p>เมื่อเตรียมไฟล์ Manifest เสร็จแล้ว เรามาเริ่มใส่รูปภาพกันครับ</p>
+
+        <ol>
+            <li>ในโฟลเดอร์ <code>My_RESOURCE_Pack</code> ให้สร้างโฟลเดอร์ชื่อ <code>textures</code></li>
+            <li>เข้าไปใน <code>textures</code> แล้วสร้างโฟลเดอร์ชื่อ <code>blocks</code></li>
+            <li>สร้างรูปภาพขนาด <strong>16x16 พิกเซล</strong> (ไฟล์ .png)</li>
+            <li>ตั้งชื่อรูปภาพว่า <code>dirt.png</code> แล้วนำไปวางในโฟลเดอร์ <code>blocks</code> ที่เพิ่งสร้าง</li>
+        </ol>
+
+        <p>โครงสร้างไฟล์ของคุณควรจะเป็นแบบนี้:</p>
+        <img class="article-image" src="image/Navigate Resource Packs.png" alt="folder structure">
+
+        <h2>ทดสอบในเกม</h2>
+        <p>
+            เมื่อทำทุกอย่างครบแล้ว ให้เปิดเกม Minecraft ขึ้นมา:
+        </p>
+        <ul>
+            <li>กด <strong>Play</strong> > <strong>Create New World</strong></li>
+            <li>เลื่อนลงมาที่แท็บ <strong>Resource Packs</strong> ทางซ้ายมือ</li>
+            <li>ในส่วน <strong>Available</strong> > <strong>Owned</strong> คุณจะเห็นชื่อ "My Resource Pack" ที่เราสร้างไว้</li>
+            <li>กด <strong>Activate</strong> แล้วสร้างโลกได้เลย!</li>
+        </ul>
+        <img class="article-image" src="image/Activate.png" alt="Activate">
+
+        <p>
+            ถ้าทำสำเร็จ บล็อกดินในเกมจะเปลี่ยนเป็นรูปที่คุณวาดไว้ (ยกเว้นดินที่มีหญ้าปกคลุมนะ!)
+        </p>
+
+    </article>
+
+    <footer>
+        <h2>ช่องทางติดต่อ</h2>
+        <div class="social-container">
+            <a class="social-icons" href="https://www.facebook.com/FPGTVMC/">
+                <img src="../../image/facebook-svgrepo-com.png" alt="Facebook">
+            </a>
+            <a class="social-icons" href="https://www.youtube.com/@MCFirsting">
+                <img src="../../image/youtube-fill-svgrepo-com.png" alt="YouTube">
+            </a>
+            <a class="social-icons" href="https://discord.gg/3j8Dk9p79r">
+                <img src="../../image/discord-svgrepo-com.png" alt="Discord">
+            </a>
+            <a class="social-icons" href="https://github.com/MCFirsting">
+                <img src="../../image/github-svgrepo-com.png" alt="GitHub">
+            </a>
+            <a class="social-icons" href="https://www.tiktok.com/@mc_firsting">
+                <img src="../../image/tiktok-svgrepo-com.png" alt="TikTok">
+            </a>
+        </div>
+    </footer>
+
+    <script src="../getting_started/getting_started.js"></script>
+</body>
+
+</html>

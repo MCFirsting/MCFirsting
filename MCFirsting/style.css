@@ -1,176 +1,137 @@
+/* Reset และ Global settings */
+* {
+    box-sizing: border-box;
+    /* สำคัญมาก ช่วยให้ Padding ไม่ดันขนาดกล่องเกินจริง */
+}
+
 body {
     background-color: #171615;
-    display: flex;
-    flex-direction: column;
-    min-height: 100vh;
+    color: #ffffff;
+    font-family: "MinecraftTen", sans-serif;
     margin: 0;
+    padding-top: 70px;
+    /* เว้นที่ให้ Navbar */
 }
 
-body>div:first-child {
-    flex-grow: 1;
-}
-
-#logo_mcfirsting {
-    padding: 10%;
-}
-
-.navbar {
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 99%;
-    display: flex;
-    align-items: center;
-    font-family: "MinecraftTen";
-    justify-content: space-between;
-    background-image: linear-gradient(to bottom, rgb(255, 106, 0), rgb(255, 149, 0));
-    padding: 3px 3px;
-    z-index: 1000;
-    filter: drop-shadow(0px 3px 4px #000000);
-}
-
-.logo img {
-    height: 45px;
-}
-
-.nav-links {
-    list-style: none;
-    display: flex;
-    margin: 0;
-}
-
-.nav-links li {
-    margin: -5px;
-}
-
-.nav-links a {
-    padding: 10px;
-    text-decoration: none;
-    color: rgb(0, 0, 0);
-    font-size: 24px;
-    line-height: 65px;
-    transition: color 0.3s;
-}
-
-.nav-links a:hover {
-    padding: 10px;
-    color: #ffffff;
-    transition: 0.3s;
-}
-
-.content {
-    margin-top: 70px;
-}
-
-section {
-    padding: 100px 20px;
-    border-bottom: 2px solid #ccc;
-}
-
-.page {
-    color: #ffffff;
-    font-family: "MinecraftTen";
-    font-size: 160%
-}
-
-p {
-    color: #ffff;
-    font-family: "MinecraftTen";
-}
-
-.project {
-    color: #ffffff;
-    font-family: "MinecraftTen";
-    text-align: center;
-}
-
-footer {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    background-color: #262423;
-    color: #ffffff;
-    padding: 2px;
-}
-
-footer h2 {
-    text-align: center;
-    margin-bottom: 20px;
-}
-
-.social-icons {
-    display: inline-flex;
-    filter: drop-shadow(0px 3px 4px #000000);
-    justify-content: center;
-    border-radius: 50%;
-    width: 60px;
-    height: 60px;
-    margin: 3px;
-    align-items: center;
-    background-color: #1f1e1d;
-}
-
-.box {
-    background: #474747;
-    padding-bottom: 15%;
-}
-
+/* Fonts */
 @font-face {
     font-family: "MinecraftTen";
     src: url("fonts/MinecraftTen-VGORe.ttf");
 }
 
-.category-container {
-    font-family: "MinecraftTen";
-    font-size: larger;
+/* Navbar */
+.navbar {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    /* แก้จาก 99% เป็น 100% */
+    height: 70px;
     display: flex;
-    justify-content: center;
-    margin: 40px 0;
-    flex-wrap: wrap;
-    gap: 20px;
-    max-width: 1200px;
-    margin-left: auto;
-    margin-right: auto;
-}
-
-.topic-box {
-    width: 200px;
-    height: 80px;
-    background-color: #454545;
-    border-radius: 8px;
-    display: flex;
-    justify-content: center;
     align-items: center;
-    box-shadow: 3px 3px 10px rgba(0, 0, 0, 0.2);
-    text-decoration: none;
-    color: #ffffff;
-    transition: transform 0.2s, box-shadow 0.2s;
+    justify-content: space-between;
+    background-image: linear-gradient(to bottom, rgb(255, 106, 0), rgb(255, 149, 0));
+    padding: 0 20px;
+    z-index: 1000;
+    box-shadow: 0px 3px 4px rgba(0, 0, 0, 0.5);
 }
 
-.topic-box h2 {
-    font-size: 1.2em;
+.logo img {
+    height: 45px;
+    vertical-align: middle;
+}
+
+.nav-links {
+    list-style: none;
+    display: flex;
+    gap: 20px;
+    /* ใช้ gap แทน margin ติดลบ */
     margin: 0;
+    padding: 0;
 }
 
-.topic-box:hover {
-    transform: translateY(-5px);
-    background-color: #e68a00;
-    box-shadow: 5px 5px 15px rgba(0, 0, 0, 0.3);
+.nav-links a {
+    text-decoration: none;
+    color: rgb(0, 0, 0);
+    font-size: 24px;
+    transition: color 0.3s;
 }
 
+.nav-links a:hover {
+    color: #ffffff;
+}
 
+/* Layout Utilities */
+.container {
+    max-width: 1100px;
+    margin: 0 auto;
+    padding: 0 20px;
+    text-align: center;
+}
+
+/* Hero Section (ส่วนบนสุด) */
+.hero-section {
+    padding: 100px 0 60px;
+    text-align: center;
+    /* สามารถเพิ่ม background-image ตรงนี้ได้ถ้าต้องการ */
+}
+
+.hero-title {
+    font-size: 3rem;
+    /* ใหญ่ขึ้นเพื่อเป็นจุดเด่น */
+    margin-bottom: 20px;
+    color: #ffffff;
+}
+
+.hero-subtitle {
+    font-size: 1.5rem;
+    line-height: 1.6;
+    color: #ddd;
+}
+
+/* Sections ทั่วไป */
+.section-content {
+    padding: 60px 0;
+    border-bottom: 1px solid #333;
+}
+
+.bg-darker {
+    background-color: #1f1e1d;
+    /* สลับสีพื้นหลังเล็กน้อยเพื่อแบ่งโซน */
+}
+
+.section-title {
+    font-size: 2rem;
+    margin-bottom: 40px;
+    color: #ff9500;
+    /* ใช้สีส้มธีมหลักให้หัวข้อเด่น */
+}
+
+/* Project Showcase */
+.project-showcase img {
+    max-width: 100%;
+    height: auto;
+    border-radius: 10px;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.5);
+    transition: transform 0.3s;
+}
+
+.project-showcase img:hover {
+    transform: scale(1.02);
+}
+
+/* News Slider (คง logic เดิมแต่จัด layout ใหม่) */
 .news-slider-section {
     display: flex;
-    flex-direction: column;
-    align-items: center;
+    justify-content: center;
     width: 100%;
-    margin-top: 20px;
 }
 
 #newsSliderContainer {
     position: relative;
     width: 370px;
     overflow: hidden;
+    padding: 10px 0;
 }
 
 #newsWrapper {
@@ -179,52 +140,184 @@ footer h2 {
 }
 
 .news-slide-item {
-    width: 350px;
-    margin: 0 10px;
+    width: 370px;
+    /* ปรับให้ตรงกับ slideWidth ใน JS (370) */
     flex-shrink: 0;
+    display: flex;
+    /* เพิ่ม Flex เพื่อจัดกึ่งกลางภายในการ์ด */
+    justify-content: center;
     text-decoration: none;
 }
 
 .news-card {
     position: relative;
     overflow: hidden;
-    width: 350px;
+    width: 240px;
     height: 240px;
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
+}
+
+.news-card img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+.card-overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    transition: background 0.3s;
 }
 
 .news-slide-item:hover .card-overlay {
-    background: linear-gradient(to top, rgba(0, 0, 0, 0.95), rgba(0, 0, 0, 0.1));
+    background: linear-gradient(to top, rgba(0, 0, 0, 0.8), transparent);
 }
 
 .slide-button {
     position: absolute;
     top: 50%;
     transform: translateY(-50%);
-    background-color: rgba(0, 0, 0, 0.5);
+    background-color: rgba(39, 39, 39, 0.8);
+    /* ปรับสีปุ่มให้เข้าธีม */
     color: white;
     border: none;
     width: 40px;
     height: 40px;
+    border-radius: 10%;
     font-size: 20px;
-    font-weight: bold;
     cursor: pointer;
     z-index: 10;
-    transition: background-color 0.3s;
+    transition: 0.3s;
 }
 
 .slide-button:hover {
-    background-color: rgba(0, 0, 0, 0.8);
-}
-
-.slide-button:disabled {
-    opacity: 0.3;
-    cursor: not-allowed;
+    background-color: rgb(129, 129, 129);
 }
 
 #prevNewsButton {
-    left: 10px;
+    left: 0px;
 }
 
 #nextNewsButton {
-    right: 10px;
+    right: 0px;
+}
+
+/* Footer */
+footer {
+    background-color: #262423;
+    color: #ffffff;
+    padding: 40px 20px;
+    text-align: center;
+    margin-top: auto;
+}
+
+.social-container {
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+    gap: 15px;
+}
+
+.social-icons {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+    background-color: #1f1e1d;
+    transition: transform 0.2s, background-color 0.2s;
+}
+
+.social-icons img {
+    height: 30px;
+    width: auto;
+}
+
+.social-icons:hover {
+    transform: translateY(-3px);
+    background-color: #333;
+}
+
+/* --- ส่วนเพิ่มเติมสำหรับหน้า Tutorial / Documentation --- */
+
+.doc-header {
+    text-align: center;
+    padding: 60px 20px 40px;
+    background-color: #1f1e1d;
+    /* พื้นหลังหัวข้อให้ดูแตกต่าง */
+    border-bottom: 4px solid #ff9500;
+    /* เส้นสีส้มธีมหลัก */
+    margin-bottom: 40px;
+}
+
+.doc-title {
+    font-size: 3rem;
+    color: #ff9500;
+    margin-bottom: 10px;
+    text-transform: uppercase;
+    text-shadow: 2px 2px 0px #000;
+}
+
+.doc-subtitle {
+    font-size: 1.2rem;
+    color: #cccccc;
+    font-family: sans-serif;
+    /* ใช้อักษรปกติให้อ่านง่ายสำหรับคำอธิบาย */
+}
+
+/* Grid Layout สำหรับกล่องหมวดหมู่ */
+.doc-grid {
+    display: grid;
+    /* จัดคอลัมน์อัตโนมัติ: เล็กสุด 220px ถ้าจอใหญ่จะขยายเต็ม */
+    grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+    gap: 25px;
+    padding-bottom: 60px;
+}
+
+/* การ์ดหมวดหมู่ (ปรับปรุงจาก topic-box เดิม) */
+.doc-card {
+    background-color: #2a2827;
+    border: 2px solid #3d3b3a;
+    border-radius: 12px;
+    padding: 30px 20px;
+    text-align: center;
+    text-decoration: none;
+    color: #ffffff;
+    transition: all 0.3s ease;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    min-height: 140px;
+    /* ความสูงขั้นต่ำ */
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.3);
+}
+
+.doc-card:hover {
+    transform: translateY(-7px);
+    background-color: #ff9500;
+    border-color: #ff9500;
+    box-shadow: 0 10px 20px rgba(255, 149, 0, 0.2);
+    color: #000;
+    /* เปลี่ยนสีตัวอักษรเมื่อเมาส์ชี้ */
+}
+
+.doc-card h3 {
+    font-family: "MinecraftTen";
+    font-size: 1.5rem;
+    margin: 0;
+    line-height: 1.4;
+    text-transform: uppercase;
+    /* ตัวพิมพ์ใหญ่ทั้งหมด */
+}
+
+/* ไอคอนในกล่อง (ถ้ามีในอนาคต) */
+.doc-icon {
+    font-size: 2rem;
+    margin-bottom: 15px;
 }
