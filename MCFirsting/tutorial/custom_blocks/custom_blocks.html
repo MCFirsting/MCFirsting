@@ -34,12 +34,13 @@
             แต่ละด้านของลูกเต๋าจะมีลวดลายไม่เหมือนกัน (เลข 1-6) และเมื่อถือในมือจะเปลี่ยนเป็นสีแดง!
         </p>
 
-        <img class="article-image" src="/tutorial/custom_blocks/image/Screenshot Blocks.png"
-            alt="Custom Die Block">
+        <img class="article-image" src="/tutorial/custom_blocks/image/Screenshot Blocks.png" alt="Custom Die Block">
 
         <h2>สิ่งที่คุณต้องเตรียม</h2>
         <ul>
-            <li>ความเข้าใจเรื่อง <strong><a href="../resource_packs/resource_packs.html"style="color:#ff9500;">Resource Pack</a></strong> และ <strong><a href="../behavior_packs/behavior_packs.html"style="color:#ff9500;">Behavior Pack</a></strong> (จากบทเรียนก่อนหน้า)
+            <li>ความเข้าใจเรื่อง <strong><a href="../resource_packs/resource_packs.html" style="color:#ff9500;">Resource
+                        Pack</a></strong> และ <strong><a href="../behavior_packs/behavior_packs.html"
+                        style="color:#ff9500;">Behavior Pack</a></strong> (จากบทเรียนก่อนหน้า)
             </li>
             <li>โปรแกรมแต่งรูป (เช่น Paint หรือ Photoshop) เพื่อทำ Texture ขนาด 16x16</li>
         </ul>
@@ -55,7 +56,8 @@
 
         <h2>ส่วนที่ 1: Behavior Pack</h2>
         <p>เริ่มจากสร้างโฟลเดอร์สำหรับ Behavior Pack ใน <code>development_behavior_packs</code> ตั้งชื่อว่า
-            <code>custom_block_behavior_pack</code></p>
+            <code>custom_block_behavior_pack</code>
+        </p>
 
         <h3>1. สร้างไฟล์ Manifest</h3>
         <p>สร้างไฟล์ <code>manifest.json</code> และใส่โค้ดนี้:</p>
@@ -120,7 +122,8 @@
             <button class="copy-btn">คัดลอก</button>
         </div>
         <p style="font-size: 0.9rem; color:#aaa;">*สังเกตว่าเรากำหนด Texture ให้แต่ละทิศไม่เหมือนกัน และใช้
-            <code>die_red</code> เวลาถือไอเทม</p>
+            <code>die_red</code> เวลาถือไอเทม
+        </p>
 
         <h2>ส่วนที่ 2: Resource Pack</h2>
         <p>สร้างโฟลเดอร์ <code>custom_block_resource_pack</code> ใน <code>development_resource_packs</code></p>
@@ -155,7 +158,7 @@
             <li><code>die_1.png</code> ถึง <code>die_6.png</code> (รูปหน้าลูกเต๋าเลข 1-6)</li>
             <li><code>die_red.png</code> (รูปลูกเต๋าสีแดง สำหรับตอนถือ)</li>
         </ul>
-        <p>นำรูปทั้งหมดไปวางไว้ที่: <code>custom_block_resource_pack/textures/blocks/</code></p>
+        <p>นำรูปทั้งหมดไปวางไว้ที่: <code>custom_block_resource_pack/textures<br>/blocks</code></p>
 
         <h3>3. กำหนดชื่อ Texture (Terrain Texture)</h3>
         <p>
@@ -183,7 +186,8 @@
 
         <h3>4. กำหนดเสียงให้บล็อก (Blocks.json)</h3>
         <p>
-            สร้างไฟล์ชื่อ <code>blocks.json</code> ในโฟลเดอร์หลักของ Resource Pack (<code>custom_block_resource_pack</code>)
+            สร้างไฟล์ชื่อ <code>blocks.json</code> ในโฟลเดอร์หลักของ Resource Pack
+            (<code>custom_block_resource_pack</code>)
             เพื่อกำหนดเสียงเวลาวางหรือทุบบล็อก ในที่นี้เราจะให้มันเสียงเหมือน "หิน" (Stone)
         </p>
         <div class="code-wrapper">
@@ -215,15 +219,43 @@
         <p>คุณจะได้ลูกเต๋าสีแดงมาถือในมือ แต่พอมันวางลงไป มันจะกลายเป็นลูกเต๋าปกติที่มีเลข 1-6 รอบด้าน!</p>
 
         <div style="margin-top: 60px; padding-top: 20px; border-top: 1px solid #444;">
-            <h2>ปัญหาที่พบบ่อย</h2>
-            <p>ถ้าบล็อกไม่ขึ้น หรือ Texture เป็นสีม่วงดำ ลองเช็คตามนี้:</p>
+            <h2>ปัญหาที่พบบ่อย (Troubleshooting)</h2>
+
+            <h3 style="color: #ff5555; font-size: 1.2rem;">ถ้าหา Resource Pack หรือ Behavior Pack ไม่เจอ:</h3>
             <ul>
-                <li><strong>Manifest UUID:</strong> เช็คว่า UUID ใน manifest ของทั้ง 2 Packs ไม่ซ้ำกัน</li>
-                <li><strong>ชื่อไฟล์รูปภาพ:</strong> ตรวจสอบว่าชื่อไฟล์ในโฟลเดอร์ กับชื่อที่เขียนใน
-                    <code>terrain_texture.json</code> ตรงกันเป๊ะๆ</li>
-                <li><strong>เวอร์ชันเกม:</strong> ตรวจสอบว่า <code>min_engine_version</code> ใน manifest
-                    ตรงกับเวอร์ชันเกมของคุณ</li>
+                <li><strong>ไฟล์ Manifest:</strong> คุณมีไฟล์ manifest ครบถ้วนแล้วหรือยัง?</li>
+
+                <li><strong>การตั้งค่าโลก:</strong> คุณได้สร้างโลกโดยเปิดใช้งาน <strong>Cheats Enabled</strong>
+                    แล้วหรือยัง?
+                </li>
+                <li><strong>เวอร์ชั่นเกม:</strong> คุณกำลังใช้ Minecraft: Bedrock Edition เวอร์ชั่น 1.19.20
+                    หรือใหม่กว่าหรือไม่?
+                </li>
             </ul>
+
+            <h3 style="color: #ff5555; font-size: 1.2rem;">ถ้าพิมพ์หา <code>demo:die</code> ไม่เจอในเกม:</h3>
+            <ul>
+                <li><strong>รูปแบบไฟล์:</strong> ตรวจสอบว่าไฟล์ใน Behavior Pack ของคุณเขียนรูปแบบ JSON ถูกต้องหรือไม่?
+                </li>
+            </ul>
+
+            <h3 style="color: #ff5555; font-size: 1.2rem;">ถ้า Texture (รูปภาพ) โหลดไม่ถูกต้อง:</h3>
+            <ul>
+                <li><strong>ชื่อไฟล์:</strong> ตรวจสอบว่าชื่อไฟล์รูปภาพและข้อมูลในไฟล์ <code>terrain_texture.json</code>
+                    ตรงกับตัวอย่างใน custom_block_resource_pack หรือไม่?</li>
+            </ul>
+
+            <div
+                style="background-color: #2b2b2b; padding: 15px; border-radius: 8px; border-left: 4px solid #4facfe; margin-top: 20px;">
+                <p style="margin: 0; color: #e0e0e0;">
+                    <strong>ผลลัพธ์ที่ควรเป็น:</strong><br>
+                    ทีนี้ลองวางบล็อกตรงไหนก็ได้ที่คุณต้องการ ลูกเต๋าจะเป็น <strong>สีแดง</strong>
+                    เมื่อถือในมือหรืออยู่ในช่องเก็บของ (Hotbar)
+                    เพราะเราตั้งค่า <code>carried_textures</code> ให้ใช้บล็อกสีแดงไว้<br><br>
+                    แต่เมื่อวางลงไปบนพื้น ด้านต่างๆ จะกลายเป็นลูกเต๋าหลากสีตามที่เรากำหนด
+                    และเมื่อเดินเหยียบบนบล็อกก็จะมีเสียงเหมือน <strong>หิน (Stone)</strong> ครับ
+                </p>
+            </div>
         </div>
 
     </article>
