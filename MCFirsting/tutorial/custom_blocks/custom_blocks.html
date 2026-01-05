@@ -1,0 +1,255 @@
+<!DOCTYPE html>
+<html lang="th">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Create Custom Blocks - MCFirsting</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+    <nav class="navbar">
+        <div class="logo">
+            <a href="../../index.html"><img id="logo_mcfirsting" src="../../image/mcfirsting_logo.png" alt="Logo"></a>
+        </div>
+        <ul class="nav-links">
+            <li><a href="../../tutorial.html">Tutorial</a></li>
+            <li><a href="../../shop.html">Shop</a></li>
+        </ul>
+    </nav>
+
+    <header class="doc-header">
+        <div class="container">
+            <h1>การสร้าง Custom Block</h1>
+            <p style="text-align: center; color: #aaa;">เรียนรู้วิธีสร้างบล็อกใหม่ที่มีลวดลายแตกต่างกันในแต่ละด้าน</p>
+        </div>
+    </header>
+
+    <article class="article-container">
+
+        <p>
+            Custom Blocks หรือ "บล็อกที่สร้างเอง" เป็นวิธีที่ยอดเยี่ยมในการเพิ่มเนื้อหาใหม่ๆ ให้กับเกม
+            ในบทเรียนนี้ เราจะมาลองสร้าง <strong>"Die Block" (บล็อกลูกเต๋า)</strong> ซึ่งมีความพิเศษคือ
+            แต่ละด้านของลูกเต๋าจะมีลวดลายไม่เหมือนกัน (เลข 1-6) และเมื่อถือในมือจะเปลี่ยนเป็นสีแดง!
+        </p>
+
+        <img class="article-image" src="/tutorial/custom_blocks/image/Screenshot Blocks.png"
+            alt="Custom Die Block">
+
+        <h2>สิ่งที่คุณต้องเตรียม</h2>
+        <ul>
+            <li>ความเข้าใจเรื่อง <strong><a href="../resource_packs/resource_packs.html"style="color:#ff9500;">Resource Pack</a></strong> และ <strong><a href="../behavior_packs/behavior_packs.html"style="color:#ff9500;">Behavior Pack</a></strong> (จากบทเรียนก่อนหน้า)
+            </li>
+            <li>โปรแกรมแต่งรูป (เช่น Paint หรือ Photoshop) เพื่อทำ Texture ขนาด 16x16</li>
+        </ul>
+
+        <div style="background:#333; padding:15px; border-radius:5px; margin:20px 0;">
+            <strong>หลักการทำงาน:</strong> เราจะใช้ <strong>Behavior Pack</strong> เพื่อกำหนดคุณสมบัติของบล็อก (เช่น
+            รูปร่าง, การตกแต่ง)
+            และใช้ <strong>Resource Pack</strong> เพื่อเก็บรูปภาพและเสียง
+        </div>
+        <p>โครงสร้างไฟล์ของคุณควรจะเป็นแบบนี้:</p>
+        <img class="article-image" src="image/Navigate Custom Blocks.png" alt="Navigate Behavior Packs">
+        </div>
+
+        <h2>ส่วนที่ 1: Behavior Pack</h2>
+        <p>เริ่มจากสร้างโฟลเดอร์สำหรับ Behavior Pack ใน <code>development_behavior_packs</code> ตั้งชื่อว่า
+            <code>custom_block_behavior_pack</code></p>
+
+        <h3>1. สร้างไฟล์ Manifest</h3>
+        <p>สร้างไฟล์ <code>manifest.json</code> และใส่โค้ดนี้:</p>
+        <div class="code-wrapper">
+            <pre><span class="token-punct">{</span>
+    <span class="token-key">"format_version"</span><span class="token-punct">:</span> <span class="token-number">2</span><span class="token-punct">,</span>
+    <span class="token-key">"header"</span><span class="token-punct">:</span> <span class="token-punct">{</span>
+        <span class="token-key">"description"</span><span class="token-punct">:</span> <span class="token-string">"Behavior Pack สำหรับบล็อกลูกเต๋า"</span><span class="token-punct">,</span>
+        <span class="token-key">"name"</span><span class="token-punct">:</span> <span class="token-string">"Die Block BP"</span><span class="token-punct">,</span>
+        <span class="token-key">"uuid"</span><span class="token-punct">:</span> <span class="token-string">"&lt;UUID ที่ 1&gt;"</span><span class="token-punct">,</span>
+        <span class="token-key">"version"</span><span class="token-punct">:</span> <span class="token-punct">[</span><span class="token-number">1</span><span class="token-punct">,</span> <span class="token-number">0</span><span class="token-punct">,</span> <span class="token-number">0</span><span class="token-punct">]</span><span class="token-punct">,</span>
+        <span class="token-key">"min_engine_version"</span><span class="token-punct">:</span> <span class="token-punct">[</span><span class="token-number">1</span><span class="token-punct">,</span> <span class="token-number">21</span><span class="token-punct">,</span> <span class="token-number">80</span><span class="token-punct">]</span>
+    <span class="token-punct">}</span><span class="token-punct">,</span>
+    <span class="token-key">"modules"</span><span class="token-punct">:</span> <span class="token-punct">[</span>
+        <span class="token-punct">{</span>
+            <span class="token-key">"description"</span><span class="token-punct">:</span> <span class="token-string">"Die Block BP"</span><span class="token-punct">,</span>
+            <span class="token-key">"type"</span><span class="token-punct">:</span> <span class="token-string">"data"</span><span class="token-punct">,</span>
+            <span class="token-key">"uuid"</span><span class="token-punct">:</span> <span class="token-string">"&lt;UUID ที่ 2&gt;"</span><span class="token-punct">,</span>
+            <span class="token-key">"version"</span><span class="token-punct">:</span> <span class="token-punct">[</span><span class="token-number">1</span><span class="token-punct">,</span> <span class="token-number">0</span><span class="token-punct">,</span> <span class="token-number">0</span><span class="token-punct">]</span>
+        <span class="token-punct">}</span>
+    <span class="token-punct">]</span>
+<span class="token-punct">}</span></pre>
+            <button class="copy-btn">คัดลอก</button>
+        </div>
+
+        <h3>2. สร้างไฟล์นิยามบล็อก (Block JSON)</h3>
+        <p>
+            สร้างโฟลเดอร์ <code>blocks</code> ขึ้นมา แล้วข้างในสร้างไฟล์ชื่อ <code>die.json</code>
+            ไฟล์นี้จะเป็นตัวกำหนดคุณสมบัติทั้งหมดของบล็อกเราครับ
+        </p>
+        <p>ให้ก๊อปปี้โค้ดด้านล่างนี้ไปใส่ (โค้ดนี้กำหนดรูปร่างและลายพื้นผิวของแต่ละด้าน):</p>
+
+        <div class="code-wrapper">
+            <pre><span class="token-punct">{</span>
+    <span class="token-key">"format_version"</span><span class="token-punct">:</span> <span class="token-string">"1.21.80"</span><span class="token-punct">,</span>
+    <span class="token-key">"minecraft:block"</span><span class="token-punct">:</span> <span class="token-punct">{</span>
+        <span class="token-key">"description"</span><span class="token-punct">:</span> <span class="token-punct">{</span>
+            <span class="token-key">"identifier"</span><span class="token-punct">:</span> <span class="token-string">"demo:die"</span>
+        <span class="token-punct">}</span><span class="token-punct">,</span>
+        <span class="token-key">"components"</span><span class="token-punct">:</span> <span class="token-punct">{</span>
+            <span class="token-key">"minecraft:geometry"</span><span class="token-punct">:</span> <span class="token-string">"minecraft:geometry.full_block"</span><span class="token-punct">,</span>
+            <span class="token-key">"minecraft:material_instances"</span><span class="token-punct">:</span> <span class="token-punct">{</span>
+                <span class="token-key">"north"</span><span class="token-punct">:</span> <span class="token-punct">{</span> <span class="token-key">"texture"</span><span class="token-punct">:</span> <span class="token-string">"die_3"</span> <span class="token-punct">}</span><span class="token-punct">,</span>
+                <span class="token-key">"south"</span><span class="token-punct">:</span> <span class="token-punct">{</span> <span class="token-key">"texture"</span><span class="token-punct">:</span> <span class="token-string">"die_4"</span> <span class="token-punct">}</span><span class="token-punct">,</span>
+                <span class="token-key">"east"</span><span class="token-punct">:</span> <span class="token-punct">{</span> <span class="token-key">"texture"</span><span class="token-punct">:</span> <span class="token-string">"die_2"</span> <span class="token-punct">}</span><span class="token-punct">,</span>
+                <span class="token-key">"west"</span><span class="token-punct">:</span> <span class="token-punct">{</span> <span class="token-key">"texture"</span><span class="token-punct">:</span> <span class="token-string">"die_5"</span> <span class="token-punct">}</span><span class="token-punct">,</span>
+                <span class="token-key">"up"</span><span class="token-punct">:</span> <span class="token-punct">{</span> <span class="token-key">"texture"</span><span class="token-punct">:</span> <span class="token-string">"die_1"</span> <span class="token-punct">}</span><span class="token-punct">,</span>
+                <span class="token-key">"down"</span><span class="token-punct">:</span> <span class="token-punct">{</span> <span class="token-key">"texture"</span><span class="token-punct">:</span> <span class="token-string">"die_6"</span> <span class="token-punct">}</span>
+            <span class="token-punct">}</span><span class="token-punct">,</span>
+            <span class="token-key">"minecraft:item_visual"</span><span class="token-punct">:</span> <span class="token-punct">{</span>
+                <span class="token-key">"geometry"</span><span class="token-punct">:</span> <span class="token-string">"minecraft:geometry.full_block"</span><span class="token-punct">,</span>
+                <span class="token-key">"material_instances"</span><span class="token-punct">:</span> <span class="token-punct">{</span>
+                    <span class="token-key">"*"</span><span class="token-punct">:</span> <span class="token-punct">{</span>
+                        <span class="token-key">"texture"</span><span class="token-punct">:</span> <span class="token-string">"die_red"</span><span class="token-punct">,</span>
+                        <span class="token-key">"render_method"</span><span class="token-punct">:</span> <span class="token-string">"opaque"</span>
+                    <span class="token-punct">}</span>
+                <span class="token-punct">}</span>
+            <span class="token-punct">}</span>
+        <span class="token-punct">}</span>
+    <span class="token-punct">}</span>
+<span class="token-punct">}</span></pre>
+            <button class="copy-btn">คัดลอก</button>
+        </div>
+        <p style="font-size: 0.9rem; color:#aaa;">*สังเกตว่าเรากำหนด Texture ให้แต่ละทิศไม่เหมือนกัน และใช้
+            <code>die_red</code> เวลาถือไอเทม</p>
+
+        <h2>ส่วนที่ 2: Resource Pack</h2>
+        <p>สร้างโฟลเดอร์ <code>custom_block_resource_pack</code> ใน <code>development_resource_packs</code></p>
+
+        <h3>1. สร้างไฟล์ Manifest</h3>
+        <p>สร้างไฟล์ <code>manifest.json</code> และใส่โค้ดนี้:</p>
+        <div class="code-wrapper">
+            <pre><span class="token-punct">{</span>
+            <span class="token-key">"format_version"</span><span class="token-punct">:</span> <span class="token-number">2</span><span class="token-punct">,</span>
+            <span class="token-key">"header"</span><span class="token-punct">:</span> <span class="token-punct">{</span>
+                <span class="token-key">"description"</span><span class="token-punct">:</span> <span class="token-string">"Resource Pack สำหรับบล็อกลูกเต๋า"</span><span class="token-punct">,</span>
+                <span class="token-key">"name"</span><span class="token-punct">:</span> <span class="token-string">"Die Block RP"</span><span class="token-punct">,</span>
+                <span class="token-key">"uuid"</span><span class="token-punct">:</span> <span class="token-string">"&lt;UUID ที่ 1&gt;"</span><span class="token-punct">,</span>
+                <span class="token-key">"version"</span><span class="token-punct">:</span> <span class="token-punct">[</span><span class="token-number">1</span><span class="token-punct">,</span> <span class="token-number">0</span><span class="token-punct">,</span> <span class="token-number">0</span><span class="token-punct">]</span><span class="token-punct">,</span>
+                <span class="token-key">"min_engine_version"</span><span class="token-punct">:</span> <span class="token-punct">[</span><span class="token-number">1</span><span class="token-punct">,</span> <span class="token-number">21</span><span class="token-punct">,</span> <span class="token-number">80</span><span class="token-punct">]</span>
+            <span class="token-punct">}</span><span class="token-punct">,</span>
+            <span class="token-key">"modules"</span><span class="token-punct">:</span> <span class="token-punct">[</span>
+                <span class="token-punct">{</span>
+                    <span class="token-key">"description"</span><span class="token-punct">:</span> <span class="token-string">"Die Block RP"</span><span class="token-punct">,</span>
+                    <span class="token-key">"type"</span><span class="token-punct">:</span> <span class="token-string">"resources"</span><span class="token-punct">,</span>
+                    <span class="token-key">"uuid"</span><span class="token-punct">:</span> <span class="token-string">"&lt;UUID ที่ 2&gt;"</span><span class="token-punct">,</span>
+                    <span class="token-key">"version"</span><span class="token-punct">:</span> <span class="token-punct">[</span><span class="token-number">1</span><span class="token-punct">,</span> <span class="token-number">0</span><span class="token-punct">,</span> <span class="token-number">0</span><span class="token-punct">]</span>
+                <span class="token-punct">}</span>
+            <span class="token-punct">]</span>
+        <span class="token-punct">}</span></pre>
+            <button class="copy-btn">คัดลอก</button>
+        </div>
+
+        <h3>2. เตรียมรูปภาพ (Textures)</h3>
+        <p>คุณต้องสร้างรูปภาพขนาด 16x16 พิกเซล จำนวน 7 รูป ดังนี้:</p>
+        <ul>
+            <li><code>die_1.png</code> ถึง <code>die_6.png</code> (รูปหน้าลูกเต๋าเลข 1-6)</li>
+            <li><code>die_red.png</code> (รูปลูกเต๋าสีแดง สำหรับตอนถือ)</li>
+        </ul>
+        <p>นำรูปทั้งหมดไปวางไว้ที่: <code>custom_block_resource_pack/textures/blocks/</code></p>
+
+        <h3>3. กำหนดชื่อ Texture (Terrain Texture)</h3>
+        <p>
+            สร้างไฟล์ <code>textures/terrain_texture.json</code> เพื่อบอกเกมว่าชื่อ "die_1" คือไฟล์ไหน
+            ก๊อปปี้โค้ดนี้ไปวาง:
+        </p>
+        <div class="code-wrapper">
+            <pre><span class="token-punct">{</span>
+    <span class="token-key">"resource_pack_name"</span><span class="token-punct">:</span> <span class="token-string">"custom_block_resource_pack"</span><span class="token-punct">,</span>
+    <span class="token-key">"texture_name"</span><span class="token-punct">:</span> <span class="token-string">"atlas.terrain"</span><span class="token-punct">,</span>
+    <span class="token-key">"padding"</span><span class="token-punct">:</span> <span class="token-number">8</span><span class="token-punct">,</span>
+    <span class="token-key">"num_mip_levels"</span><span class="token-punct">:</span> <span class="token-number">4</span><span class="token-punct">,</span>
+    <span class="token-key">"texture_data"</span><span class="token-punct">:</span> <span class="token-punct">{</span>
+        <span class="token-key">"die_1"</span><span class="token-punct">:</span> <span class="token-punct">{</span> <span class="token-key">"textures"</span><span class="token-punct">:</span> <span class="token-string">"textures/blocks/die_1"</span> <span class="token-punct">}</span><span class="token-punct">,</span>
+        <span class="token-key">"die_2"</span><span class="token-punct">:</span> <span class="token-punct">{</span> <span class="token-key">"textures"</span><span class="token-punct">:</span> <span class="token-string">"textures/blocks/die_2"</span> <span class="token-punct">}</span><span class="token-punct">,</span>
+        <span class="token-key">"die_3"</span><span class="token-punct">:</span> <span class="token-punct">{</span> <span class="token-key">"textures"</span><span class="token-punct">:</span> <span class="token-string">"textures/blocks/die_3"</span> <span class="token-punct">}</span><span class="token-punct">,</span>
+        <span class="token-key">"die_4"</span><span class="token-punct">:</span> <span class="token-punct">{</span> <span class="token-key">"textures"</span><span class="token-punct">:</span> <span class="token-string">"textures/blocks/die_4"</span> <span class="token-punct">}</span><span class="token-punct">,</span>
+        <span class="token-key">"die_5"</span><span class="token-punct">:</span> <span class="token-punct">{</span> <span class="token-key">"textures"</span><span class="token-punct">:</span> <span class="token-string">"textures/blocks/die_5"</span> <span class="token-punct">}</span><span class="token-punct">,</span>
+        <span class="token-key">"die_6"</span><span class="token-punct">:</span> <span class="token-punct">{</span> <span class="token-key">"textures"</span><span class="token-punct">:</span> <span class="token-string">"textures/blocks/die_6"</span> <span class="token-punct">}</span><span class="token-punct">,</span>
+        <span class="token-key">"die_red"</span><span class="token-punct">:</span> <span class="token-punct">{</span> <span class="token-key">"textures"</span><span class="token-punct">:</span> <span class="token-string">"textures/blocks/die_red"</span> <span class="token-punct">}</span>
+    <span class="token-punct">}</span>
+<span class="token-punct">}</span></pre>
+            <button class="copy-btn">คัดลอก</button>
+        </div>
+
+        <h3>4. กำหนดเสียงให้บล็อก (Blocks.json)</h3>
+        <p>
+            สร้างไฟล์ชื่อ <code>blocks.json</code> ในโฟลเดอร์หลักของ Resource Pack (<code>custom_block_resource_pack</code>)
+            เพื่อกำหนดเสียงเวลาวางหรือทุบบล็อก ในที่นี้เราจะให้มันเสียงเหมือน "หิน" (Stone)
+        </p>
+        <div class="code-wrapper">
+            <pre><span class="token-punct">{</span>
+            <span class="token-key">"format_version"</span><span class="token-punct">:</span> <span class="token-string">"1.19.30"</span><span class="token-punct">,</span>
+            <span class="token-key">"demo:die"</span><span class="token-punct">:</span> <span class="token-punct">{</span>
+                <span class="token-key">"sound"</span><span class="token-punct">:</span> <span class="token-string">"stone"</span>
+            <span class="token-punct">}</span>
+        <span class="token-punct">}</span></pre>
+            <button class="copy-btn">คัดลอก</button>
+        </div>
+
+        <h3>5. การตั้งชื่อ</h3>
+        <p>สร้างไฟล์ <code>texts/en_US.lang</code> แล้วใส่ข้อความนี้:</p>
+        <div class="code-wrapper">
+            <pre>tile.demo:die.name=Die Block</pre>
+            <button class="copy-btn">คัดลอก</button>
+        </div>
+
+        <h2>ทดสอบในเกม</h2>
+        <p>
+            เข้าเกม Minecraft สร้างโลกใหม่ (อย่าลืมเปิด Cheat และเปิดใช้งานทั้ง Resource และ Behavior Packs)
+            จากนั้นพิมพ์คำสั่งเพื่อเสกบล็อกออกมา:
+        </p>
+        <div class="code-wrapper">
+            <pre>/give @s demo:die</pre>
+            <button class="copy-btn">คัดลอก</button>
+        </div>
+        <p>คุณจะได้ลูกเต๋าสีแดงมาถือในมือ แต่พอมันวางลงไป มันจะกลายเป็นลูกเต๋าปกติที่มีเลข 1-6 รอบด้าน!</p>
+
+        <div style="margin-top: 60px; padding-top: 20px; border-top: 1px solid #444;">
+            <h2>ปัญหาที่พบบ่อย</h2>
+            <p>ถ้าบล็อกไม่ขึ้น หรือ Texture เป็นสีม่วงดำ ลองเช็คตามนี้:</p>
+            <ul>
+                <li><strong>Manifest UUID:</strong> เช็คว่า UUID ใน manifest ของทั้ง 2 Packs ไม่ซ้ำกัน</li>
+                <li><strong>ชื่อไฟล์รูปภาพ:</strong> ตรวจสอบว่าชื่อไฟล์ในโฟลเดอร์ กับชื่อที่เขียนใน
+                    <code>terrain_texture.json</code> ตรงกันเป๊ะๆ</li>
+                <li><strong>เวอร์ชันเกม:</strong> ตรวจสอบว่า <code>min_engine_version</code> ใน manifest
+                    ตรงกับเวอร์ชันเกมของคุณ</li>
+            </ul>
+        </div>
+
+    </article>
+
+    <footer>
+        <h2>ช่องทางติดต่อ</h2>
+        <div class="social-container">
+            <a class="social-icons" href="https://www.facebook.com/FPGTVMC/">
+                <img src="../../image/facebook-svgrepo-com.png" alt="Facebook">
+            </a>
+            <a class="social-icons" href="https://www.youtube.com/@MCFirsting">
+                <img src="../../image/youtube-fill-svgrepo-com.png" alt="YouTube">
+            </a>
+            <a class="social-icons" href="https://discord.gg/tnqZCfz4wz">
+                <img src="../../image/discord-svgrepo-com.png" alt="Discord">
+            </a>
+            <a class="social-icons" href="https://github.com/MCFirsting">
+                <img src="../../image/github-svgrepo-com.png" alt="GitHub">
+            </a>
+            <a class="social-icons" href="https://www.tiktok.com/@mc_firsting">
+                <img src="../../image/tiktok-svgrepo-com.png" alt="TikTok">
+            </a>
+        </div>
+    </footer>
+
+    <script src="../getting_started/getting_started.js"></script>
+</body>
+
+</html>
