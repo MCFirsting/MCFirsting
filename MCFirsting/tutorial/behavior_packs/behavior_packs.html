@@ -1,0 +1,481 @@
+<!DOCTYPE html>
+<html lang="th">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Introduction to Behavior Packs</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+  <nav class="navbar">
+    <div class="logo">
+      <a href="../../index.html"><img id="logo_mcfirsting" src="../../image/mcfirsting_logo.png" alt="Logo"></a>
+    </div>
+    <ul class="nav-links">
+      <li><a href="../../tutorial.html">Tutorial</a></li>
+      <li><a href="../../shop.html">Shop</a></li>
+    </ul>
+  </nav>
+
+  <header class="doc-header">
+    <div class="container">
+      <h1>Behavior Packs เบื้องต้น</h1>
+      <p style="text-align: center; color: #aaa;">เปลี่ยนพฤติกรรมของสิ่งมีชีวิตและกฎเกณฑ์ในโลก Minecraft</p>
+    </div>
+  </header>
+
+  <article class="article-container">
+
+    <p>
+      <strong>Behavior Pack</strong> คือชุดไฟล์ที่กำหนด "นิสัย" หรือ "พฤติกรรม" ของสิ่งต่างๆ ในเกม
+      เช่น ทำให้วัวโจมตีผู้เล่น, เปลี่ยนของที่ดรอปจากซอมบี้, หรือแม้แต่สร้างสูตรคราฟต์ของขึ้นมาใหม่
+    </p>
+    <img class="article-image" src="image/Screenshot Cow.png" alt="Screenshot Cow">
+
+    <h2>โครงสร้างไฟล์และโฟลเดอร์</h2>
+    <p>
+      เพื่อให้ Minecraft หาไฟล์ของคุณเจอ เราต้องสร้างโฟลเดอร์และไฟล์ตามโครงสร้างที่กำหนด
+      เริ่มจากเข้าไปที่โฟลเดอร์ <code>com.mojang</code> (ดูวิธีเข้าได้ที่หน้า <a
+        href="../getting_started/getting_started.html" style="color:#ff9500;">พื้นฐานการเริ่มต้น</a>)
+    </p>
+    <p>โครงสร้างไฟล์ของคุณควรจะเป็นแบบนี้:</p>
+    <img class="article-image" src="image/Navigate Behavior Packs.png" alt="Navigate Behavior Packs">
+    </div>
+
+    <h3>1. สร้างโฟลเดอร์ Pack</h3>
+    <p>สร้างโฟลเดอร์ใหม่ตั้งชื่อว่า <code>My_BEHAVIOR_Pack</code></p>
+
+    <h3>2. สร้างไฟล์ Manifest</h3>
+    <p>
+      สร้างไฟล์ <code>manifest.json</code> ในโฟลเดอร์นั้น แล้วใส่โค้ดด้านล่าง
+      (สังเกตว่าตรง type จะเป็น <code>data</code> แทน resources)
+    </p>
+
+    <div class="code-wrapper">
+      <pre><span class="token-punct">{</span>
+    <span class="token-key">"format_version"</span><span class="token-punct">:</span> <span class="token-number">2</span><span class="token-punct">,</span>
+    <span class="token-key">"header"</span><span class="token-punct">:</span> <span class="token-punct">{</span>
+        <span class="token-key">"description"</span><span class="token-punct">:</span> <span class="token-string">"My Angry Cow Add-On"</span><span class="token-punct">,</span>
+        <span class="token-key">"name"</span><span class="token-punct">:</span> <span class="token-string">"My Behavior Pack"</span><span class="token-punct">,</span>
+        <span class="token-key">"uuid"</span><span class="token-punct">:</span> <span class="token-string">"&lt;UUID ที่ 1&gt;"</span><span class="token-punct">,</span>
+        <span class="token-key">"version"</span><span class="token-punct">:</span> <span class="token-punct">[</span><span class="token-number">1</span><span class="token-punct">,</span> <span class="token-number">0</span><span class="token-punct">,</span> <span class="token-number">0</span><span class="token-punct">]</span><span class="token-punct">,</span>
+        <span class="token-key">"min_engine_version"</span><span class="token-punct">:</span> <span class="token-punct">[</span><span class="token-number">1</span><span class="token-punct">,</span> <span class="token-number">16</span><span class="token-punct">,</span> <span class="token-number">0</span><span class="token-punct">]</span>
+    <span class="token-punct">}</span><span class="token-punct">,</span>
+    <span class="token-key">"modules"</span><span class="token-punct">:</span> <span class="token-punct">[</span>
+        <span class="token-punct">{</span>
+            <span class="token-key">"description"</span><span class="token-punct">:</span> <span class="token-string">"My First Behavior Mod"</span><span class="token-punct">,</span>
+            <span class="token-key">"type"</span><span class="token-punct">:</span> <span class="token-string">"data"</span><span class="token-punct">,</span>
+            <span class="token-key">"uuid"</span><span class="token-punct">:</span> <span class="token-string">"&lt;UUID ที่ 2&gt;"</span><span class="token-punct">,</span>
+            <span class="token-key">"version"</span><span class="token-punct">:</span> <span class="token-punct">[</span><span class="token-number">1</span><span class="token-punct">,</span> <span class="token-number">0</span><span class="token-punct">,</span> <span class="token-number">0</span><span class="token-punct">]</span>
+        <span class="token-punct">}</span>
+    <span class="token-punct">]</span>
+<span class="token-punct">}</span></pre>
+      <button class="copy-btn">คัดลอก</button>
+    </div>
+
+    <div style="background:#333; padding:15px; border-radius:5px; margin-top:10px;">
+      <p style="font-size: 0.9rem; margin:0;">อย่าลืมเปลี่ยน <code>&lt;UUID&gt;</code> ทั้ง 2 จุดด้วยรหัสจาก <a
+          href="https://www.uuidgenerator.net/" target="_blank" style="color:#4facfe;">uuidgenerator.net</a>
+        นะครับ</p>
+    </div>
+
+    <h2>การสร้างวัวดุร้าย (Angry Cow)</h2>
+    <p>เราจะมาแก้ไขไฟล์ของวัว (Cow) ให้มันไล่ขวิดผู้เล่นกันครับ!</p>
+
+    <ol>
+      <li>สร้างโฟลเดอร์ <code>entities</code> ในโฟลเดอร์ Pack ของคุณ</li>
+      <li>สร้างไฟล์ชื่อ <code>cow.json</code></li>
+      <li>คัดลอกโค้ดฉบับเต็มด้านล่างนี้ไปวาง</li>
+    </ol>
+
+    <div class="code-wrapper">
+      <pre><span class="token-punct">{</span>
+    <span class="token-key">"format_version"</span><span class="token-punct">:</span> <span class="token-string">"1.21.90"</span><span class="token-punct">,</span>
+    <span class="token-key">"minecraft:entity"</span><span class="token-punct">:</span> <span class="token-punct">{</span>
+        <span class="token-key">"description"</span><span class="token-punct">:</span> <span class="token-punct">{</span>
+            <span class="token-key">"identifier"</span><span class="token-punct">:</span> <span class="token-string">"minecraft:cow"</span><span class="token-punct">,</span>
+            <span class="token-key">"spawn_category"</span><span class="token-punct">:</span> <span class="token-string">"creature"</span><span class="token-punct">,</span>
+            <span class="token-key">"is_spawnable"</span><span class="token-punct">:</span> <span class="token-number">true</span><span class="token-punct">,</span>
+            <span class="token-key">"is_summonable"</span><span class="token-punct">:</span> <span class="token-number">true</span><span class="token-punct">,</span>
+            <span class="token-key">"properties"</span><span class="token-punct">:</span> <span class="token-punct">{</span>
+                <span class="token-key">"minecraft:climate_variant"</span><span class="token-punct">:</span> <span class="token-punct">{</span>
+                    <span class="token-key">"type"</span><span class="token-punct">:</span> <span class="token-string">"enum"</span><span class="token-punct">,</span>
+                    <span class="token-key">"values"</span><span class="token-punct">:</span> <span class="token-punct">[</span>
+                        <span class="token-string">"temperate"</span><span class="token-punct">,</span>
+                        <span class="token-string">"warm"</span><span class="token-punct">,</span>
+                        <span class="token-string">"cold"</span>
+                    <span class="token-punct">]</span><span class="token-punct">,</span>
+                    <span class="token-key">"default"</span><span class="token-punct">:</span> <span class="token-string">"temperate"</span><span class="token-punct">,</span>
+                    <span class="token-key">"client_sync"</span><span class="token-punct">:</span> <span class="token-number">true</span>
+                <span class="token-punct">}</span>
+            <span class="token-punct">}</span><span class="token-punct">,</span>
+            <span class="token-key">"runtime_identifier"</span><span class="token-punct">:</span> <span class="token-string">"minecraft:cow"</span>
+        <span class="token-punct">}</span><span class="token-punct">,</span>
+        <span class="token-key">"component_groups"</span><span class="token-punct">:</span> <span class="token-punct">{</span>
+            <span class="token-key">"minecraft:cow_baby"</span><span class="token-punct">:</span> <span class="token-punct">{</span>
+                <span class="token-key">"minecraft:is_baby"</span><span class="token-punct">:</span> <span class="token-punct">{</span><span class="token-punct">}</span><span class="token-punct">,</span>
+                <span class="token-key">"minecraft:scale"</span><span class="token-punct">:</span> <span class="token-punct">{</span>
+                    <span class="token-key">"value"</span><span class="token-punct">:</span> <span class="token-number">0.5</span>
+                <span class="token-punct">}</span><span class="token-punct">,</span>
+                <span class="token-key">"minecraft:ageable"</span><span class="token-punct">:</span> <span class="token-punct">{</span>
+                    <span class="token-key">"duration"</span><span class="token-punct">:</span> <span class="token-number">1200</span><span class="token-punct">,</span>
+                    <span class="token-key">"feed_items"</span><span class="token-punct">:</span> <span class="token-string">"wheat"</span><span class="token-punct">,</span>
+                    <span class="token-key">"grow_up"</span><span class="token-punct">:</span> <span class="token-punct">{</span>
+                        <span class="token-key">"event"</span><span class="token-punct">:</span> <span class="token-string">"minecraft:ageable_grow_up"</span><span class="token-punct">,</span>
+                        <span class="token-key">"target"</span><span class="token-punct">:</span> <span class="token-string">"self"</span>
+                    <span class="token-punct">}</span>
+                <span class="token-punct">}</span><span class="token-punct">,</span>
+                <span class="token-key">"minecraft:rideable"</span><span class="token-punct">:</span> <span class="token-punct">{</span>
+                    <span class="token-key">"seat_count"</span><span class="token-punct">:</span> <span class="token-number">1</span><span class="token-punct">,</span>
+                    <span class="token-key">"family_types"</span><span class="token-punct">:</span> <span class="token-punct">[</span>
+                        <span class="token-string">"zombie"</span>
+                    <span class="token-punct">]</span><span class="token-punct">,</span>
+                    <span class="token-key">"seats"</span><span class="token-punct">:</span> <span class="token-punct">{</span>
+                        <span class="token-key">"position"</span><span class="token-punct">:</span> <span class="token-punct">[</span>
+                            <span class="token-number">0</span><span class="token-punct">,</span>
+                            <span class="token-number">1</span><span class="token-punct">,</span>
+                            <span class="token-number">0</span>
+                        <span class="token-punct">]</span>
+                    <span class="token-punct">}</span>
+                <span class="token-punct">}</span><span class="token-punct">,</span>
+                <span class="token-key">"minecraft:behavior.follow_parent"</span><span class="token-punct">:</span> <span class="token-punct">{</span>
+                    <span class="token-key">"priority"</span><span class="token-punct">:</span> <span class="token-number">6</span><span class="token-punct">,</span>
+                    <span class="token-key">"speed_multiplier"</span><span class="token-punct">:</span> <span class="token-number">1.1</span>
+                <span class="token-punct">}</span>
+            <span class="token-punct">}</span><span class="token-punct">,</span>
+            <span class="token-key">"minecraft:cow_adult"</span><span class="token-punct">:</span> <span class="token-punct">{</span>
+                <span class="token-key">"minecraft:leashable_to"</span><span class="token-punct">:</span> <span class="token-punct">{</span><span class="token-punct">}</span><span class="token-punct">,</span>
+                <span class="token-key">"minecraft:experience_reward"</span><span class="token-punct">:</span> <span class="token-punct">{</span>
+                    <span class="token-key">"on_bred"</span><span class="token-punct">:</span> <span class="token-string">"Math.Random(1,7)"</span><span class="token-punct">,</span>
+                    <span class="token-key">"on_death"</span><span class="token-punct">:</span> <span class="token-string">"query.last_hit_by_player ? Math.Random(1,3) : 0"</span>
+                <span class="token-punct">}</span><span class="token-punct">,</span>
+                <span class="token-key">"minecraft:loot"</span><span class="token-punct">:</span> <span class="token-punct">{</span>
+                    <span class="token-key">"table"</span><span class="token-punct">:</span> <span class="token-string">"loot_tables/entities/cow.json"</span>
+                <span class="token-punct">}</span><span class="token-punct">,</span>
+                <span class="token-key">"minecraft:rideable"</span><span class="token-punct">:</span> <span class="token-punct">{</span>
+                    <span class="token-key">"seat_count"</span><span class="token-punct">:</span> <span class="token-number">1</span><span class="token-punct">,</span>
+                    <span class="token-key">"family_types"</span><span class="token-punct">:</span> <span class="token-punct">[</span>
+                        <span class="token-string">"zombie"</span>
+                    <span class="token-punct">]</span><span class="token-punct">,</span>
+                    <span class="token-key">"seats"</span><span class="token-punct">:</span> <span class="token-punct">{</span>
+                        <span class="token-key">"position"</span><span class="token-punct">:</span> <span class="token-punct">[</span>
+                            <span class="token-number">0</span><span class="token-punct">,</span>
+                            <span class="token-number">1.15</span><span class="token-punct">,</span>
+                            <span class="token-number">0</span>
+                        <span class="token-punct">]</span>
+                    <span class="token-punct">}</span>
+                <span class="token-punct">}</span><span class="token-punct">,</span>
+                <span class="token-key">"minecraft:behavior.breed"</span><span class="token-punct">:</span> <span class="token-punct">{</span>
+                    <span class="token-key">"priority"</span><span class="token-punct">:</span> <span class="token-number">3</span><span class="token-punct">,</span>
+                    <span class="token-key">"speed_multiplier"</span><span class="token-punct">:</span> <span class="token-number">1</span>
+                <span class="token-punct">}</span><span class="token-punct">,</span>
+                <span class="token-key">"minecraft:breedable"</span><span class="token-punct">:</span> <span class="token-punct">{</span>
+                    <span class="token-key">"require_tame"</span><span class="token-punct">:</span> <span class="token-number">false</span><span class="token-punct">,</span>
+                    <span class="token-key">"breed_items"</span><span class="token-punct">:</span> <span class="token-string">"wheat"</span><span class="token-punct">,</span>
+                    <span class="token-key">"breeds_with"</span><span class="token-punct">:</span> <span class="token-punct">{</span>
+                        <span class="token-key">"mate_type"</span><span class="token-punct">:</span> <span class="token-string">"minecraft:cow"</span><span class="token-punct">,</span>
+                        <span class="token-key">"baby_type"</span><span class="token-punct">:</span> <span class="token-string">"minecraft:cow"</span><span class="token-punct">,</span>
+                        <span class="token-key">"breed_event"</span><span class="token-punct">:</span> <span class="token-punct">{</span>
+                            <span class="token-key">"event"</span><span class="token-punct">:</span> <span class="token-string">"minecraft:entity_born"</span><span class="token-punct">,</span>
+                            <span class="token-key">"target"</span><span class="token-punct">:</span> <span class="token-string">"baby"</span>
+                        <span class="token-punct">}</span>
+                    <span class="token-punct">}</span><span class="token-punct">,</span>
+                    <span class="token-key">"property_inheritance"</span><span class="token-punct">:</span> <span class="token-punct">{</span>
+                        <span class="token-key">"minecraft:climate_variant"</span><span class="token-punct">:</span> <span class="token-punct">{</span><span class="token-punct">}</span>
+                    <span class="token-punct">}</span>
+                <span class="token-punct">}</span><span class="token-punct">,</span>
+                <span class="token-key">"minecraft:interact"</span><span class="token-punct">:</span> <span class="token-punct">{</span>
+                    <span class="token-key">"interactions"</span><span class="token-punct">:</span> <span class="token-punct">[</span>
+                        <span class="token-punct">{</span>
+                            <span class="token-key">"on_interact"</span><span class="token-punct">:</span> <span class="token-punct">{</span>
+                                <span class="token-key">"filters"</span><span class="token-punct">:</span> <span class="token-punct">{</span>
+                                    <span class="token-key">"all_of"</span><span class="token-punct">:</span> <span class="token-punct">[</span>
+                                        <span class="token-punct">{</span>
+                                            <span class="token-key">"test"</span><span class="token-punct">:</span> <span class="token-string">"is_family"</span><span class="token-punct">,</span>
+                                            <span class="token-key">"subject"</span><span class="token-punct">:</span> <span class="token-string">"other"</span><span class="token-punct">,</span>
+                                            <span class="token-key">"value"</span><span class="token-punct">:</span> <span class="token-string">"player"</span>
+                                        <span class="token-punct">}</span><span class="token-punct">,</span>
+                                        <span class="token-punct">{</span>
+                                            <span class="token-key">"test"</span><span class="token-punct">:</span> <span class="token-string">"has_equipment"</span><span class="token-punct">,</span>
+                                            <span class="token-key">"domain"</span><span class="token-punct">:</span> <span class="token-string">"hand"</span><span class="token-punct">,</span>
+                                            <span class="token-key">"subject"</span><span class="token-punct">:</span> <span class="token-string">"other"</span><span class="token-punct">,</span>
+                                            <span class="token-key">"value"</span><span class="token-punct">:</span> <span class="token-string">"bucket:0"</span>
+                                        <span class="token-punct">}</span>
+                                    <span class="token-punct">]</span>
+                                <span class="token-punct">}</span>
+                            <span class="token-punct">}</span><span class="token-punct">,</span>
+                            <span class="token-key">"use_item"</span><span class="token-punct">:</span> <span class="token-number">true</span><span class="token-punct">,</span>
+                            <span class="token-key">"transform_to_item"</span><span class="token-punct">:</span> <span class="token-string">"bucket:1"</span><span class="token-punct">,</span>
+                            <span class="token-key">"play_sounds"</span><span class="token-punct">:</span> <span class="token-string">"milk"</span><span class="token-punct">,</span>
+                            <span class="token-key">"interact_text"</span><span class="token-punct">:</span> <span class="token-string">"action.interact.milk"</span>
+                        <span class="token-punct">}</span>
+                    <span class="token-punct">]</span>
+                <span class="token-punct">}</span>
+            <span class="token-punct">}</span>
+        <span class="token-punct">}</span><span class="token-punct">,</span>
+        <span class="token-key">"components"</span><span class="token-punct">:</span> <span class="token-punct">{</span>
+            <span class="token-key">"minecraft:is_hidden_when_invisible"</span><span class="token-punct">:</span> <span class="token-punct">{</span><span class="token-punct">}</span><span class="token-punct">,</span>
+            <span class="token-key">"minecraft:type_family"</span><span class="token-punct">:</span> <span class="token-punct">{</span>
+                <span class="token-key">"family"</span><span class="token-punct">:</span> <span class="token-punct">[</span>
+                    <span class="token-string">"cow"</span><span class="token-punct">,</span>
+                    <span class="token-string">"mob"</span>
+                <span class="token-punct">]</span>
+            <span class="token-punct">}</span><span class="token-punct">,</span>
+            <span class="token-key">"minecraft:breathable"</span><span class="token-punct">:</span> <span class="token-punct">{</span>
+                <span class="token-key">"total_supply"</span><span class="token-punct">:</span> <span class="token-number">15</span><span class="token-punct">,</span>
+                <span class="token-key">"suffocate_time"</span><span class="token-punct">:</span> <span class="token-number">0</span>
+            <span class="token-punct">}</span><span class="token-punct">,</span>
+            <span class="token-key">"minecraft:navigation.walk"</span><span class="token-punct">:</span> <span class="token-punct">{</span>
+                <span class="token-key">"can_path_over_water"</span><span class="token-punct">:</span> <span class="token-number">true</span><span class="token-punct">,</span>
+                <span class="token-key">"avoid_water"</span><span class="token-punct">:</span> <span class="token-number">true</span><span class="token-punct">,</span>
+                <span class="token-key">"avoid_damage_blocks"</span><span class="token-punct">:</span> <span class="token-number">true</span>
+            <span class="token-punct">}</span><span class="token-punct">,</span>
+            <span class="token-key">"minecraft:movement.basic"</span><span class="token-punct">:</span> <span class="token-punct">{</span><span class="token-punct">}</span><span class="token-punct">,</span>
+            <span class="token-key">"minecraft:jump.static"</span><span class="token-punct">:</span> <span class="token-punct">{</span><span class="token-punct">}</span><span class="token-punct">,</span>
+            <span class="token-key">"minecraft:can_climb"</span><span class="token-punct">:</span> <span class="token-punct">{</span><span class="token-punct">}</span><span class="token-punct">,</span>
+            <span class="token-key">"minecraft:collision_box"</span><span class="token-punct">:</span> <span class="token-punct">{</span>
+                <span class="token-key">"width"</span><span class="token-punct">:</span> <span class="token-number">0.9</span><span class="token-punct">,</span>
+                <span class="token-key">"height"</span><span class="token-punct">:</span> <span class="token-number">1.3</span>
+            <span class="token-punct">}</span><span class="token-punct">,</span>
+            <span class="token-key">"minecraft:nameable"</span><span class="token-punct">:</span> <span class="token-punct">{</span><span class="token-punct">}</span><span class="token-punct">,</span>
+            <span class="token-key">"minecraft:health"</span><span class="token-punct">:</span> <span class="token-punct">{</span>
+                <span class="token-key">"value"</span><span class="token-punct">:</span> <span class="token-number">10</span><span class="token-punct">,</span>
+                <span class="token-key">"max"</span><span class="token-punct">:</span> <span class="token-number">10</span>
+            <span class="token-punct">}</span><span class="token-punct">,</span>
+            <span class="token-key">"minecraft:hurt_on_condition"</span><span class="token-punct">:</span> <span class="token-punct">{</span>
+                <span class="token-key">"damage_conditions"</span><span class="token-punct">:</span> <span class="token-punct">[</span>
+                    <span class="token-punct">{</span>
+                        <span class="token-key">"filters"</span><span class="token-punct">:</span> <span class="token-punct">{</span>
+                            <span class="token-key">"test"</span><span class="token-punct">:</span> <span class="token-string">"in_lava"</span><span class="token-punct">,</span>
+                            <span class="token-key">"subject"</span><span class="token-punct">:</span> <span class="token-string">"self"</span><span class="token-punct">,</span>
+                            <span class="token-key">"operator"</span><span class="token-punct">:</span> <span class="token-string">"=="</span><span class="token-punct">,</span>
+                            <span class="token-key">"value"</span><span class="token-punct">:</span> <span class="token-number">true</span>
+                        <span class="token-punct">}</span><span class="token-punct">,</span>
+                        <span class="token-key">"cause"</span><span class="token-punct">:</span> <span class="token-string">"lava"</span><span class="token-punct">,</span>
+                        <span class="token-key">"damage_per_tick"</span><span class="token-punct">:</span> <span class="token-number">4</span>
+                    <span class="token-punct">}</span>
+                <span class="token-punct">]</span>
+            <span class="token-punct">}</span><span class="token-punct">,</span>
+            <span class="token-key">"minecraft:movement"</span><span class="token-punct">:</span> <span class="token-punct">{</span>
+                <span class="token-key">"value"</span><span class="token-punct">:</span> <span class="token-number">0.25</span>
+            <span class="token-punct">}</span><span class="token-punct">,</span>
+            <span class="token-comment" style="color: #6a9955;">/* --- ส่วนที่เพิ่มเข้ามา: ทำให้วัวโจมตีได้ --- */</span>
+            <span class="token-key">"minecraft:behavior.nearest_attackable_target"</span><span class="token-punct">:</span> <span class="token-punct">{</span>
+                <span class="token-key">"priority"</span><span class="token-punct">:</span> <span class="token-number">2</span><span class="token-punct">,</span>
+                <span class="token-key">"must_see"</span><span class="token-punct">:</span> <span class="token-number">true</span><span class="token-punct">,</span>
+                <span class="token-key">"reselect_targets"</span><span class="token-punct">:</span> <span class="token-number">true</span><span class="token-punct">,</span>
+                <span class="token-key">"within_radius"</span><span class="token-punct">:</span> <span class="token-number">25.0</span><span class="token-punct">,</span>
+                <span class="token-key">"entity_types"</span><span class="token-punct">:</span> <span class="token-punct">[</span>
+                    <span class="token-punct">{</span>
+                        <span class="token-key">"filters"</span><span class="token-punct">:</span> <span class="token-punct">{</span>
+                            <span class="token-key">"test"</span><span class="token-punct">:</span> <span class="token-string">"is_family"</span><span class="token-punct">,</span>
+                            <span class="token-key">"subject"</span><span class="token-punct">:</span> <span class="token-string">"other"</span><span class="token-punct">,</span>
+                            <span class="token-key">"value"</span><span class="token-punct">:</span> <span class="token-string">"player"</span>
+                        <span class="token-punct">}</span><span class="token-punct">,</span>
+                        <span class="token-key">"max_dist"</span><span class="token-punct">:</span> <span class="token-number">32</span>
+                    <span class="token-punct">}</span>
+                <span class="token-punct">]</span>
+            <span class="token-punct">}</span><span class="token-punct">,</span>
+            <span class="token-key">"minecraft:behavior.melee_attack"</span><span class="token-punct">:</span> <span class="token-punct">{</span>
+                <span class="token-key">"priority"</span><span class="token-punct">:</span> <span class="token-number">3</span>
+            <span class="token-punct">}</span><span class="token-punct">,</span>
+            <span class="token-key">"minecraft:attack"</span><span class="token-punct">:</span> <span class="token-punct">{</span>
+                <span class="token-key">"damage"</span><span class="token-punct">:</span> <span class="token-number">3</span>
+            <span class="token-punct">}</span><span class="token-punct">,</span>
+            <span class="token-comment" style="color: #6a9955;">/* ------------------------------------- */</span>
+            <span class="token-key">"minecraft:despawn"</span><span class="token-punct">:</span> <span class="token-punct">{</span>
+                <span class="token-key">"despawn_from_distance"</span><span class="token-punct">:</span> <span class="token-punct">{</span><span class="token-punct">}</span>
+            <span class="token-punct">}</span><span class="token-punct">,</span>
+            <span class="token-key">"minecraft:behavior.float"</span><span class="token-punct">:</span> <span class="token-punct">{</span>
+                <span class="token-key">"priority"</span><span class="token-punct">:</span> <span class="token-number">0</span>
+            <span class="token-punct">}</span><span class="token-punct">,</span>
+            <span class="token-key">"minecraft:behavior.panic"</span><span class="token-punct">:</span> <span class="token-punct">{</span>
+                <span class="token-key">"priority"</span><span class="token-punct">:</span> <span class="token-number">1</span><span class="token-punct">,</span>
+                <span class="token-key">"speed_multiplier"</span><span class="token-punct">:</span> <span class="token-number">1.25</span>
+            <span class="token-punct">}</span><span class="token-punct">,</span>
+            <span class="token-key">"minecraft:behavior.mount_pathing"</span><span class="token-punct">:</span> <span class="token-punct">{</span>
+                <span class="token-key">"priority"</span><span class="token-punct">:</span> <span class="token-number">2</span><span class="token-punct">,</span>
+                <span class="token-key">"speed_multiplier"</span><span class="token-punct">:</span> <span class="token-number">1.5</span><span class="token-punct">,</span>
+                <span class="token-key">"target_dist"</span><span class="token-punct">:</span> <span class="token-number">0</span><span class="token-punct">,</span>
+                <span class="token-key">"track_target"</span><span class="token-punct">:</span> <span class="token-number">true</span>
+            <span class="token-punct">}</span><span class="token-punct">,</span>
+            <span class="token-key">"minecraft:behavior.breed"</span><span class="token-punct">:</span> <span class="token-punct">{</span>
+                <span class="token-key">"priority"</span><span class="token-punct">:</span> <span class="token-number">3</span><span class="token-punct">,</span>
+                <span class="token-key">"speed_multiplier"</span><span class="token-punct">:</span> <span class="token-number">1</span>
+            <span class="token-punct">}</span><span class="token-punct">,</span>
+            <span class="token-key">"minecraft:behavior.tempt"</span><span class="token-punct">:</span> <span class="token-punct">{</span>
+                <span class="token-key">"priority"</span><span class="token-punct">:</span> <span class="token-number">4</span><span class="token-punct">,</span>
+                <span class="token-key">"speed_multiplier"</span><span class="token-punct">:</span> <span class="token-number">1.25</span><span class="token-punct">,</span>
+                <span class="token-key">"items"</span><span class="token-punct">:</span> <span class="token-punct">[</span>
+                    <span class="token-string">"wheat"</span>
+                <span class="token-punct">]</span>
+            <span class="token-punct">}</span><span class="token-punct">,</span>
+            <span class="token-key">"minecraft:behavior.follow_parent"</span><span class="token-punct">:</span> <span class="token-punct">{</span>
+                <span class="token-key">"priority"</span><span class="token-punct">:</span> <span class="token-number">5</span><span class="token-punct">,</span>
+                <span class="token-key">"speed_multiplier"</span><span class="token-punct">:</span> <span class="token-number">1.1</span>
+            <span class="token-punct">}</span><span class="token-punct">,</span>
+            <span class="token-key">"minecraft:behavior.random_stroll"</span><span class="token-punct">:</span> <span class="token-punct">{</span>
+                <span class="token-key">"priority"</span><span class="token-punct">:</span> <span class="token-number">6</span><span class="token-punct">,</span>
+                <span class="token-key">"speed_multiplier"</span><span class="token-punct">:</span> <span class="token-number">0.8</span>
+            <span class="token-punct">}</span><span class="token-punct">,</span>
+            <span class="token-key">"minecraft:behavior.look_at_player"</span><span class="token-punct">:</span> <span class="token-punct">{</span>
+                <span class="token-key">"priority"</span><span class="token-punct">:</span> <span class="token-number">7</span><span class="token-punct">,</span>
+                <span class="token-key">"look_distance"</span><span class="token-punct">:</span> <span class="token-number">6</span><span class="token-punct">,</span>
+                <span class="token-key">"probability"</span><span class="token-punct">:</span> <span class="token-number">0.02</span>
+            <span class="token-punct">}</span><span class="token-punct">,</span>
+            <span class="token-key">"minecraft:behavior.random_look_around"</span><span class="token-punct">:</span> <span class="token-punct">{</span>
+                <span class="token-key">"priority"</span><span class="token-punct">:</span> <span class="token-number">9</span>
+            <span class="token-punct">}</span><span class="token-punct">,</span>
+            <span class="token-key">"minecraft:leashable"</span><span class="token-punct">:</span> <span class="token-punct">{</span><span class="token-punct">}</span><span class="token-punct">,</span>
+            <span class="token-key">"minecraft:balloonable"</span><span class="token-punct">:</span> <span class="token-punct">{</span><span class="token-punct">}</span><span class="token-punct">,</span>
+            <span class="token-key">"minecraft:physics"</span><span class="token-punct">:</span> <span class="token-punct">{</span><span class="token-punct">}</span><span class="token-punct">,</span>
+            <span class="token-key">"minecraft:pushable"</span><span class="token-punct">:</span> <span class="token-punct">{</span>
+                <span class="token-key">"is_pushable"</span><span class="token-punct">:</span> <span class="token-number">true</span><span class="token-punct">,</span>
+                <span class="token-key">"is_pushable_by_piston"</span><span class="token-punct">:</span> <span class="token-number">true</span>
+            <span class="token-punct">}</span><span class="token-punct">,</span>
+            <span class="token-key">"minecraft:conditional_bandwidth_optimization"</span><span class="token-punct">:</span> <span class="token-punct">{</span><span class="token-punct">}</span>
+        <span class="token-punct">}</span><span class="token-punct">,</span>
+        <span class="token-key">"events"</span><span class="token-punct">:</span> <span class="token-punct">{</span>
+            <span class="token-key">"minecraft:entity_spawned"</span><span class="token-punct">:</span> <span class="token-punct">{</span>
+                <span class="token-key">"sequence"</span><span class="token-punct">:</span> <span class="token-punct">[</span>
+                    <span class="token-punct">{</span>
+                        <span class="token-key">"randomize"</span><span class="token-punct">:</span> <span class="token-punct">[</span>
+                            <span class="token-punct">{</span>
+                                <span class="token-key">"weight"</span><span class="token-punct">:</span> <span class="token-number">95</span><span class="token-punct">,</span>
+                                <span class="token-key">"trigger"</span><span class="token-punct">:</span> <span class="token-string">"minecraft:spawn_adult"</span>
+                            <span class="token-punct">}</span><span class="token-punct">,</span>
+                            <span class="token-punct">{</span>
+                                <span class="token-key">"weight"</span><span class="token-punct">:</span> <span class="token-number">5</span><span class="token-punct">,</span>
+                                <span class="token-key">"add"</span><span class="token-punct">:</span> <span class="token-punct">{</span>
+                                    <span class="token-key">"component_groups"</span><span class="token-punct">:</span> <span class="token-punct">[</span>
+                                        <span class="token-string">"minecraft:cow_baby"</span>
+                                    <span class="token-punct">]</span>
+                                <span class="token-punct">}</span>
+                            <span class="token-punct">}</span>
+                        <span class="token-punct">]</span>
+                    <span class="token-punct">}</span><span class="token-punct">,</span>
+                    <span class="token-punct">{</span>
+                        <span class="token-key">"first_valid"</span><span class="token-punct">:</span> <span class="token-punct">[</span>
+                            <span class="token-punct">{</span>
+                                <span class="token-key">"filters"</span><span class="token-punct">:</span> <span class="token-punct">{</span>
+                                    <span class="token-key">"test"</span><span class="token-punct">:</span> <span class="token-string">"has_biome_tag"</span><span class="token-punct">,</span>
+                                    <span class="token-key">"value"</span><span class="token-punct">:</span> <span class="token-string">"spawns_warm_variant_farm_animals"</span>
+                                <span class="token-punct">}</span><span class="token-punct">,</span>
+                                <span class="token-key">"set_property"</span><span class="token-punct">:</span> <span class="token-punct">{</span>
+                                    <span class="token-key">"minecraft:climate_variant"</span><span class="token-punct">:</span> <span class="token-string">"warm"</span>
+                                <span class="token-punct">}</span>
+                            <span class="token-punct">}</span><span class="token-punct">,</span>
+                            <span class="token-punct">{</span>
+                                <span class="token-key">"filters"</span><span class="token-punct">:</span> <span class="token-punct">{</span>
+                                    <span class="token-key">"test"</span><span class="token-punct">:</span> <span class="token-string">"has_biome_tag"</span><span class="token-punct">,</span>
+                                    <span class="token-key">"value"</span><span class="token-punct">:</span> <span class="token-string">"spawns_cold_variant_farm_animals"</span>
+                                <span class="token-punct">}</span><span class="token-punct">,</span>
+                                <span class="token-key">"set_property"</span><span class="token-punct">:</span> <span class="token-punct">{</span>
+                                    <span class="token-key">"minecraft:climate_variant"</span><span class="token-punct">:</span> <span class="token-string">"cold"</span>
+                                <span class="token-punct">}</span>
+                            <span class="token-punct">}</span>
+                        <span class="token-punct">]</span>
+                    <span class="token-punct">}</span>
+                <span class="token-punct">]</span>
+            <span class="token-punct">}</span><span class="token-punct">,</span>
+            <span class="token-key">"minecraft:entity_born"</span><span class="token-punct">:</span> <span class="token-punct">{</span>
+                <span class="token-key">"add"</span><span class="token-punct">:</span> <span class="token-punct">{</span>
+                    <span class="token-key">"component_groups"</span><span class="token-punct">:</span> <span class="token-punct">[</span>
+                        <span class="token-string">"minecraft:cow_baby"</span>
+                    <span class="token-punct">]</span>
+                <span class="token-punct">}</span>
+            <span class="token-punct">}</span><span class="token-punct">,</span>
+            <span class="token-key">"minecraft:entity_transformed"</span><span class="token-punct">:</span> <span class="token-punct">{</span>
+                <span class="token-key">"remove"</span><span class="token-punct">:</span> <span class="token-punct">{</span><span class="token-punct">}</span><span class="token-punct">,</span>
+                <span class="token-key">"add"</span><span class="token-punct">:</span> <span class="token-punct">{</span>
+                    <span class="token-key">"component_groups"</span><span class="token-punct">:</span> <span class="token-punct">[</span>
+                        <span class="token-string">"minecraft:cow_adult"</span>
+                    <span class="token-punct">]</span>
+                <span class="token-punct">}</span>
+            <span class="token-punct">}</span><span class="token-punct">,</span>
+            <span class="token-key">"minecraft:ageable_grow_up"</span><span class="token-punct">:</span> <span class="token-punct">{</span>
+                <span class="token-key">"remove"</span><span class="token-punct">:</span> <span class="token-punct">{</span>
+                    <span class="token-key">"component_groups"</span><span class="token-punct">:</span> <span class="token-punct">[</span>
+                        <span class="token-string">"minecraft:cow_baby"</span>
+                    <span class="token-punct">]</span>
+                <span class="token-punct">}</span><span class="token-punct">,</span>
+                <span class="token-key">"add"</span><span class="token-punct">:</span> <span class="token-punct">{</span>
+                    <span class="token-key">"component_groups"</span><span class="token-punct">:</span> <span class="token-punct">[</span>
+                        <span class="token-string">"minecraft:cow_adult"</span>
+                    <span class="token-punct">]</span>
+                <span class="token-punct">}</span>
+            <span class="token-punct">}</span><span class="token-punct">,</span>
+            <span class="token-key">"minecraft:spawn_adult"</span><span class="token-punct">:</span> <span class="token-punct">{</span>
+                <span class="token-key">"add"</span><span class="token-punct">:</span> <span class="token-punct">{</span>
+                    <span class="token-key">"component_groups"</span><span class="token-punct">:</span> <span class="token-punct">[</span>
+                        <span class="token-string">"minecraft:cow_adult"</span>
+                    <span class="token-punct">]</span>
+                <span class="token-punct">}</span>
+            <span class="token-punct">}</span>
+        <span class="token-punct">}</span>
+    <span class="token-punct">}</span>
+<span class="token-punct">}</span></pre>
+      <button class="copy-btn">คัดลอก</button>
+    </div>
+
+
+    <h2>ทดสอบในเกม</h2>
+    <p>
+      เมื่อทำทุกอย่างครบแล้ว ให้เปิดเกม Minecraft ขึ้นมา:
+    </p>
+    <ul>
+      <li>กด <strong>Play</strong> > <strong>Create New World</strong></li>
+      <li>เลื่อนลงมาที่แท็บ <strong>Behavior Packs</strong> ทางซ้ายมือ</li>
+      <li>ในส่วน <strong>Available</strong> > <strong>Owned</strong> คุณจะเห็นชื่อ "My Behavior Pack"
+        ที่เราสร้างไว้</li>
+      <li>กด <strong>Activate</strong> แล้วสร้างโลกได้เลย!</li>
+    </ul>
+    <img class="article-image" src="image/Activate.png" alt="Activate">
+
+    <p>
+      ถ้าทำสำเร็จ ระวังตัวให้ดี เพราะมันจะไม่ใช่วัวที่แสนเชื่องอีกต่อไป!
+    </p>
+
+    <div style="margin-top: 60px; padding-top: 20px; border-top: 1px solid #444;">
+      <h2>ปัญหาที่พบบ่อย</h2>
+      <p>เจอปัญหา Behavior pack ใช่ไหม? ไม่ต้องกังวล การแก้ไขปัญหาเป็นเรื่องปกติของการพัฒนาครับ
+        นี่คือจุดเริ่มต้นในการตรวจสอบ:</p>
+      <ul>
+        <li><strong>เช็ค Content Error Logs:</strong> ตรวจสอบ <strong>Content Error Logs</strong>
+          ในเกมเพื่อดูแจ้งเตือนข้อผิดพลาดที่อาจทำให้เกมไม่เสถียรหรือทำงานผิดปกติ</li>
+        <li><strong>ตรวจสอบโครงสร้างไฟล์:</strong> ดาวน์โหลด <a
+            href="https://github.com/Mojang/bedrock-samples/releases" target="_blank" style="color:#4facfe;">ตัวอย่าง
+            Behavior Pack</a> จาก GitHub
+          เพื่อนำมาเปรียบเทียบโครงสร้างไฟล์กับของคุณว่าถูกต้องหรือไม่</li>
+      </ul>
+    </div>
+
+  </article>
+
+  <footer>
+    <h2>ช่องทางติดต่อ</h2>
+    <div class="social-container">
+      <a class="social-icons" href="https://www.facebook.com/FPGTVMC/">
+        <img src="../../image/facebook-svgrepo-com.png" alt="Facebook">
+      </a>
+      <a class="social-icons" href="https://www.youtube.com/@MCFirsting">
+        <img src="../../image/youtube-fill-svgrepo-com.png" alt="YouTube">
+      </a>
+      <a class="social-icons" href="https://discord.gg/tnqZCfz4wz">
+        <img src="../../image/discord-svgrepo-com.png" alt="Discord">
+      </a>
+      <a class="social-icons" href="https://github.com/MCFirsting">
+        <img src="../../image/github-svgrepo-com.png" alt="GitHub">
+      </a>
+      <a class="social-icons" href="https://www.tiktok.com/@mc_firsting">
+        <img src="../../image/tiktok-svgrepo-com.png" alt="TikTok">
+      </a>
+    </div>
+  </footer>
+
+  <script src="../getting_started/getting_started.js"></script>
+</body>
+
+</html>

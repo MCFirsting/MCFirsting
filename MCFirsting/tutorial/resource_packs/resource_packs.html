@@ -4,7 +4,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Introduction to Resource Packs - MCFirsting</title>
+    <title>Introduction to Resource Packs</title>
     <link rel="stylesheet" href="style.css">
 </head>
 
@@ -38,7 +38,7 @@
             <strong>Resource Pack</strong> คือโครงสร้างโฟลเดอร์ที่เก็บไฟล์ปรับแต่งรูปลักษณ์ทั้งหมด เช่น โมเดล (Models),
             เสียง (Sounds), และพื้นผิว (Textures) ในบทเรียนนี้เราจะมาลองเปลี่ยนลายของบล็อกหญ้ากัน!
         </p>
-        <img class="article-image" src="image/Screenshot Dirt.png" alt="Getting Started Minecraft">
+        <img class="article-image" src="image/Screenshot Dirt.png" alt="Screenshot Dirt">
 
         <h2>โครงสร้างไฟล์และโฟลเดอร์</h2>
         <p>
@@ -46,6 +46,9 @@
             เริ่มจากเข้าไปที่โฟลเดอร์ <code>com.mojang</code> (ดูวิธีเข้าได้ที่หน้า <a
                 href="../getting_started/getting_started.html" style="color:#ff9500;">พื้นฐานการเริ่มต้น</a>)
         </p>
+
+        <p>โครงสร้างไฟล์ของคุณควรจะเป็นแบบนี้:</p>
+        <img class="article-image" src="image/Navigate Resource Packs.png" alt="Navigate Resource Packs">
 
         <h3>1. สร้างโฟลเดอร์ Pack</h3>
         <p>
@@ -108,9 +111,6 @@
             <li>ตั้งชื่อรูปภาพว่า <code>dirt.png</code> แล้วนำไปวางในโฟลเดอร์ <code>blocks</code> ที่เพิ่งสร้าง</li>
         </ol>
 
-        <p>โครงสร้างไฟล์ของคุณควรจะเป็นแบบนี้:</p>
-        <img class="article-image" src="image/Navigate Resource Packs.png" alt="folder structure">
-
         <h2>ทดสอบในเกม</h2>
         <p>
             เมื่อทำทุกอย่างครบแล้ว ให้เปิดเกม Minecraft ขึ้นมา:
@@ -118,7 +118,8 @@
         <ul>
             <li>กด <strong>Play</strong> > <strong>Create New World</strong></li>
             <li>เลื่อนลงมาที่แท็บ <strong>Resource Packs</strong> ทางซ้ายมือ</li>
-            <li>ในส่วน <strong>Available</strong> > <strong>Owned</strong> คุณจะเห็นชื่อ "My Resource Pack" ที่เราสร้างไว้</li>
+            <li>ในส่วน <strong>Available</strong> > <strong>Owned</strong> คุณจะเห็นชื่อ "My Resource Pack"
+                ที่เราสร้างไว้</li>
             <li>กด <strong>Activate</strong> แล้วสร้างโลกได้เลย!</li>
         </ul>
         <img class="article-image" src="image/Activate.png" alt="Activate">
@@ -126,6 +127,41 @@
         <p>
             ถ้าทำสำเร็จ บล็อกดินในเกมจะเปลี่ยนเป็นรูปที่คุณวาดไว้ (ยกเว้นดินที่มีหญ้าปกคลุมนะ!)
         </p>
+
+        <div style="margin-top: 60px; padding-top: 20px; border-top: 1px solid #444;">
+            <h2>ปัญหาที่พบบ่อย</h2>
+            <p>เจอปัญหา Resource pack ใช่ไหม? ไม่ต้องห่วง การแก้ไขปัญหาเป็นเรื่องปกติของการพัฒนาครับ</p>
+            <p>คุณสามารถดาวน์โหลด <a href="https://github.com/Mojang/bedrock-samples/releases" target="_blank"
+                    style="color:#4facfe;">ตัวอย่าง Resource Pack</a> จาก GitHub ของ Minecraft
+                มาเช็คโครงสร้างไฟล์เทียบกับของคุณได้</p>
+
+            <h3 style="color: #ff5555;">Resource Pack ไม่ขึ้นในเกม</h3>
+            <p>ถ้า Pack ของคุณไม่โผล่ในหน้าตั้งค่า Add-ons ของโลก อาจเกิดจากไฟล์ <code>manifest.json</code> ผิดพลาด
+                ลองเช็คตามนี้:</p>
+            <ul>
+                <li><strong>UUID ซ้ำกันไหม?:</strong> เช็คว่า UUID ในส่วน <code>header</code> และ <code>modules</code>
+                    เป็นคนละตัวกันหรือไม่ (ดูหัวข้อ UUID ด้านบน)</li>
+                <li><strong>นามสกุลไฟล์ถูกต้องไหม?:</strong> Windows ของคุณโชว์นามสกุลไฟล์หรือยัง? ถ้ายัง ให้ไปเปิด
+                    'File
+                    Name Extensions' ในแถบ View ของ File Explorer เพื่อให้แน่ใจว่าเป็น <code>.json</code> ไม่ใช่
+                    <code>.json.txt</code>
+                </li>
+                <li><strong>วงเล็บครบไหม?:</strong> เช็ควงเล็บปีกกา <code>{ }</code> และก้ามปู <code>[ ]</code>
+                    ให้ดีว่าเปิดปิดครบถ้วน (แนะนำให้ใช้ VS Code จะช่วยเตือนจุดผิดได้)</li>
+            </ul>
+
+            <h3 style="color: #ff5555;">Resource Pack ขึ้น แต่รูปไม่เปลี่ยน (Content ไม่ทำงาน)</h3>
+            <ul>
+                <li><strong>เช็คชื่อและที่อยู่โฟลเดอร์:</strong> ตรวจสอบว่าโฟลเดอร์ <code>textures</code> และ
+                    <code>blocks</code> สะกดถูกเป๊ะๆ และวางซ้อนกันถูกลำดับ
+                </li>
+                <li><strong>ชื่อไฟล์รูปภาพ:</strong> แน่ใจนะว่าตั้งชื่อไฟล์รูปเหมือนกับไฟล์ต้นฉบับเป๊ะๆ (เช่น
+                    <code>dirt.png</code>) หรือไม่
+                </li>
+                <li><strong>ลำดับของ Pack:</strong> ลองเลื่อน Pack ของคุณไปไว้บนสุดในหน้าตั้งค่าเกม เพื่อให้มันทำงานทับ
+                    Pack อื่นๆ</li>
+            </ul>
+        </div>
 
     </article>
 
