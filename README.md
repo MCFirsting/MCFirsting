@@ -1,54 +1,24 @@
-<div align="center">
+<h1 align="center">Hi 👋, I'm First</h1>
+<h3 align="center">Minecraft Add-ons Creator | Content Creator | Freelancer</h3>
 
-  <img src="https://user-images.githubusercontent.com/18350557/176309783-0785949b-9127-417c-8b55-ab5a4333674e.gif" width="30px">
-  <h1>Hi there, I'm First!</h1>
-  
-  <h3>Minecraft Add-ons Creator | Content Creator | Freelancer</h3>
 
-  <p>
-    I am a developer based in <b>Thailand</b> with a passion for coding and game customization.<br>
-    Specializing in <b>Minecraft Add-ons</b> development with years of experience.
-  </p>
+- 🔭 I’m currently working on **YouTube Content**
 
-  <br>
+- ✉️ Contact me at: **tirawat2546somkhan@gmail.com**
 
-  <a href="https://mcfirsting.netlify.app/"><strong>Explore My Portfolio »</strong></a>
-  <br>
-  <br>
+- 💼 I’m currently working as a **Add-ons Creator**
 
-  <p>
-    <a href="https://discord.com/users/mc_firsting" target="_blank">
-      <img src="https://img.shields.io/badge/Discord-5865F2?style=for-the-badge&logo=discord&logoColor=white" alt="Discord" />
-    </a>
-    <a href="https://www.facebook.com/FPGTVMC" target="_blank">
-      <img src="https://img.shields.io/badge/Facebook-1877F2?style=for-the-badge&logo=facebook&logoColor=white" alt="Facebook" />
-    </a>
-    <a href="https://www.youtube.com/@MCFirsting" target="_blank">
-      <img src="https://img.shields.io/badge/YouTube-FF0000?style=for-the-badge&logo=youtube&logoColor=white" alt="YouTube" />
-    </a>
-  </p>
-
-</div>
-
----
-
-### 🚀 About Me
-
-- 🔭 I’m currently working on **[YouTube Content](http://youtube.com/@mcfirsting)**
-- 💼 I’m currently working as a **Freelance Developer**
 - 🌍 I'm based in **Thailand**
-- ✉️ Contact me at: **[tirawat2546somkhan@gmail.com](mailto:tirawat2546somkhan@gmail.com)**
 
-### 🛠️ Languages & Tools
+- 👨‍💻 All of my projects are available at **https://mcfirsting.netlify.app/**
 
+<h3 align="left">Connect with me:</h3>
 <p align="left">
-  <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript" target="_blank">
-    <img src="https://img.shields.io/badge/JavaScript-F7DF1E?style=for-the-badge&logo=javascript&logoColor=black" alt="JavaScript" />
-  </a>
-  <a href="https://code.visualstudio.com/" target="_blank">
-    <img src="https://img.shields.io/badge/VS_Code-007ACC?style=for-the-badge&logo=visual-studio-code&logoColor=white" alt="VS Code" />
-  </a>
-  </p>
+<a href="https://twitter.com/mcfirsting" target="blank"><img align="center" src="https://raw.githubusercontent.com/rahuldkjain/github-profile-readme-generator/master/src/images/icons/Social/twitter.svg" alt="mcfirsting" height="30" width="40" /></a>
+<a href="https://fb.com/fpgtvmc" target="blank"><img align="center" src="https://raw.githubusercontent.com/rahuldkjain/github-profile-readme-generator/master/src/images/icons/Social/facebook.svg" alt="fpgtvmc" height="30" width="40" /></a>
+<a href="https://instagram.com/@mcfirsting" target="blank"><img align="center" src="https://raw.githubusercontent.com/rahuldkjain/github-profile-readme-generator/master/src/images/icons/Social/instagram.svg" alt="@mcfirsting" height="30" width="40" /></a>
+<a href="https://www.youtube.com/c/@mcfirsting" target="blank"><img align="center" src="https://raw.githubusercontent.com/rahuldkjain/github-profile-readme-generator/master/src/images/icons/Social/youtube.svg" alt="@mcfirsting" height="30" width="40" /></a>
+</p>
 
-# 📊 GitHub Stats:
-[![Anurag's GitHub stats](https://github-readme-stats.vercel.app/api?username=mcfirsting)](https://github.com/mcfirsting/github-readme-stats)
+<h3 align="left">Languages and Tools:</h3>
+<p align="left"> <a href="https://www.w3schools.com/css/" target="_blank" rel="noreferrer"> <img src="https://raw.githubusercontent.com/devicons/devicon/master/icons/css3/css3-original-wordmark.svg" alt="css3" width="40" height="40"/> </a> <a href="https://www.w3.org/html/" target="_blank" rel="noreferrer"> <img src="https://raw.githubusercontent.com/devicons/devicon/master/icons/html5/html5-original-wordmark.svg" alt="html5" width="40" height="40"/> </a> <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript" target="_blank" rel="noreferrer"> <img src="https://raw.githubusercontent.com/devicons/devicon/master/icons/javascript/javascript-original.svg" alt="javascript" width="40" height="40"/> </a> </p>
