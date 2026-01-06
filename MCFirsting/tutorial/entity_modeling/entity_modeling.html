@@ -1,0 +1,192 @@
+<!DOCTYPE html>
+<html lang="th">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Entity Modeling & Animation</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+    <nav class="navbar">
+        <div class="logo">
+            <a href="../../index.html"><img id="logo_mcfirsting" src="../../image/mcfirsting_logo.png" alt="Logo"></a>
+        </div>
+        <ul class="nav-links">
+            <li><a href="../../tutorial.html">Tutorial</a></li>
+            <li><a href="../../shop.html">Shop</a></li>
+        </ul>
+    </nav>
+
+    <header class="doc-header">
+        <div class="container">
+            <h1>การสร้างโมเดลและอนิเมชัน Entity Modeling</h1>
+            <p style="text-align: center; color: #aaa;">เปลี่ยนจินตนาการให้เป็น 3D และทำให้มันเคลื่อนไหวด้วย Blockbench
+            </p>
+        </div>
+    </header>
+
+    <article class="article-container">
+
+        <p>
+            ในบทนี้เราจะมาลงลึกเรื่อง
+            <strong>"รูปลักษณ์ภายนอก"</strong> กันครับ เราจะสร้างโมเดลหุ่นยนต์ (Robot) ลงสี และใส่ท่าทางให้มัน
+            โดยใช้โปรแกรมยอดนิยมอย่าง <strong>Blockbench</strong>
+        </p>
+
+        <h2>สิ่งที่คุณต้องเตรียม</h2>
+        <ul>
+            <li>ความเข้าใจเรื่อง <strong><a href="../resource_packs/resource_packs.html" style="color:#ff9500;">Resource
+                        Pack</a></strong> และ <strong><a href="../behavior_packs/behavior_packs.html"
+                        style="color:#ff9500;">Behavior Pack</a></strong> (จากบทเรียนก่อนหน้า)
+            </li>
+
+        <h2>เตรียมเครื่องมือ</h2>
+        <p>
+            เราจะใช้โปรแกรม <strong>Blockbench</strong> ซึ่งเป็นเครื่องมือสร้างโมเดล 3D สำหรับ Minecraft
+            ที่ดีที่สุดในตอนนี้
+            (ฟรีและใช้งานง่ายมาก)
+        </p>
+        <ul>
+            <li><a href="https://www.blockbench.net/" target="_blank" style="color: #4facfe;">ดาวน์โหลด Blockbench</a>
+                (หรือใช้ผ่านเว็บก็ได้)</li>
+        </ul>
+
+        <h2>ส่วนที่ 1: การสร้างโมเดล (Modeling)</h2>
+
+        <h3>1. ตั้งค่าโปรเจกต์</h3>
+        <p>
+            เมื่อเปิด Blockbench ให้เลือกเมนู <strong>Bedrock Model</strong> จากนั้นตั้งค่าดังนี้:
+        </p>
+        <ul>
+            <li><strong>File Name:</strong> <code>robot</code></li>
+            <li><strong>Model Identifier:</strong> <code>geometry.robot</code> (สำคัญมาก! ต้องตรงกับไฟล์ JSON ของเรา)
+            </li>
+            <li><strong>Texture Size:</strong> 64x64 (หรือ 32x32 สำหรับโมเดลเล็กๆ)</li>
+        </ul>
+
+        <h3>2. สร้างโครงกระดูก</h3>
+        <p>
+            โครงสร้างกระดูก (Bone) คือหัวใจสำคัญของการทำอนิเมชัน กระดูกแต่ละชิ้นจะทำหน้าที่เหมือน "ข้อต่อ"
+            ที่เราสามารถหมุนหรือขยับได้
+        </p>
+        <div
+            style="background:#2b2b2b; padding:15px; border-radius:8px; border-left: 4px solid #f0ad4e; margin-bottom: 20px;">
+            <p style="margin:0;">
+                <strong>เทคนิค:</strong> ควรสร้างกระดูกหลัก (Root Bone) หนึ่งชิ้นเพื่อคุมทั้งตัว แล้วค่อยสร้างกระดูกย่อย
+                (เช่น หัว, แขน, ขา)
+                ใส่เข้าไปข้างใน จะทำให้จัดการท่าทางได้ง่ายขึ้น
+            </p>
+        </div>
+        <p>ตัวอย่างโครงสร้างกระดูกของหุ่นยนต์:</p>
+        <div class="code-wrapper">
+            <pre>root (กระดูกหลัก)
+ ├── head (หัว)
+ ├── body (ลำตัว)
+ ├── arm_right (แขนขวา)
+ ├── arm_left (แขนซ้าย)
+ └── wheel (ล้อ - สำหรับอนิเมชันขับเคลื่อน)</pre>
+        </div>
+
+        <h3>3. ปั้นทรง (Cube)</h3>
+        <p>
+            ใช้เครื่องมือ <strong>Cube</strong> สร้างสี่เหลี่ยมขึ้นมาแล้วจัดวางให้เป็นรูปร่าง
+            อย่าลืมลาก Cube ไปใส่ใน Bone ที่ถูกต้องด้วยนะครับ (เช่น ลูกตาก็ต้องอยู่ใน Bone หัว)
+        </p>
+
+        <h2>ส่วนที่ 2: การลงสี (Texturing)</h2>
+        <p>
+            เมื่อปั้นเสร็จแล้ว ให้กด <strong>Create Texture</strong> ใน Blockbench (เลือกแบบ Template เพื่อให้โปรแกรมกาง
+            UV ให้เอง)
+            จากนั้นไปที่แท็บ <strong>Paint</strong> เพื่อระบายสีลงบนโมเดล 3D ได้เลย!
+        </p>
+        <p>
+            เมื่อเสร็จแล้วให้บันทึกไฟล์:
+        </p>
+        <ul>
+            <li><strong>Model:</strong> <code>robot.geo.json</code> (นำไปใส่ในโฟลเดอร์ <code>models/entity/</code>)</li>
+            <li><strong>Texture:</strong> <code>robot.png</code> (นำไปใส่ในโฟลเดอร์ <code>textures/entity/</code>)</li>
+        </ul>
+
+        <h2>ส่วนที่ 3: การทำอนิเมชัน (Animation)</h2>
+        <p>
+            กลับมาที่ Blockbench เปลี่ยนไปที่แท็บ <strong>Animate</strong> แล้วกดเครื่องหมาย <code>+</code>
+            เพื่อสร้างอนิเมชันใหม่
+            ตั้งชื่อว่า <code>animation.robot.sway</code> (ท่าโยกตัว)
+        </p>
+
+        <h3>ขั้นตอนการทำ Keyframe</h3>
+        <ol>
+            <li>เลือก Bone ที่ต้องการขยับ (เช่น <code>body</code>)</li>
+            <li>เลื่อนแถบเวลาไปที่ 0 วินาที -> กดปุ่ม Rotation แล้วขยับเล็กน้อยเพื่อสร้างจุดเริ่มต้น</li>
+            <li>เลื่อนไปที่ 0.5 วินาที -> หมุนตัวไปทางซ้าย</li>
+            <li>เลื่อนไปที่ 1.0 วินาที -> หมุนตัวไปทางขวา</li>
+            <li>เลื่อนไปที่ 1.5 วินาที -> หมุนกลับมาตรงกลาง</li>
+            <li>ตั้งค่า <strong>Loop</strong> เป็น True เพื่อให้เล่นวนซ้ำ</li>
+        </ol>
+
+        <p>
+            เมื่อเสร็จแล้ว ให้บันทึกไฟล์อนิเมชันเป็น <code>robot.animation.json</code> แล้วนำไปใส่ในโฟลเดอร์
+            <code>animations/</code> ของ Resource Pack
+        </p>
+
+        <h2>ส่วนที่ 4: เชื่อมต่อในโค้ด</h2>
+        <p>
+            สุดท้าย เราต้องบอกเกมให้เล่นอนิเมชันนี้ โดยไปแก้ไฟล์ <strong>Client Entity</strong>
+            (<code>robot.entity.json</code>):
+        </p>
+
+        <div class="code-wrapper">
+            <pre><span class="token-key">"animations"</span><span class="token-punct">:</span> <span class="token-punct">{</span>
+    <span class="token-key">"sway"</span><span class="token-punct">:</span> <span class="token-string">"animation.robot.sway"</span>
+<span class="token-punct">}</span><span class="token-punct">,</span>
+<span class="token-key">"scripts"</span><span class="token-punct">:</span> <span class="token-punct">{</span>
+    <span class="token-key">"animate"</span><span class="token-punct">:</span> <span class="token-punct">[</span>
+        <span class="token-punct">{</span> <span class="token-key">"sway"</span><span class="token-punct">:</span> <span class="token-string">"!query.is_on_ground"</span> <span class="token-punct">}</span>
+    <span class="token-punct">]</span>
+<span class="token-punct">}</span></pre>
+            <button class="copy-btn">คัดลอก</button>
+        </div>
+
+        <p>
+            <strong>อธิบายโค้ด:</strong> เราตั้งเงื่อนไขว่า <code>!query.is_on_ground</code> (เมื่อไม่ได้อยู่บนพื้น)
+            ให้เล่นท่า <code>sway</code>
+            ดังนั้นเวลาหุ่นยนต์ลอยตัวหรือตกจากที่สูง มันจะโยกตัวไปมาครับ!
+        </p>
+
+        <div style="margin-top: 40px; border-top: 1px solid #444; padding-top: 20px;">
+            <h3>บทสรุป</h3>
+            <p>
+                ตอนนี้คุณมีหุ่นยนต์ที่มีโมเดลเป็นของตัวเอง มีสีสัน และขยับได้แล้ว!
+                การฝึกฝนใช้ Blockbench บ่อยๆ จะช่วยให้คุณสร้างสรรค์ Entity ที่ซับซ้อนและสวยงามขึ้นได้เรื่อยๆ ครับ
+            </p>
+        </div>
+
+    </article>
+
+    <footer>
+        <h2>ช่องทางติดต่อ</h2>
+        <div class="social-container">
+            <a class="social-icons" href="https://www.facebook.com/FPGTVMC/">
+                <img src="../../image/facebook-svgrepo-com.png" alt="Facebook">
+            </a>
+            <a class="social-icons" href="https://www.youtube.com/@MCFirsting">
+                <img src="../../image/youtube-fill-svgrepo-com.png" alt="YouTube">
+            </a>
+            <a class="social-icons" href="https://discord.gg/tnqZCfz4wz">
+                <img src="../../image/discord-svgrepo-com.png" alt="Discord">
+            </a>
+            <a class="social-icons" href="https://github.com/MCFirsting">
+                <img src="../../image/github-svgrepo-com.png" alt="GitHub">
+            </a>
+            <a class="social-icons" href="https://www.tiktok.com/@mc_firsting">
+                <img src="../../image/tiktok-svgrepo-com.png" alt="TikTok">
+            </a>
+        </div>
+    </footer>
+
+    <script src="../getting_started/getting_started.js"></script>
+</body>
+
+</html>

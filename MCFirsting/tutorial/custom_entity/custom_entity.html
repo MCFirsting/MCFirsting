@@ -1,0 +1,908 @@
+<!DOCTYPE html>
+<html lang="th">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Creating New Entity Types</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+    <nav class="navbar">
+        <div class="logo">
+            <a href="../../index.html"><img id="logo_mcfirsting" src="../../image/mcfirsting_logo.png" alt="Logo"></a>
+        </div>
+        <ul class="nav-links">
+            <li><a href="../../tutorial.html">Tutorial</a></li>
+            <li><a href="../../shop.html">Shop</a></li>
+        </ul>
+    </nav>
+
+    <header class="doc-header">
+        <div class="container">
+            <h1>การสร้าง Entity ใหม่</h1>
+            <p style="text-align: center; color: #aaa;">เรียนรู้วิธีสร้างสิ่งมีชีวิตหรือวัตถุใหม่ๆ ในโลก Minecraft
+                ของคุณ</p>
+        </div>
+    </header>
+
+    <article class="article-container">
+
+        <p>
+            Entity คือวัตถุทุกอย่างในเกมที่มีการเคลื่อนไหวหรือมีการโต้ตอบได้ ไม่ว่าจะเป็น Mobs (สัตว์,
+            มอนสเตอร์),
+            Projectiles (ลูกธนู, ลูกไฟ), หรือแม้แต่ยานพาหนะ (เรือ, รถราง)
+        </p>
+        <p>
+            ในบทเรียนนี้ เราจะมาลองสร้าง <strong>"หุ่นยนต์ (Robot)"</strong> อย่างง่าย
+            เพื่อเรียนรู้โครงสร้างพื้นฐานที่จำเป็นในการนำ Entity ใหม่เข้าสู่เกมครับ
+        </p>
+
+        <h2>สิ่งที่คุณต้องเตรียม</h2>
+        <ul>
+            <li>ความเข้าใจเรื่อง <strong><a href="../resource_packs/resource_packs.html" style="color:#ff9500;">Resource
+                        Pack</a></strong> และ <strong><a href="../behavior_packs/behavior_packs.html"
+                        style="color:#ff9500;">Behavior Pack</a></strong> (จากบทเรียนก่อนหน้า)
+            </li>
+
+            <h2>โครงสร้างไฟล์</h2>
+            <p>
+                ใน Behavior Pack ไฟล์ Entity มีหน้าที่กำหนดนิยามของ Entity ในฝั่ง Server
+                ส่วนใน Resource Pack ไฟล์ Client Entity จะทำหน้าที่บอกตัวเกมว่า Entity นั้นควรมีหน้าตาเป็นอย่างไร
+            </p>
+            <p>
+                แผนภาพด้านล่างแสดงให้เห็นว่าไฟล์ต่างๆ ทำงานร่วมกันอย่างไรเพื่อสร้าง Custom Entity ขึ้นมา:
+            </p>
+
+            <img class="article-image" src="/tutorial/custom_entity/image/File Structure Custom Entity.png"
+                alt="Entity File Interaction Graph">
+
+            <h2>การตั้งชื่อ</h2>
+            <p>
+                เมื่อคุณสร้าง Entity สิ่งแรกที่ต้องคำนึงถึงคือ ID ที่จะตั้งให้มัน ไฟล์ต่างๆ ใน Resource และ Behavior
+                Packs
+                จะต้องเชื่อมโยงกันโดยใช้ Entity ID นี้ ซึ่งประกอบด้วย <strong>Namespace</strong> (ชื่อเฉพาะกลุ่ม) และ
+                <strong>Name</strong> (ชื่อระบุตัว) คั่นด้วยเครื่องหมายทวิภาค (<code>:</code>) ตัวอย่างเช่น
+                <code>sample:robot</code>
+            </p>
+
+            <div
+                style="background:#2b2b2b; padding:15px; border-radius:8px; border-left: 4px solid #ff9500; margin-bottom: 20px;">
+                <h4 style="margin-top:0; color:#ff9500;">กฎการตั้งชื่อ ID</h4>
+                <ul style="margin-bottom:0;">
+                    <li><strong>Namespace:</strong> ควรเป็นชื่อย่อทีมหรือชื่อโปรเจกต์ของคุณ</li>
+                    <li><strong>ตัวอักษร:</strong> ใช้ได้เฉพาะตัวพิมพ์เล็ก (a-z), ตัวเลข (0-9), และขีดล่าง (_) เท่านั้น
+                    </li>
+                    <li><strong>ข้อห้าม:</strong> ห้ามใช้ <code>minecraft</code> เป็น namespace
+                        เพราะถูกสงวนไว้สำหรับทรัพยากรดั้งเดิมของเกม (Vanilla)
+                        ยกเว้นว่าคุณต้องการเขียนทับคอนเทนต์เดิมจริงๆ</li>
+                </ul>
+            </div>
+
+            <p>
+                ไฟล์ส่วนใหญ่ที่ใช้กำหนด Entity จะเป็นไฟล์ JSON เพื่อไม่ให้สับสน เราแนะนำให้ใช้มาตรฐานการตั้งชื่อไฟล์ (Naming
+                Convention) แบบเดียวกัน ดังนี้:
+            </p>
+            
+            <div class="table-wrapper">
+                <table>
+                    <thead>
+                        <tr style="background-color: #333; color: #ffffff;">
+                            <th style="padding: 15px; text-align: left;">ประเภทไฟล์ (File Type)</th>
+                            <th style="padding: 15px; text-align: left;">ชื่อไฟล์ (File Name)</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr style="border-bottom: 1px solid #444;">
+                            <td style="padding: 15px;">Client Entity Files</td>
+                            <td style="padding: 15px; color: #a5d6ff;"><code>entity_name.entity.json</code></td>
+                        </tr>
+                        <tr style="border-bottom: 1px solid #444;">
+                            <td style="padding: 15px;">Model Files</td>
+                            <td style="padding: 15px; color: #a5d6ff;"><code>entity_name.geo.json</code></td>
+                        </tr>
+                        <tr style="border-bottom: 1px solid #444;">
+                            <td style="padding: 15px;">Animation Files</td>
+                            <td style="padding: 15px; color: #a5d6ff;"><code>entity_name.animation.json</code></td>
+                        </tr>
+                        <tr style="border-bottom: 1px solid #444;">
+                            <td style="padding: 15px;">Animation Controllers</td>
+                            <td style="padding: 15px; color: #a5d6ff;"><code>entity_name.animation_controllers.json</code></td>
+                        </tr>
+                        <tr>
+                            <td style="padding: 15px;">Render Controllers</td>
+                            <td style="padding: 15px; color: #a5d6ff;"><code>entity_name.render_controllers.json</code></td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+            <p style="font-size: 0.9rem; color:#aaa; margin-top: 5px;">*ให้แทนที่คำว่า <code>entity_name</code> ด้วยชื่อ Entity
+                ของคุณ (ไม่ต้องใส่ namespace)</p>
+
+
+            <div style="background:#333; padding:15px; border-radius:5px; margin:20px 0;">
+                <strong>หลักการทำงาน:</strong> Entity ประกอบด้วย 2 ส่วนหลักคือ
+                <strong>Behavior Pack</strong> (กำหนดพฤติกรรม ค่าพลัง) และ
+                <strong>Resource Pack</strong> (กำหนดหน้าตา เสียง และโมเดล)
+            </div>
+
+            <h2>ส่วนที่ 1: Behavior Pack</h2>
+            <p>
+                ส่วนนี้จะบอกเกมว่า Entity นี้คืออะไร ทำอะไรได้บ้าง เริ่มจากสร้างโฟลเดอร์สำหรับ Behavior Pack ของคุณ
+                แล้วเข้าไปสร้างโฟลเดอร์ชื่อ <code>entities</code>
+            </p>
+
+            <h3>1. สร้างไฟล์นิยาม Entity</h3>
+            <p>สร้างไฟล์ชื่อ <code>robot.json</code> ในโฟลเดอร์ <code>entities</code> และใส่โค้ดนี้:</p>
+
+            <div class="code-wrapper">
+                <pre><span class="token-punct">{</span>
+    <span class="token-key">"format_version"</span><span class="token-punct">:</span> <span class="token-string">"1.21.80"</span><span class="token-punct">,</span>
+    <span class="token-key">"minecraft:entity"</span><span class="token-punct">:</span> <span class="token-punct">{</span>
+        <span class="token-key">"description"</span><span class="token-punct">:</span> <span class="token-punct">{</span>
+            <span class="token-key">"identifier"</span><span class="token-punct">:</span> <span class="token-string">"my:robot"</span><span class="token-punct">,</span>
+            <span class="token-key">"is_spawnable"</span><span class="token-punct">:</span> <span class="token-number">true</span><span class="token-punct">,</span>
+            <span class="token-key">"is_summonable"</span><span class="token-punct">:</span> <span class="token-number">true</span>
+        <span class="token-punct">}</span><span class="token-punct">,</span>
+        <span class="token-key">"components"</span><span class="token-punct">:</span> <span class="token-punct">{</span>
+            <span class="token-key">"minecraft:physics"</span><span class="token-punct">:</span> <span class="token-punct">{</span><span class="token-punct">}</span>
+        <span class="token-punct">}</span>
+    <span class="token-punct">}</span>
+<span class="token-punct">}</span></pre>
+                <button class="copy-btn">คัดลอก</button>
+            </div>
+
+            <p><strong>คำอธิบายโค้ด:</strong></p>
+            <ul>
+                <li><code>identifier</code>: ชื่ออ้างอิงของ Entity (ต้องมีเครื่องหมาย : คั่น เช่น <code>my:robot</code>)
+                </li>
+                <li><code>is_spawnable</code>: อนุญาตให้มีไข่สปาวน์ใน Creative Mode</li>
+                <li><code>is_summonable</code>: อนุญาตให้เรียกด้วยคำสั่ง <code>/summon</code></li>
+                <li><code>minecraft:physics</code>: คอมโพเนนต์พื้นฐานที่ทำให้ Entity มีแรงโน้มถ่วงและชนกับบล็อกได้</li>
+            </ul>
+
+            <h2>ส่วนที่ 2: Resource Pack</h2>
+            <p>
+                ตอนนี้เราต้องเพิ่ม Entity ลงใน Resource Pack เพื่อกำหนดรูปลักษณ์ ในโฟลเดอร์ <code>entity</code> ของ
+                Resource Pack
+                ให้สร้างไฟล์ JSON ใหม่ชื่อว่า <code>robot.entity.json</code>
+            </p>
+
+            <h3>1. Client Entity Definition</h3>
+            <p>เริ่มต้นด้วยโครงสร้างพื้นฐานและการกำหนดสีของไข่สปาวน์ (Spawn Egg):</p>
+
+            <div class="code-wrapper">
+                <pre><span class="token-punct">{</span>
+                <span class="token-key">"format_version"</span><span class="token-punct">:</span> <span class="token-string">"1.10.0"</span><span class="token-punct">,</span>
+                <span class="token-key">"minecraft:client_entity"</span><span class="token-punct">:</span> <span class="token-punct">{</span>
+                    <span class="token-key">"description"</span><span class="token-punct">:</span> <span class="token-punct">{</span>
+                        <span class="token-key">"identifier"</span><span class="token-punct">:</span> <span class="token-string">"my:robot"</span><span class="token-punct">,</span>
+                        <span class="token-key">"spawn_egg"</span><span class="token-punct">:</span> <span class="token-punct">{</span>
+                            <span class="token-key">"base_color"</span><span class="token-punct">:</span> <span class="token-string">"#505152"</span><span class="token-punct">,</span>
+                            <span class="token-key">"overlay_color"</span><span class="token-punct">:</span> <span class="token-string">"#3b9dff"</span>
+                        <span class="token-punct">}</span>
+                    <span class="token-punct">}</span>
+                <span class="token-punct">}</span>
+            <span class="token-punct">}</span></pre>
+                <button class="copy-btn">คัดลอก</button>
+            </div>
+
+            <p>
+                นี่คือโครงสร้างพื้นฐานของไฟล์ ซึ่งคล้ายกับไฟล์ฝั่ง Behavior ที่เราทำไปก่อนหน้านี้ สังเกตว่าเราใช้
+                <code>client_entity</code> แทน <code>entity</code>
+            </p>
+            <p>
+                แท็ก <code>spawn_egg</code> กำหนดหน้าตาของไข่สปาวน์ในช่องเก็บของ
+                วิธีนี้จะทำให้ไข่ดูเหมือนของเดิมในเกมแต่สามารถปรับสี
+                <code>base_color</code> (สีพื้น) และ <code>overlay_color</code> (สีจุด) ได้ตามต้องการ
+            </p>
+
+            <h3>2. ภาพและโมเดล (Visuals)</h3>
+            <p>
+                ก่อนที่จะนำ Entity เข้าเกมได้ มันจำเป็นต้องมีโมเดล ในบทความก่อนหน้า
+            </p>
+            <ul>
+                <li>บันทึกไฟล์โมเดลไว้ที่ <code>models/entity/robot.geo.json</code></li>
+                <li>บันทึกไฟล์ Texture ไว้ที่ <code>textures/entity/robot.png</code></li>
+            </ul>
+
+            <p>
+                เมื่อไฟล์โมเดลพร้อมแล้ว เราต้องใช้ <strong>Render Controller</strong> เพื่อเชื่อมโยง โมเดล, Texture, และ
+                Material
+                เข้าด้วยกัน
+                ให้เปิดไฟล์ <code>robot.entity.json</code> เดิมขึ้นมา แล้วแก้โค้ดให้เป็นแบบนี้:
+            </p>
+
+            <div class="code-wrapper">
+                <pre><span class="token-punct">{</span>
+                <span class="token-key">"format_version"</span><span class="token-punct">:</span> <span class="token-string">"1.10.0"</span><span class="token-punct">,</span>
+                <span class="token-key">"minecraft:client_entity"</span><span class="token-punct">:</span> <span class="token-punct">{</span>
+                    <span class="token-key">"description"</span><span class="token-punct">:</span> <span class="token-punct">{</span>
+                        <span class="token-key">"identifier"</span><span class="token-punct">:</span> <span class="token-string">"my:robot"</span><span class="token-punct">,</span>
+                        <span class="token-key">"materials"</span><span class="token-punct">:</span> <span class="token-punct">{</span>
+                            <span class="token-key">"default"</span><span class="token-punct">:</span> <span class="token-string">"entity"</span>
+                        <span class="token-punct">}</span><span class="token-punct">,</span>
+                        <span class="token-key">"textures"</span><span class="token-punct">:</span> <span class="token-punct">{</span>
+                            <span class="token-key">"default"</span><span class="token-punct">:</span> <span class="token-string">"textures/entity/robot"</span>
+                        <span class="token-punct">}</span><span class="token-punct">,</span>
+                        <span class="token-key">"geometry"</span><span class="token-punct">:</span> <span class="token-punct">{</span>
+                            <span class="token-key">"default"</span><span class="token-punct">:</span> <span class="token-string">"geometry.robot"</span>
+                        <span class="token-punct">}</span><span class="token-punct">,</span>
+                        <span class="token-key">"render_controllers"</span><span class="token-punct">:</span> <span class="token-punct">[</span>
+                            <span class="token-string">"controller.render.default"</span>
+                        <span class="token-punct">]</span><span class="token-punct">,</span>
+                        <span class="token-key">"spawn_egg"</span><span class="token-punct">:</span> <span class="token-punct">{</span>
+                            <span class="token-key">"base_color"</span><span class="token-punct">:</span> <span class="token-string">"#505152"</span><span class="token-punct">,</span>
+                            <span class="token-key">"overlay_color"</span><span class="token-punct">:</span> <span class="token-string">"#3b9dff"</span>
+                        <span class="token-punct">}</span>
+                    <span class="token-punct">}</span>
+                <span class="token-punct">}</span>
+            <span class="token-punct">}</span></pre>
+                <button class="copy-btn">คัดลอก</button>
+            </div>
+
+            <p><strong>รายละเอียดเพิ่มเติม:</strong></p>
+            <ul>
+                <li><strong>Geometry:</strong> อ้างอิงชื่อ Geometry ในไฟล์โมเดล (ถ้าใช้ Blockbench ให้เช็คชื่อใน Project
+                    Settings
+                    ว่าเป็น <code>robot</code> หรือไม่)</li>
+                <li><strong>Textures:</strong> ลิงก์ไปยัง Path ของไฟล์รูปภาพ โดยไม่ต้องใส่นามสกุล <code>.png</code></li>
+                <li><strong>Materials:</strong> ปกติจะใช้ <code>entity</code> แต่ถ้า Texture มีส่วนโปร่งใส (Transparent)
+                    ให้ใช้
+                    <code>entity_alphatest</code> หรือถ้าโปร่งแสง (Translucent) ให้ใช้ <code>entity_alphablend</code>
+                </li>
+                <li><strong>Render Controller:</strong> สำหรับ Entity ทั่วไป เราสามารถใช้
+                    <code>controller.render.default</code>
+                    ที่เกมมีให้ได้เลย
+                </li>
+            </ul>
+
+            <h3>3. การตั้งชื่อในเกม</h3>
+            <p>
+                ในตอนนี้ ทั้งตัว Entity และไข่สปาวน์ (Spawn Egg) จะยังไม่มีชื่อที่ถูกต้องในเกม เพื่อกำหนดชื่อให้สวยงาม
+                เราจำเป็นต้องใช้ <strong>ไฟล์ภาษา (Language file)</strong>
+            </p>
+            <p>
+                ให้สร้างโฟลเดอร์ชื่อ <code>texts</code> ใน Resource Pack ของคุณ และสร้างไฟล์ใหม่ชื่อ
+                <code>en_US.lang</code>
+                (นี่คือไฟล์ภาษาหลักที่จะใช้เป็นค่าเริ่มต้นหากไม่มีภาษาอื่น)
+            </p>
+            <p>ในไฟล์ <code>en_US.lang</code> ให้เพิ่ม 2 บรรทัดนี้ลงไป:</p>
+
+            <div class="code-wrapper">
+                <pre>entity.my:robot.name=Robot<br>item.spawn_egg.entity.my:robot.name=Spawn Robot</pre>
+                <button class="copy-btn">คัดลอก</button>
+            </div>
+
+            <p><strong>คำอธิบาย:</strong></p>
+            <ul>
+                <li>บรรทัดแรก: กำหนดชื่อของ Entity ซึ่งจะปรากฏในหน้าต่างแชท (เช่น ตอนตาย) โครงสร้างคือ
+                    <code>entity.&lt;identifier&gt;.name=&lt;ชื่อ&gt;</code>
+                </li>
+                <li>บรรทัดที่สอง: กำหนดชื่อไอเทมของไข่สปาวน์ โครงสร้างคือ
+                    <code>item.spawn_egg.entity.&lt;identifier&gt;.name=&lt;ชื่อ&gt;</code>
+                </li>
+            </ul>
+
+
+            <h2>การทดสอบ (Testing)</h2>
+            <p>
+                ตรวจสอบให้แน่ใจว่าคุณได้ทดสอบตั้งแต่เนิ่นๆ และทดสอบบ่อยๆ
+                การเจอปัญหาตั้งแต่ช่วงแรกจะช่วยให้การหาสาเหตุและการแก้ไขทำได้ง่ายขึ้น
+                ยิ่งทดสอบบ่อยเท่าไหร่ คุณก็จะยิ่งเจอปัญหาเร็วขึ้นเท่านั้น
+                ซึ่งจะช่วยให้คุณรู้ทันทีว่าปัญหานั้นเกิดจากการเปลี่ยนแปลงล่าสุดจุดไหน
+            </p>
+            <p>
+                คุณควรจะสามารถเรียก Entity ของคุณออกมาได้โดยใช้ไข่สปาวน์ (Spawn Egg) หรือคำสั่ง <code>/summon my:robot</code>
+                หากคุณต้องการแค่ Entity ที่ยืนนิ่งๆ เพียงเท่านี้ก็ถือว่าเสร็จสิ้นแล้ว
+                แต่ถ้าหากคุณต้องการปรับแต่งให้มันขยับหรือมีลูกเล่นมากกว่านี้ เราไปลุยกันต่อเลย!
+            </p>
+
+            <h2>องค์ประกอบและพฤติกรรม (Components)</h2>
+            <p>
+                Components คือคำสั่งที่บอก Entity ว่าต้องทำตัวอย่างไรในเกม เรามาลองเพิ่ม Components หลายๆ ตัวลงไป
+                และดูรายละเอียดกันว่าแต่ละตัวทำหน้าที่อะไรบ้าง
+            </p>
+            <p>
+                ในโฟลเดอร์ <code>behavior pack/entities/</code> ให้เปิดไฟล์ <code>robot.json</code> ขึ้นมา
+                แล้วค้นหาบรรทัด <code>"minecraft:physics": {}</code> จากนั้นให้ **แทนที่** บรรทัดนั้นด้วยโค้ดชุดใหญ่ด้านล่างนี้:
+            </p>
+            
+            <div class="code-wrapper">
+                <pre>        <span class="token-key">"components"</span><span class="token-punct">:</span> <span class="token-punct">{</span>
+                        <span class="token-key">"minecraft:physics"</span><span class="token-punct">:</span> <span class="token-punct">{</span><span class="token-punct">}</span><span class="token-punct">,</span>
+                        <span class="token-key">"minecraft:nameable"</span><span class="token-punct">:</span> <span class="token-punct">{</span><span class="token-punct">}</span><span class="token-punct">,</span>
+                        <span class="token-key">"minecraft:movement"</span><span class="token-punct">:</span> <span class="token-punct">{</span>
+                            <span class="token-key">"value"</span><span class="token-punct">:</span> <span class="token-number">0.25</span>
+                        <span class="token-punct">}</span><span class="token-punct">,</span>
+                        <span class="token-key">"minecraft:movement.basic"</span><span class="token-punct">:</span> <span class="token-punct">{</span><span class="token-punct">}</span><span class="token-punct">,</span>
+                        <span class="token-key">"minecraft:jump.static"</span><span class="token-punct">:</span> <span class="token-punct">{</span><span class="token-punct">}</span><span class="token-punct">,</span>
+                        <span class="token-key">"minecraft:navigation.walk"</span><span class="token-punct">:</span> <span class="token-punct">{</span>
+                            <span class="token-key">"avoid_water"</span><span class="token-punct">:</span> <span class="token-keyword">true</span>
+                        <span class="token-punct">}</span><span class="token-punct">,</span>
+                        <span class="token-key">"minecraft:behavior.tempt"</span><span class="token-punct">:</span> <span class="token-punct">{</span>
+                            <span class="token-key">"priority"</span><span class="token-punct">:</span> <span class="token-number">1</span><span class="token-punct">,</span>
+                            <span class="token-key">"speed_multiplier"</span><span class="token-punct">:</span> <span class="token-number">1.4</span><span class="token-punct">,</span>
+                            <span class="token-key">"items"</span><span class="token-punct">:</span> <span class="token-punct">[</span><span class="token-string">"diamond"</span><span class="token-punct">]</span><span class="token-punct">,</span>
+                            <span class="token-key">"within_radius"</span><span class="token-punct">:</span> <span class="token-number">7.0</span>
+                        <span class="token-punct">}</span><span class="token-punct">,</span>
+                        <span class="token-key">"minecraft:behavior.random_stroll"</span><span class="token-punct">:</span> <span class="token-punct">{</span>
+                            <span class="token-key">"priority"</span><span class="token-punct">:</span> <span class="token-number">3</span><span class="token-punct">,</span>
+                            <span class="token-key">"speed_multiplier"</span><span class="token-punct">:</span> <span class="token-number">0.8</span>
+                        <span class="token-punct">}</span><span class="token-punct">,</span>
+                        <span class="token-key">"minecraft:experience_reward"</span><span class="token-punct">:</span> <span class="token-punct">{</span>
+                            <span class="token-key">"on_death"</span><span class="token-punct">:</span> <span class="token-number">8</span>
+                        <span class="token-punct">}</span>
+                    <span class="token-punct">}</span></pre>
+                <button class="copy-btn">คัดลอก</button>
+            </div>
+            
+            <p>มาดูกันว่า Component แต่ละตัวที่เราเพิ่งใส่ลงไป มีหน้าที่ทำอะไรบ้าง:</p>
+            
+            <div class="table-wrapper">
+                <table>
+                    <thead>
+                        <tr style="background-color: #333; color: #ffffff;">
+                            <th style="padding: 15px; width: 40%; text-align: left;">ชื่อ Component</th>
+                            <th style="padding: 15px; text-align: left;">คำอธิบาย</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr style="border-bottom: 1px solid #444;">
+                            <td style="padding: 15px; color: #a5d6ff;">minecraft:nameable</td>
+                            <td style="padding: 15px;">อนุญาตให้ผู้เล่นตั้งชื่อ Entity ได้โดยใช้ Name Tag</td>
+                        </tr>
+                        <tr style="border-bottom: 1px solid #444;">
+                            <td style="padding: 15px; color: #a5d6ff;">minecraft:movement</td>
+                            <td style="padding: 15px;">กำหนดความเร็วในการเคลื่อนที่ (0.25 คือความเร็วปกติของสัตว์ส่วนใหญ่ใน
+                                Minecraft)</td>
+                        </tr>
+                        <tr style="border-bottom: 1px solid #444;">
+                            <td style="padding: 15px; color: #a5d6ff;">minecraft:movement.basic</td>
+                            <td style="padding: 15px;">มอบความสามารถพื้นฐานให้ Entity เดินไปมาบนพื้นดินได้</td>
+                        </tr>
+                        <tr style="border-bottom: 1px solid #444;">
+                            <td style="padding: 15px; color: #a5d6ff;">minecraft:jump.static</td>
+                            <td style="padding: 15px;">ทำให้ Entity กระโดดได้ เพื่อให้สามารถปีนขึ้นบล็อกต่างๆ ขณะเดิน</td>
+                        </tr>
+                        <tr style="border-bottom: 1px solid #444;">
+                            <td style="padding: 15px; color: #a5d6ff;">minecraft:navigation.walk</td>
+                            <td style="padding: 15px;">ระบบนำทางสำหรับการเดิน โดยเราตั้งค่า <code>avoid_water: true</code>
+                                เพื่อให้มันหลีกเลี่ยงการลงน้ำ</td>
+                        </tr>
+                        <tr style="border-bottom: 1px solid #444;">
+                            <td style="padding: 15px; color: #a5d6ff;">minecraft:behavior.tempt</td>
+                            <td style="padding: 15px;">
+                                ทำให้ Entity เดินตามผู้เล่นที่ถือ <strong>เพชร (Diamond)</strong><br>
+                                เราตั้งค่า Priority เป็น 1 (เลขน้อย = สำคัญมาก) เพื่อให้มันทำสิ่งนี้เป็นอันดับแรกเมื่อเจอเงื่อนไข
+                            </td>
+                        </tr>
+                        <tr style="border-bottom: 1px solid #444;">
+                            <td style="padding: 15px; color: #a5d6ff;">minecraft:behavior.random_stroll</td>
+                            <td style="padding: 15px;">
+                                ทำให้ Entity เดินเล่นไปเรื่อยๆ อย่างอิสระ<br>
+                                เราตั้งค่า Priority เป็น 3 (สำคัญน้อยกว่าการเดินตามเพชร)
+                                ดังนั้นมันจะเดินเล่นก็ต่อเมื่อไม่มีใครถือเพชรล่อมันอยู่
+                            </td>
+                        </tr>
+                        <tr>
+                            <td style="padding: 15px; color: #a5d6ff;">minecraft:experience_reward</td>
+                            <td style="padding: 15px;">กำหนดให้ Entity ดรอปค่าประสบการณ์ (XP) จำนวน 8 หน่วย เมื่อถูกผู้เล่นสังหาร</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+
+            <h2>การทำอนิเมชัน (Animations)</h2>
+            <p>
+                ในส่วนนี้ เราจะเพิ่มอนิเมชัน "ล้อหมุน" ง่ายๆ ให้กับหุ่นยนต์ครับ (หากต้องการเรียนรู้ลึกซึ้งเกี่ยวกับ Animation
+                Controllers
+                และการทำอนิเมชันใน Blockbench แนะนำให้)
+            
+                [Image of 3d model of a wheel]
+            
+            </p>
+            <p>
+                อนิเมชันจะถูกเก็บไว้ในไฟล์ Animation ดังนั้นอย่างแรกที่ต้องทำคือสร้างโฟลเดอร์ชื่อ <code>animations</code>
+                ใน Resource Pack และสร้างไฟล์ชื่อ <code>robot.animation.json</code> ข้างในนั้นครับ
+            </p>
+            <p>
+                ในไฟล์นั้น เราจะสร้างอนิเมชันใหม่ชื่อ <code>animation.robot.drive</code> และตั้งค่า <code>loop</code> เป็น
+                <code>true</code>
+                เพื่อให้อนิเมชันเล่นวนซ้ำไปเรื่อยๆ โค้ดจะมีหน้าตาแบบนี้ครับ:
+            </p>
+            
+            <div class="code-wrapper">
+                <pre><span class="token-punct">{</span>
+                <span class="token-key">"format_version"</span><span class="token-punct">:</span> <span class="token-string">"1.8.0"</span><span class="token-punct">,</span>
+                <span class="token-key">"animations"</span><span class="token-punct">:</span> <span class="token-punct">{</span>
+                    <span class="token-key">"animation.robot.drive"</span><span class="token-punct">:</span> <span class="token-punct">{</span>
+                        <span class="token-key">"loop"</span><span class="token-punct">:</span> <span class="token-keyword">true</span>
+                    <span class="token-punct">}</span>
+                <span class="token-punct">}</span>
+            <span class="token-punct">}</span></pre>
+                <button class="copy-btn">คัดลอก</button>
+            </div>
+            
+            <p>
+                การทำอนิเมชันช่วยให้เราขยับตำแหน่ง (Position), การหมุน (Rotation), และขนาด (Scale) ของแต่ละ "กระดูก" (Bone) ได้
+                (ถ้ายังไม่รู้ว่า Bone คืออะไร ไม่ต้องห่วงครับ คิดซะว่ามันคือชิ้นส่วนหนึ่งของโมเดล เช่น ขา หรือ ล้อ ก็ได้)
+                การทำอนิเมชันทำได้ทั้งแบบ Keyframes, การใช้สูตร <strong>Molang</strong>, หรือใช้ทั้งคู่ผสมกัน
+                ในตัวอย่างนี้เราจะใช้สูตร Molang ครับ
+            </p>
+            
+            <h3>รู้จักกับ Molang เบื้องต้น</h3>
+            <p>
+                <strong>Molang</strong> เป็นภาษาเฉพาะสำหรับ Resource และ Behavior Packs มันช่วยให้เราดึงค่าตัวเลขต่างๆ จาก Entity
+                โดยใช้ <code>query</code> และนำมาคำนวณเป็นผลลัพธ์ทางคณิตศาสตร์ได้
+            </p>
+            <p>
+                ตัวอย่างเช่นคำสั่ง <code>query.modified_distance_moved</code> จะคืนค่าระยะทางที่ Entity เคลื่อนที่ไป
+                เราสามารถนำค่านี้มาคำนวณการหมุนของล้อหุ่นยนต์ในแกน X ซึ่งจะทำให้ดูเหมือนหุ่นยนต์กำลังขับเคลื่อนอยู่
+                (ตัวเลขอาจต้องลองปรับดู แต่สำหรับโมเดลนี้คูณด้วย 60 กำลังสวยครับ)
+            </p>
+            
+            <p>ให้แก้โค้ดในไฟล์ <code>robot.animation.json</code> เป็นแบบนี้:</p>
+            
+            <div class="code-wrapper">
+                <pre><span class="token-punct">{</span>
+                <span class="token-key">"format_version"</span><span class="token-punct">:</span> <span class="token-string">"1.8.0"</span><span class="token-punct">,</span>
+                <span class="token-key">"animations"</span><span class="token-punct">:</span> <span class="token-punct">{</span>
+                    <span class="token-key">"animation.robot.drive"</span><span class="token-punct">:</span> <span class="token-punct">{</span>
+                        <span class="token-key">"loop"</span><span class="token-punct">:</span> <span class="token-keyword">true</span><span class="token-punct">,</span>
+                        <span class="token-key">"bones"</span><span class="token-punct">:</span> <span class="token-punct">{</span>
+                            <span class="token-key">"wheel"</span><span class="token-punct">:</span> <span class="token-punct">{</span>
+                                <span class="token-key">"rotation"</span><span class="token-punct">:</span><span class="token-punct">[</span><span class="token-string">"query.modified_distance_moved*60"</span><span class="token-punct">,</span> <span class="token-number">0</span><span class="token-punct">,</span> <span class="token-number">0</span><span class="token-punct">]</span>
+                            <span class="token-punct">}</span>
+                        <span class="token-punct">}</span>
+                    <span class="token-punct">}</span>
+                <span class="token-punct">}</span>
+            <span class="token-punct">}</span></pre>
+                <button class="copy-btn">คัดลอก</button>
+            </div>
+            <p style="font-size: 0.9rem; color:#aaa;">*หมายเหตุ: ในโมเดลของคุณต้องมีชิ้นส่วนที่ตั้งชื่อว่า "wheel" ด้วยนะครับ
+                ไม่งั้นมันจะไม่รู้ว่าต้องหมุนชิ้นไหน</p>
+            
+            <h3>เชื่อมต่ออนิเมชันเข้ากับ Entity</h3>
+            <p>
+                เมื่อสร้างไฟล์อนิเมชันเสร็จแล้ว เราต้องไปเชื่อมโยงมันเข้ากับไฟล์ Client Entity
+                ดังนั้นให้เปิดไฟล์ <code>resource_pack/entity/robot.entity.json</code> ขึ้นมา
+            </p>
+            <p>
+                เราต้องเพิ่มส่วน <code>animations</code> เพื่อลงทะเบียนไฟล์ และใช้ส่วน <code>scripts</code> กับ <code>animate</code>
+                เพื่อสั่งให้มันเล่นตลอดเวลา ให้แก้ไขไฟล์ <code>robot.entity.json</code> โดยเพิ่มโค้ดในส่วน <code>description</code>
+                ดังนี้:
+            </p>
+            
+            <div class="code-wrapper">
+                <pre>        <span class="token-key">"description"</span><span class="token-punct">:</span> <span class="token-punct">{</span>
+                        <span class="token-key">"identifier"</span><span class="token-punct">:</span> <span class="token-string">"my:robot"</span><span class="token-punct">,</span>
+                        <span class="token-key">"materials"</span><span class="token-punct">:</span> <span class="token-punct">{</span> <span class="token-key">"default"</span><span class="token-punct">:</span> <span class="token-string">"entity"</span> <span class="token-punct">}</span><span class="token-punct">,</span>
+                        <span class="token-key">"textures"</span><span class="token-punct">:</span> <span class="token-punct">{</span> <span class="token-key">"default"</span><span class="token-punct">:</span> <span class="token-string">"textures/entity/robot"</span> <span class="token-punct">}</span><span class="token-punct">,</span>
+                        <span class="token-key">"geometry"</span><span class="token-punct">:</span> <span class="token-punct">{</span> <span class="token-key">"default"</span><span class="token-punct">:</span> <span class="token-string">"geometry.robot"</span> <span class="token-punct">}</span><span class="token-punct">,</span>
+                        <span class="token-key">"render_controllers"</span><span class="token-punct">:</span> <span class="token-punct">[</span> <span class="token-string">"controller.render.default"</span> <span class="token-punct">]</span><span class="token-punct">,</span>
+                        <span class="token-key">"spawn_egg"</span><span class="token-punct">:</span> <span class="token-punct">{</span> <span class="token-key">"base_color"</span><span class="token-punct">:</span> <span class="token-string">"#505152"</span><span class="token-punct">,</span> <span class="token-key">"overlay_color"</span><span class="token-punct">:</span> <span class="token-string">"#3b9dff"</span> <span class="token-punct">}</span><span class="token-punct">,</span>
+                        
+                        <span class="token-comment" style="color: #6a9955;">/* --- ส่วนที่เพิ่มเข้ามา --- */</span>
+                        <span class="token-key">"animations"</span><span class="token-punct">:</span> <span class="token-punct">{</span>
+                            <span class="token-key">"drive"</span><span class="token-punct">:</span> <span class="token-string">"animation.robot.drive"</span>
+                        <span class="token-punct">}</span><span class="token-punct">,</span>
+                        <span class="token-key">"scripts"</span><span class="token-punct">:</span> <span class="token-punct">{</span>
+                            <span class="token-key">"animate"</span><span class="token-punct">:</span> <span class="token-punct">[</span><span class="token-string">"drive"</span><span class="token-punct">]</span>
+                        <span class="token-punct">}</span>
+                        <span class="token-comment" style="color: #6a9955;">/* ------------------------ */</span>
+                    <span class="token-punct">}</span></pre>
+                <button class="copy-btn">คัดลอก</button>
+            </div>
+            
+            <p>
+                ด้วยโค้ดชุดนี้ อนิเมชัน <code>drive</code> จะถูกเปิดใช้งานเสมอ
+                และล้อหุ่นยนต์ของคุณจะหมุนโดยอัตโนมัติเมื่อมันเคลื่อนที่ครับ!
+            </p>
+
+            <h2>ตัวควบคุมการแสดงผล (Render Controllers)</h2>
+            <p>
+                <strong>Render Controllers</strong> คือเครื่องมือที่ช่วยให้เราปรับเปลี่ยน รูปทรง (Geometry), ลวดลาย (Textures),
+                และวัสดุ (Materials) ของ Entity ได้โดยใช้ภาษา Molang
+            </p>
+            <p>
+                ปกติแล้วเราต้องสร้างไฟล์ใหม่ในโฟลเดอร์ <code>render_controllers</code> ของ Resource Pack (เช่น
+                <code>robot.render_controllers.json</code>)
+                ตัวอย่างโค้ดด้านล่างแสดงวิธีการเรียกใช้ Geometry, Material, และ Texture ที่เรากำหนดไว้ในไฟล์ Client Entity
+                มาใช้งานเป็นค่าเริ่มต้น (Default):
+            </p>
+            
+            <div class="code-wrapper">
+                <pre><span class="token-punct">{</span>
+                <span class="token-key">"format_version"</span><span class="token-punct">:</span> <span class="token-string">"1.8.0"</span><span class="token-punct">,</span>
+                <span class="token-key">"render_controllers"</span><span class="token-punct">:</span> <span class="token-punct">{</span>
+                    <span class="token-key">"controller.render.robot"</span><span class="token-punct">:</span> <span class="token-punct">{</span>
+                        <span class="token-key">"geometry"</span><span class="token-punct">:</span> <span class="token-string">"Geometry.default"</span><span class="token-punct">,</span>
+                        <span class="token-key">"materials"</span><span class="token-punct">:</span> <span class="token-punct">[</span> <span class="token-punct">{</span> <span class="token-key">"*"</span><span class="token-punct">:</span> <span class="token-string">"Material.default"</span> <span class="token-punct">}</span><span class="token-punct">]</span><span class="token-punct">,</span>
+                        <span class="token-key">"textures"</span><span class="token-punct">:</span> <span class="token-punct">[</span> <span class="token-string">"Texture.default"</span> <span class="token-punct">]</span>
+                    <span class="token-punct">}</span>
+                <span class="token-punct">}</span>
+            <span class="token-punct">}</span></pre>
+                <button class="copy-btn">คัดลอก</button>
+            </div>
+            
+            <p>
+                หากคุณต้องการใช้เพียงแค่โมเดลและสีพื้นฐานชุดเดียว คุณสามารถใช้ <code>controller.render.default</code>
+                ตามที่เราทำไปในหัวข้อก่อนหน้าได้เลยโดยไม่ต้องสร้างไฟล์นี้ แต่การเรียนรู้เรื่อง Render Controller ไว้ตอนนี้จะดีมาก
+                เพราะมันเป็นพื้นฐานสำคัญในการทำระบบขั้นสูง เช่น การสุ่มสี Texture ให้กับ Entity
+            </p>
+            
+            <h3>เจาะลึกโครงสร้าง Render Controller</h3>
+            <ul>
+                <li>
+                    <strong>ไฟล์เดียวคุมได้หลายตัว:</strong> ไฟล์ Render Controller หนึ่งไฟล์สามารถบรรจุ Controller
+                    ได้มากกว่าหนึ่งตัว
+                    โดยเขียนเรียงกันภายในวงเล็บปีกกาของ <code>render_controllers</code>
+                </li>
+                <li>
+                    <strong>การตั้งชื่อ:</strong> แต่ละ Controller มักจะตั้งชื่อตามรูปแบบ
+                    <code>controller.render.&lt;entity-name&gt;</code>
+                    เช่นในตัวอย่างนี้เราใช้ชื่อว่า <code>controller.render.robot</code> (แต่ถ้าเป็น Controller
+                    แบบอเนกประสงค์ที่ใช้ร่วมกันหลายตัว ก็สามารถตั้งชื่อเป็นคำอื่นได้)
+                </li>
+                <li>
+                    <strong>โครงสร้างภายใน:</strong> ภายในแท็กของ Render Controller จะมีการระบุทรัพยากรต่างๆ (Geometry, Materials,
+                    Textures)
+                    ซึ่งสังเกตได้ว่าแต่ละอันจะมีการกำหนดค่า JSON ที่แตกต่างกันออกไปตามการใช้งาน
+                </li>
+            </ul>
+
+            <h3>รูปทรง (Geometry)</h3>
+            <p>
+                Render Controller หนึ่งตัวสามารถแสดงผล Geometry ได้เพียงอันเดียวในแต่ละครั้ง ดังนั้นค่าของคีย์ <code>geometry</code>
+                จึงเป็นได้แค่ข้อความ (String) เดียวเท่านั้น ข้อความนี้สามารถเป็นนิพจน์ Molang ได้ และจะต้องส่งคืนค่ากลับมาเป็น
+                Geometry เสมอ
+            </p>
+            <p>
+                ในตัวอย่างก่อนหน้านี้ เราเรียกใช้ <code>Geometry.default</code> ซึ่งหมายความว่ามันจะคืนค่า Geometry
+                ที่ถูกเชื่อมโยงไว้ว่าเป็น
+                <code>default</code> ในไฟล์ Client Entity ตัวไหนก็ตามที่เรียกใช้ Render Controller นี้ (ในที่นี้คือ
+                <code>geometry.robot</code> นั่นเอง)
+            </p>
+            
+            <div
+                style="background-color: #2b2b2b; padding: 15px; border-radius: 8px; border-left: 4px solid #f0ad4e; margin-top: 15px; margin-bottom: 20px;">
+                <h4 style="margin-top:0; color:#f0ad4e;">ข้อควรระวัง</h4>
+                <p style="margin: 0;">
+                    คุณสามารถแสดงผลหลาย Geometry บน Entity ตัวเดียวได้ โดยการใช้ Render Controller หลายตัวซ้อนกัน
+                    แต่วิธีนี้อาจมีความซับซ้อนและนำไปสู่พฤติกรรมที่ไม่คาดคิดได้
+                    ดังนั้นจึงแนะนำสำหรับผู้สร้างที่มีประสบการณ์แล้วเท่านั้น
+                </p>
+            </div>
+
+            <h3>วัสดุ (Materials)</h3>
+            <p>
+                ต่างจาก Geometry ตรงที่ค่าของ <code>materials</code> จะเป็นแบบอาร์เรย์ (Array) ที่เก็บวัตถุ (Objects) ไว้ข้างใน
+                ทำให้เราสามารถกำหนดวัสดุ (Material) แยกให้กับแต่ละชิ้นส่วนกระดูก (Bone) ได้
+            </p>
+            <p>
+                วัตถุแต่ละตัวในอาร์เรย์จะมีคู่ Key-Value หนึ่งคู่ โดยตัว Key จะทำหน้าที่เลือกกลุ่มของกระดูก เครื่องหมายดอกจัน
+                (<code>*</code>)
+                จะใช้เป็นตัวแทน (Wildcard) ซึ่งหมายความว่ากระดูกทุกชิ้น ไม่ว่าจะชื่ออะไรก็ตาม จะถูกกำหนดให้ใช้วัสดุแบบ Default
+            </p>
+            <div
+                style="background-color: #2b2b2b; padding: 15px; border-radius: 8px; border-left: 4px solid #4facfe; margin-bottom: 20px;">
+                <p style="margin: 0;">
+                    <strong>ข้อควรจำ:</strong> Materials จะถูกกำหนดตามลำดับจากบนลงล่าง หมายความว่ารายการที่อยู่ด้านล่างสามารถ
+                    <strong>เขียนทับ (Overwrite)</strong> การตั้งค่าก่อนหน้าได้
+                </p>
+            </div>
+            
+            <div class="code-wrapper">
+                <pre>  <span class="token-key">"materials"</span><span class="token-punct">:</span> <span class="token-punct">[</span>
+                <span class="token-punct">{</span> <span class="token-key">"*"</span><span class="token-punct">:</span> <span class="token-string">"Material.default"</span> <span class="token-punct">}</span><span class="token-punct">,</span>
+                <span class="token-punct">{</span> <span class="token-key">"*_arm"</span><span class="token-punct">:</span> <span class="token-string">"Material.transparent"</span> <span class="token-punct">}</span>
+              <span class="token-punct">]</span></pre>
+                <button class="copy-btn">คัดลอก</button>
+            </div>
+            
+            <p>
+                ในตัวอย่างข้างต้น:
+            </p>
+            <ol>
+                <li>บรรทัดแรก: เรากำหนดวัสดุแบบ <code>Material.default</code> ให้กับกระดูก <strong>ทุกชิ้น</strong> (<code>*</code>)
+                </li>
+                <li>บรรทัดที่สอง: เราเขียนทับด้วยวัสดุแบบ <code>Material.transparent</code> (โปร่งใส)
+                    ลงบนกระดูกทุกชิ้นที่มีชื่อลงท้ายด้วย <code>_arm</code></li>
+            </ol>
+            <p>
+                ด้วยวิธีนี้ ชิ้นส่วนแขนทั้งหมดจะรองรับความโปร่งใส ในขณะที่ส่วนอื่นๆ ยังคงใช้วัสดุแบบปกติครับ
+            </p>
+
+            <h3>ลวดลาย (Textures)</h3>
+            <p>
+                Textures จะถูกกำหนดเป็นอาร์เรย์ของข้อความ (Array of Strings) ในกรณีส่วนใหญ่ เราจะเชื่อมโยง Texture
+                ไว้ที่นี่แค่ไฟล์เดียว
+                เนื่องจาก Entity ส่วนใหญ่ไม่รองรับการแยก Texture หลายชิ้น (ต้องรวมเป็นรูปเดียว)
+            </p>
+            <p>
+                แต่มีข้อยกเว้นหนึ่งอย่างคือ: Material บางชนิดสามารถรองรับ Texture หลายชั้นซ้อนทับกันได้ เช่น Material ที่ชื่อว่า
+                <code>entity_multitexture</code> ตัวอย่างเช่น ลามะ (Llamas) ใช้เทคนิคนี้ในการวางลวดลายผ้าคลุมทับลงบนตัวของมัน
+            </p>
+
+            <h3>อาร์เรย์ (Arrays) และการสุ่มลวดลาย</h3>
+            <p>
+                เมื่อต้องทำงานกับทรัพยากรประเภทเดียวกันหลายๆ ชิ้น การใช้ <strong>อาร์เรย์ (Array)</strong> จะมีประโยชน์มาก
+                อาร์เรย์คือรายการของลิสต์ทรัพยากรที่เรากำหนดไว้ใน Render Controller ซึ่งเราสามารถใช้ Molang เลือกหยิบมาใช้ทีละอันได้
+            </p>
+            <p>
+                เราสามารถกำหนดอาร์เรย์ให้กับหุ่นยนต์ได้ดังนี้ (ในไฟล์ Render Controller):
+            </p>
+            
+            <div class="code-wrapper">
+                <pre>  <span class="token-key">"controller.render.robot"</span><span class="token-punct">:</span> <span class="token-punct">{</span>
+                <span class="token-key">"arrays"</span><span class="token-punct">:</span> <span class="token-punct">{</span>
+                  <span class="token-key">"textures"</span><span class="token-punct">:</span> <span class="token-punct">{</span>
+                    <span class="token-key">"Array.variant"</span><span class="token-punct">:</span> <span class="token-punct">[</span>
+                      <span class="token-string">"Texture.default"</span><span class="token-punct">,</span>
+                      <span class="token-string">"Texture.variant_b"</span><span class="token-punct">,</span>
+                      <span class="token-string">"Texture.variant_c"</span>
+                    <span class="token-punct">]</span>
+                  <span class="token-punct">}</span>
+                <span class="token-punct">}</span>
+              <span class="token-punct">}</span></pre>
+                <button class="copy-btn">คัดลอก</button>
+            </div>
+            
+            <p>
+                ในส่วน <code>arrays</code> เราสามารถสร้างอาร์เรย์ให้กับ 3 หมวดหมู่ได้แก่: <code>textures</code>,
+                <code>materials</code>, และ <code>geometries</code>
+                โดยใช้ชื่อนำหน้าว่า <code>Array.&lt;ชื่อ&gt;</code> แต่ละบรรทัดข้างในจะเชื่อมโยงไปยังทรัพยากรที่กำหนดไว้ในไฟล์
+                Client Entity
+            </p>
+            <p>
+                การเรียกใช้อาร์เรย์จะทำผ่าน Molang โดยอาร์เรย์จะ <strong>เริ่มนับจาก 0 (0-based)</strong>
+                (ตัวแรกคือลำดับที่ 0, ตัวที่สองคือ 1, ไปเรื่อยๆ) ดังนั้น Texture ตัวแรกจะเข้าถึงได้ด้วยคำสั่ง
+                <code>Array.variant[0]</code>
+            </p>
+            
+            <h4>การเชื่อมโยงกับ Behavior (Variant)</h4>
+            <p>
+                ในตัวอย่างนี้ เราจะใช้ค่า <code>query.variant</code> เพื่อเลือก Texture จากอาร์เรย์ ซึ่งค่า Variant ของ Mob
+                สามารถเปลี่ยนได้ผ่านคอมโพเนนต์ <code>minecraft:variant</code> ในไฟล์ Behavior
+            </p>
+            <div class="code-wrapper">
+                <pre><span class="token-key">"textures"</span><span class="token-punct">:</span> <span class="token-punct">[</span> <span class="token-string">"Array.variant[ query.variant ]"</span> <span class="token-punct">]</span></pre>
+            </div>
+            
+            <h4>ขั้นตอนที่ 1: เพิ่ม Texture ใน Resource Pack</h4>
+            <p>
+                เราต้องเชื่อมโยงไฟล์รูปภาพสีอื่นๆ ในไฟล์ <strong>Client Entity</strong> (<code>robot.entity.json</code>)
+                สมมติว่าคุณได้ทำไฟล์รูปหุ่นยนต์สีอื่นเตรียมไว้แล้วชื่อ <code>robot_b.png</code> และ <code>robot_c.png</code>
+            </p>
+            <div class="code-wrapper">
+                <pre>            <span class="token-key">"textures"</span><span class="token-punct">:</span> <span class="token-punct">{</span>
+                            <span class="token-key">"default"</span><span class="token-punct">:</span> <span class="token-string">"textures/entity/robot"</span><span class="token-punct">,</span>
+                            <span class="token-key">"variant_b"</span><span class="token-punct">:</span> <span class="token-string">"textures/entity/robot_b"</span><span class="token-punct">,</span>
+                            <span class="token-key">"variant_c"</span><span class="token-punct">:</span> <span class="token-string">"textures/entity/robot_c"</span>
+                        <span class="token-punct">}</span><span class="token-punct">,</span></pre>
+                <button class="copy-btn">คัดลอก</button>
+            </div>
+            
+            <h4>ขั้นตอนที่ 2: ตั้งค่าการสุ่มใน Behavior Pack</h4>
+            <p>
+                ขั้นตอนสุดท้ายคือการสุ่มค่า Variant ในไฟล์ <strong>Behavior</strong> (<code>robot.json</code>) เราจะใช้:
+            </p>
+            <ul>
+                <li><strong>Component Groups:</strong> ชุดคำสั่งสำหรับเพิ่ม/ลบ Component (ในที่นี้คือการกำหนดเลข Variant)</li>
+                <li><strong>Events:</strong> เหตุการณ์ที่จะสุ่มเลือก Component Group เมื่อ Entity เกิดมา</li>
+            </ul>
+            
+            <div class="code-wrapper">
+                <pre>        <span class="token-key">"component_groups"</span><span class="token-punct">:</span> <span class="token-punct">{</span>
+                        <span class="token-key">"sample:color_0"</span><span class="token-punct">:</span> <span class="token-punct">{</span>
+                            <span class="token-key">"minecraft:variant"</span><span class="token-punct">:</span> <span class="token-punct">{</span><span class="token-key">"value"</span><span class="token-punct">:</span> <span class="token-number">0</span><span class="token-punct">}</span>
+                        <span class="token-punct">}</span><span class="token-punct">,</span>
+                        <span class="token-key">"sample:color_1"</span><span class="token-punct">:</span> <span class="token-punct">{</span>
+                            <span class="token-key">"minecraft:variant"</span><span class="token-punct">:</span> <span class="token-punct">{</span><span class="token-key">"value"</span><span class="token-punct">:</span> <span class="token-number">1</span><span class="token-punct">}</span>
+                        <span class="token-punct">}</span><span class="token-punct">,</span>
+                        <span class="token-key">"sample:color_2"</span><span class="token-punct">:</span> <span class="token-punct">{</span>
+                            <span class="token-key">"minecraft:variant"</span><span class="token-punct">:</span> <span class="token-punct">{</span><span class="token-key">"value"</span><span class="token-punct">:</span> <span class="token-number">2</span><span class="token-punct">}</span>
+                        <span class="token-punct">}</span>
+                    <span class="token-punct">}</span><span class="token-punct">,</span>
+                    <span class="token-key">"events"</span><span class="token-punct">:</span> <span class="token-punct">{</span>
+                        <span class="token-key">"minecraft:entity_spawned"</span><span class="token-punct">:</span> <span class="token-punct">{</span>
+                            <span class="token-key">"randomize"</span><span class="token-punct">:</span> <span class="token-punct">[</span>
+                                <span class="token-punct">{</span> <span class="token-key">"add"</span><span class="token-punct">:</span> <span class="token-punct">{</span> <span class="token-key">"component_groups"</span><span class="token-punct">:</span> <span class="token-punct">[</span><span class="token-string">"sample:color_0"</span><span class="token-punct">]</span> <span class="token-punct">}</span> <span class="token-punct">}</span><span class="token-punct">,</span>
+                                <span class="token-punct">{</span> <span class="token-key">"add"</span><span class="token-punct">:</span> <span class="token-punct">{</span> <span class="token-key">"component_groups"</span><span class="token-punct">:</span> <span class="token-punct">[</span><span class="token-string">"sample:color_1"</span><span class="token-punct">]</span> <span class="token-punct">}</span> <span class="token-punct">}</span><span class="token-punct">,</span>
+                                <span class="token-punct">{</span> <span class="token-key">"add"</span><span class="token-punct">:</span> <span class="token-punct">{</span> <span class="token-key">"component_groups"</span><span class="token-punct">:</span> <span class="token-punct">[</span><span class="token-string">"sample:color_2"</span><span class="token-punct">]</span> <span class="token-punct">}</span> <span class="token-punct">}</span>
+                            <span class="token-punct">]</span>
+                        <span class="token-punct">}</span>
+                    <span class="token-punct">}</span></pre>
+                <button class="copy-btn">คัดลอก</button>
+            </div>
+            
+            <p>
+                ด้วยการตั้งค่านี้ เมื่อคุณเสกหุ่นยนต์ออกมา มันจะสุ่มเลือก Component Group หนึ่งชุด (0, 1 หรือ 2)
+                ซึ่งจะไปกำหนดค่า Variant และทำให้ Render Controller เลือก Texture จาก Array มาแสดงผลให้ตรงกัน
+                นี่คือเทคนิคยอดนิยมในการสร้างความหลากหลายให้กับ Entity ครับ!
+            </p>
+
+            <h2>การเกิดตามธรรมชาติ (Spawning)</h2>
+            <p>
+                <strong>Spawn Rules</strong> คือกฎที่กำหนดว่า Entity จะเกิดขึ้นมาเองตามธรรมชาติในโลกได้อย่างไรแบบสุ่ม
+                ในส่วนนี้เราจะมาสร้างไฟล์ Spawn Rules ให้กับหุ่นยนต์กันครับ
+            </p>
+            <p>
+                เริ่มจากสร้างโฟลเดอร์ชื่อ <code>spawn_rules</code> ใน Behavior Pack ของคุณ จากนั้นสร้างไฟล์ใหม่ชื่อ
+                <code>robot.json</code> ข้างในนั้น และใส่โค้ดดังนี้:
+            </p>
+            
+            <div class="code-wrapper">
+                <pre><span class="token-punct">{</span>
+              <span class="token-key">"format_version"</span><span class="token-punct">:</span> <span class="token-string">"1.8.0"</span><span class="token-punct">,</span>
+              <span class="token-key">"minecraft:spawn_rules"</span><span class="token-punct">:</span> <span class="token-punct">{</span>
+                <span class="token-key">"description"</span><span class="token-punct">:</span> <span class="token-punct">{</span>
+                  <span class="token-key">"identifier"</span><span class="token-punct">:</span> <span class="token-string">"my:robot"</span><span class="token-punct">,</span>
+                  <span class="token-key">"population_control"</span><span class="token-punct">:</span> <span class="token-string">"animal"</span>
+                <span class="token-punct">}</span><span class="token-punct">,</span>
+                <span class="token-key">"conditions"</span><span class="token-punct">:</span> <span class="token-punct">[</span><span class="token-punct">]</span>
+              <span class="token-punct">}</span>
+            <span class="token-punct">}</span></pre>
+                <button class="copy-btn">คัดลอก</button>
+            </div>
+            
+            <p>
+                ภายใน <code>minecraft:spawn_rules</code> มี 2 ส่วนหลักที่เราต้องคำนึงถึง คือ
+                <strong>การควบคุมประชากร (Population Control)</strong> และ <strong>เงื่อนไข (Conditions)</strong>
+            </p>
+            <ul>
+                <li><code>description</code>: กำหนดคุณสมบัติพื้นฐานของไฟล์</li>
+                <li><code>identifier</code>: ต้องตรงกับชื่อ ID ของ Entity เรา (เช่น <code>my:robot</code>)</li>
+                <li><code>population_control</code>: กำหนดวิธีที่เกมใช้คำนวณจำนวน Mob ที่จะเกิด (Pool ไหน)
+                    ซึ่งส่วนนี้จะซับซ้อนนิดหน่อยครับ</li>
+            </ul>
+
+            <h3>การควบคุมประชากร (Population Control)</h3>
+            <p>
+                เกมจะมี "บ่อพัก" (Pools) ของเอนทิตีที่แตกต่างกัน เมื่อบ่อพักที่กำหนดไว้เต็ม เกมจะไม่สปาวน์ม็อบในกลุ่มนั้นเพิ่มอีก
+                โดยมี 3 ตัวเลือกหลักคือ:
+            </p>
+            <ul>
+                <li><code>"animal"</code>: ม็อบที่เป็นมิตร เช่น วัว และ หมู</li>
+                <li><code>"water_animal"</code>: ม็อบในน้ำ เช่น ปลาเขตร้อน และ โลมา</li>
+                <li><code>"monster"</code>: ม็อบศัตรู เช่น สเกเลตัน และ ซอมบี้</li>
+            </ul>
+            <p>สำหรับหุ่นยนต์ตัวนี้ เราจะเลือกใช้กลุ่ม <strong>animal</strong> ครับ</p>
+            
+            <h3>เงื่อนไข (Conditions)</h3>
+            <p>
+                <code>conditions</code> คือรายการเงื่อนไขต่างๆ ที่อนุญาตให้ม็อบเกิดในโลกได้ แต่ละเงื่อนไขประกอบไปด้วยกลุ่มของ
+                Component
+                ที่กำหนดกฎเกณฑ์ว่า "เมื่อไหร่ควรเกิด" และ "เมื่อไหร่ไม่ควรเกิด"
+            </p>
+            <p>
+                สำหรับการตั้งค่าพื้นฐาน เงื่อนไขชุดเดียวก็เพียงพอแล้ว สำหรับหุ่นยนต์ตัวนี้ เราจะใช้การตั้งค่าดังนี้:
+            </p>
+            
+            <div class="code-wrapper">
+                <pre><span class="token-punct">{</span>
+                <span class="token-key">"format_version"</span><span class="token-punct">:</span> <span class="token-string">"1.8.0"</span><span class="token-punct">,</span>
+                <span class="token-key">"minecraft:spawn_rules"</span><span class="token-punct">:</span> <span class="token-punct">{</span>
+                    <span class="token-key">"description"</span><span class="token-punct">:</span> <span class="token-punct">{</span>
+                        <span class="token-key">"identifier"</span><span class="token-punct">:</span> <span class="token-string">"my:robot"</span><span class="token-punct">,</span>
+                        <span class="token-key">"population_control"</span><span class="token-punct">:</span> <span class="token-string">"animal"</span>
+                    <span class="token-punct">}</span><span class="token-punct">,</span>
+                    <span class="token-key">"conditions"</span><span class="token-punct">:</span> <span class="token-punct">[</span>
+                        <span class="token-punct">{</span>
+                            <span class="token-key">"minecraft:spawns_on_surface"</span><span class="token-punct">:</span> <span class="token-punct">{</span><span class="token-punct">}</span><span class="token-punct">,</span>
+                            <span class="token-key">"minecraft:brightness_filter"</span><span class="token-punct">:</span> <span class="token-punct">{</span>
+                                <span class="token-key">"min"</span><span class="token-punct">:</span> <span class="token-number">12</span><span class="token-punct">,</span>
+                                <span class="token-key">"max"</span><span class="token-punct">:</span> <span class="token-number">15</span><span class="token-punct">,</span>
+                                <span class="token-key">"adjust_for_weather"</span><span class="token-punct">:</span> <span class="token-keyword">false</span>
+                            <span class="token-punct">}</span><span class="token-punct">,</span>
+                            <span class="token-key">"minecraft:weight"</span><span class="token-punct">:</span> <span class="token-punct">{</span>
+                                <span class="token-key">"default"</span><span class="token-punct">:</span> <span class="token-number">40</span>
+                            <span class="token-punct">}</span><span class="token-punct">,</span>
+                            <span class="token-key">"minecraft:biome_filter"</span><span class="token-punct">:</span> <span class="token-punct">{</span>
+                                <span class="token-key">"test"</span><span class="token-punct">:</span> <span class="token-string">"has_biome_tag"</span><span class="token-punct">,</span>
+                                <span class="token-key">"value"</span><span class="token-punct">:</span> <span class="token-string">"animal"</span>
+                            <span class="token-punct">}</span>
+                        <span class="token-punct">}</span>
+                    <span class="token-punct">]</span>
+                <span class="token-punct">}</span>
+            <span class="token-punct">}</span></pre>
+                <button class="copy-btn">คัดลอก</button>
+            </div>
+            
+            <p>มาดูความหมายของแต่ละ Component ที่เราใช้กันครับ:</p>
+            
+            <div class="table-wrapper">
+                <table>
+                    <thead>
+                        <tr style="background-color: #333; color: #ffffff;">
+                            <th style="padding: 15px; width: 35%; text-align: left;">ชื่อ Component</th>
+                            <th style="padding: 15px; text-align: left;">คำอธิบาย</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr style="border-bottom: 1px solid #444;">
+                            <td style="padding: 15px; color: #a5d6ff;">minecraft:spawns_on_surface</td>
+                            <td style="padding: 15px;">กำหนดให้ม็อบเกิดบนพื้นผิวโลกเท่านั้น (ไม่เกิดใต้ดิน)</td>
+                        </tr>
+                        <tr style="border-bottom: 1px solid #444;">
+                            <td style="padding: 15px; color: #a5d6ff;">minecraft:brightness_filter</td>
+                            <td style="padding: 15px;">
+                                กำหนดช่วงความสว่างที่อนุญาตให้เกิด (0-15) <br>
+                                หากตั้งค่า <code>adjust_for_weather</code> เป็น <code>true</code>
+                                เกมจะนำสภาพอากาศอย่างฝนตกหรือพายุมาคำนวณลดแสงด้วย
+                            </td>
+                        </tr>
+                        <tr style="border-bottom: 1px solid #444;">
+                            <td style="padding: 15px; color: #a5d6ff;">minecraft:weight</td>
+                            <td style="padding: 15px;">
+                                น้ำหนักความน่าจะเป็นในการเกิด ยิ่งเลขเยอะ ม็อบยิ่งเกิดบ่อย
+                            </td>
+                        </tr>
+                        <tr>
+                            <td style="padding: 15px; color: #a5d6ff;">minecraft:biome_filter</td>
+                            <td style="padding: 15px;">
+                                กรองไบโอมที่อนุญาตให้เกิด รองรับตัวดำเนินการเช่น <code>all_of</code> และ <code>any_of</code>
+                                โดยไบโอมจะมี Tag ระบุประเภท เช่น monster หรือ animal
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+            
+            <p>
+                <strong>ผลลัพธ์:</strong> ตอนนี้หุ่นยนต์จะสามารถเกิดได้ทุกที่บนพื้นผิวที่มีสัตว์เกิดได้ และต้องมีแสงสว่างเพียงพอ
+                (12-15)
+                ด้วยค่าน้ำหนัก 40 พวกมันจะเกิดค่อนข้างบ่อยเลยทีเดียวครับ!
+            </p>
+
+            <div style="margin-top: 60px; padding-top: 20px; border-top: 1px solid #444;">
+                <h2>ปัญหาที่พบบ่อย</h2>
+
+                <h3 style="color: #ff5555; font-size: 1.2rem;">Entity ไม่ปรากฏตัว หรือเป็นล่องหน:</h3>
+                <ul>
+                    <li><strong>ไฟล์ Resource Pack:</strong> ตรวจสอบว่าชื่อไฟล์ Texture และ Geometry ในไฟล์ Client
+                        Entity
+                        สะกดถูกต้องตรงกับชื่อไฟล์จริงหรือไม่</li>
+                    <li><strong>Identifier:</strong> ชื่อ <code>identifier</code> ใน Behavior Pack และ Resource Pack
+                        ต้องตรงกันเป๊ะๆ (เช่น <code>my:robot</code>)</li>
+                </ul>
+
+                <h3 style="color: #ff5555; font-size: 1.2rem;">พิมพ์คำสั่ง /summon ไม่เจอ:</h3>
+                <ul>
+                    <li><strong>เปิด Cheats:</strong> ตรวจสอบว่าโลกของคุณเปิดใช้งาน Cheats แล้วหรือยัง?</li>
+                    <li><strong>ตรวจสอบ JSON:</strong> ลองเช็คว่าวงเล็บปีกกา <code>{}</code> ในไฟล์
+                        <code>robot.json</code>
+                        เปิดปิดครบถ้วนหรือไม่
+                    </li>
+                </ul>
+            </div>
+
+    </article>
+
+    <footer>
+        <h2>ช่องทางติดต่อ</h2>
+        <div class="social-container">
+            <a class="social-icons" href="https://www.facebook.com/FPGTVMC/">
+                <img src="../../image/facebook-svgrepo-com.png" alt="Facebook">
+            </a>
+            <a class="social-icons" href="https://www.youtube.com/@MCFirsting">
+                <img src="../../image/youtube-fill-svgrepo-com.png" alt="YouTube">
+            </a>
+            <a class="social-icons" href="https://discord.gg/tnqZCfz4wz">
+                <img src="../../image/discord-svgrepo-com.png" alt="Discord">
+            </a>
+            <a class="social-icons" href="https://github.com/MCFirsting">
+                <img src="../../image/github-svgrepo-com.png" alt="GitHub">
+            </a>
+            <a class="social-icons" href="https://www.tiktok.com/@mc_firsting">
+                <img src="../../image/tiktok-svgrepo-com.png" alt="TikTok">
+            </a>
+        </div>
+    </footer>
+
+    <script src="../getting_started/getting_started.js"></script>
+</body>
+
+</html>
