@@ -50,14 +50,5 @@
   </a>
   </p>
 
-### 📊 GitHub Stats
-
-<div align="center">
-  <a href="https://github.com/MCFirsting">
-    <img src="https://github-readme-stats.vercel.app/api?username=MCFirsting&show_icons=true&count_private=true&title_color=a855f7&text_color=a855f7&icon_color=a855f7&bg_color=181824&hide_border=true" alt="MCFirsting GitHub stats" />
-  </a>
-  <br><br>
-  <a href="https://github.com/MCFirsting">
-    <img src="https://github-readme-stats.vercel.app/api/top-langs/?username=MCFirsting&langs_count=10&title_color=a855f7&text_color=a855f7&icon_color=a855f7&bg_color=181824&hide_border=true&locale=en&custom_title=Top%20Languages" alt="Top Languages" />
-  </a>
-</div>
+# 📊 GitHub Stats:
+[![Anurag's GitHub stats](https://github-readme-stats.vercel.app/api?username=mcfirsting)](https://github.com/mcfirsting/github-readme-stats)
