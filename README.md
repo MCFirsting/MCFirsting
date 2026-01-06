@@ -3,7 +3,7 @@
   <img src="https://user-images.githubusercontent.com/18350557/176309783-0785949b-9127-417c-8b55-ab5a4333674e.gif" width="30px">
   <h1>Hi there, I'm First!</h1>
   
-  <h3>Minecraft Add-on Developer | Content Creator | Freelancer</h3>
+  <h3>Minecraft Add-ons Creator | Content Creator | Freelancer</h3>
 
   <p>
     I am a developer based in <b>Thailand</b> with a passion for coding and game customization.<br>
