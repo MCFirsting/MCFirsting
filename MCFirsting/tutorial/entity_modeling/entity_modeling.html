@@ -41,127 +41,505 @@
                         Pack</a></strong> และ <strong><a href="../behavior_packs/behavior_packs.html"
                         style="color:#ff9500;">Behavior Pack</a></strong> (จากบทเรียนก่อนหน้า)
             </li>
-
-        <h2>เตรียมเครื่องมือ</h2>
-        <p>
-            เราจะใช้โปรแกรม <strong>Blockbench</strong> ซึ่งเป็นเครื่องมือสร้างโมเดล 3D สำหรับ Minecraft
-            ที่ดีที่สุดในตอนนี้
-            (ฟรีและใช้งานง่ายมาก)
-        </p>
-        <ul>
-            <li><a href="https://www.blockbench.net/" target="_blank" style="color: #4facfe;">ดาวน์โหลด Blockbench</a>
-                (หรือใช้ผ่านเว็บก็ได้)</li>
-        </ul>
-
-        <h2>ส่วนที่ 1: การสร้างโมเดล (Modeling)</h2>
-
-        <h3>1. ตั้งค่าโปรเจกต์</h3>
-        <p>
-            เมื่อเปิด Blockbench ให้เลือกเมนู <strong>Bedrock Model</strong> จากนั้นตั้งค่าดังนี้:
-        </p>
-        <ul>
-            <li><strong>File Name:</strong> <code>robot</code></li>
-            <li><strong>Model Identifier:</strong> <code>geometry.robot</code> (สำคัญมาก! ต้องตรงกับไฟล์ JSON ของเรา)
+            <li>ดาวน์โหลดตัวอย่าง <strong><a
+                        href="https://github.com/microsoft/minecraft-samples/archive/refs/heads/main.zip"
+                        style="color:#ff9500;">Entity Robot</a> (แบบพื้นฐานและฉบับเต็ม)</strong>
             </li>
-            <li><strong>Texture Size:</strong> 64x64 (หรือ 32x32 สำหรับโมเดลเล็กๆ)</li>
-        </ul>
 
-        <h3>2. สร้างโครงกระดูก</h3>
-        <p>
-            โครงสร้างกระดูก (Bone) คือหัวใจสำคัญของการทำอนิเมชัน กระดูกแต่ละชิ้นจะทำหน้าที่เหมือน "ข้อต่อ"
-            ที่เราสามารถหมุนหรือขยับได้
-        </p>
-        <div
-            style="background:#2b2b2b; padding:15px; border-radius:8px; border-left: 4px solid #f0ad4e; margin-bottom: 20px;">
-            <p style="margin:0;">
-                <strong>เทคนิค:</strong> ควรสร้างกระดูกหลัก (Root Bone) หนึ่งชิ้นเพื่อคุมทั้งตัว แล้วค่อยสร้างกระดูกย่อย
-                (เช่น หัว, แขน, ขา)
-                ใส่เข้าไปข้างใน จะทำให้จัดการท่าทางได้ง่ายขึ้น
+            <h2>เตรียมเครื่องมือ</h2>
+            <p>
+                เราจะใช้โปรแกรม <strong>Blockbench</strong> ซึ่งเป็นเครื่องมือสร้างโมเดล 3D สำหรับ Minecraft
+                ที่ดีที่สุดในตอนนี้
+                (ฟรีและใช้งานง่ายมาก)
             </p>
-        </div>
-        <p>ตัวอย่างโครงสร้างกระดูกของหุ่นยนต์:</p>
-        <div class="code-wrapper">
-            <pre>root (กระดูกหลัก)
- ├── head (หัว)
- ├── body (ลำตัว)
- ├── arm_right (แขนขวา)
- ├── arm_left (แขนซ้าย)
- └── wheel (ล้อ - สำหรับอนิเมชันขับเคลื่อน)</pre>
-        </div>
+            <ul>
+                <li><a href="https://www.blockbench.net/" target="_blank" style="color: #4facfe;">ดาวน์โหลด
+                        Blockbench</a>
+                    (หรือใช้ผ่านเว็บก็ได้)</li>
+            </ul>
 
-        <h3>3. ปั้นทรง (Cube)</h3>
-        <p>
-            ใช้เครื่องมือ <strong>Cube</strong> สร้างสี่เหลี่ยมขึ้นมาแล้วจัดวางให้เป็นรูปร่าง
-            อย่าลืมลาก Cube ไปใส่ใน Bone ที่ถูกต้องด้วยนะครับ (เช่น ลูกตาก็ต้องอยู่ใน Bone หัว)
-        </p>
+            <h2>ส่วนที่ 1: การสร้างโมเดล Modeling</h2>
+            <p>
+                โมเดลใน Minecraft ใช้รูปแบบเฉพาะที่ใช้ <strong>JSON</strong> ในการกำหนดรูปร่าง
+                โมเดลแต่ละตัวจะใช้ Texture ซึ่งสามารถกำหนดได้ผ่าน Render Controllers
+            </p>
 
-        <h2>ส่วนที่ 2: การลงสี (Texturing)</h2>
-        <p>
-            เมื่อปั้นเสร็จแล้ว ให้กด <strong>Create Texture</strong> ใน Blockbench (เลือกแบบ Template เพื่อให้โปรแกรมกาง
-            UV ให้เอง)
-            จากนั้นไปที่แท็บ <strong>Paint</strong> เพื่อระบายสีลงบนโมเดล 3D ได้เลย!
-        </p>
-        <p>
-            เมื่อเสร็จแล้วให้บันทึกไฟล์:
-        </p>
-        <ul>
-            <li><strong>Model:</strong> <code>robot.geo.json</code> (นำไปใส่ในโฟลเดอร์ <code>models/entity/</code>)</li>
-            <li><strong>Texture:</strong> <code>robot.png</code> (นำไปใส่ในโฟลเดอร์ <code>textures/entity/</code>)</li>
-        </ul>
+            <p>
+                ในการสร้างโมเดลและ Texture เราจะใช้ <strong>Blockbench</strong> ซึ่งเป็นโปรแกรมสร้างโมเดล 3D สำหรับ
+                Minecraft: Bedrock Edition ได้โดยเฉพาะ
+            </p>
 
-        <h2>ส่วนที่ 3: การทำอนิเมชัน (Animation)</h2>
-        <p>
-            กลับมาที่ Blockbench เปลี่ยนไปที่แท็บ <strong>Animate</strong> แล้วกดเครื่องหมาย <code>+</code>
-            เพื่อสร้างอนิเมชันใหม่
-            ตั้งชื่อว่า <code>animation.robot.sway</code> (ท่าโยกตัว)
-        </p>
+            <div
+                style="background-color: #2b2b2b; padding: 15px; border-radius: 8px; border-left: 4px solid #ff5555; margin: 20px 0;">
+                <h4 style="margin-top: 0; color: #ff5555;">สำคัญ</h4>
+                <p style="margin: 0;">
+                    Blockbench เป็นโปรแกรมที่พัฒนาโดยผู้ร่วมพัฒนาภายนอก (Third-party) และไม่ใช่ผลิตภัณฑ์ของ Mojang หรือ
+                    Microsoft
+                    ผู้ใช้ควรใช้งานโดยใช้วิจารณญาณของตนเอง
+                </p>
+            </div>
 
-        <h3>ขั้นตอนการทำ Keyframe</h3>
-        <ol>
-            <li>เลือก Bone ที่ต้องการขยับ (เช่น <code>body</code>)</li>
-            <li>เลื่อนแถบเวลาไปที่ 0 วินาที -> กดปุ่ม Rotation แล้วขยับเล็กน้อยเพื่อสร้างจุดเริ่มต้น</li>
-            <li>เลื่อนไปที่ 0.5 วินาที -> หมุนตัวไปทางซ้าย</li>
-            <li>เลื่อนไปที่ 1.0 วินาที -> หมุนตัวไปทางขวา</li>
-            <li>เลื่อนไปที่ 1.5 วินาที -> หมุนกลับมาตรงกลาง</li>
-            <li>ตั้งค่า <strong>Loop</strong> เป็น True เพื่อให้เล่นวนซ้ำ</li>
-        </ol>
 
-        <p>
-            เมื่อเสร็จแล้ว ให้บันทึกไฟล์อนิเมชันเป็น <code>robot.animation.json</code> แล้วนำไปใส่ในโฟลเดอร์
-            <code>animations/</code> ของ Resource Pack
-        </p>
+            <h3>การตั้งค่าโมเดล</h3>
+            <p>
+                เมื่อคุณเปิดโปรแกรม Blockbench ขึ้นมาครั้งแรก คุณจะเห็นรายชื่อรูปแบบโมเดลที่มีให้เลือก ให้เลือก
+                <strong>Bedrock
+                    Entity</strong>
+                จากนั้นคุณจะเห็นหน้าต่างเด้งขึ้นมาเกี่ยวกับการตั้งค่าพื้นฐานสำหรับโปรเจกต์
+            </p>
 
-        <h2>ส่วนที่ 4: เชื่อมต่อในโค้ด</h2>
-        <p>
-            สุดท้าย เราต้องบอกเกมให้เล่นอนิเมชันนี้ โดยไปแก้ไฟล์ <strong>Client Entity</strong>
-            (<code>robot.entity.json</code>):
-        </p>
+            <img class="article-image" src="/tutorial/entity_modeling/image/Blockbench New Project.png"
+                alt="Blockbench Project Settings">
 
-        <div class="code-wrapper">
-            <pre><span class="token-key">"animations"</span><span class="token-punct">:</span> <span class="token-punct">{</span>
-    <span class="token-key">"sway"</span><span class="token-punct">:</span> <span class="token-string">"animation.robot.sway"</span>
-<span class="token-punct">}</span><span class="token-punct">,</span>
-<span class="token-key">"scripts"</span><span class="token-punct">:</span> <span class="token-punct">{</span>
-    <span class="token-key">"animate"</span><span class="token-punct">:</span> <span class="token-punct">[</span>
-        <span class="token-punct">{</span> <span class="token-key">"sway"</span><span class="token-punct">:</span> <span class="token-string">"!query.is_on_ground"</span> <span class="token-punct">}</span>
-    <span class="token-punct">]</span>
-<span class="token-punct">}</span></pre>
-            <button class="copy-btn">คัดลอก</button>
-        </div>
+            <p>
+                ส่วนที่สำคัญคือ <strong>Mob Geometry Name</strong> ตรงนี้เราต้องใส่ชื่อที่ไม่ซ้ำใครให้กับโมเดล
+                วิธีปฏิบัติที่ดีที่สุดคือการใช้รูปแบบ <strong>snake_case</strong> นั่นคือใช้เฉพาะตัวอักษรพิมพ์เล็ก
+                (a-z), ตัวเลข
+                (0-9),
+                และขีดล่าง (_) รวมถึงจุด (.) เท่านั้น <strong>ห้ามเว้นวรรคและห้ามใช้อักขระพิเศษอื่นๆ</strong>
+            </p>
+            <p>
+                สำหรับโมเดลของเรา ในช่องนี้เราจะใส่คำว่า <code>robot</code> ลงไปครับ
+            </p>
+            <p>
+                เราสามารถปล่อยช่องชื่อไฟล์ (File Name) ว่างไว้ก่อนได้ เพราะเราจะไปกำหนดชื่อตอนส่งออก (Export)
+                โมเดลในภายหลัง
+                ส่วนการตั้งค่า Box UV และขนาด Texture (Texture Size) ก็สามารถปล่อยเป็นค่าเริ่มต้นไว้ได้เช่นกัน
+                เพราะเราจะมาปรับแก้กันทีหลัง
+                เมื่อเสร็จแล้วกดปุ่ม <strong>Confirm</strong> เพื่อบันทึกการตั้งค่าเหล่านี้ได้เลย
+            </p>
 
-        <p>
-            <strong>อธิบายโค้ด:</strong> เราตั้งเงื่อนไขว่า <code>!query.is_on_ground</code> (เมื่อไม่ได้อยู่บนพื้น)
-            ให้เล่นท่า <code>sway</code>
-            ดังนั้นเวลาหุ่นยนต์ลอยตัวหรือตกจากที่สูง มันจะโยกตัวไปมาครับ!
-        </p>
 
-        <div style="margin-top: 40px; border-top: 1px solid #444; padding-top: 20px;">
+
+
+
+
+
+
+
+
+
+            <h3>โครงสร้างกระดูก</h3>
+            <p>
+                สิ่งแรกที่ต้องคำนึงถึงเมื่อเริ่มทำโมเดลคือ <strong>โครงสร้างกระดูก</strong>
+                กระดูกคือชิ้นส่วนของโมเดลที่สามารถทำอนิเมชันให้เคลื่อนไหวได้
+                และสามารถจัดเรียงเป็นลำดับชั้นที่ซับซ้อนแค่ไหนก็ได้ ตัวกระดูกเองจะมองไม่เห็น แต่ทำหน้าที่เป็นตัวเก็บ
+                "ลูกบาศก์" (Cubes) ที่ก่อให้เกิดเป็นรูปร่างของโมเดล
+            </p>
+
+
+
+            <img class="article-image" src="/tutorial/entity_modeling/image/Bone Structure.png"
+                alt="Blockbench Bone Listing">
+
+            <p>
+                แนวทางปฏิบัติที่ดีคือการสร้าง <strong>กระดูกหลัก (Root Bone)</strong> ขึ้นมาหนึ่งอัน
+                และนำทุกอย่างที่เหลือใส่ไว้ข้างในนั้น
+                วิธีนี้จะช่วยให้คุณสามารถทำอนิเมชันขยับ "ทั้งตัว" ได้พร้อมกัน หรือจะขยับแค่ "เฉพาะส่วน"
+                ก็ทำได้สะดวกในภายหลัง
+            </p>
+            <p>
+                ให้ลองสร้างกลุ่มใหม่ใน Blockbench (ในบริบทนี้ "Groups" และ "Bones" คือสิ่งเดียวกันครับ)
+            </p>
+            <p>
+                คุณสามารถคลิกขวาที่กลุ่ม หรือกดปุ่ม <code>F2</code> เพื่อเปลี่ยนชื่อ การตั้งชื่อกระดูกควรใช้รูปแบบ
+                <strong>snake_case</strong>
+                (ตัวพิมพ์เล็ก, ตัวเลข, และขีดล่างเท่านั้น) และชื่อกระดูกแต่ละชิ้น <strong>ต้องไม่ซ้ำกัน</strong>
+                เพื่อให้เราอ้างอิงถึงได้ถูกต้องเวลาทำอนิเมชัน
+            </p>
+            <p>
+                ในขณะที่เราสร้างโมเดลในขั้นตอนถัดๆ ไป อย่าลืมตรวจสอบว่าโครงสร้างกระดูกถูกต้อง
+                คุณสามารถลากกลุ่มไปมาเพื่อเปลี่ยนลำดับ
+                หรือลากใส่เข้าไปในกลุ่มอื่นได้
+                ภาพหน้าจอด้านบนแสดงตัวอย่างโครงสร้างกระดูกที่ถูกต้องของโมเดลที่เสร็จสมบูรณ์ครับ
+            </p>
+
+
+            <h3>รูปร่าง Shape</h3>
+            <p>
+                ตอนนี้คุณสามารถเริ่มสร้างรูปร่างของโมเดลได้แล้วครับ ให้สร้างลูกบาศก์ (Cubes) ใหม่ขึ้นมา
+                แล้วใช้เครื่องมือสำหรับ ย้าย
+                (Move),
+                ปรับขนาด (Resize), และหมุน (Rotation) เพื่อปรับแต่งมัน
+            </p>
+            <div
+                style="background-color: #2b2b2b; padding: 10px 15px; border-radius: 8px; border-left: 4px solid #4facfe; margin-bottom: 15px;">
+                <strong>เคล็ดลับ:</strong> วิธีเพิ่ม Cube ให้เร็วขึ้นคือการเลือก Cube ที่วางตำแหน่งไว้ดีแล้ว แล้วกดปุ่ม
+                <code>Ctrl + D</code> (Duplicate) เพื่อคัดลอกมันออกมาครับ
+            </div>
+
+            <img class="article-image" src="/tutorial/entity_modeling/image/shape.png"
+                alt="Textureless shape of a robot in Blockbench">
+
+            <p>
+                คุณสามารถย้าย Cube ได้แม่นยำยิ่งขึ้นโดยการกดปุ่ม <code>Shift</code>, <code>Control</code>
+                หรือกดทั้งสองปุ่มพร้อมกันค้างไว้
+                ขึ้นอยู่กับสไตล์การปั้นโมเดล บางครั้งอาจจะดีกว่าถ้าเรายึดตามเส้นตาราง (Grid) อย่างเคร่งครัด
+                หรือจะขยับทีละครึ่งหรือหนึ่งส่วนสี่ช่องก็ได้
+            </p>
+            <p>
+                โมเดลของ Bedrock Edition จะใช้ระบบ <strong>Box UV mapping</strong> เป็นค่าเริ่มต้น
+                นั่นหมายความว่าการวางลวดลาย
+                Texture
+                จะรองรับเฉพาะเลขจำนวนเต็ม และจะปัดเศษลงหากจำเป็น เพื่อป้องกันไม่ให้ภาพยืดหรือเกิดหน้าผิวที่มองไม่เห็น
+                (Invisible faces)
+                <strong>ตรวจสอบให้แน่ใจว่าขนาดของ Cube เป็นเลขจำนวนเต็มเสมอ</strong>
+            </p>
+
+            <h4>การทำส่วนที่สมมาตร (Symmetrical parts)</h4>
+            <p>
+                หากคุณกำลังปั้นชิ้นส่วนที่สมมาตรกัน เช่น แขน หรือ ขา ให้สร้างด้านขวาก่อน แล้วค่อยใช้คำสั่ง
+                <strong>Mirror</strong>
+                (สะท้อนกลับ)
+                ไปยังด้านซ้ายทีหลัง คุณจะเลือก Mirror ก่อนหรือหลังทำ Texture ก็ได้
+                ขึ้นอยู่กับว่าคุณต้องการให้ลวดลายทั้งสองข้างเหมือนกันเป๊ะๆ หรือไม่
+            </p>
+
+            <h4>จุดหมุน (Pivot Point)</h4>
+            <p>
+                เมื่อคุณสร้างกระดูก (Bone) สำหรับชิ้นส่วนที่ต้องมีการขยับเขยื้อน ให้คิดเสมอว่า
+                <strong>"ชิ้นส่วนนี้ควรจะหมุนรอบจุดไหน?"</strong>
+            </p>
+            <p>
+                ให้เลือกที่กระดูกแล้วกดปุ่ม <code>P</code> เพื่อเรียกเครื่องมือ <strong>Pivot Tool</strong> ขึ้นมา
+                เครื่องมือนี้จะช่วยให้คุณย้ายจุดหมุนของกระดูกได้
+                (คุณสามารถใช้เครื่องมือนี้กับ Cube ได้เช่นกัน หากต้องการให้ Cube นั้นหมุนรอบจุดที่กำหนด)
+            </p>
+
+            <h2>ส่วนที่ 2: การลงสี Texturing</h2>
+
+            <h3>เทมเพลต Templates</h3>
+            <p>
+                เมื่อรูปร่างของโมเดลเสร็จสมบูรณ์แล้ว คุณสามารถสร้าง <strong>Texture Template</strong> ได้
+                เทมเพลตคือไฟล์รูปภาพที่จัดสรรพื้นที่ว่างเฉพาะ
+                สำหรับลูกบาศก์ทุกชิ้นและทุกด้านของโมเดลไว้ให้แล้ว แม้คุณจะสามารถทำ UV map ด้วยตัวเองได้
+                แต่การสร้างเทมเพลตจะช่วยจัดการเรื่องนี้ให้โดยอัตโนมัติ
+                และจัดวางพื้นที่ให้อย่างคุ้มค่าที่สุด (อย่าลืมนะครับว่า Minecraft
+                ไม่ค่อยถูกโรคกับรูปภาพที่มีความละเอียดสูงๆ หรือ
+                High-resolution สักเท่าไหร่)
+            </p>
+            <p>
+                ตอนสร้าง Texture ให้ตั้งชื่อว่า <code>robot</code> และเลือก <strong>Template</strong>
+                ในหน้าต่างที่เด้งขึ้นมา ให้เลือกความละเอียด (Resolution) โดย <strong>16x</strong> คือค่ามาตรฐานของ
+                Minecraft
+                แต่คุณสามารถเลือกให้สูงกว่านี้ได้ถ้าต้องการ
+                <img class="article-image" src="/tutorial/entity_modeling/image/Create Textures.png"
+                    alt="Create Textures">
+            </p>
+
+            <h3>สีพื้นฐาน Base color</h3>
+            <p>
+                เมื่อสร้างเทมเพลตเสร็จแล้ว ให้ย้ายไปที่แท็บ <strong>Paint</strong> ใน Blockbench
+                ซึ่งจะแสดงเครื่องมือทั้งหมดสำหรับแก้ไข Texture
+                ให้เลือกเครื่องมือ <strong>Paint Bucket</strong> (ถังสี) และตั้งค่า <strong>Fill mode</strong>
+                (โหมดการเทสี)
+                จากนั้นเลือกสีจากแผงสีด้านขวา ตอนนี้คุณสามารถไล่จิ้มที่ลูกบาศก์เพื่อลงสีพื้นฐานให้แต่ละชิ้นได้เลยครับ
+                <img class="article-image" src="/tutorial/entity_modeling/image/Base color.png" alt="Base color">
+            </p>
+
+            <h3>การเก็บรายละเอียด Details</h3>
+            <p>
+                ตอนนี้คุณเริ่มลงรายละเอียดลวดลายได้แล้ว หากคุณถนัดใช้โปรแกรมแต่งรูปภายนอกมากกว่า คุณสามารถกดไอคอน
+                <strong>Save</strong>
+                ข้างๆ ชื่อ Texture เพื่อบันทึกไฟล์ แล้วนำไปเปิดในโปรแกรมแต่งรูปของคุณได้เลย การเปลี่ยนแปลงใดๆ จะปรากฏใน
+                Blockbench
+                ทันทีที่คุณกดบันทึกไฟล์ในโปรแกรมนั้น
+                แต่ถ้าคุณชอบทำงานบนโมเดลโดยตรง ก็สามารถใช้เครื่องมือระบายสีที่มีใน Blockbench ได้เลยครับ
+            </p>
+
+            <div
+                style="background-color: #2b2b2b; padding: 15px; border-radius: 8px; border-left: 4px solid #4facfe; margin-top: 20px;">
+                <h4 style="margin-top: 0; color: #4facfe;">เทคนิคการใช้หัวแปรง (Paintbrush Tricks)</h4>
+                <ul style="margin-bottom: 0;">
+                    <li><strong>ขนาดแปรง:</strong> หากต้องการระบายพื้นที่ใหญ่ๆ คุณสามารถเพิ่มขนาดหัวแปรง (Brush size)
+                        ได้</li>
+                    <li><strong>มุมมอง:</strong> คุณสามารถระบายสีลงบนโมเดลในมุมมอง <strong>3D preview</strong> โดยตรง
+                        หรือจะระบายบน
+                        <strong>UV editor</strong> (ภาพ 2 มิติ) ทางด้านซ้ายก็ได้
+                    </li>
+                    <li><strong>การลากเส้นตรง:</strong> หากต้องการขีดเส้นตรง ให้คลิกที่จุดเริ่มต้นของเส้น จากนั้นกด
+                        <strong>Shift
+                            ค้างไว้</strong> แล้วคลิกที่จุดปลายทาง
+                    </li>
+                    <li><strong>การซ่อนชิ้นส่วน:</strong> เพื่อให้แน่ใจว่าคุณไม่พลาดจุดที่ถูกบังอยู่
+                        (ซึ่งอาจโผล่ออกมาตอนขยับท่าทาง)
+                        คุณสามารถซ่อนลูกบาศก์บางชิ้นได้ โดยกดที่ <strong>ไอคอนรูปตา</strong> ในหน้าต่าง Outliner</li>
+                </ul>
+            </div>
+
+            <h2>ส่วนที่ 3: การทำอนิเมชัน Animations</h2>
+            <p>
+                อนิเมชันไม่เพียงแต่ทำให้รูปร่างของโมเดลขยับได้เท่านั้น แต่ยังสามารถสั่งให้เล่นเสียงและแสดงเอฟเฟกต์อนุภาค
+                (Particle
+                effects) ได้อีกด้วย
+                ในส่วนนี้เราจะมาดูกันว่า เราจะเพิ่มอนิเมชันให้กับ Entity ได้อย่างไร, วิธีสร้างอนิเมชันเองใน Blockbench,
+                และสุดท้ายคือวิธีใช้ Animation Controllers ครับ
+            </p>
+
+            <h3>1. การใช้อนิเมชันพื้นฐาน</h3>
+            <p>
+                ใน Vanilla Resource Pack (แพ็คดั้งเดิมของเกม)
+                จะมีอนิเมชันทั่วไปที่เราสามารถอ้างอิงมาใช้ในแพ็คของเราได้เลยโดยไม่ต้องก๊อปปี้ไฟล์มา
+                อนิเมชันเหล่านี้เป็นจุดเริ่มต้นที่ดีสำหรับ Entity ที่คล้ายกับสัตว์ในเกม
+            </p>
+            <p>
+                ในตัวอย่างนี้ เราจะใช้ท่า <strong>look at</strong> (หันมอง) ซึ่งจะทำการหมุนกระดูกส่วนหัว (Head)
+                ดังนั้นจึงสำคัญมากที่โมเดลของคุณต้องมีกระดูกชื่อ <code>head</code>
+            </p>
+            <p>
+                นอกจากนี้ Entity จำเป็นต้องมี Component <code>look_at</code> ในไฟล์ <strong>Behavior</strong> ด้วย
+                (อันเดียวกับที่วัวใช้ครับ)
+            </p>
+
+            <div class="code-wrapper">
+                <pre>  <span class="token-key">"minecraft:behavior.look_at_player"</span><span class="token-punct">:</span> <span class="token-punct">{</span>
+                <span class="token-key">"priority"</span><span class="token-punct">:</span> <span class="token-number">7</span><span class="token-punct">,</span>
+                <span class="token-key">"look_distance"</span><span class="token-punct">:</span> <span class="token-number">6</span><span class="token-punct">,</span>
+                <span class="token-key">"probability"</span><span class="token-punct">:</span> <span class="token-number">0.02</span>
+              <span class="token-punct">}</span><span class="token-punct">,</span>
+              <span class="token-key">"minecraft:behavior.random_look_around"</span><span class="token-punct">:</span> <span class="token-punct">{</span>
+                <span class="token-key">"priority"</span><span class="token-punct">:</span> <span class="token-number">9</span>
+              <span class="token-punct">}</span></pre>
+                <button class="copy-btn">คัดลอก</button>
+            </div>
+
+            <p>
+                เมื่อตั้งค่า Behavior เสร็จแล้ว ให้ไปที่ไฟล์ <strong>Client Entity</strong>
+                (<code>robot.entity.json</code>)
+                (ตรวจสอบให้แน่ใจว่า <code>format_version</code> เป็น <code>1.10.0</code> หรือสูงกว่านะครับ)
+            </p>
+            <p>
+                เราต้องเชื่อมโยงอนิเมชันก่อน โดย <code>animation.common.look_at_target</code> คือ <strong>Global
+                    Identifier</strong>
+
+                ส่วน <code>look_at_target</code> คือ <strong>Short Name</strong> (ชื่อย่อ)
+                ที่เราตั้งขึ้นเพื่อใช้เรียกในไฟล์นี้
+            </p>
+
+            <div class="code-wrapper">
+                <pre>  <span class="token-key">"animations"</span><span class="token-punct">:</span> <span class="token-punct">{</span>
+                <span class="token-key">"look_at_target"</span><span class="token-punct">:</span> <span class="token-string">"animation.common.look_at_target"</span>
+              <span class="token-punct">}</span></pre>
+                <button class="copy-btn">คัดลอก</button>
+            </div>
+
+            <p>
+                จากนั้นสั่งให้เล่นอนิเมชันผ่าน <code>scripts/animate</code>:
+            </p>
+
+            <div class="code-wrapper">
+                <pre>  <span class="token-key">"scripts"</span><span class="token-punct">:</span> <span class="token-punct">{</span>
+                <span class="token-key">"animate"</span><span class="token-punct">:</span> <span class="token-punct">[</span><span class="token-string">"look_at_target"</span><span class="token-punct">]</span>
+              <span class="token-punct">}</span></pre>
+                <button class="copy-btn">คัดลอก</button>
+            </div>
+            <p>
+                ถ้าคุณลองทดสอบในเกมตอนนี้ หุ่นยนต์จะสามารถหันหัวมองไปรอบๆ ได้แล้วครับ!
+            </p>
+
+            <h3>2. การสร้างอนิเมชันเอง</h3>
+            <p>
+                เราจะมาสร้างอนิเมชันที่จะเล่นเมื่อหุ่นยนต์ "เสียหลัก" (เท้าไม่ติดพื้น) โดยใช้เงื่อนไข Molang
+                <code>query.is_on_ground</code>
+                มาตรวจสอบว่าหุ่นยนต์แตะพื้นอยู่หรือไม่
+            </p>
+            <img class="article-image" src="/tutorial/entity_modeling/image/Animation.png" alt="Animation">
+
+            <p>
+                เปิดโมเดลใน Blockbench แล้วไปที่แท็บ <strong>Animate</strong> สร้างอนิเมชันใหม่ชื่อ
+                <code>animation.robot.sway</code>
+                (ชื่ออนิเมชันรองรับเฉพาะ snake_case, ตัวอักษร, และจุดเท่านั้น ห้ามใช้ colon หรือ dash นะครับ)
+            </p>
+            <ul>
+                <li>ที่วินาทีที่ 0: สร้าง Keyframe เริ่มต้น</li>
+                <li>ที่ 0.20 วินาที: หมุนหุ่นยนต์ไปทางซ้ายเล็กน้อย (ประมาณ 10 องศา)</li>
+                <li>ที่ 0.50 วินาที: หมุนไปทางขวา</li>
+                <li>ที่ 1.0 วินาที: หมุนกลับมาที่ 0</li>
+            </ul>
+            <p>
+                กดเล่นดู คุณจะเห็นหุ่นยนต์โยกตัวไปมา (Sway) จากนั้นกด <strong>Ctrl + S</strong> เพื่อบันทึกไฟล์เป็น
+                <code>robot.animation.json</code>
+                ในโฟลเดอร์ <code>animations</code> ของ Resource Pack
+            </p>
+            <p>
+                กลับมาที่ไฟล์ <strong>Client Entity</strong> เราจะเพิ่มเงื่อนไขให้เล่นท่า Sway เฉพาะตอนที่
+                <strong>ไม่ได้อยู่บนพื้น</strong> (<code>!query.is_on_ground</code>):
+            </p>
+
+            <div class="code-wrapper">
+                <pre>  <span class="token-key">"animations"</span><span class="token-punct">:</span> <span class="token-punct">{</span>
+                  <span class="token-key">"look_at_target"</span><span class="token-punct">:</span> <span class="token-string">"animation.common.look_at_target"</span><span class="token-punct">,</span>
+                  <span class="token-key">"sway"</span><span class="token-punct">:</span> <span class="token-string">"animation.robot.sway"</span>
+              <span class="token-punct">}</span><span class="token-punct">,</span>
+              <span class="token-key">"scripts"</span><span class="token-punct">:</span> <span class="token-punct">{</span>
+                <span class="token-key">"animate"</span><span class="token-punct">:</span> <span class="token-punct">[</span>
+                  <span class="token-string">"look_at_target"</span><span class="token-punct">,</span>
+                  <span class="token-punct">{</span><span class="token-key">"sway"</span><span class="token-punct">:</span><span class="token-string">"!query.is_on_ground"</span><span class="token-punct">}</span>
+                <span class="token-punct">]</span>
+              <span class="token-punct">}</span></pre>
+                <button class="copy-btn">คัดลอก</button>
+            </div>
+
+            <p>
+                <strong>ปัญหาที่พบ:</strong> ถ้าคุณผลักหุ่นยนต์ตกขอบ อนิเมชันจะเล่นแค่ครั้งเดียวแล้วค้างไปเลย
+                นั่นเพราะว่า Script ใน <code>animate</code> ทำหน้าที่กำหนดค่า Blend (ความเข้มข้นของการเล่น) เท่านั้น
+                ไม่ได้สั่งให้ "เริ่มเล่นใหม่" ทุกครั้ง ดังนั้นเราจึงต้องใช้ตัวช่วยที่เก่งกว่านี้ นั่นคือ
+                <strong>Animation
+                    Controllers</strong> ครับ
+            </p>
+
+            <h3>3. ตัวควบคุมอนิเมชัน Animation Controllers</h3>
+            <p>
+                Animation Controllers ทำงานโดยใช้ระบบ <strong>States (สถานะ)</strong> ตัวควบคุมหนึ่งตัวสามารถมีกี่สถานะก็ได้ไม่จำกัด
+                แต่จะมีเพียงสถานะเดียวเท่านั้นที่ทำงาน (Active) ในเวลาเดียวกัน ตัวควบคุมสามารถเปลี่ยนสถานะ (Transition)
+                ไปยังสถานะอื่นได้ผ่านนิพจน์ Molang
+                แต่ละสถานะสามารถสั่งเล่นอนิเมชัน เสียง และเอฟเฟกต์อนุภาค (Particle effects) ที่แตกต่างกันได้
+            </p>
+            
+            
+            
+            <p>
+                ทุกครั้งที่ Entity ถูกโหลดโดยฝั่ง Client (เช่น ตอนผู้เล่นเข้าโลก) Animation Controller จะเริ่มทำงานที่สถานะเริ่มต้น
+                ซึ่งโดยปกติจะชื่อว่า <code>default</code>
+            </p>
+            
+            <h4>ขั้นตอนที่ 1: สร้างไฟล์ Controller</h4>
+            <p>
+                ให้สร้างโฟลเดอร์ใหม่ชื่อ <code>animation_controllers</code> ใน Resource Pack จากนั้นสร้างไฟล์ชื่อ
+                <code>robot.animation_controllers.json</code> และเริ่มต้นด้วยโค้ดดังนี้:
+            </p>
+            <div class="code-wrapper">
+                <pre><span class="token-punct">{</span>
+              <span class="token-key">"format_version"</span><span class="token-punct">:</span> <span class="token-string">"1.10.0"</span><span class="token-punct">,</span>
+              <span class="token-key">"animation_controllers"</span><span class="token-punct">:</span> <span class="token-punct">{</span>
+                <span class="token-key">"controller.animation.robot.ground"</span><span class="token-punct">:</span> <span class="token-punct">{</span><span class="token-punct">}</span>
+              <span class="token-punct">}</span>
+            <span class="token-punct">}</span></pre>
+                <button class="copy-btn">คัดลอก</button>
+            </div>
+            
+            <h4>ขั้นตอนที่ 2: กำหนดสถานะเริ่มต้น (Default State)</h4>
+            <p>
+                เราต้องสร้างสถานะเริ่มต้นที่ชื่อว่า <code>default</code> สถานะนี้มีหน้าที่เดียวคือ "รอจังหวะ" เพื่อเปลี่ยนไปสถานะ
+                <code>swaying</code> (โยกตัว)
+                เมื่อ Entity ไม่ได้อยู่บนพื้นดินแล้ว เราจะใช้ <strong>Transition</strong> ซึ่งจะทำงานทันทีที่ค่า
+                <code>query.is_on_ground</code> ไม่เป็นจริง (<code>!query.is_on_ground</code>)
+            </p>
+            <div class="code-wrapper">
+                <pre><span class="token-punct">{</span>
+              <span class="token-key">"format_version"</span><span class="token-punct">:</span> <span class="token-string">"1.10.0"</span><span class="token-punct">,</span>
+                <span class="token-key">"animation_controllers"</span><span class="token-punct">:</span> <span class="token-punct">{</span>
+                  <span class="token-key">"controller.animation.robot.ground"</span><span class="token-punct">:</span> <span class="token-punct">{</span>
+                    <span class="token-key">"states"</span><span class="token-punct">:</span> <span class="token-punct">{</span>
+                      <span class="token-key">"default"</span><span class="token-punct">:</span> <span class="token-punct">{</span>
+                        <span class="token-key">"transitions"</span><span class="token-punct">:</span><span class="token-punct">[</span>
+                           <span class="token-punct">{</span><span class="token-key">"swaying"</span><span class="token-punct">:</span> <span class="token-string">"!query.is_on_ground"</span><span class="token-punct">}</span>
+                        <span class="token-punct">]</span>
+                     <span class="token-punct">}</span>
+                    <span class="token-punct">}</span>
+                <span class="token-punct">}</span>
+              <span class="token-punct">}</span>
+            <span class="token-punct">}</span></pre>
+                <button class="copy-btn">คัดลอก</button>
+            </div>
+            
+            <h4>ขั้นตอนที่ 3: กำหนดสถานะโยกตัว (Swaying State)</h4>
+            <p>
+                ต่อไปเราจะเพิ่มสถานะ <code>swaying</code> สถานะนี้จะเล่นอนิเมชันโยกตัว และหลังจากนั้นจะรีเซ็ตกลับไปสถานะ default
+                เราสามารถใช้ <code>query.all_animations_finished</code> เพื่อให้เปลี่ยนสถานะกลับก็ต่อเมื่ออนิเมชันเล่นจบแล้วเท่านั้น
+                และเราต้องเช็คด้วยว่า Entity กลับมาอยู่บนพื้นแล้วหรือยัง
+            </p>
+            <div class="code-wrapper">
+                <pre><span class="token-punct">{</span>
+              <span class="token-key">"format_version"</span><span class="token-punct">:</span> <span class="token-string">"1.10.0"</span><span class="token-punct">,</span>
+              <span class="token-key">"animation_controllers"</span><span class="token-punct">:</span> <span class="token-punct">{</span>
+                  <span class="token-key">"controller.animation.robot.ground"</span><span class="token-punct">:</span> <span class="token-punct">{</span>
+                    <span class="token-key">"states"</span><span class="token-punct">:</span> <span class="token-punct">{</span>
+                      <span class="token-key">"default"</span><span class="token-punct">:</span> <span class="token-punct">{</span>
+                         <span class="token-key">"transitions"</span><span class="token-punct">:</span><span class="token-punct">[</span>
+                            <span class="token-punct">{</span><span class="token-key">"swaying"</span><span class="token-punct">:</span> <span class="token-string">"!query.is_on_ground"</span><span class="token-punct">}</span>
+                          <span class="token-punct">]</span>
+                      <span class="token-punct">}</span><span class="token-punct">,</span>
+                      <span class="token-key">"swaying"</span><span class="token-punct">:</span> <span class="token-punct">{</span>
+                        <span class="token-key">"animations"</span><span class="token-punct">:</span><span class="token-punct">[</span>
+                          <span class="token-string">"sway"</span>
+                        <span class="token-punct">]</span><span class="token-punct">,</span>
+                        <span class="token-key">"transitions"</span><span class="token-punct">:</span><span class="token-punct">[</span>
+                          <span class="token-punct">{</span><span class="token-key">"default"</span><span class="token-punct">:</span> <span class="token-string">"query.all_animations_finished &amp;&amp; query.is_on_ground"</span><span class="token-punct">}</span>
+                        <span class="token-punct">]</span>
+                      <span class="token-punct">}</span>
+                    <span class="token-punct">}</span>
+                  <span class="token-punct">}</span>
+              <span class="token-punct">}</span>
+            <span class="token-punct">}</span></pre>
+                <button class="copy-btn">คัดลอก</button>
+            </div>
+            
+            <h4>ขั้นตอนที่ 4: เชื่อมต่อใน Client Entity</h4>
+            <p>
+                ตอนนี้เราต้องเชื่อมโยง Animation Controller เข้ากับ Entity ของเรา วิธีการเหมือนกับการเชื่อมไฟล์ Animation
+                ปกติเลยครับ
+                คือใส่ในส่วน <code>animations</code> และสั่งเล่นใน <code>scripts</code> ของไฟล์ Client Entity
+                (<code>robot.entity.json</code>)
+            </p>
+            <div class="code-wrapper">
+                <pre>  <span class="token-key">"animations"</span><span class="token-punct">:</span> <span class="token-punct">{</span>
+                <span class="token-key">"look_at_target"</span><span class="token-punct">:</span> <span class="token-string">"animation.common.look_at_target"</span><span class="token-punct">,</span>
+                <span class="token-key">"sway"</span><span class="token-punct">:</span> <span class="token-string">"animation.robot.sway"</span><span class="token-punct">,</span>
+                <span class="token-key">"ground"</span><span class="token-punct">:</span> <span class="token-string">"controller.animation.robot.ground"</span>
+              <span class="token-punct">}</span><span class="token-punct">,</span>
+              <span class="token-key">"scripts"</span><span class="token-punct">:</span> <span class="token-punct">{</span>
+                <span class="token-key">"animate"</span><span class="token-punct">:</span> <span class="token-punct">[</span>
+                  <span class="token-string">"look_at_target"</span><span class="token-punct">,</span>
+                  <span class="token-string">"ground"</span>
+                <span class="token-punct">]</span>
+              <span class="token-punct">}</span></pre>
+                <button class="copy-btn">คัดลอก</button>
+            </div>
+            
+            <h3>การปรับแต่งให้ลื่นไหล Smooth Transitions</h3>
+            <p>
+                ถ้าทดสอบในเกมตอนนี้ อนิเมชันจะเล่นได้หลายรอบแล้ว แต่ถ้าหุ่นยนต์เท้าลอยจากพื้น 2 ครั้งติดกันเร็วๆ
+                ครั้งที่สองอนิเมชันอาจจะไม่เล่น
+                เพราะอนิเมชันรอบแรกยังไม่จบ Controller เลยยังไม่รีเซ็ตกลับไปสถานะ Default
+            </p>
+            <p>
+                เราจะแก้ปัญหานี้โดยการเอาเงื่อนไข <code>all_animations_finished</code> ออก เพื่อให้มันออกจากสถานะ swaying
+                ทันทีที่เท้าแตะพื้น
+                แต่ถ้าทำแบบนี้อนิเมชันจะตัดจบแบบกระตุก
+            </p>
+            <p>
+                เพื่อป้องกันการกระตุก เราจะใช้ตัวเลือก <strong><code>blend_transition</code></strong>
+                ซึ่งช่วยให้การเปลี่ยนสถานะค่อยๆ จางหายไป (Fade out)
+                อย่างนุ่มนวลตามเวลาที่กำหนด นี่เป็นคุณสมบัติที่สำคัญมากของ Animation Controllers และยังใช้ทำ Transition
+                ระหว่างท่าทางต่างๆ ได้ด้วย
+            </p>
+            <p>
+                ให้แก้โค้ดส่วนสถานะ <code>swaying</code> เป็นดังนี้:
+            </p>
+            <div class="code-wrapper">
+                <pre>  <span class="token-key">"swaying"</span><span class="token-punct">:</span> <span class="token-punct">{</span>
+                <span class="token-key">"animations"</span><span class="token-punct">:</span><span class="token-punct">[</span>
+                  <span class="token-string">"sway"</span>
+                <span class="token-punct">]</span><span class="token-punct">,</span>
+                <span class="token-key">"transitions"</span><span class="token-punct">:</span><span class="token-punct">[</span>
+                  <span class="token-punct">{</span><span class="token-key">"default"</span><span class="token-punct">:</span> <span class="token-string">"query.is_on_ground"</span><span class="token-punct">}</span>
+                <span class="token-punct">]</span><span class="token-punct">,</span>
+                <span class="token-key">"blend_transition"</span><span class="token-punct">:</span><span class="token-number">0.5</span>
+              <span class="token-punct">}</span></pre>
+                <button class="copy-btn">คัดลอก</button>
+            </div>
+            <p>
+                ตอนนี้เมื่อหุ่นยนต์ตกลงพื้น อนิเมชันโยกตัวจะค่อยๆ เฟดหายไปอย่างนุ่มนวลภายในเวลา 0.5 วินาที
+                ทำให้การเคลื่อนไหวดูเป็นธรรมชาติมากครับ!
+            </p>
+
             <h3>บทสรุป</h3>
             <p>
                 ตอนนี้คุณมีหุ่นยนต์ที่มีโมเดลเป็นของตัวเอง มีสีสัน และขยับได้แล้ว!
                 การฝึกฝนใช้ Blockbench บ่อยๆ จะช่วยให้คุณสร้างสรรค์ Entity ที่ซับซ้อนและสวยงามขึ้นได้เรื่อยๆ ครับ
             </p>
-        </div>
+            </div>
 
     </article>
 
