@@ -1,0 +1,503 @@
+<!DOCTYPE html>
+<html lang="th">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Advanced Custom Blocks - MCFirsting</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+    <nav class="navbar">
+        <div class="logo">
+            <a href="../../index.html"><img id="logo_mcfirsting" src="../../image/mcfirsting_logo.png" alt="Logo"></a>
+        </div>
+        <ul class="nav-links">
+            <li><a href="../../tutorial.html">Tutorial</a></li>
+            <li><a href="../../shop.html">Shop</a></li>
+        </ul>
+    </nav>
+
+    <header class="doc-header">
+        <div class="container">
+            <h1>การสร้างบล็อกขั้นสูง Advanced Custom Blocks</h1>
+            <p style="text-align: center; color: #aaa;">ก้าวข้ามขีดจำกัดของบล็อกสี่เหลี่ยม
+                ด้วยรูปทรงและโมเดลที่คุณออกแบบเองได้</p>
+        </div>
+    </header>
+
+    <article class="article-container">
+
+        <p>
+            ในบทเรียนนี้ คุณจะได้เรียนรู้เจาะลึกเกี่ยวกับองค์ประกอบ (Components) ของ Custom Block ให้มากขึ้น ซึ่งรวมถึง:
+        </p>
+
+        <ul>
+            <li>การใช้โปรแกรม <strong>Blockbench</strong> เพื่อออกแบบรูปทรง (Geometry) และลวดลาย (Texture) </li>
+            <li>การเพิ่มรูปทรงของบล็อกที่มีรูปร่างหรือขนาดแตกต่างไปจากสี่เหลี่ยมปกติ (16x16x16)</li>
+            <li>การใช้คอมโพเนนต์ <code>minecraft:geometry</code> เพื่ออ้างอิงรูปทรงที่เราสร้างขึ้นเอง</li>
+            <li>การใช้คอมโพเนนต์ <code>minecraft:material_instances</code> เพื่อกำหนด Texture ให้กับรูปทรงนั้น</li>
+        </ul>
+
+        <img class="article-image" src="/tutorial/advanced_custom_blocks/image/Screenshot Advanced Custom Blocks.png"
+            alt="Screenshot Cow">
+
+        <div
+            style="background-color: #2b2b2b; padding: 15px; border-radius: 8px; border-left: 4px solid #ff9500; margin: 20px 0;">
+            <h4 style="margin-top: 0; color: #ff9500;">คำแนะนำ:</h4>
+            <p style="margin: 0;">
+                หากคุณยังไม่ได้เรียนบทเรียน <a href="/tutorial/custom_blocks/custom_blocks.html"
+                    style="color: #a5d6ff;">วิธีสร้าง Custom Block
+                    เบื้องต้น</a>
+                ขอแนะนำให้กลับไปศึกษาและทำให้สำเร็จก่อนเริ่มบทเรียนนี้ครับ
+            </p>
+        </div>
+
+        
+
+        <p>
+            ก่อนหน้านี้เราได้สร้าง "บล็อกลูกเต๋า" กันไปแล้ว ซึ่งเป็นวิธีที่ใช้ไฟล์และเขียน JSON น้อยที่สุดเท่าที่จะทำได้
+            แต่คราวนี้ เราจะมาสำรวจความเป็นไปได้ใหม่ๆ ที่น่าตื่นเต้นยิ่งกว่าเดิม โดยใช้ JSON components
+            ใน Behavior Pack ที่ชื่อว่า <code>geometry</code> และ <code>material_instances</code> กันครับ!
+        </p>
+        <p>โครงสร้างไฟล์ของคุณควรจะเป็นแบบนี้:</p>
+        <img class="article-image" src="image/Navigate Advanced Custom Blocks.png" alt="Navigate Behavior Packs">
+        </div>
+
+        <hr style="border: 0; border-top: 1px solid #444; margin: 30px 0;">
+
+        <h2>บล็อกซูชิ Sushi Blocks</h2>
+        <p>
+            ในโปรเจกต์นี้ เราจะมาสร้างบล็อกแบบกำหนดเองโดยใช้ Geometry และ Material Instances
+            ซึ่งผลลัพธ์ที่เราจะทำกันก็คือ...
+            <strong>ซูชิ (Sushi)</strong> ครับ!
+        </p>
+
+
+
+        <h2>มาเริ่มใช้ Blockbench</h2>
+        <p>
+            ในบทเรียนนี้ เราจะต้องลงมือทำงานกันในโปรแกรม <strong>Blockbench</strong> ครับ ซึ่ง Blockbench
+            เป็นโปรแกรมสร้างโมเดล
+            3D ฟรี
+            สำหรับสร้างโมเดล Entity ใน Minecraft: Bedrock Edition โดยเฉพาะ
+        </p>
+
+
+
+        <p>
+            นอกจากจะปั้นโมเดลได้แล้ว ผู้ใช้ยังสามารถสร้าง Texture และทำอนิเมชันสำหรับแผนที่ Bedrock Edition ได้อีกด้วย
+            Blockbench ยังรองรับระบบปลั๊กอินภายนอก
+            ซึ่งช่วยให้นักพัฒนาสามารถสร้างเครื่องมือเสริมเพื่อนำมาใช้งานภายในโปรแกรมได้
+            และยังสามารถส่งออก (Export) โมเดลเป็นไฟล์มาตรฐานแบบ OBJ, โมเดลบล็อกของ Java Edition, และรูปแบบอื่นๆ
+            ได้อีกมากมาย
+        </p>
+        <p>
+            เราจะใช้ Blockbench ในบทเรียนชุดนี้เพื่อสร้าง Geometry สำหรับบล็อกขั้นสูงต่างๆ ที่เราจะทำกัน ได้แก่
+            <strong>ซูชิ, ปลาในฟองน้ำ และ ร่มกันแดดยักษ์</strong>
+        </p>
+
+        <h3>การจัดการรูปทรงใน Geometry</h3>
+        <p>
+            แต่ละ Custom Block จะมีค่า <strong>Unit Vector (UV)</strong> ที่แตกต่างกันสำหรับ Texture ในแต่ละด้านของซูชิ
+            ค่า UV จะเป็นตัวกำหนดว่ารูปทรงเรขาคณิต (Geometry) จะถูกวางทาบลงบน Texture อย่างไร
+        </p>
+
+
+        <img class="article-image" src="/tutorial/advanced_custom_blocks/image/sushi.png"
+            alt="Sushi Wrap Texture">
+        <img class="article-image" src="/tutorial/advanced_custom_blocks/image/sushi_uv.png"
+            alt="Sushi Wrap UV Texture">
+
+        <p>
+            สาหร่ายที่ใช้ห่อจะเหมือนกันทั้ง 3 แบบ (ที่เราจะสร้างกัน) ดังนั้นคุณสามารถใช้
+            Geometry
+            เดิมซ้ำได้เลย!
+        </p>
+        <p>
+            อย่างไรก็ตาม Texture ของไส้ซูชิแต่ละชิ้นจะแตกต่างกันไปตามชนิดของโรล นี่คือตัวอย่างของ <strong>"แซลมอนโรล"
+                (Salmon
+                roll)</strong> ครับ:
+        </p>
+
+        <img class="article-image" src="/tutorial/advanced_custom_blocks/image/sushi1.png" alt="Sushi Wrap Texture">
+        <img class="article-image" src="/tutorial/advanced_custom_blocks/image/sushi_uv1.png" alt="Sushi Wrap UV Texture">
+
+        <div
+            style="background-color: #2b2b2b; padding: 15px; border-radius: 8px; border-left: 4px solid #f0ad4e; margin: 20px 0;">
+            <p style="margin: 0;">
+                เราขอแนะนำอย่างยิ่งให้คุณเรียนรู้การใช้งาน Blockbench อย่างละเอียด หากคุณเริ่มสร้าง Entity
+                ที่ซับซ้อนและมีเอกลักษณ์เฉพาะตัวมากขึ้น
+                แต่สำหรับบทเรียนนี้ เราจะใช้วิธีลัดโดยการ <strong>สร้างไฟล์เปล่าๆ</strong> ขึ้นมา แล้ว Export
+                ลงเครื่องคอมพิวเตอร์
+            </p>
+        </div>
+
+        <h3>การส่งออกไฟล์จาก Blockbench</h3>
+        <p>
+            กรณีหากคุณลองวิธีลัดนำโค้ดโมเดลทั้งหมดมาใช้ ไห้สร้างไฟล์ <code>.json</code> ไว้ล่วงหน้า (สร้างไฟล์เปล่า)
+            ให้เปิดไฟล์ <code>.json</code> ที่คุณเพิ่งสร้างมา
+            แล้วนำโค้ดด้านล่างนี้ไปวางทับได้เลยครับ
+            นี่คือข้อมูลรูปทรงของ "ซูชิ" ที่เราเตรียมไว้ให้:
+        </p>
+        <p>
+
+        </p>
+
+        <div class="code-wrapper">
+            <pre><span class="token-punct">{</span> 
+          <span class="token-key">"format_version"</span><span class="token-punct">:</span> <span class="token-string">"1.12.0"</span><span class="token-punct">,</span> 
+          <span class="token-key">"minecraft:geometry"</span><span class="token-punct">:</span> <span class="token-punct">[</span> 
+            <span class="token-punct">{</span> 
+              <span class="token-key">"description"</span><span class="token-punct">:</span> <span class="token-punct">{</span> 
+                <span class="token-key">"identifier"</span><span class="token-punct">:</span> <span class="token-string">"geometry.sushi"</span><span class="token-punct">,</span> 
+                <span class="token-key">"texture_width"</span><span class="token-punct">:</span> <span class="token-number">36</span><span class="token-punct">,</span> 
+                <span class="token-key">"texture_height"</span><span class="token-punct">:</span> <span class="token-number">18</span><span class="token-punct">,</span> 
+                <span class="token-key">"visible_bounds_width"</span><span class="token-punct">:</span> <span class="token-number">2</span><span class="token-punct">,</span> 
+                <span class="token-key">"visible_bounds_height"</span><span class="token-punct">:</span> <span class="token-number">2.5</span><span class="token-punct">,</span> 
+                <span class="token-key">"visible_bounds_offset"</span><span class="token-punct">:</span> <span class="token-punct">[</span><span class="token-number">0</span><span class="token-punct">,</span> <span class="token-number">0.75</span><span class="token-punct">,</span> <span class="token-number">0</span><span class="token-punct">]</span> 
+              <span class="token-punct">}</span><span class="token-punct">,</span> 
+              <span class="token-key">"bones"</span><span class="token-punct">:</span> <span class="token-punct">[</span> 
+                <span class="token-punct">{</span> 
+                  <span class="token-key">"name"</span><span class="token-punct">:</span> <span class="token-string">"bb_main"</span><span class="token-punct">,</span> 
+                  <span class="token-key">"pivot"</span><span class="token-punct">:</span> <span class="token-punct">[</span><span class="token-number">0</span><span class="token-punct">,</span> <span class="token-number">0</span><span class="token-punct">,</span> <span class="token-number">0</span><span class="token-punct">]</span><span class="token-punct">,</span> 
+                  <span class="token-key">"cubes"</span><span class="token-punct">:</span> <span class="token-punct">[</span> 
+                    <span class="token-punct">{</span><span class="token-key">"origin"</span><span class="token-punct">:</span> <span class="token-punct">[</span><span class="token-number">-6</span><span class="token-punct">,</span> <span class="token-number">0</span><span class="token-punct">,</span> <span class="token-number">-3</span><span class="token-punct">]</span><span class="token-punct">,</span> <span class="token-key">"size"</span><span class="token-punct">:</span> <span class="token-punct">[</span><span class="token-number">12</span><span class="token-punct">,</span> <span class="token-number">12</span><span class="token-punct">,</span> <span class="token-number">6</span><span class="token-punct">]</span><span class="token-punct">,</span> <span class="token-key">"uv"</span><span class="token-punct">:</span> <span class="token-punct">[</span><span class="token-number">0</span><span class="token-punct">,</span> <span class="token-number">0</span><span class="token-punct">]</span><span class="token-punct">}</span> 
+                  <span class="token-punct">]</span> 
+                <span class="token-punct">}</span> 
+              <span class="token-punct">]</span> 
+            <span class="token-punct">}</span> 
+          <span class="token-punct">]</span> 
+        <span class="token-punct">}</span></pre>
+            <button class="copy-btn">คัดลอก</button>
+        </div>
+
+        <p>
+            ตอนนี้คุณสามารถสร้าง Texture ใน Blockbench ได้เลย หรือจะสร้างในโปรแกรมแต่งภาพแยกต่างหากก็ได้
+            (แต่ต้องแน่ใจว่าขนาดและ UV ของรูปภาพตรงกับที่กำหนดไว้ใน Geometry นะครับ)
+        </p>
+
+        <h2>การตั้งค่า Resource Pack</h2>
+
+        <h3>1. เพิ่มไฟล์โมเดล Geometry</h3>
+        <p>
+            เริ่มจากการนำไฟล์โมเดลซูชิไปใส่ใน Resource Pack กันครับ
+        </p>
+        <ol>
+            <li>เข้าไปที่โฟลเดอร์ <code>custom_block_resource_pack</code> ของคุณ</li>
+            <li>สร้างโฟลเดอร์ชื่อ <code>models</code></li>
+            <li>เข้าไปใน models แล้วสร้างโฟลเดอร์ชื่อ <code>blocks</code></li>
+            <li><strong>คัดลอกไฟล์ Geometry (.json)</strong> ที่ได้จาก Blockbench มาวางไว้ในโฟลเดอร์
+                <code>models/blocks</code>
+                นี้
+            </li>
+        </ol>
+
+        <h3>2. ตั้งชื่อบล็อก</h3>
+        <p>
+            เช่นเดียวกับตอนทำบล็อกลูกเต๋า เราต้องกำหนดชื่อที่แสดงในเกมให้ซูชิทั้ง 3 แบบ
+            ให้เปิดไฟล์ <code>texts/en_US.lang</code> แล้วเพิ่มโค้ดนี้ต่อท้ายครับ:
+        </p>
+
+        <div class="code-wrapper">
+            <pre>tile.demo:salmon_roll.name=Salmon Roll<br>tile.demo:tuna_roll.name=Tuna Roll<br>tile.demo:california_roll.name=California Roll</pre>
+            <button class="copy-btn">คัดลอก</button>
+        </div>
+        <p style="font-size: 0.9rem; color: #ff5555;">*ระวัง: อย่าเผลอเคาะเว้นวรรค (Space) หลังเครื่องหมายเท่ากับ (=)
+            นะครับ
+            ไม่งั้นชื่อในเกมจะแหว่งไป</p>
+
+        <h3>3. เพิ่มรูปภาพ Textures</h3>
+        <p>
+            ให้นำไฟล์รูปภาพ Texture ของคุณไปวางไว้ในโฟลเดอร์ <code>textures/blocks</code>
+            (สำหรับบทเรียนนี้คุณสามารถบันทึกรูปตัวอย่างได้ครับ)
+            <img class="article-image"
+                src="https://learn.microsoft.com/en-us/minecraft/creator/documents/media/advancedcustomblocks/advancedblock6.png?view=minecraft-bedrock-stable"
+                width="150px" alt="Salmon Roll Texture">
+            <img class="article-image"
+                src="https://learn.microsoft.com/en-us/minecraft/creator/documents/media/advancedcustomblocks/advancedblock7.png?view=minecraft-bedrock-stable"
+                width="150px" alt="Salmon Roll Texture">
+            <img class="article-image"
+                src="https://learn.microsoft.com/en-us/minecraft/creator/documents/media/advancedcustomblocks/advancedblock8.png?view=minecraft-bedrock-stable"
+                width="150px" alt="Salmon Roll Texture">
+            <img class="article-image"
+                src="https://learn.microsoft.com/en-us/minecraft/creator/documents/media/advancedcustomblocks/advancedblock9.png?view=minecraft-bedrock-stable"
+                width="150px" alt="Salmon Roll Texture">
+        </p>
+
+        <h3>4. Terrain Texture</h3>
+        <p>
+            ขั้นตอนนี้คือการจับคู่ "ชื่อเรียก Texture" เข้ากับ "ที่อยู่ไฟล์ภาพ" ให้เปิดไฟล์
+            <code>textures/terrain_texture.json</code>
+            แล้วเพิ่มโค้ดลงไปในส่วน <code>texture_data</code> ดังนี้:
+        </p>
+
+        <div class="code-wrapper">
+            <pre><span class="token-punct">{</span> 
+          <span class="token-key">"texture_data"</span><span class="token-punct">:</span> <span class="token-punct">{</span> 
+            <span class="token-key">"sushi_wrap"</span><span class="token-punct">:</span> <span class="token-punct">{</span> 
+              <span class="token-key">"textures"</span><span class="token-punct">:</span> <span class="token-string">"textures/blocks/sushi_wrap"</span> 
+            <span class="token-punct">}</span><span class="token-punct">,</span> 
+            <span class="token-key">"salmon_roll"</span><span class="token-punct">:</span> <span class="token-punct">{</span> 
+              <span class="token-key">"textures"</span><span class="token-punct">:</span> <span class="token-string">"textures/blocks/salmon_roll"</span> 
+            <span class="token-punct">}</span><span class="token-punct">,</span> 
+            <span class="token-key">"tuna_roll"</span><span class="token-punct">:</span> <span class="token-punct">{</span> 
+             <span class="token-key">"textures"</span><span class="token-punct">:</span> <span class="token-string">"textures/blocks/tuna_roll"</span> 
+            <span class="token-punct">}</span><span class="token-punct">,</span> 
+            <span class="token-key">"california_roll"</span><span class="token-punct">:</span> <span class="token-punct">{</span> 
+             <span class="token-key">"textures"</span><span class="token-punct">:</span> <span class="token-string">"textures/blocks/california_roll"</span> 
+            <span class="token-punct">}</span> 
+          <span class="token-punct">}</span>
+        <span class="token-punct">}</span></pre>
+            <button class="copy-btn">คัดลอก</button>
+        </div>
+
+        <h3>5. เพิ่มเสียง blocks.json - ไม่บังคับ</h3>
+        <p>
+            การเพิ่มเสียงใน <code>blocks.json</code> เป็นทางเลือกเสริม เราจะให้ซูชิใช้เสียงเหมือน
+            <strong>"โคลน" (Mud)</strong> เพราะมันนุ่มนิ่ม!
+        </p>
+
+        <div
+            style="background-color: #2b2b2b; padding: 15px; border-radius: 8px; border-left: 4px solid #f0ad4e; margin: 15px 0;">
+            <p style="margin: 0;">
+                <strong>สำคัญ!</strong> เนื่องจากเรากำลังใช้ Geometry และ Material Instances ขั้นสูง
+                ข้อมูลการ Render (แสดงผล) ในไฟล์นี้จะถูกเขียนทับโดย Behavior Pack ดังนั้นในไฟล์นี้เราจะใส่แค่ข้อมูล
+                <strong>เสียง</strong> เท่านั้นครับ
+            </p>
+        </div>
+
+        <p>เปิดไฟล์ <code>blocks.json</code> (ที่รากของ Resource Pack) แล้วเพิ่มข้อมูลต่อจาก <code>demo:die</code>:</p>
+
+        <div class="code-wrapper">
+            <pre><span class="token-punct">{</span> 
+          <span class="token-key">"format_version"</span><span class="token-punct">:</span> <span class="token-string">"1.19.30"</span><span class="token-punct">,</span> 
+          <span class="token-key">"demo:die"</span><span class="token-punct">:</span> <span class="token-punct">{</span>
+          <span class="token-punct">}</span><span class="token-punct">,</span> 
+          <span class="token-key">"demo:salmon_roll"</span><span class="token-punct">:</span> <span class="token-punct">{</span> 
+            <span class="token-key">"sound"</span><span class="token-punct">:</span> <span class="token-string">"mud"</span> 
+          <span class="token-punct">}</span><span class="token-punct">,</span> 
+          <span class="token-key">"demo:tuna_roll"</span><span class="token-punct">:</span> <span class="token-punct">{</span> 
+            <span class="token-key">"sound"</span><span class="token-punct">:</span> <span class="token-string">"mud"</span> 
+          <span class="token-punct">}</span><span class="token-punct">,</span> 
+          <span class="token-key">"demo:california_roll"</span><span class="token-punct">:</span> <span class="token-punct">{</span> 
+            <span class="token-key">"sound"</span><span class="token-punct">:</span> <span class="token-string">"mud"</span> 
+          <span class="token-punct">}</span>
+        <span class="token-punct">}</span></pre>
+            <button class="copy-btn">คัดลอก</button>
+        </div>
+
+        <h2>Behavior Pack</h2>
+        <p>
+            มานำชิ้นส่วนทรัพยากรทั้งหมดมารวมกันให้เป็นส่วนผสมที่ลงตัวในไฟล์ Behavior Pack กันครับ
+        </p>
+
+        <h3>1. สร้างไฟล์ Custom Block แยกตามชนิด</h3>
+        <p>
+            ถึงแม้ว่าบล็อกซูชิทั้ง 3 แบบจะใช้โมเดล <code>geometry.sushi</code> ตัวเดียวกัน
+            แต่เราต้องสร้างไฟล์แยกสำหรับแต่ละโรล
+            เพื่อให้มันกลายเป็นบล็อกที่มีคุณสมบัติและลวดลายเฉพาะตัวครับ
+        </p>
+        <ol>
+            <li>เข้าไปที่โฟลเดอร์ <code>custom_block_behavior_pack</code> ของคุณ</li>
+            <li>เข้าไปในโฟลเดอร์ <code>blocks</code> และสร้างไฟล์ข้อความชื่อ <code>salmon_roll.json</code></li>
+            <li>เปิดไฟล์ <code>salmon_roll.json</code> ด้วย Text Editor</li>
+        </ol>
+
+        <h3>2. เขียนโค้ด JSON</h3>
+        <p>
+            ในไฟล์นี้ เราจะต้องระบุว่าบล็อกนี้คืออะไร และมีหน้าตาอย่างไร ให้คัดลอกโค้ดนี้ไปวางครับ:
+        </p>
+
+        <div class="code-wrapper">
+            <pre><span class="token-punct">{</span>
+          <span class="token-key">"format_version"</span><span class="token-punct">:</span> <span class="token-string">"1.19.40"</span><span class="token-punct">,</span>
+          <span class="token-key">"minecraft:block"</span><span class="token-punct">:</span> <span class="token-punct">{</span>
+            <span class="token-key">"description"</span><span class="token-punct">:</span> <span class="token-punct">{</span>
+              <span class="token-key">"identifier"</span><span class="token-punct">:</span> <span class="token-string">"demo:salmon_roll"</span>
+            <span class="token-punct">}</span><span class="token-punct">,</span>
+            <span class="token-key">"components"</span><span class="token-punct">:</span> <span class="token-punct">{</span>
+              <span class="token-key">"minecraft:geometry"</span><span class="token-punct">:</span> <span class="token-string">"geometry.sushi"</span><span class="token-punct">,</span>
+              <span class="token-key">"minecraft:material_instances"</span><span class="token-punct">:</span><span class="token-punct">{</span>
+                <span class="token-key">"north"</span><span class="token-punct">:</span> <span class="token-punct">{</span> 
+                  <span class="token-key">"texture"</span><span class="token-punct">:</span> <span class="token-string">"salmon_roll"</span>
+                <span class="token-punct">}</span><span class="token-punct">,</span>
+                <span class="token-key">"south"</span><span class="token-punct">:</span> <span class="token-punct">{</span> 
+                  <span class="token-key">"texture"</span><span class="token-punct">:</span> <span class="token-string">"salmon_roll"</span>
+                <span class="token-punct">}</span><span class="token-punct">,</span>
+                <span class="token-key">"*"</span><span class="token-punct">:</span> <span class="token-punct">{</span>
+                  <span class="token-key">"texture"</span><span class="token-punct">:</span> <span class="token-string">"sushi_wrap"</span>
+                <span class="token-punct">}</span>
+              <span class="token-punct">}</span>
+            <span class="token-punct">}</span>
+          <span class="token-punct">}</span>
+        <span class="token-punct">}</span></pre>
+            <button class="copy-btn">คัดลอก</button>
+        </div>
+
+        <h3>3. เจาะลึก Component</h3>
+        <p>นี่คือช่วงเวลาสำคัญที่เราจะได้ใช้พลังของ Custom Block Components ครับ!</p>
+
+        <h4>minecraft:geometry</h4>
+        <p>
+            ใช้กำหนดว่าบล็อกนี้จะใช้โมเดลรูปร่างแบบไหน โดยเราจะอ้างอิงชื่อ Identifier (<code>geometry.sushi</code>)
+            ที่เรากำหนดไว้ในไฟล์ JSON
+        </p>
+
+        <h4>minecraft:material_instances</h4>
+        <p>
+            คือตัวกำหนด Texture และการแสดงผลแสงเงาต่างๆ
+        </p>
+        <ul>
+            <li>
+                <strong>การกำหนดด้าน:</strong> เราสามารถระบุชื่อด้านที่ต้องการได้ เช่น <code>north</code> (เหนือ) และ
+                <code>south</code> (ใต้)
+                เพื่อให้โชว์ไส้แซลมอน
+            </li>
+            <li>
+                <strong>เครื่องหมายดอกจัน (*):</strong> นี่คือกุญแจพิเศษที่หมายถึง "ด้านที่เหลือทั้งหมด"
+                หากเราไม่ได้ระบุ
+                Texture ให้ด้านไหนเป็นพิเศษ
+                เกมจะดึง Texture จากตรงนี้ไปใช้ (ในที่นี้คือ <code>sushi_wrap</code> หรือสาหร่ายห่อ)
+            </li>
+        </ul>
+        <div
+            style="background-color: #2b2b2b; padding: 10px 15px; border-radius: 8px; border-left: 4px solid #ff5555; margin-bottom: 20px;">
+            <strong>ข้อควรจำ:</strong> คุณ <strong>ต้อง</strong> ใส่คีย์ <code>*</code> ทุกครั้งเมื่อใช้งาน
+            <code>material_instances</code> เพื่อกำหนดค่าเริ่มต้นครับ
+        </div>
+
+        <h3>ทางเลือกเสริม: การใช้ตัวแปร</h3>
+        <p>
+            เราสามารถเขียนโค้ดให้สั้นลงและเป็นระเบียบขึ้นได้ โดยการนิยาม "ชื่อตัวแปร" ให้กับ Texture ชุดนั้นๆ
+            มาดูตัวอย่างการใช้ตัวแปร <code>sushi_side</code> กันครับ:
+        </p>
+
+        <div class="code-wrapper">
+            <pre><span class="token-punct">{</span>
+          <span class="token-key">"format_version"</span><span class="token-punct">:</span> <span class="token-string">"1.19.40"</span><span class="token-punct">,</span>
+          <span class="token-key">"minecraft:block"</span><span class="token-punct">:</span> <span class="token-punct">{</span>
+            <span class="token-key">"description"</span><span class="token-punct">:</span> <span class="token-punct">{</span>
+              <span class="token-key">"identifier"</span><span class="token-punct">:</span> <span class="token-string">"demo:salmon_roll"</span>
+            <span class="token-punct">}</span><span class="token-punct">,</span>
+            <span class="token-key">"components"</span><span class="token-punct">:</span> <span class="token-punct">{</span>
+              <span class="token-key">"minecraft:geometry"</span><span class="token-punct">:</span> <span class="token-string">"geometry.sushi"</span><span class="token-punct">,</span>
+              <span class="token-key">"minecraft:material_instances"</span><span class="token-punct">:</span> <span class="token-punct">{</span>
+                <span class="token-key">"north"</span><span class="token-punct">:</span> <span class="token-string">"sushi_side"</span><span class="token-punct">,</span>
+                <span class="token-key">"south"</span><span class="token-punct">:</span> <span class="token-string">"sushi_side"</span><span class="token-punct">,</span>
+                <span class="token-key">"*"</span><span class="token-punct">:</span> <span class="token-punct">{</span>
+                  <span class="token-key">"texture"</span><span class="token-punct">:</span> <span class="token-string">"sushi_wrap"</span>
+                <span class="token-punct">}</span><span class="token-punct">,</span>
+                <span class="token-key">"sushi_side"</span><span class="token-punct">:</span> <span class="token-punct">{</span>
+                  <span class="token-key">"texture"</span><span class="token-punct">:</span> <span class="token-string">"salmon_roll"</span>
+                <span class="token-punct">}</span>
+              <span class="token-punct">}</span>
+            <span class="token-punct">}</span>
+          <span class="token-punct">}</span>
+        <span class="token-punct">}</span></pre>
+            <button class="copy-btn">คัดลอก</button>
+        </div>
+        <p>
+            สังเกตว่าเรากำหนดให้ <code>sushi_side</code> มีค่าเท่ากับ Texture <code>salmon_roll</code> จากนั้นในส่วน
+            north และ
+            south
+            เราก็แค่พิมพ์คำว่า <code>"sushi_side"</code> ลงไปแทนที่จะต้องเขียน Object เต็มๆ ซ้ำหลายรอบ
+        </p>
+
+        <h3>ตาคุณแล้ว!</h3>
+        <p>
+            ตอนนี้ให้คุณลองสร้างไฟล์สำหรับ <strong>Tuna Roll</strong> และ <strong>California Roll</strong>
+            ด้วยตัวเองดูครับ
+            โดยการคัดลอกไฟล์ <code>salmon_roll.json</code> แล้วเปลี่ยน:
+        </p>
+        <ul>
+            <li><code>identifier</code> ให้เป็นชื่อใหม่ (เช่น <code>demo:tuna_roll</code>)</li>
+            <li>เปลี่ยนชื่อ Texture ใน <code>material_instances</code> ให้ตรงกับชนิดของโรลนั้นๆ</li>
+        </ul>
+
+        <h2>การทดสอบบล็อก</h2>
+        <p>
+            เมื่อเรากำหนดค่าบล็อกซูชิทั้งใน Behavior Pack และ Resource Pack เสร็จเรียบร้อยแล้ว
+            ก็ถึงเวลาทดสอบในเกมดูว่าหน้าตาจะเป็นอย่างไร
+        </p>
+
+
+
+        <ol>
+            <li>เปิดช่องแชทขึ้นมา (กดปุ่ม T หรือ Enter บนคอมพิวเตอร์)</li>
+            <li>พิมพ์คำสั่งต่อไปนี้เพื่อเสกบล็อกออกมา:</li>
+        </ol>
+
+        <div class="code-wrapper">
+            <pre>/give @s demo:salmon_roll</pre>
+            <button class="copy-btn">คัดลอก</button>
+        </div>
+        <div class="code-wrapper">
+            <pre>/give @s demo:tuna_roll</pre>
+            <button class="copy-btn">คัดลอก</button>
+        </div>
+        <div class="code-wrapper">
+            <pre>/give @s demo:california_roll</pre>
+            <button class="copy-btn">คัดลอก</button>
+        </div>
+
+        <p>
+            ตอนนี้คุณสามารถวางบล็อกซูชิได้ทั่วเลย! ข้อสังเกตคือ ด้วยรูปทรง (Geometry) ที่เล็กกว่าบล็อกสี่เหลี่ยมปกติ
+            ทำให้เวลาวางเรียงกัน พวกมันจะดูเหมือนวางห่างกันนิดหน่อย
+            ไม่ได้ชิดติดกันเป็นก้อนเดียวเหมือนบล็อกดินหรือหินครับ
+        </p>
+        <p>
+            อย่าลืมลองทดสอบเสกซูชิให้ครบทั้ง 3 แบบนะครับ (Salmon, Tuna, California)
+            เพื่อชื่นชมความน่ารักของบล็อกใหม่เหล่านี้!
+        </p>
+
+        <hr style="border: 0; border-top: 1px solid #444; margin: 30px 0;">
+
+        <div style="margin-top: 40px;">
+            <h3>บทสรุป</h3>
+            <p>
+                ยินดีด้วยครับ! ในบทเรียนนี้คุณได้ก้าวข้ามขีดจำกัดของบล็อกสี่เหลี่ยมธรรมดา โดยการเรียนรู้วิธี:
+            </p>
+            <ul>
+                <li>นำโมเดล 3D จาก <strong>Blockbench</strong> มาใช้เป็น Custom Block</li>
+                <li>ใช้ <strong>Geometry</strong> เพื่อกำหนดรูปทรงที่ซับซ้อน</li>
+                <li>ใช้ <strong>Material Instances</strong> เพื่อเปลี่ยนลาย Texture บนโมเดลเดิม (โมเดลเดียวทำได้ตั้ง 3
+                    เมนู!)
+                </li>
+            </ul>
+            <p>
+                ความรู้เหล่านี้เป็นพื้นฐานสำคัญในการสร้างของตกแต่งบ้าน เฟอร์นิเจอร์ หรือไอเท็มเจ๋งๆ ในโลก Minecraft
+                ของคุณครับ
+            </p>
+        </div>
+
+    </article>
+
+    </article>
+
+    <footer>
+        <h2>ช่องทางติดต่อ</h2>
+        <div class="social-container">
+            <a class="social-icons" href="https://www.facebook.com/FPGTVMC/">
+                <img src="../../image/facebook-svgrepo-com.png" alt="Facebook">
+            </a>
+            <a class="social-icons" href="https://www.youtube.com/@MCFirsting">
+                <img src="../../image/youtube-fill-svgrepo-com.png" alt="YouTube">
+            </a>
+            <a class="social-icons" href="https://discord.gg/tnqZCfz4wz">
+                <img src="../../image/discord-svgrepo-com.png" alt="Discord">
+            </a>
+            <a class="social-icons" href="https://github.com/MCFirsting">
+                <img src="../../image/github-svgrepo-com.png" alt="GitHub">
+            </a>
+            <a class="social-icons" href="https://www.tiktok.com/@mc_firsting">
+                <img src="../../image/tiktok-svgrepo-com.png" alt="TikTok">
+            </a>
+        </div>
+    </footer>
+
+    <script src="../getting_started/getting_started.js"></script>
+</body>
+
+</html>
