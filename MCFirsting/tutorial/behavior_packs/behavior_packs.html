@@ -2,59 +2,59 @@
 <html lang="th">
 
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Introduction to Behavior Packs</title>
-  <link rel="stylesheet" href="style.css">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Introduction to Behavior Packs</title>
+    <link rel="stylesheet" href="style.css">
 </head>
 
 <body>
-  <nav class="navbar">
-    <div class="logo">
-      <a href="../../index.html"><img id="logo_mcfirsting" src="../../image/mcfirsting_logo.png" alt="Logo"></a>
-    </div>
-    <ul class="nav-links">
-      <li><a href="../../tutorial.html">Tutorial</a></li>
-      <li><a href="../../shop.html">Shop</a></li>
-    </ul>
-  </nav>
+    <nav class="navbar">
+        <div class="logo">
+            <a href="../../index.html"><img id="logo_mcfirsting" src="../../image/mcfirsting_logo.png" alt="Logo"></a>
+        </div>
+        <ul class="nav-links">
+            <li><a href="../../tutorial.html">Tutorial</a></li>
+            <li><a href="../../shop.html">Shop</a></li>
+        </ul>
+    </nav>
 
-  <header class="doc-header">
-    <div class="container">
-      <h1>Behavior Packs เบื้องต้น</h1>
-      <p style="text-align: center; color: #aaa;">เปลี่ยนพฤติกรรมของสิ่งมีชีวิตและกฎเกณฑ์ในโลก Minecraft</p>
-    </div>
-  </header>
+    <header class="doc-header">
+        <div class="container">
+            <h1>Behavior Packs เบื้องต้น</h1>
+            <p style="text-align: center; color: #aaa;">เปลี่ยนพฤติกรรมของสิ่งมีชีวิตและกฎเกณฑ์ในโลก Minecraft</p>
+        </div>
+    </header>
 
-  <article class="article-container">
+    <article class="article-container">
 
-    <p>
-      <strong>Behavior Pack</strong> คือชุดไฟล์ที่กำหนด "นิสัย" หรือ "พฤติกรรม" ของสิ่งต่างๆ ในเกม
-      เช่น ทำให้วัวโจมตีผู้เล่น, เปลี่ยนของที่ดรอปจากซอมบี้, หรือแม้แต่สร้างสูตรคราฟต์ของขึ้นมาใหม่
-    </p>
-    <img class="article-image" src="image/Screenshot Cow.png" alt="Screenshot Cow">
+        <p>
+            <strong>Behavior Pack</strong> คือชุดไฟล์ที่กำหนด "นิสัย" หรือ "พฤติกรรม" ของสิ่งต่างๆ ในเกม
+            เช่น ทำให้วัวโจมตีผู้เล่น, เปลี่ยนของที่ดรอปจากซอมบี้, หรือแม้แต่สร้างสูตรคราฟต์ของขึ้นมาใหม่
+        </p>
+        <img class="article-image" src="image/Screenshot Cow.png" alt="Screenshot Cow">
 
-    <h2>โครงสร้างไฟล์และโฟลเดอร์</h2>
-    <p>
-      เพื่อให้ Minecraft หาไฟล์ของคุณเจอ เราต้องสร้างโฟลเดอร์และไฟล์ตามโครงสร้างที่กำหนด
-      เริ่มจากเข้าไปที่โฟลเดอร์ <code>com.mojang</code> (ดูวิธีเข้าได้ที่หน้า <a
-        href="../getting_started/getting_started.html" style="color:#ff9500;">พื้นฐานการเริ่มต้น</a>)
-    </p>
-    <p>โครงสร้างไฟล์ของคุณควรจะเป็นแบบนี้:</p>
-    <img class="article-image" src="image/Navigate Behavior Packs.png" alt="Navigate Behavior Packs">
-    </div>
+        <h2>โครงสร้างไฟล์และโฟลเดอร์</h2>
+        <p>
+            เพื่อให้ Minecraft หาไฟล์ของคุณเจอ เราต้องสร้างโฟลเดอร์และไฟล์ตามโครงสร้างที่กำหนด
+            เริ่มจากเข้าไปที่โฟลเดอร์ <code>com.mojang</code> (ดูวิธีเข้าได้ที่หน้า <a
+                href="../getting_started/getting_started.html" style="color:#ff9500;">พื้นฐานการเริ่มต้น</a>)
+        </p>
+        <p>โครงสร้างไฟล์ของคุณควรจะเป็นแบบนี้:</p>
+        <img class="article-image" src="image/Navigate Behavior Packs.png" alt="Navigate Behavior Packs">
+        </div>
 
-    <h3>1. สร้างโฟลเดอร์ Pack</h3>
-    <p>สร้างโฟลเดอร์ใหม่ตั้งชื่อว่า <code>My_BEHAVIOR_Pack</code></p>
+        <h3>1. สร้างโฟลเดอร์ Pack</h3>
+        <p>สร้างโฟลเดอร์ใหม่ตั้งชื่อว่า <code>My_BEHAVIOR_Pack</code></p>
 
-    <h3>2. สร้างไฟล์ Manifest</h3>
-    <p>
-      สร้างไฟล์ <code>manifest.json</code> ในโฟลเดอร์นั้น แล้วใส่โค้ดด้านล่าง
-      (สังเกตว่าตรง type จะเป็น <code>data</code> แทน resources)
-    </p>
+        <h3>2. สร้างไฟล์ Manifest</h3>
+        <p>
+            สร้างไฟล์ <code>manifest.json</code> ในโฟลเดอร์นั้น แล้วใส่โค้ดด้านล่าง
+            (สังเกตว่าตรง type จะเป็น <code>data</code> แทน resources)
+        </p>
 
-    <div class="code-wrapper">
-      <pre><span class="token-punct">{</span>
+        <div class="code-wrapper">
+            <pre><span class="token-punct">{</span>
     <span class="token-key">"format_version"</span><span class="token-punct">:</span> <span class="token-number">2</span><span class="token-punct">,</span>
     <span class="token-key">"header"</span><span class="token-punct">:</span> <span class="token-punct">{</span>
         <span class="token-key">"description"</span><span class="token-punct">:</span> <span class="token-string">"My Angry Cow Add-On"</span><span class="token-punct">,</span>
@@ -72,26 +72,26 @@
         <span class="token-punct">}</span>
     <span class="token-punct">]</span>
 <span class="token-punct">}</span></pre>
-      <button class="copy-btn">คัดลอก</button>
-    </div>
+            <button class="copy-btn">คัดลอก</button>
+        </div>
 
-    <div style="background:#333; padding:15px; border-radius:5px; margin-top:10px;">
-      <p style="font-size: 0.9rem; margin:0;">อย่าลืมเปลี่ยน <code>&lt;UUID&gt;</code> ทั้ง 2 จุดด้วยรหัสจาก <a
-          href="https://www.uuidgenerator.net/" target="_blank" style="color:#4facfe;">uuidgenerator.net</a>
-        นะครับ</p>
-    </div>
+        <div style="background:#333; padding:15px; border-radius:5px; margin-top:10px;">
+            <p style="font-size: 0.9rem; margin:0;">อย่าลืมเปลี่ยน <code>&lt;UUID&gt;</code> ทั้ง 2 จุดด้วยรหัสจาก <a
+                    href="https://www.uuidgenerator.net/" target="_blank" style="color:#4facfe;">uuidgenerator.net</a>
+                นะครับ</p>
+        </div>
 
-    <h2>การสร้างวัวดุร้าย Angry Cow</h2>
-    <p>เราจะมาแก้ไขไฟล์ของวัว (Cow) ให้มันไล่ขวิดผู้เล่นกันครับ!</p>
+        <h2>การสร้างวัวดุร้าย Angry Cow</h2>
+        <p>เราจะมาแก้ไขไฟล์ของวัว (Cow) ให้มันไล่ขวิดผู้เล่นกันครับ!</p>
 
-    <ol>
-      <li>สร้างโฟลเดอร์ <code>entities</code> ในโฟลเดอร์ Pack ของคุณ</li>
-      <li>สร้างไฟล์ชื่อ <code>cow.json</code></li>
-      <li>คัดลอกโค้ดฉบับเต็มด้านล่างนี้ไปวาง</li>
-    </ol>
+        <ol>
+            <li>สร้างโฟลเดอร์ <code>entities</code> ในโฟลเดอร์ Pack ของคุณ</li>
+            <li>สร้างไฟล์ชื่อ <code>cow.json</code></li>
+            <li>คัดลอกโค้ดฉบับเต็มด้านล่างนี้ไปวาง</li>
+        </ol>
 
-    <div class="code-wrapper">
-      <pre><span class="token-punct">{</span>
+        <div class="code-wrapper">
+            <pre><span class="token-punct">{</span>
     <span class="token-key">"format_version"</span><span class="token-punct">:</span> <span class="token-string">"1.21.90"</span><span class="token-punct">,</span>
     <span class="token-key">"minecraft:entity"</span><span class="token-punct">:</span> <span class="token-punct">{</span>
         <span class="token-key">"description"</span><span class="token-punct">:</span> <span class="token-punct">{</span>
@@ -417,65 +417,66 @@
         <span class="token-punct">}</span>
     <span class="token-punct">}</span>
 <span class="token-punct">}</span></pre>
-      <button class="copy-btn">คัดลอก</button>
-    </div>
+            <button class="copy-btn">คัดลอก</button>
+        </div>
 
 
-    <h2>ทดสอบในเกม</h2>
-    <p>
-      เมื่อทำทุกอย่างครบแล้ว ให้เปิดเกม Minecraft ขึ้นมา:
-    </p>
-    <ul>
-      <li>กด <strong>Play</strong> > <strong>Create New World</strong></li>
-      <li>เลื่อนลงมาที่แท็บ <strong>Behavior Packs</strong> ทางซ้ายมือ</li>
-      <li>ในส่วน <strong>Available</strong> > <strong>Owned</strong> คุณจะเห็นชื่อ "My Behavior Pack"
-        ที่เราสร้างไว้</li>
-      <li>กด <strong>Activate</strong> แล้วสร้างโลกได้เลย!</li>
-    </ul>
-    <img class="article-image" src="image/Activate.png" alt="Activate">
+        <h2>ทดสอบในเกม</h2>
+        <p>
+            เมื่อทำทุกอย่างครบแล้ว ให้เปิดเกม Minecraft ขึ้นมา:
+        </p>
+        <ul>
+            <li>กด <strong>Play</strong> > <strong>Create New World</strong></li>
+            <li>เลื่อนลงมาที่แท็บ <strong>Behavior Packs</strong> ทางซ้ายมือ</li>
+            <li>ในส่วน <strong>Available</strong> > <strong>Owned</strong> คุณจะเห็นชื่อ "My Behavior Pack"
+                ที่เราสร้างไว้</li>
+            <li>กด <strong>Activate</strong> แล้วสร้างโลกได้เลย!</li>
+        </ul>
+        <img class="article-image" src="image/Activate.png" alt="Activate">
 
-    <p>
-      ถ้าทำสำเร็จ ระวังตัวให้ดี เพราะมันจะไม่ใช่วัวที่แสนเชื่องอีกต่อไป!
-    </p>
+        <p>
+            ถ้าทำสำเร็จ ระวังตัวให้ดี เพราะมันจะไม่ใช่วัวที่แสนเชื่องอีกต่อไป!
+        </p>
 
-    <div style="margin-top: 60px; padding-top: 20px; border-top: 1px solid #444;">
-      <h2>ปัญหาที่พบบ่อย</h2>
-      <p>เจอปัญหา Behavior pack ใช่ไหม? ไม่ต้องกังวล การแก้ไขปัญหาเป็นเรื่องปกติของการพัฒนาครับ
-        นี่คือจุดเริ่มต้นในการตรวจสอบ:</p>
-      <ul>
-        <li><strong>เช็ค Content Error Logs:</strong> ตรวจสอบ <strong>Content Error Logs</strong>
-          ในเกมเพื่อดูแจ้งเตือนข้อผิดพลาดที่อาจทำให้เกมไม่เสถียรหรือทำงานผิดปกติ</li>
-        <li><strong>ตรวจสอบโครงสร้างไฟล์:</strong> ดาวน์โหลด <a
-            href="https://github.com/Mojang/bedrock-samples/releases" target="_blank" style="color:#4facfe;">ตัวอย่าง
-            Behavior Pack</a> จาก GitHub
-          เพื่อนำมาเปรียบเทียบโครงสร้างไฟล์กับของคุณว่าถูกต้องหรือไม่</li>
-      </ul>
-    </div>
+        <div style="margin-top: 60px; padding-top: 20px; border-top: 1px solid #444;">
+            <h2>ปัญหาที่พบบ่อย</h2>
+            <p>เจอปัญหา Behavior pack ใช่ไหม? ไม่ต้องกังวล การแก้ไขปัญหาเป็นเรื่องปกติของการพัฒนาครับ
+                นี่คือจุดเริ่มต้นในการตรวจสอบ:</p>
+            <ul>
+                <li><strong>เช็ค Content Error Logs:</strong> ตรวจสอบ <strong>Content Error Logs</strong>
+                    ในเกมเพื่อดูแจ้งเตือนข้อผิดพลาดที่อาจทำให้เกมไม่เสถียรหรือทำงานผิดปกติ</li>
+                <li><strong>ตรวจสอบโครงสร้างไฟล์:</strong> ดาวน์โหลด <a
+                        href="https://github.com/Mojang/bedrock-samples/releases" target="_blank"
+                        style="color:#4facfe;">ตัวอย่าง
+                        Behavior Pack</a> จาก GitHub
+                    เพื่อนำมาเปรียบเทียบโครงสร้างไฟล์กับของคุณว่าถูกต้องหรือไม่</li>
+            </ul>
+        </div>
 
-  </article>
+    </article>
 
-  <footer>
-    <h2>ช่องทางติดต่อ</h2>
-    <div class="social-container">
-      <a class="social-icons" href="https://www.facebook.com/FPGTVMC/">
-        <img src="../../image/facebook-svgrepo-com.png" alt="Facebook">
-      </a>
-      <a class="social-icons" href="https://www.youtube.com/@MCFirsting">
-        <img src="../../image/youtube-fill-svgrepo-com.png" alt="YouTube">
-      </a>
-      <a class="social-icons" href="https://discord.gg/tnqZCfz4wz">
-        <img src="../../image/discord-svgrepo-com.png" alt="Discord">
-      </a>
-      <a class="social-icons" href="https://github.com/MCFirsting">
-        <img src="../../image/github-svgrepo-com.png" alt="GitHub">
-      </a>
-      <a class="social-icons" href="https://www.tiktok.com/@mc_firsting">
-        <img src="../../image/tiktok-svgrepo-com.png" alt="TikTok">
-      </a>
-    </div>
-  </footer>
+    <footer>
+        <h2>ช่องทางติดต่อ</h2>
+        <div class="social-container">
+            <a class="social-icons" href="https://www.facebook.com/AddonInsiderTH">
+                <img src="../../image/facebook-svgrepo-com.png" alt="Facebook">
+            </a>
+            <a class="social-icons" href="https://www.youtube.com/@MCFirsting">
+                <img src="../../image/youtube-fill-svgrepo-com.png" alt="YouTube">
+            </a>
+            <a class="social-icons" href="https://discord.gg/tnqZCfz4wz">
+                <img src="../../image/discord-svgrepo-com.png" alt="Discord">
+            </a>
+            <a class="social-icons" href="https://github.com/MCFirsting">
+                <img src="../../image/github-svgrepo-com.png" alt="GitHub">
+            </a>
+            <a class="social-icons" href="https://www.tiktok.com/@mc_firsting">
+                <img src="../../image/tiktok-svgrepo-com.png" alt="TikTok">
+            </a>
+        </div>
+    </footer>
 
-  <script src="../getting_started/getting_started.js"></script>
+    <script src="../getting_started/getting_started.js"></script>
 </body>
 
 </html>

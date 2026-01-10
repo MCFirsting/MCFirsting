@@ -390,19 +390,21 @@
 
             <h3>3. ตัวควบคุมอนิเมชัน Animation Controllers</h3>
             <p>
-                Animation Controllers ทำงานโดยใช้ระบบ <strong>States (สถานะ)</strong> ตัวควบคุมหนึ่งตัวสามารถมีกี่สถานะก็ได้ไม่จำกัด
+                Animation Controllers ทำงานโดยใช้ระบบ <strong>States (สถานะ)</strong>
+                ตัวควบคุมหนึ่งตัวสามารถมีกี่สถานะก็ได้ไม่จำกัด
                 แต่จะมีเพียงสถานะเดียวเท่านั้นที่ทำงาน (Active) ในเวลาเดียวกัน ตัวควบคุมสามารถเปลี่ยนสถานะ (Transition)
                 ไปยังสถานะอื่นได้ผ่านนิพจน์ Molang
                 แต่ละสถานะสามารถสั่งเล่นอนิเมชัน เสียง และเอฟเฟกต์อนุภาค (Particle effects) ที่แตกต่างกันได้
             </p>
-            
-            
-            
+
+
+
             <p>
-                ทุกครั้งที่ Entity ถูกโหลดโดยฝั่ง Client (เช่น ตอนผู้เล่นเข้าโลก) Animation Controller จะเริ่มทำงานที่สถานะเริ่มต้น
+                ทุกครั้งที่ Entity ถูกโหลดโดยฝั่ง Client (เช่น ตอนผู้เล่นเข้าโลก) Animation Controller
+                จะเริ่มทำงานที่สถานะเริ่มต้น
                 ซึ่งโดยปกติจะชื่อว่า <code>default</code>
             </p>
-            
+
             <h4>ขั้นตอนที่ 1: สร้างไฟล์ Controller</h4>
             <p>
                 ให้สร้างโฟลเดอร์ใหม่ชื่อ <code>animation_controllers</code> ใน Resource Pack จากนั้นสร้างไฟล์ชื่อ
@@ -417,10 +419,11 @@
             <span class="token-punct">}</span></pre>
                 <button class="copy-btn">คัดลอก</button>
             </div>
-            
+
             <h4>ขั้นตอนที่ 2: กำหนดสถานะเริ่มต้น (Default State)</h4>
             <p>
-                เราต้องสร้างสถานะเริ่มต้นที่ชื่อว่า <code>default</code> สถานะนี้มีหน้าที่เดียวคือ "รอจังหวะ" เพื่อเปลี่ยนไปสถานะ
+                เราต้องสร้างสถานะเริ่มต้นที่ชื่อว่า <code>default</code> สถานะนี้มีหน้าที่เดียวคือ "รอจังหวะ"
+                เพื่อเปลี่ยนไปสถานะ
                 <code>swaying</code> (โยกตัว)
                 เมื่อ Entity ไม่ได้อยู่บนพื้นดินแล้ว เราจะใช้ <strong>Transition</strong> ซึ่งจะทำงานทันทีที่ค่า
                 <code>query.is_on_ground</code> ไม่เป็นจริง (<code>!query.is_on_ground</code>)
@@ -442,11 +445,13 @@
             <span class="token-punct">}</span></pre>
                 <button class="copy-btn">คัดลอก</button>
             </div>
-            
+
             <h4>ขั้นตอนที่ 3: กำหนดสถานะโยกตัว (Swaying State)</h4>
             <p>
-                ต่อไปเราจะเพิ่มสถานะ <code>swaying</code> สถานะนี้จะเล่นอนิเมชันโยกตัว และหลังจากนั้นจะรีเซ็ตกลับไปสถานะ default
-                เราสามารถใช้ <code>query.all_animations_finished</code> เพื่อให้เปลี่ยนสถานะกลับก็ต่อเมื่ออนิเมชันเล่นจบแล้วเท่านั้น
+                ต่อไปเราจะเพิ่มสถานะ <code>swaying</code> สถานะนี้จะเล่นอนิเมชันโยกตัว และหลังจากนั้นจะรีเซ็ตกลับไปสถานะ
+                default
+                เราสามารถใช้ <code>query.all_animations_finished</code>
+                เพื่อให้เปลี่ยนสถานะกลับก็ต่อเมื่ออนิเมชันเล่นจบแล้วเท่านั้น
                 และเราต้องเช็คด้วยว่า Entity กลับมาอยู่บนพื้นแล้วหรือยัง
             </p>
             <div class="code-wrapper">
@@ -474,10 +479,11 @@
             <span class="token-punct">}</span></pre>
                 <button class="copy-btn">คัดลอก</button>
             </div>
-            
+
             <h4>ขั้นตอนที่ 4: เชื่อมต่อใน Client Entity</h4>
             <p>
-                ตอนนี้เราต้องเชื่อมโยง Animation Controller เข้ากับ Entity ของเรา วิธีการเหมือนกับการเชื่อมไฟล์ Animation
+                ตอนนี้เราต้องเชื่อมโยง Animation Controller เข้ากับ Entity ของเรา วิธีการเหมือนกับการเชื่อมไฟล์
+                Animation
                 ปกติเลยครับ
                 คือใส่ในส่วน <code>animations</code> และสั่งเล่นใน <code>scripts</code> ของไฟล์ Client Entity
                 (<code>robot.entity.json</code>)
@@ -496,7 +502,7 @@
               <span class="token-punct">}</span></pre>
                 <button class="copy-btn">คัดลอก</button>
             </div>
-            
+
             <h3>การปรับแต่งให้ลื่นไหล Smooth Transitions</h3>
             <p>
                 ถ้าทดสอบในเกมตอนนี้ อนิเมชันจะเล่นได้หลายรอบแล้ว แต่ถ้าหุ่นยนต์เท้าลอยจากพื้น 2 ครั้งติดกันเร็วๆ
@@ -504,7 +510,8 @@
                 เพราะอนิเมชันรอบแรกยังไม่จบ Controller เลยยังไม่รีเซ็ตกลับไปสถานะ Default
             </p>
             <p>
-                เราจะแก้ปัญหานี้โดยการเอาเงื่อนไข <code>all_animations_finished</code> ออก เพื่อให้มันออกจากสถานะ swaying
+                เราจะแก้ปัญหานี้โดยการเอาเงื่อนไข <code>all_animations_finished</code> ออก เพื่อให้มันออกจากสถานะ
+                swaying
                 ทันทีที่เท้าแตะพื้น
                 แต่ถ้าทำแบบนี้อนิเมชันจะตัดจบแบบกระตุก
             </p>
@@ -546,7 +553,7 @@
     <footer>
         <h2>ช่องทางติดต่อ</h2>
         <div class="social-container">
-            <a class="social-icons" href="https://www.facebook.com/FPGTVMC/">
+            <a class="social-icons" href="https://www.facebook.com/AddonInsiderTH">
                 <img src="../../image/facebook-svgrepo-com.png" alt="Facebook">
             </a>
             <a class="social-icons" href="https://www.youtube.com/@MCFirsting">
