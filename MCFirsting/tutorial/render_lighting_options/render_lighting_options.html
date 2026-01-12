@@ -1,0 +1,405 @@
+<!DOCTYPE html>
+<html lang="th">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Render & Lighting Options</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+    <nav class="navbar">
+        <div class="logo">
+            <a href="../../index.html"><img id="logo_mcfirsting" src="../../image/mcfirsting_logo.png" alt="Logo"></a>
+        </div>
+        <ul class="nav-links">
+            <li><a href="../../tutorial.html">Tutorial</a></li>
+            <li><a href="../../shop.html">Shop</a></li>
+        </ul>
+    </nav>
+
+    <header class="doc-header">
+        <div class="container">
+            <h1>ตัวเลือกการแสดงผลและแสงเงา Render & Lighting Options</h1>
+            <p style="text-align: center; color: #aaa;">เจาะลึก Material Instances เพื่อสร้างกระจกใส แสงสว่าง
+                และเอฟเฟกต์สุดล้ำ</p>
+        </div>
+    </header>
+
+    <article class="article-container">
+
+        <p>
+            เอาล่ะครับ! ตอนนี้เราทำบล็อกที่มีรูปร่าง (Shape) แตกต่างกันได้แล้ว ซึ่งมันเจ๋งสุดๆ ไปเลย!
+            แต่ถ้าเราอยากได้ลูกเล่นที่เจ๋งกว่านี้ล่ะ? เคยสงสัยไหมครับว่า "บล็อกกระจกสี" (Stained glass block)
+            มันทำงานยังไงกันแน่?
+        </p>
+        <p>
+            ในบทเรียนนี้ เราจะมาสำรวจเอฟเฟกต์สนุกๆ โดยใช้ <strong>ตัวเลือกการแสดงผล (Render Options)</strong>
+            ที่มีอยู่ในคอมโพเนนต์ <code>material_instances</code> กันครับ
+        </p>
+        <img class="article-image" src="image/Screenshot Bubble Fish.png" alt="Screenshot Bubble Fish">
+
+
+
+
+        <div
+            style="background-color: #2b2b2b; padding: 15px; border-radius: 8px; border-left: 4px solid #ff9500; margin: 20px 0;">
+            <h4 style="margin-top: 0; color: #ff9500;">สิ่งที่ต้องเตรียมตัวก่อนเริ่ม</h4>
+            <p>ขอแนะนำให้คุณเรียนรู้และทำบทเรียนเหล่านี้ให้เสร็จก่อนที่จะเริ่มบทนี้นะครับ:</p>
+            <ul>
+                <li><a href="/tutorial/custom_blocks/custom_blocks.html" style="color: #a5d6ff;">การสร้าง Custom
+                        Block</a></li>
+                <li><a href="/tutorial/advanced_custom_blocks/advanced_custom_blocks.html"
+                        style="color: #a5d6ff;">การสร้างบล็อกขั้นสูง (Advanced Custom Blocks)</a></li>
+            </ul>
+        </div>
+        <p>
+            ในบทเรียนนี้ เราจะเน้นทำความเข้าใจว่า <strong>วิธีการแสดงผล (Render Methods)</strong> แบบต่างๆ ในคอมโพเนนต์
+            <code>material_instances</code> ส่งผลต่อการแสดงผลบล็อกของเราอย่างไร
+        </p>
+        <p>
+            เพื่อให้เห็นภาพชัดเจน เราจะใช้ <strong>บล็อกปลาในฟองอากาศ (Bubble Fish)</strong>
+            ที่แสดงอยู่ด้านล่างนี้เป็นตัวอย่างครับ
+            เพราะบล็อกนี้มีประเภทของพิกเซลที่หลากหลาย ซึ่งจะแสดงผลแตกต่างกันไปตาม Render Method ที่เราเลือกใช้
+        </p>
+
+        <p>
+            เจ้าปลาในฟองอากาศนี้เกิดจากการประกอบกันของชิ้นส่วนหลายชิ้น:
+        </p>
+        <ul>
+            <li><strong>ฟองอากาศ:</strong> คือบล็อกขนาด 16x16x16 (เต็มบล็อกพอดี)</li>
+            <li><strong>ตัวปลาข้างใน:</strong> เป็นบล็อกขนาด 3x4x5</li>
+            <li><strong>หางปลา:</strong> เกิดจากบล็อกเล็กๆ ขนาด 1x1x1 จำนวน 5 ชิ้นต่อกัน</li>
+        </ul>
+        <p>
+            รูปทรง (Geometry) ทั้งหมดถูกจัดวางบน UV Map เรียบร้อยแล้ว เพื่อให้แสดงผลในเกมได้อย่างถูกต้องตามที่เราต้องการ
+        </p>
+
+        <h3>เรื่องของสีและความโปร่งใส</h3>
+        <p>
+            Texture ของฟองอากาศถูกสร้างขึ้น (ในตัวอย่างใช้โปรแกรม Paint3D) เพื่อให้มีพิกเซลครบทั้ง 3 ประเภท ได้แก่:
+        </p>
+        <ul>
+            <li><strong>ทึบแสง (Opaque):</strong> มองไม่ทะลุเลย (เช่น ตัวปลา)</li>
+            <li><strong>โปร่งแสง (Translucent):</strong> มองทะลุได้ลางๆ เหมือนกระจกฝ้า (เช่น ผิวฟองอากาศ)</li>
+            <li><strong>โปร่งใส (Transparent):</strong> มองทะลุได้ 100% (ส่วนว่างรอบๆ)</li>
+        </ul>
+
+        <div
+            style="background-color: #2b2b2b; padding: 15px; border-radius: 8px; border-left: 4px solid #4facfe; margin: 20px 0;">
+            <p style="margin: 0;">
+                คุณสามารถสร้างบล็อกโปร่งใสในแบบของคุณเองได้
+                หรือจะเข้าไปดาวน์โหลดไฟล์ตัวอย่างและดูข้อมูลเพิ่มเติมได้ที่หน้า
+                <a href="https://github.com/microsoft/minecraft-samples" target="_blank"
+                    style="color: #a5d6ff;">minecraft-samples</a> ครับ
+            </p>
+        </div>
+
+        <h3>การตั้งค่า Resource Pack</h3>
+        <p>
+            นี่ไม่ใช่ครั้งแรกที่เราสร้าง Custom Blocks กัน ดังนั้นคราวนี้เราจะไปกันแบบรวบรัดนะครับ
+            หากคุณงงตรงไหน สามารถย้อนกลับไปดูบทเรียน <a href="../custom_blocks/custom_blocks.html"
+                style="color:#ff9500;">Custom Block</a> ก่อนหน้านี้ได้เลยครับ
+        </p>
+
+        <ol>
+            <li>
+                <strong>ส่งออกไฟล์ (Export):</strong> ส่งออกไฟล์ Geometry จาก Blockbench เหมือนกับที่เราทำกับบล็อกซูชิ
+            </li>
+            <li>
+                <strong>จัดเก็บไฟล์:</strong> นำไฟล์ Geometry ที่ได้ ไปใส่ในโฟลเดอร์
+                <code>custom_block_resource_pack<br>/models/blocks</code>
+                (หรือใช้โค้ด JSON ด้านล่างนี้)
+            </li>
+        </ol>
+
+        <div class="code-wrapper">
+            <pre><span class="token-punct">{</span>
+          <span class="token-key">"format_version"</span><span class="token-punct">:</span> <span class="token-string">"1.12.0"</span><span class="token-punct">,</span>
+          <span class="token-key">"minecraft:geometry"</span><span class="token-punct">:</span> <span class="token-punct">[</span>
+            <span class="token-punct">{</span>
+              <span class="token-key">"description"</span><span class="token-punct">:</span> <span class="token-punct">{</span>
+                <span class="token-key">"identifier"</span><span class="token-punct">:</span> <span class="token-string">"geometry.bubble_fish"</span><span class="token-punct">,</span>
+                <span class="token-key">"texture_width"</span><span class="token-punct">:</span> <span class="token-number">64</span><span class="token-punct">,</span>
+                <span class="token-key">"texture_height"</span><span class="token-punct">:</span> <span class="token-number">64</span><span class="token-punct">,</span>
+                <span class="token-key">"visible_bounds_width"</span><span class="token-punct">:</span> <span class="token-number">2</span><span class="token-punct">,</span>
+                <span class="token-key">"visible_bounds_height"</span><span class="token-punct">:</span> <span class="token-number">2.5</span><span class="token-punct">,</span>
+                <span class="token-key">"visible_bounds_offset"</span><span class="token-punct">:</span> <span class="token-punct">[</span><span class="token-number">0</span><span class="token-punct">,</span> <span class="token-number">0.75</span><span class="token-punct">,</span> <span class="token-number">0</span><span class="token-punct">]</span>
+              <span class="token-punct">}</span><span class="token-punct">,</span>
+              <span class="token-key">"bones"</span><span class="token-punct">:</span> <span class="token-punct">[</span>
+                <span class="token-punct">{</span>
+                  <span class="token-key">"name"</span><span class="token-punct">:</span> <span class="token-string">"bb_main"</span><span class="token-punct">,</span>
+                  <span class="token-key">"pivot"</span><span class="token-punct">:</span> <span class="token-punct">[</span><span class="token-number">0</span><span class="token-punct">,</span> <span class="token-number">0</span><span class="token-punct">,</span> <span class="token-number">0</span><span class="token-punct">]</span><span class="token-punct">,</span>
+                  <span class="token-key">"cubes"</span><span class="token-punct">:</span> <span class="token-punct">[</span>
+                    <span class="token-punct">{</span> <span class="token-key">"origin"</span><span class="token-punct">:</span> <span class="token-punct">[</span><span class="token-number">-8</span><span class="token-punct">,</span> <span class="token-number">0</span><span class="token-punct">,</span> <span class="token-number">-8</span><span class="token-punct">]</span><span class="token-punct">,</span> <span class="token-key">"size"</span><span class="token-punct">:</span> <span class="token-punct">[</span><span class="token-number">16</span><span class="token-punct">,</span> <span class="token-number">16</span><span class="token-punct">,</span> <span class="token-number">16</span><span class="token-punct">]</span><span class="token-punct">,</span> <span class="token-key">"uv"</span><span class="token-punct">:</span> <span class="token-punct">[</span><span class="token-number">0</span><span class="token-punct">,</span> <span class="token-number">0</span><span class="token-punct">]</span> <span class="token-punct">}</span>
+                  <span class="token-punct">]</span>
+                <span class="token-punct">}</span><span class="token-punct">,</span>
+                <span class="token-punct">{</span>
+                  <span class="token-key">"name"</span><span class="token-punct">:</span> <span class="token-string">"fish"</span><span class="token-punct">,</span>
+                  <span class="token-key">"pivot"</span><span class="token-punct">:</span> <span class="token-punct">[</span><span class="token-number">0</span><span class="token-punct">,</span> <span class="token-number">-14</span><span class="token-punct">,</span> <span class="token-number">0</span><span class="token-punct">]</span><span class="token-punct">,</span>
+                  <span class="token-key">"cubes"</span><span class="token-punct">:</span> <span class="token-punct">[</span>
+                    <span class="token-punct">{</span> <span class="token-key">"origin"</span><span class="token-punct">:</span> <span class="token-punct">[</span><span class="token-number">-4</span><span class="token-punct">,</span> <span class="token-number">6</span><span class="token-punct">,</span> <span class="token-number">-1</span><span class="token-punct">]</span><span class="token-punct">,</span> <span class="token-key">"size"</span><span class="token-punct">:</span> <span class="token-punct">[</span><span class="token-number">5</span><span class="token-punct">,</span> <span class="token-number">4</span><span class="token-punct">,</span> <span class="token-number">3</span><span class="token-punct">]</span><span class="token-punct">,</span> <span class="token-key">"uv"</span><span class="token-punct">:</span> <span class="token-punct">[</span><span class="token-number">0</span><span class="token-punct">,</span> <span class="token-number">34</span><span class="token-punct">]</span> <span class="token-punct">}</span><span class="token-punct">,</span>
+                    <span class="token-punct">{</span> <span class="token-key">"origin"</span><span class="token-punct">:</span> <span class="token-punct">[</span><span class="token-number">1</span><span class="token-punct">,</span> <span class="token-number">7</span><span class="token-punct">,</span> <span class="token-number">0</span><span class="token-punct">]</span><span class="token-punct">,</span> <span class="token-key">"size"</span><span class="token-punct">:</span> <span class="token-punct">[</span><span class="token-number">1</span><span class="token-punct">,</span> <span class="token-number">1</span><span class="token-punct">,</span> <span class="token-number">1</span><span class="token-punct">]</span><span class="token-punct">,</span> <span class="token-key">"uv"</span><span class="token-punct">:</span> <span class="token-punct">[</span><span class="token-number">0</span><span class="token-punct">,</span> <span class="token-number">41</span><span class="token-punct">]</span> <span class="token-punct">}</span><span class="token-punct">,</span>
+                    <span class="token-punct">{</span> <span class="token-key">"origin"</span><span class="token-punct">:</span> <span class="token-punct">[</span><span class="token-number">2</span><span class="token-punct">,</span> <span class="token-number">8</span><span class="token-punct">,</span> <span class="token-number">0</span><span class="token-punct">]</span><span class="token-punct">,</span> <span class="token-key">"size"</span><span class="token-punct">:</span> <span class="token-punct">[</span><span class="token-number">1</span><span class="token-punct">,</span> <span class="token-number">1</span><span class="token-punct">,</span> <span class="token-number">1</span><span class="token-punct">]</span><span class="token-punct">,</span> <span class="token-key">"uv"</span><span class="token-punct">:</span> <span class="token-punct">[</span><span class="token-number">0</span><span class="token-punct">,</span> <span class="token-number">41</span><span class="token-punct">]</span> <span class="token-punct">}</span><span class="token-punct">,</span>
+                    <span class="token-punct">{</span> <span class="token-key">"origin"</span><span class="token-punct">:</span> <span class="token-punct">[</span><span class="token-number">3</span><span class="token-punct">,</span> <span class="token-number">9</span><span class="token-punct">,</span> <span class="token-number">0</span><span class="token-punct">]</span><span class="token-punct">,</span> <span class="token-key">"size"</span><span class="token-punct">:</span> <span class="token-punct">[</span><span class="token-number">1</span><span class="token-punct">,</span> <span class="token-number">1</span><span class="token-punct">,</span> <span class="token-number">1</span><span class="token-punct">]</span><span class="token-punct">,</span> <span class="token-key">"uv"</span><span class="token-punct">:</span> <span class="token-punct">[</span><span class="token-number">0</span><span class="token-punct">,</span> <span class="token-number">41</span><span class="token-punct">]</span> <span class="token-punct">}</span><span class="token-punct">,</span>
+                    <span class="token-punct">{</span> <span class="token-key">"origin"</span><span class="token-punct">:</span> <span class="token-punct">[</span><span class="token-number">3</span><span class="token-punct">,</span> <span class="token-number">5</span><span class="token-punct">,</span> <span class="token-number">0</span><span class="token-punct">]</span><span class="token-punct">,</span> <span class="token-key">"size"</span><span class="token-punct">:</span> <span class="token-punct">[</span><span class="token-number">1</span><span class="token-punct">,</span> <span class="token-number">1</span><span class="token-punct">,</span> <span class="token-number">1</span><span class="token-punct">]</span><span class="token-punct">,</span> <span class="token-key">"uv"</span><span class="token-punct">:</span> <span class="token-punct">[</span><span class="token-number">0</span><span class="token-punct">,</span> <span class="token-number">41</span><span class="token-punct">]</span> <span class="token-punct">}</span><span class="token-punct">,</span>
+                    <span class="token-punct">{</span> <span class="token-key">"origin"</span><span class="token-punct">:</span> <span class="token-punct">[</span><span class="token-number">2</span><span class="token-punct">,</span> <span class="token-number">6</span><span class="token-punct">,</span> <span class="token-number">0</span><span class="token-punct">]</span><span class="token-punct">,</span> <span class="token-key">"size"</span><span class="token-punct">:</span> <span class="token-punct">[</span><span class="token-number">1</span><span class="token-punct">,</span> <span class="token-number">1</span><span class="token-punct">,</span> <span class="token-number">1</span><span class="token-punct">]</span><span class="token-punct">,</span> <span class="token-key">"uv"</span><span class="token-punct">:</span> <span class="token-punct">[</span><span class="token-number">0</span><span class="token-punct">,</span> <span class="token-number">41</span><span class="token-punct">]</span> <span class="token-punct">}</span>
+                  <span class="token-punct">]</span>
+                <span class="token-punct">}</span>
+              <span class="token-punct">]</span>
+            <span class="token-punct">}</span>
+          <span class="token-punct">]</span>
+        <span class="token-punct">}</span></pre>
+            <button class="copy-btn">คัดลอก</button>
+        </div>
+
+        <ol start="3">
+            <li>
+                <strong>ใส่รูปภาพ (Texture):</strong> นำไฟล์ Texture ของปลาในฟองน้ำไปใส่ไว้ในโฟลเดอร์<br>
+                <code>custom_block_resource_pack/<br>textures/blocks</code>
+                <img class="article-image"
+                    src="https://learn.microsoft.com/en-us/minecraft/creator/documents/media/renderandlighting/ral2.png?view=minecraft-bedrock-stable">
+
+            </li>
+            <li>
+                <strong>ตั้งค่า Texture Map:</strong> ไปที่ <code>custom_block_resource_pack/<br>/textures</code>
+                แล้วแก้ไขไฟล์
+                <code>terrain_texture.json</code> เพื่อเพิ่มชื่ออ้างอิง
+            </li>
+            <li>
+                <strong>ตั้งชื่อบล็อก (Lang):</strong> ไปที่
+                <code>custom_block_resource_pack/<br>/texts/en_US.lang</code>
+                แล้วเพิ่มชื่อภาษาอังกฤษให้บล็อกใหม่ของเรา
+            </li>
+            <li>
+                <strong>เพิ่มเสียง (Optional):</strong> คุณสามารถเพิ่มข้อมูลใน <code>blocks.json</code>
+                เพื่อใส่เสียงได้
+                (แต่เนื่องจากเราใช้ Custom Geometry ข้อมูลอื่นๆ ในไฟล์นี้จะไม่ถูกนำไปใช้ ดังนั้นขั้นตอนนี้
+                <strong>ไม่บังคับ</strong> ครับ สำหรับบล็อกนี้เราจะข้ามไป)
+            </li>
+        </ol>
+
+        <h2>การตั้งค่า Behavior Pack</h2>
+
+        <h3>สร้างไฟล์ JSON สำหรับบล็อก</h3>
+        <p>
+            ได้เวลาสร้างไฟล์ Behavior Pack กันแล้วครับ ให้สร้างไฟล์ <code>bubble_fish.json</code> ในโฟลเดอร์
+            <code>blocks</code>
+            และใส่โค้ดพื้นฐานดังนี้:
+        </p>
+
+        <div class="code-wrapper">
+            <pre><span class="token-punct">{</span>
+          <span class="token-key">"format_version"</span><span class="token-punct">:</span> <span class="token-string">"1.19.40"</span><span class="token-punct">,</span>
+          <span class="token-key">"minecraft:block"</span><span class="token-punct">:</span> <span class="token-punct">{</span>
+            <span class="token-key">"description"</span><span class="token-punct">:</span> <span class="token-punct">{</span>
+              <span class="token-key">"identifier"</span><span class="token-punct">:</span> <span class="token-string">"demo:bubble_fish"</span>
+            <span class="token-punct">}</span><span class="token-punct">,</span>
+            <span class="token-key">"components"</span><span class="token-punct">:</span> <span class="token-punct">{</span>
+              <span class="token-key">"minecraft:geometry"</span><span class="token-punct">:</span> <span class="token-string">"geometry.bubble_fish"</span><span class="token-punct">,</span>
+              <span class="token-key">"minecraft:material_instances"</span><span class="token-punct">:</span> <span class="token-punct">{</span>
+                <span class="token-key">"*"</span><span class="token-punct">:</span> <span class="token-punct">{</span>
+                  <span class="token-key">"texture"</span><span class="token-punct">:</span> <span class="token-string">"bubble_fish"</span>
+                <span class="token-punct">}</span>
+              <span class="token-punct">}</span>
+            <span class="token-punct">}</span>
+          <span class="token-punct">}</span>
+        <span class="token-punct">}</span></pre>
+            <button class="copy-btn">คัดลอก</button>
+        </div>
+
+        <p>
+            เช่นเคยครับ เรากำหนด Identifier, อ้างอิง Geometry, และระบุ Texture ในกรณีนี้เราจะใช้
+            <code>bubble_fish</code>
+            กับทุกด้าน (<code>*</code>) เลยครับ
+        </p>
+
+        <h2>วิธีการแสดงผล Render Methods</h2>
+        <p>
+            มาถึงของดีกันแล้ว! เราจะมาสำรวจพารามิเตอร์ <strong><code>render_method</code></strong> ที่อยู่ใน
+            <code>material_instances</code> กันครับ ค่าเริ่มต้นของมันคือ <strong>Opaque</strong> (ทึบแสง)
+            มาดูกันว่าถ้าเราเปลี่ยนค่าเป็นแบบต่างๆ ผลลัพธ์ที่ได้กับเจ้าปลาในฟองอากาศจะเป็นอย่างไร
+        </p>
+
+        <h3>1. แบบทึบแสง Opaque</h3>
+        <p>
+            นี่คือค่าพื้นฐานครับ
+        </p>
+        <div class="code-wrapper">
+            <pre>  <span class="token-key">"minecraft:material_instances"</span><span class="token-punct">:</span> <span class="token-punct">{</span>
+             <span class="token-key">"*"</span><span class="token-punct">:</span> <span class="token-punct">{</span>
+              <span class="token-key">"texture"</span><span class="token-punct">:</span> <span class="token-string">"bubble_fish"</span><span class="token-punct">,</span>
+              <span class="token-key">"render_method"</span><span class="token-punct">:</span> <span class="token-string">"opaque"</span>
+             <span class="token-punct">}</span>
+          <span class="token-punct">}</span></pre>
+            <button class="copy-btn">คัดลอก</button>
+        </div>
+
+        <img class="article-image" src="/tutorial/render_lighting_options/image/Screenshot Opaque.png" width="300">
+
+        <p>
+            <strong>ผลลัพธ์:</strong> อย่างที่คุณเห็น ความโปร่งใส (Transparency) และความโปร่งแสง (Translucency)
+            จะไม่แสดงผลเลย
+            สีเหล่านั้นจะถูกแสดงเป็น "สีทึบที่ใกล้เคียงที่สุด" แทน (กลายเป็นก้อนสีดำๆ ทึบๆ)
+        </p>
+
+        <h3>2. แบบสองด้าน Double-Sided</h3>
+        <div class="code-wrapper">
+            <pre>  <span class="token-key">"render_method"</span><span class="token-punct">:</span> <span class="token-string">"double_sided"</span></pre>
+            <button class="copy-btn">คัดลอก</button>
+        </div>
+        <p>
+            ตัวเลือกนี้จะปิดการทำงานของ <strong>Backface Culling</strong>
+        </p>
+        <div
+            style="background-color: #2b2b2b; padding: 15px; border-radius: 8px; border-left: 4px solid #f0ad4e; margin: 10px 0;">
+            <p style="margin: 0;">
+                <strong>เกร็ดความรู้:</strong> 'Backface culling' คือเทคนิคการเรนเดอร์เพื่อประหยัดทรัพยากรเครื่อง
+                โดยเกมจะไม่แสดงผลผิวของบล็อกด้านที่คุณมองไม่เห็น (เช่น ผิวด้านในของบล็อกทึบ)
+            </p>
+        </div>
+        <p>
+            ปกติแล้ว <code>opaque</code> จะเปิดใช้ Backface culling เป็นค่าเริ่มต้น
+            แต่ถ้าคุณต้องการให้แสดงผลผิวด้านหลังด้วย
+            (หรือทำให้บล็อกมี "สองด้าน") ให้ใช้ <code>double_sided</code> ครับ
+        </p>
+        <img class="article-image" src="/tutorial/render_lighting_options/image/Screenshot Double Sided.png" width="300">
+        <p>
+            <strong>ผลลัพธ์:</strong> ถ้ามองจากภายนอก <code>opaque</code> กับ <code>double_sided</code>
+            จะดูเหมือนกันเป๊ะ
+            แต่ความต่างคือถ้าคุณ "เอาหัวมุดเข้าไปในบล็อก" แบบ Opaque คุณจะมองไม่เห็นผิวด้านใน แต่แบบ Double-Sided
+            คุณจะมองเห็นผนังด้านในครับ
+        </p>
+
+        <h3>3. แบบ Alpha Test (alpha_test)</h3>
+        <div class="code-wrapper">
+            <pre>  <span class="token-key">"render_method"</span><span class="token-punct">:</span> <span class="token-string">"alpha_test"</span></pre>
+            <button class="copy-btn">คัดลอก</button>
+        </div>
+
+        <img class="article-image" src="/tutorial/render_lighting_options/image/Screenshot Alpha Test.png" width="300">
+
+        <p>
+            <strong>ผลลัพธ์:</strong> แบบนี้จะไม่รองรับความ "กึ่งใส" (Translucency) ทำให้พิกเซลที่เป็นสีฟ้าจางๆ
+            ของเราหายไป
+            แต่จะรองรับความ "โปร่งใส" (Transparent) และ "ทึบ" (Opaque) นอกจากนี้ยัง <strong>ปิด Backface
+                culling</strong> ด้วย
+            ทำให้เราสามารถมองทะลุส่วนที่ใสเข้าไปเห็นผนังด้านหลังของฟองอากาศได้... อย่างน้อยตอนนี้เราก็เห็นตัวปลาแล้ว!
+        </p>
+
+        <h3>4. แบบ Alpha Test หน้าเดียว (alpha_test_single_sided)</h3>
+        <div class="code-wrapper">
+            <pre>  <span class="token-key">"render_method"</span><span class="token-punct">:</span> <span class="token-string">"alpha_test_single_sided"</span></pre>
+            <button class="copy-btn">คัดลอก</button>
+        </div>
+        <p>
+            วิธีนี้คล้ายกับ Alpha Test ปกติ คือไม่รองรับความกึ่งใส (Translucency) แต่รองรับความใส (Transparent)
+            สิ่งที่ต่างกันคือ <strong>มันเปิดใช้ Backface culling</strong>
+        </p>
+        <img class="article-image" src="/tutorial/render_lighting_options/image/Screenshot Alpha Test Single Sided.png" width="300">
+        <p>
+            <strong>ผลลัพธ์:</strong> คุณจะมองทะลุได้ แต่จะไม่เห็นผนังด้านหลังของฟองอากาศ
+            เหมือนกับบล็อกกระจกปกติในเกมนั่นเองครับ
+        </p>
+
+        <h3>5. แบบผสมผสาน Blend</h3>
+        <div class="code-wrapper">
+            <pre>  <span class="token-key">"render_method"</span><span class="token-punct">:</span> <span class="token-string">"blend"</span></pre>
+            <button class="copy-btn">คัดลอก</button>
+        </div>
+
+        <img class="article-image" src="/tutorial/render_lighting_options/image/Screenshot Blend.png" width="300">
+
+        <p>
+            <strong>ผลลัพธ์:</strong> Blend อนุญาตให้แสดงผลได้ครบทั้ง 3 แบบ คือ โปร่งใส
+            (Transparent),
+            โปร่งแสง/กึ่งใส (Translucent), และทึบแสง (Opaque) และมันเปิดใช้ Backface culling เป็นค่าเริ่มต้น
+            (ทำให้ไม่เห็นผนังด้านหลังที่รกตา)
+        </p>
+
+        <h2>ตัวเลือกแสงเงา Lighting Options</h2>
+        <p>
+            นอกจากเรื่องการแสดงผลพื้นผิวแล้ว ยังมีตัวเลือกเกี่ยวกับแสงเงาอีก 2 อย่างที่น่าสนใจให้เราสำรวจกันครับ
+        </p>
+
+        <h3>1. การบดบังแสงโดยรอบ Ambient Occlusion</h3>
+        <p>
+            ค่านี้กำหนดว่าควรจะเกิดเงาขึ้นรอบๆ หรือใต้บล็อกหรือไม่
+            <br>ถ้าตั้งค่าเป็น <code>true</code> (ค่าเริ่มต้น) เกมจะสร้างเงาตรงมุมหรือซอกหลืบของบล็อก ทำให้ดูมีมิติ
+        </p>
+
+        <div class="code-wrapper">
+            <pre><span class="token-key">"minecraft:material_instances"</span><span class="token-punct">:</span> <span class="token-punct">{</span>
+             <span class="token-key">"*"</span><span class="token-punct">:</span> <span class="token-punct">{</span>
+              <span class="token-key">"texture"</span><span class="token-punct">:</span> <span class="token-string">"bubble_fish"</span><span class="token-punct">,</span>
+              <span class="token-key">"render_method"</span><span class="token-punct">:</span> <span class="token-string">"blend"</span><span class="token-punct">,</span>
+              <span class="token-key">"ambient_occlusion"</span><span class="token-punct">:</span> <span class="token-keyword">true</span>
+             <span class="token-punct">}</span>
+        <span class="token-punct">}</span></pre>
+            <button class="copy-btn">คัดลอก</button>
+        </div>
+
+        <img class="article-image" src="/tutorial/render_lighting_options/image/Screenshot Ambient Occlusion.png">
+
+
+        <p>
+            จากภาพตัวอย่าง บล็อกทาง <strong>ซ้าย</strong> ตั้งค่า <code>ambient_occlusion</code> เป็น <code>true</code>
+            (สังเกตว่าจะมีเงาที่ฐานบล็อก)
+            ส่วนบล็อกทาง <strong>ขวา</strong> ตั้งค่าเป็น <code>false</code> (บล็อกดูสว่างเท่ากันหมดและไม่มีเงาที่ฐาน)
+        </p>
+
+        <h3>2. การหรี่แสงตามด้าน Face Dimming</h3>
+        <p>
+            ค่านี้กำหนดว่า "พื้นผิวควรมืดลงตามด้านที่มันหันไปหาแสงหรือไม่?"
+            <br>ปกติแล้วใน Minecraft ด้านบนจะสว่างที่สุด ด้านข้างจะมืดลงนิดหน่อย และด้านล่างจะมืดสุด เพื่อให้วัตถุดูเป็น
+            3 มิติ
+        </p>
+
+        <div class="code-wrapper">
+            <pre><span class="token-key">"minecraft:material_instances"</span><span class="token-punct">:</span> <span class="token-punct">{</span>
+             <span class="token-key">"*"</span><span class="token-punct">:</span> <span class="token-punct">{</span>
+              <span class="token-key">"texture"</span><span class="token-punct">:</span> <span class="token-string">"bubble_fish"</span><span class="token-punct">,</span>
+              <span class="token-key">"render_method"</span><span class="token-punct">:</span> <span class="token-string">"blend"</span><span class="token-punct">,</span>
+              <span class="token-key">"face_dimming"</span><span class="token-punct">:</span> <span class="token-keyword">true</span>
+             <span class="token-punct">}</span>
+        <span class="token-punct">}</span></pre>
+            <button class="copy-btn">คัดลอก</button>
+        </div>
+
+        <img class="article-image" src="/tutorial/render_lighting_options/image/Screenshot Face Dimming.png">
+
+        <p>
+            เช่นเดียวกับตัวอย่างก่อนหน้าครับ บล็อกทาง <strong>ซ้าย</strong> ตั้งค่า <code>face_dimming</code> เป็น
+            <code>true</code> (แสงแต่ละด้านไม่เท่ากัน ดูมีมิติ)
+            ส่วนบล็อกทาง <strong>ขวา</strong> ตั้งค่าเป็น <code>false</code> (แสงสว่างเท่ากันทุกด้าน ทำให้ดู "แบน"
+            หรือเหมือนเรืองแสงได้นิดหน่อย)
+        </p>
+
+    </article>
+
+    <footer>
+        <h2>ช่องทางติดต่อ</h2>
+        <div class="social-container">
+            <a class="social-icons" href="https://www.facebook.com/FPGTVMC/">
+                <img src="../../image/facebook-svgrepo-com.png" alt="Facebook">
+            </a>
+            <a class="social-icons" href="https://www.youtube.com/@MCFirsting">
+                <img src="../../image/youtube-fill-svgrepo-com.png" alt="YouTube">
+            </a>
+            <a class="social-icons" href="https://discord.gg/tnqZCfz4wz">
+                <img src="../../image/discord-svgrepo-com.png" alt="Discord">
+            </a>
+            <a class="social-icons" href="https://github.com/MCFirsting">
+                <img src="../../image/github-svgrepo-com.png" alt="GitHub">
+            </a>
+            <a class="social-icons" href="https://www.tiktok.com/@mc_firsting">
+                <img src="../../image/tiktok-svgrepo-com.png" alt="TikTok">
+            </a>
+        </div>
+    </footer>
+
+    <script src="../getting_started/getting_started.js"></script>
+</body>
+
+</html>
