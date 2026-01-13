@@ -42,6 +42,8 @@
             จากนั้นเราจะนำตัวอย่างจากบทเรียนก่อนหน้า (บล็อกซูชิ) มาสาธิตเรื่อง Culling ให้ดูครับ
         </p>
 
+        <img class="article-image" src="image/Screenshot Umbrella_Culling.png" alt="Screenshot Umbrella Culling">
+
         <div
             style="background-color: #2b2b2b; padding: 15px; border-radius: 8px; border-left: 4px solid #ff9500; margin: 20px 0;">
             <h4 style="margin-top: 0; color: #ff9500;">สิ่งที่ต้องเตรียมตัวก่อนเริ่</h4>
@@ -67,6 +69,7 @@
             เรามาลองสร้างบล็อกขนาด <strong>30x30x30 พิกเซล</strong> ใน Blockbench
             แต่ก่อนอื่น เราต้องมาทำความเข้าใจเกี่ยวกับข้อจำกัดของการสร้าง Custom Block ขนาดใหญ่กันเสียก่อนครับ
         </p>
+        <img class="article-image" src="image/geometry.png" width="450px" alt="Screenshot Geometry">
         <h3>ข้อจำกัดของ Custom Block</h3>
         <p>
             ก่อนลงมือปั้นโมเดล เราต้องทราบข้อจำกัด 3 ข้อของการสร้างบล็อกขนาดใหญ่กันก่อนครับ:
@@ -91,11 +94,13 @@
                 (16x16x16) เสมอ
             </li>
         </ol>
+        <img class="article-image" src="image/limitations.png" width="450px" alt="Screenshot Limitations">
 
         <p>
             นี่คือภาพจำลองขอบเขตสูงสุด (Absolute bounds) ที่บล็อกของคุณต้องอยู่ภายใน เมื่อเทียบกับบล็อกฐาน 16x16x16
             ครับ:
         </p>
+        <img class="article-image" src="image/Base Block.png" width="450px" alt="Screenshot Base Block">
 
 
 
@@ -247,7 +252,6 @@
             <li>
                 <strong>เพิ่ม Texture:</strong> นำรูปภาพ <code>umbrella.png</code> ไปใส่ในโฟลเดอร์
                 <code>textures/blocks</code>
-
             </li>
             <li>
                 <strong>ตั้งค่าอื่นๆ:</strong> อย่าลืมเพิ่มชื่อ Texture ใน <code>terrain_texture.json</code>,
@@ -255,6 +259,10 @@
                 และถ้าอยากให้มีเสียงก็เพิ่มใน <code>blocks.json</code> ด้วยนะครับ
             </li>
         </ol>
+
+        <img class="article-image"
+            src="https://learn.microsoft.com/en-us/minecraft/creator/documents/media/customoversized/picture7.png?view=minecraft-bedrock-stable">
+
         <h3>Behavior Pack</h3>
         <p>
             ให้สร้างไฟล์ <code>umbrella.json</code> ขึ้นมา (ในโฟลเดอร์ <code>blocks</code> ของ Behavior Pack)
@@ -286,7 +294,7 @@
             <p>นี่คือหน้าตาของโค้ดที่ถูกต้องครับ:</p>
             <div class="code-wrapper">
                 <pre><span class="token-punct">{</span>
-          <span class="token-key">"format_version"</span><span class="token-punct">:</span> <span class="token-string">"1.19.40"</span><span class="token-punct">,</span>
+          <span class="token-key">"format_version"</span><span class="token-punct">:</span> <span class="token-string">"1.21.80"</span><span class="token-punct">,</span>
           <span class="token-key">"minecraft:block"</span><span class="token-punct">:</span> <span class="token-punct">{</span>
             <span class="token-key">"description"</span><span class="token-punct">:</span> <span class="token-punct">{</span>
               <span class="token-key">"identifier"</span><span class="token-punct">:</span> <span class="token-string">"demo:umbrella"</span>
@@ -310,7 +318,7 @@
             ก็ถึงเวลาทดสอบในเกมครับ
         </p>
         <ol>
-            <li>เปิดช่องแชทขึ้นมา (กดปุ่ม <code>T</code> หรือ <code>Enter</code> บน Windows)</li>
+            <li>เปิดช่องแชทขึ้นมา</li>
             <li>พิมพ์คำสั่งต่อไปนี้:</li>
         </ol>
 
@@ -322,8 +330,7 @@
         <p>
             ทีนี้ก็เริ่มวางร่มแสนสวยพวกนั้นได้เลยครับ!
         </p>
-
-
+        <img class="article-image" src="/tutorial/sizing_and_culling/image/Screenshot Umbrella.png">
 
         <div
             style="background-color: #2b2b2b; padding: 15px; border-radius: 8px; border-left: 4px solid #f0ad4e; margin: 20px 0;">
@@ -379,7 +386,7 @@
 
         <div class="code-wrapper">
             <pre><span class="token-punct">{</span>
-          <span class="token-key">"format_version"</span><span class="token-punct">:</span> <span class="token-string">"1.19.40"</span><span class="token-punct">,</span>
+          <span class="token-key">"format_version"</span><span class="token-punct">:</span> <span class="token-string">"1.21.80"</span><span class="token-punct">,</span>
           <span class="token-key">"minecraft:block"</span><span class="token-punct">:</span> <span class="token-punct">{</span>
             <span class="token-key">"description"</span><span class="token-punct">:</span> <span class="token-punct">{</span>
               <span class="token-key">"identifier"</span><span class="token-punct">:</span> <span class="token-string">"demo:tuna_roll"</span>
@@ -414,18 +421,20 @@
         </p>
 
         <div class="code-wrapper">
-            <pre><span class="token-punct">{</span><br><span class="token-key">"format_version"</span><span class="token-punct">:</span> <span class="token-string">"1.20.60"</span><span class="token-punct">,</span><br><span class="token-key">"minecraft:block_culling_rules"</span><span class="token-punct">:</span> <span class="token-punct">{</span>
+            <pre><span class="token-punct">{</span><br><span class="token-key">"format_version"</span><span class="token-punct">:</span> <span class="token-string">"1.21.80"</span><span class="token-punct">,</span><br><span class="token-key">"minecraft:block_culling_rules"</span><span class="token-punct">:</span> <span class="token-punct">{</span>
             <span class="token-key">"description"</span><span class="token-punct">:</span> <span class="token-punct">{</span>
                 <span class="token-key">"identifier"</span><span class="token-punct">:</span> <span class="token-string">"test:sushi_cull"</span>
             <span class="token-punct">}</span><span class="token-punct">,</span>
             <span class="token-key">"rules"</span><span class="token-punct">:</span> <span class="token-punct">[</span>
                 <span class="token-punct">{</span>
                  <span class="token-key">"geometry_part"</span><span class="token-punct">:</span> <span class="token-punct">{</span> <span class="token-key">"bone"</span><span class="token-punct">:</span> <span class="token-string">"bb_main"</span><span class="token-punct">,</span> <span class="token-key">"cube"</span><span class="token-punct">:</span> <span class="token-number">0</span><span class="token-punct">,</span> <span class="token-key">"face"</span><span class="token-punct">:</span> <span class="token-string">"north"</span> <span class="token-punct">}</span><span class="token-punct">,</span>
-                 <span class="token-key">"direction"</span><span class="token-punct">:</span> <span class="token-string">"north"</span>
+                 <span class="token-key">"direction"</span><span class="token-punct">:</span> <span class="token-string">"north"</span>,
+                 <span class="token-key">"condition"</span><span class="token-punct">:</span> <span class="token-string">"same_block"</span>
                 <span class="token-punct">}</span><span class="token-punct">,</span>
                 <span class="token-punct">{</span>
                  <span class="token-key">"geometry_part"</span><span class="token-punct">:</span> <span class="token-punct">{</span> <span class="token-key">"bone"</span><span class="token-punct">:</span> <span class="token-string">"bb_main"</span><span class="token-punct">,</span> <span class="token-key">"cube"</span><span class="token-punct">:</span> <span class="token-number">0</span><span class="token-punct">,</span> <span class="token-key">"face"</span><span class="token-punct">:</span> <span class="token-string">"south"</span> <span class="token-punct">}</span><span class="token-punct">,</span>
-                 <span class="token-key">"direction"</span><span class="token-punct">:</span> <span class="token-string">"south"</span>
+                 <span class="token-key">"direction"</span><span class="token-punct">:</span> <span class="token-string">"south"</span>,
+                 <span class="token-key">"condition"</span><span class="token-punct">:</span> <span class="token-string">"same_block"</span>
                 <span class="token-punct">}</span>
             <span class="token-punct">]</span>
           <span class="token-punct">}</span>
@@ -436,22 +445,12 @@
 
         <h3>ผลลัพธ์การทดสอบ</h3>
         <p>
-            ถ้าคุณวาง Tuna Roll เรียงกัน 3 ชิ้น เนื่องจากพวกมันมีขนาดเล็กและมีที่ว่างรอบตัว Culling จะยังไม่ทำงาน
-            และพวกมันจะดูเป็นปกติครับ
+            ถ้าคุณวาง Tuna Roll เรียงกัน 2 ชิ้น คุณจะเห็นว่า <strong>หน้าผิวซูชิ (ส่วนที่เป็นเนื้อปลา) หายไป!</strong>
+            เหลือแค่แหวนสาหร่ายรอบนอกเท่านั้น
         </p>
-
-
-
+        <img class="article-image" src="/tutorial/sizing_and_culling/image/Screenshot Culling.png">
         <p>
-            แต่ถ้าคุณลองเปลี่ยนบล็อกตรงกลางเป็น <strong>บล็อกเต็ม (Full block)</strong> เช่น ไม้ Acacia
-            คุณจะเห็นว่า <strong>หน้าผิวซูชิ (ส่วนที่เป็นเนื้อปลา) หายไป!</strong> เหลือแค่แหวนสาหร่ายรอบนอกเท่านั้น
-        </p>
-
-
-
-        <p>
-            นั่นเป็นเพราะระบบ Culling เข้าใจว่า "ด้านนี้ถูกบล็อกอื่นบังแล้ว ไม่ต้องแสดงผลก็ได้" (แม้ว่าจริงๆ
-            แล้วซูชิเราจะอันเล็กกว่าบล็อกปกติก็ตาม)
+            นั่นเป็นเพราะระบบ Culling เข้าใจว่า "ด้านนี้ถูกบล็อกอื่นบังแล้ว ไม่ต้องแสดงผลก็ได้"
             นี่คือตัวอย่างการทำงานของ Culling ครับ!
         </p>
     </article>
