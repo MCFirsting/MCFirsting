@@ -1,0 +1,564 @@
+<!DOCTYPE html>
+<html lang="th">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Animated Block Texture</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+    <nav class="navbar">
+        <div class="logo">
+            <a href="../../index.html"><img id="logo_mcfirsting" src="../../image/mcfirsting_logo.png" alt="Logo"></a>
+        </div>
+        <ul class="nav-links">
+            <li><a href="../../tutorial.html">Tutorial</a></li>
+            <li><a href="../../shop.html">Shop</a></li>
+        </ul>
+    </nav>
+
+    <header class="doc-header">
+        <div class="container">
+            <h1>การสร้าง Texture เคลื่อนไหว Animated Block Texture</h1>
+            <p style="text-align: center; color: #aaa;">เปลี่ยนบล็อกนิ่งๆ ให้ขยับได้ด้วยเทคนิค Flipbook Animation</p>
+        </div>
+    </header>
+
+    <article class="article-container">
+
+        <p>
+            ในบทเรียนนี้ คุณจะได้เรียนรู้วิธีสร้างอนิเมชันให้กับ Texture ของบล็อกโดยใช้ Resource Pack
+            และข่าวดีคือ <strong>คุณไม่จำเป็นต้องใช้โปรแกรมทำอนิเมชันภายนอกเลยครับ!</strong>
+        </p>
+
+        <h3>หลักการทำงาน (The Flipbook Style)</h3>
+        <p>
+            เราจะใช้สไตล์ที่เรียกว่า <strong>"Flipbook animation" (อนิเมชันสมุดพลิก)</strong> ครับ
+            เคยเห็น (หรือเคยทำ) ภาพวาดการ์ตูนตรงมุมสมุดหนังสือเรียนไหมครับ? ที่พอเรากรีดกระดาษเร็วๆ
+            ภาพวาดเหล่านั้นจะดูเหมือนขยับได้?
+            นั่นแหละครับคือสิ่งที่เรากำลังจะทำ
+        </p>
+        <p>
+            ภาพวาดแต่ละภาพคือ <strong>"เฟรม" (Frame)</strong> ของอนิเมชัน
+            ภาพลวงตาของการเคลื่อนไหวจะเกิดขึ้นจากความเร็วในการเปลี่ยนเฟรม
+            และความเนียนของการเชื่อมต่อระหว่างเฟรมเหล่านั้น
+        </p>
+
+
+
+        <h3>การจัดเก็บไฟล์</h3>
+        <p>
+            ในระบบ Flipbook animation ของ Minecraft เราจะไม่แยกไฟล์รูปภาพสำหรับแต่ละเฟรมออกจากกันครับ
+            แต่จะมีเพียง <strong>ไฟล์เดียว</strong> และเฟรมทั้งหมดจะถูกเรียงต่อกันเป็น <strong>"แถบยาวๆ" (Long
+                strip)</strong>
+            (หลักการเดียวกับไฟล์ Animated GIF เลยครับ)
+        </p>
+        <p>
+            แต่ละเฟรมคือสี่เหลี่ยมขนาด 16x16 พิกเซล โค้ดอนิเมชันภายในเกมจะกำหนดหมายเลขให้แต่ละสี่เหลี่ยม
+            โดยเริ่มนับจากด้านบนสุดเป็น <strong>เฟรมที่ 0</strong>
+        </p>
+        <p>
+            โดยปกติแล้ว บล็อกทั้ง 6 ด้านจะแสดงเฟรมเดียวกันพร้อมกัน
+            แต่เดี๋ยวเราจะมาคุยกันเรื่องการใส่อนิเมชันที่แตกต่างกันในแต่ละด้านทีหลังครับ
+        </p>
+
+        <div
+            style="background-color: #2b2b2b; padding: 15px; border-radius: 8px; border-left: 4px solid #ff9500; margin: 20px 0;">
+            <h4 style="margin-top: 0; color: #ff9500;">สิ่งที่ต้องเตรียมตัวก่อนเริ่ม</h4>
+            <p>ก่อนเริ่มบทเรียนนี้ คุณควรทำสิ่งเหล่านี้ให้เรียบร้อยครับ:</p>
+            <ul>
+                <li>สร้าง Resource Pack พื้นฐาน (ดูได้ที่บทเรียน <a href="/tutorial/resource_packs/resource_packs.html"
+                        style="color: #a5d6ff;">การสร้าง Resource
+                        Pack</a>)</li>
+                <li>ดาวน์โหลด <a href="https://github.com/microsoft/minecraft-samples" target="_blank"
+                        style="color: #a5d6ff;">sample pack collection</a> เก็บไว้ในเครื่องเพื่อดูตัวอย่าง</li>
+                <li>ดาวน์โหลด <a href="https://aka.ms/resourcepacktemplate" target="_blank"
+                        style="color: #a5d6ff;">Vanilla Minecraft packs</a>
+                    ตัวล่าสุดเพื่อใช้เป็นแหล่งอ้างอิงโค้ดและกราฟิก</li>
+            </ul>
+        </div>
+
+        <h2>โครงสร้าง Resource Pack สำหรับอนิเมชัน</h2>
+        <p>นี่คือโครงสร้างพื้นฐานและเนื้อหาภายในสำหรับ Animation Pack ที่เรากำลังจะสร้างกันครับ:</p>
+
+        <div class="code-wrapper">
+            <pre>
+        resource_pack/
+            textures/
+                blocks/
+                    block_name.png
+                flipbook_texture.json
+            manifest.json
+        </pre>
+        </div>
+
+        <p>
+            ลองเปิด Resource Pack จากตัวอย่าง <strong>Vanilla Minecraft sample packs</strong> ดูนะครับ
+        </p>
+        <ol>
+            <li>
+                เข้าไปที่โฟลเดอร์ <code>textures</code> แล้วตามด้วย <code>blocks</code>
+                ตรงนี้แหละครับคือที่อยู่ของไฟล์ภาพ
+                <code>.png</code> ของบล็อกต่างๆ
+            </li>
+            <li>
+                เปิดไฟล์ <code>flipbook_texture.json</code> ขึ้นมาดูเนื้อหาข้างใน คุณจะเห็นรายชื่อ Texture แบบ Flipbook
+                จำนวนมาก
+                ลองสังเกตดูนะครับว่า Texture แต่ละอันมีการตั้งค่าที่แตกต่างกันออกไป
+            </li>
+        </ol>
+
+        <h3>ตัวอย่างการตั้งค่า</h3>
+
+        <h4>1. Sculk (สคัลค์)</h4>
+        <p>ตัวอย่างแบบง่าย มีการกำหนดความเร็วในการเปลี่ยนเฟรม</p>
+        <div class="code-wrapper">
+            <pre><span class="token-punct">{</span>
+            <span class="token-key">"flipbook_texture"</span><span class="token-punct">:</span> <span class="token-string">"textures/blocks/sculk"</span><span class="token-punct">,</span>
+            <span class="token-key">"atlas_tile"</span><span class="token-punct">:</span> <span class="token-string">"sculk"</span><span class="token-punct">,</span>
+            <span class="token-key">"ticks_per_frame"</span><span class="token-punct">:</span> <span class="token-number">20</span>
+        <span class="token-punct">}</span></pre>
+        </div>
+
+        <h4>2. Bubble Column (เสาฟองอากาศ)</h4>
+        <p>ตัวอย่างที่ซับซ้อนขึ้น มีการเรียงลำดับเฟรมแบบย้อนหลัง (จาก 31 ไป 0)</p>
+        <div class="code-wrapper">
+            <pre><span class="token-punct">{</span>
+            <span class="token-key">"flipbook_texture"</span><span class="token-punct">:</span> <span class="token-string">"textures/blocks/bubble_column_inner_b"</span><span class="token-punct">,</span>
+            <span class="token-key">"atlas_index"</span><span class="token-punct">:</span> <span class="token-number">1</span><span class="token-punct">,</span>
+            <span class="token-key">"atlas_tile_variant"</span><span class="token-punct">:</span> <span class="token-number">1</span><span class="token-punct">,</span>
+            <span class="token-key">"atlas_tile"</span><span class="token-punct">:</span> <span class="token-string">"bubble_column_mid"</span><span class="token-punct">,</span>
+            <span class="token-key">"ticks_per_frame"</span><span class="token-punct">:</span> <span class="token-number">1</span><span class="token-punct">,</span>
+            <span class="token-key">"frames"</span><span class="token-punct">:</span> <span class="token-punct">[</span> <span class="token-number">31</span><span class="token-punct">,</span> <span class="token-number">30</span><span class="token-punct">,</span> <span class="token-number">29</span><span class="token-punct">,</span> <span class="token-comment">/* ...ละไว้... */</span> <span class="token-number">2</span><span class="token-punct">,</span> <span class="token-number">1</span><span class="token-punct">,</span> <span class="token-number">0</span> <span class="token-punct">]</span><span class="token-punct">,</span>
+            <span class="token-key">"blend_frames"</span><span class="token-punct">:</span> <span class="token-boolean">false</span>
+        <span class="token-punct">}</span></pre>
+        </div>
+
+        <h4>3. Respawn Anchor Top (ด้านบนของ Respawn Anchor)</h4>
+        <div class="code-wrapper">
+            <pre><span class="token-punct">{</span>
+            <span class="token-key">"flipbook_texture"</span><span class="token-punct">:</span> <span class="token-string">"textures/blocks/respawn_anchor_top"</span><span class="token-punct">,</span>
+            <span class="token-key">"atlas_tile"</span><span class="token-punct">:</span> <span class="token-string">"respawn_anchor_top"</span><span class="token-punct,">,</span>
+            <span class="token-key">"atlas_index"</span><span class="token-punct">:</span> <span class="token-number">2</span><span class="token-punct">,</span>
+            <span class="token-key">"atlas_tile_variant"</span><span class="token-punct">:</span> <span class="token-number">2</span><span class="token-punct">,</span>
+            <span class="token-key">"frames"</span><span class="token-punct">:</span> <span class="token-punct">[</span> <span class="token-number">0</span><span class="token-punct">,</span> <span class="token-number">1</span><span class="token-punct">,</span> <span class="token-number">2</span><span class="token-punct">,</span> <span class="token-comment">/* ...เรียงไปจนถึง... */</span> <span class="token-number">31</span> <span class="token-punct">]</span>
+        <span class="token-punct">}</span></pre>
+        </div>
+
+        <h3>คุณสมบัติของ Flipbook Texture</h3>
+        <p>ตารางด้านล่างนี้อธิบายความหมายของค่าต่างๆ ที่เราใช้กำหนดอนิเมชันครับ:</p>
+
+        <table
+            style="width: 100%; border-collapse: collapse; margin-top: 15px; background-color: #2b2b2b; color: #fff;">
+            <thead>
+                <tr style="background-color: #4facfe; color: #000;">
+                    <th style="padding: 10px; text-align: left; border: 1px solid #444;">ชื่อคุณสมบัติ (Name)</th>
+                    <th style="padding: 10px; text-align: left; border: 1px solid #444;">คำอธิบาย (Description)</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td style="padding: 10px; border: 1px solid #444;"><code>flipbook_texture</code></td>
+                    <td style="padding: 10px; border: 1px solid #444;">ที่อยู่ไฟล์รูปภาพ (Path)
+                        สำหรับด้านใดด้านหนึ่งหรือหลายด้านของบล็อก</td>
+                </tr>
+                <tr>
+                    <td style="padding: 10px; border: 1px solid #444;"><code>atlas_index</code></td>
+                    <td style="padding: 10px; border: 1px solid #444;">หมายเลขของเฟรมแรกที่จะให้แสดงเมื่อเริ่มอนิเมชัน
+                        (และถ้าเกิดข้อผิดพลาดขึ้น เฟรมนี้จะถูกนำมาแสดงค้างไว้)</td>
+                </tr>
+                <tr>
+                    <td style="padding: 10px; border: 1px solid #444;"><code>atlas_tile</code></td>
+                    <td style="padding: 10px; border: 1px solid #444;">ชื่อของรูปภาพที่จะถูกนำมาแสดงแทน
+                        หากอนิเมชันมีปัญหา</td>
+                </tr>
+                <tr>
+                    <td style="padding: 10px; border: 1px solid #444;"><code>atlas_tile_variant</code></td>
+                    <td style="padding: 10px; border: 1px solid #444;">รูปภาพทางเลือกที่จะให้แสดงเป็น atlas tile</td>
+                </tr>
+                <tr>
+                    <td style="padding: 10px; border: 1px solid #444;"><code>ticks_per_frame</code></td>
+                    <td style="padding: 10px; border: 1px solid #444;">
+                        จำนวน "ทิค" (Tick) ของเวลาในเกมที่จะให้ผ่านไปก่อนจะเปลี่ยนเป็นเฟรมถัดไป
+                        <br><em style="color: #aaa;">(1 วินาที = 20 ทิค)</em>
+                    </td>
+                </tr>
+                <tr>
+                    <td style="padding: 10px; border: 1px solid #444;"><code>frames</code></td>
+                    <td style="padding: 10px; border: 1px solid #444;">
+                        ชุดตัวเลข (Array) ของหมายเลขเฟรม ใช้กำหนดลำดับการแสดงผลว่าจะให้เล่นเฟรมไหนก่อนหลัง
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+
+        <h2>เตรียม Resource Pack สำหรับอนิเมชัน</h2>
+        <p>
+            เพื่อให้ง่ายต่อการเรียนรู้ ให้เราเริ่มต้นโดยใช้ Resource Pack <strong>"Green Dirt Block"
+                (บล็อกดินสีเขียว)</strong>
+            ที่ทำเสร็จแล้ว (จากบทเรียน <a href="/tutorial/resource_packs/resource_packs.html"
+                style="color: #a5d6ff;">การสร้าง Resource Pack</a>)
+            หรือถ้าหาไม่เจอ ก็สามารถดาวน์โหลดได้จาก <a href="https://github.com/microsoft/minecraft-samples"
+                target="_blank" style="color: #a5d6ff;">Minecraft pack samples</a> ครับ
+        </p>
+
+
+
+
+        <h2>การแก้ไขบล็อกที่มีอนิเมชันอยู่แล้ว</h2>
+        <p>
+            เพื่อให้คุ้นเคยกับวิธีการทำงานของ Texture อนิเมชัน เราจะมาเริ่มจากการแก้ไขบล็อกที่มีอนิเมชันอยู่แล้ว
+            ปรับเปลี่ยนมันนิดหน่อย แล้วมาดูการเปลี่ยนแปลงกันครับ
+        </p>
+
+        <h3>1. สร้างไฟล์กำหนดค่า (JSON)</h3>
+        <p>
+            เข้าไปที่โฟลเดอร์ <code>textures</code> ใน <code>My_RESOURCE_Pack</code> ของคุณ
+            จากนั้นสร้างไฟล์ข้อความใหม่ชื่อ <code>flipbook_texture.json</code> และใส่โค้ดนี้ลงไปครับ:
+        </p>
+
+        <div class="code-wrapper">
+            <pre><span class="token-punct">[</span>
+          <span class="token-punct">{</span>
+            <span class="token-key">"flipbook_texture"</span><span class="token-punct">:</span> <span class="token-string">"textures/blocks/sculk"</span><span class="token-punct">,</span>
+            <span class="token-key">"atlas_tile"</span><span class="token-punct">:</span> <span class="token-string">"sculk"</span><span class="token-punct">,</span>
+            <span class="token-key">"frames"</span><span class="token-punct">:</span> <span class="token-punct">[</span> <span class="token-number">0</span><span class="token-punct">,</span> <span class="token-number">1</span><span class="token-punct">,</span> <span class="token-number">2</span><span class="token-punct">,</span> <span class="token-number">3</span><span class="token-punct">]</span><span class="token-punct">,</span>
+            <span class="token-key">"ticks_per_frame"</span><span class="token-punct">:</span> <span class="token-number">20</span>
+          <span class="token-punct">}</span>
+        <span class="token-punct">]</span></pre>
+            <button class="copy-btn">คัดลอก</button>
+        </div>
+        <p><em>(โค้ดนี้สั่งให้บล็อก Sculk เล่นเฟรมที่ 0 ถึง 3 โดยเปลี่ยนเฟรมทุกๆ 20 ทิค หรือ 1 วินาที)</em></p>
+
+        <h3>2. เตรียมไฟล์รูปภาพ Texture</h3>
+        <ol>
+            <li>เข้าไปที่โฟลเดอร์ <code>blocks</code> (ที่อยู่ใน textures)</li>
+            <li>
+                ดาวน์โหลดไฟล์ <strong>sculk.png</strong> ด้านล่างนี้ แล้วนำไปวางไว้ในโฟลเดอร์ครับ
+                <br>
+                <img class="article-image"
+                    src="https://learn.microsoft.com/en-us/minecraft/creator/documents/media/createanimatedblocktexture/sculk.png?view=minecraft-bedrock-stable"
+                    width="80">
+            </li>
+        </ol>
+
+
+
+        <h3>3. แก้ไขรูปภาพ</h3>
+        <p>
+            ให้เปิดไฟล์ <code>sculk.png</code> ในโปรแกรมแต่งภาพ (เช่น Paint.net, Photoshop, หรือ Pixel Studio)
+            แล้วลองแก้ไขลวดลายในแต่ละเฟรมให้ดูแตกต่างกันเล็กน้อยครับ
+        </p>
+
+        <img class="article-image"
+            src="https://learn.microsoft.com/en-us/minecraft/creator/documents/media/createanimatedblocktexture/sculk_edited.png?view=minecraft-bedrock-stable"
+            width="80">
+
+        <h3>4. ทดสอบในเกม</h3>
+        <p>
+            เมื่อวางไฟล์ <code>sculk.png</code> (ตัวที่แก้แล้ว) เสร็จเรียบร้อย ให้ติดตั้ง Resource Pack เข้าเกม
+            Minecraft
+            แล้วลองวางบล็อก Sculk ดูครับ มันควรจะขยับเปลี่ยนรูปร่างหน้าตาตามที่คุณวาดไว้ แบบนี้:
+        </p>
+
+        <hr style="border: 0; border-top: 1px solid #444; margin: 30px 0;">
+
+        <p>
+            ตอนนี้เราเริ่มเข้าใจแล้วว่า Flipbook animation ทำงานยังไงกับบล็อกที่มีอนิเมชันอยู่แล้ว
+            หัวข้อถัดไป เรามาลองทำให้บล็อกที่ <strong>ไม่เคยมี</strong> อนิเมชันมาก่อน ขยับได้กันบ้างดีกว่าครับ!
+        </p>
+
+
+
+
+        <h2>การใส่อนิเมชันให้บล็อกปกติ: แร่ลาพิส Lapis Lazuli Ore</h2>
+        <p>
+            คราวนี้เราจะมาต่อยอดจากเดิม โดยการเพิ่มอนิเมชันให้กับบล็อกที่ปกติแล้วไม่มีอนิเมชันอย่าง <strong>"แร่ลาพิส"
+                (Lapis
+                Ore)</strong> กันครับ
+        </p>
+
+        <h3>1. อัปเดตไฟล์ JSON</h3>
+        <p>
+            ให้แทนที่เนื้อหาเดิมในไฟล์ <code>flipbook_texture.json</code> ด้วยโค้ดชุดใหม่นี้ครับ:
+        </p>
+
+        <div class="code-wrapper">
+            <pre><span class="token-punct">[</span>
+          <span class="token-punct">{</span>
+            <span class="token-key">"flipbook_texture"</span><span class="token-punct">:</span> <span class="token-string">"textures/blocks/sculk"</span><span class="token-punct">,</span>
+            <span class="token-key">"atlas_tile"</span><span class="token-punct">:</span> <span class="token-string">"sculk"</span><span class="token-punct">,</span>
+            <span class="token-key">"frames"</span><span class="token-punct">:</span> <span class="token-punct">[</span> <span class="token-number">0</span><span class="token-punct">,</span> <span class="token-number">1</span><span class="token-punct">,</span> <span class="token-number">2</span><span class="token-punct">,</span> <span class="token-number">3</span><span class="token-punct">]</span><span class="token-punct">,</span>
+            <span class="token-key">"ticks_per_frame"</span><span class="token-punct">:</span> <span class="token-number">20</span>
+          <span class="token-punct">}</span><span class="token-punct">,</span>
+          <span class="token-punct">{</span>
+            <span class="token-key">"flipbook_texture"</span><span class="token-punct">:</span> <span class="token-string">"textures/blocks/lapis_ore"</span><span class="token-punct">,</span>
+            <span class="token-key">"atlas_tile"</span><span class="token-punct">:</span> <span class="token-string">"lapis_ore"</span><span class="token-punct">,</span>
+            <span class="token-key">"frames"</span><span class="token-punct">:</span> <span class="token-punct">[</span> <span class="token-number">0</span><span class="token-punct">,</span> <span class="token-number">1</span><span class="token-punct">,</span> <span class="token-number">2</span><span class="token-punct">,</span> <span class="token-number">3</span><span class="token-punct">,</span> <span class="token-number">4</span><span class="token-punct">,</span> <span class="token-number">5</span><span class="token-punct">]</span><span class="token-punct">,</span>
+            <span class="token-key">"ticks_per_frame"</span><span class="token-punct">:</span> <span class="token-number">10</span>
+          <span class="token-punct">}</span>
+        <span class="token-punct">]</span></pre>
+            <button class="copy-btn">คัดลอก</button>
+        </div>
+
+        <p><strong>อธิบายโค้ดส่วน lapis_ore:</strong></p>
+        <ul>
+            <li><code>"frames": [ 0, 1, 2, 3, 4, 5]</code>: บรรทัดนี้บอกเกมว่า เรากำลังจะเพิ่มเฟรมเข้าไปอีก 5 เฟรม
+                รวมกับของเดิม
+                (เฟรม 0) เป็นทั้งหมด <strong>6 เฟรม</strong> ครับ</li>
+            <li><code>"ticks_per_frame": 10</code>: บรรทัดนี้กำหนดว่าลาพิสจะเปลี่ยนเฟรมเร็วกว่า Sculk (Sculk ใช้ 20 ทิค
+                แต่
+                Lapis ใช้ 10 ทิค หรือครึ่งวินาที)</li>
+        </ul>
+
+        <h3>2. ปรับขนาดรูปภาพ</h3>
+        <p>
+            รูปภาพดั้งเดิมของแร่ลาพิส (Vanilla lapis ore) นั้นมีขนาด <strong>16 x 16 พิกเซล</strong> หน้าตาแบบนี้ครับ:
+        </p>
+
+
+
+        <p>
+            แต่ในเมื่อเรากำหนดในโค้ด JSON ว่าจะมี <strong>6 เฟรม</strong> เราจำเป็นต้องขยายความสูงของรูปภาพ (Canvas
+            Size)
+            เพื่อให้รองรับเฟรมทั้งหมด
+        </p>
+        <div style="background-color: #2b2b2b; padding: 10px; border-left: 4px solid #4facfe; margin-bottom: 15px;">
+            <p style="margin: 0;">
+                <strong>สูตรคำนวณ:</strong> 16 พิกเซล (ความสูงเดิม) x 6 (จำนวนเฟรม) = <strong>96 พิกเซล</strong>
+            </p>
+        </div>
+        <p>
+            ดังนั้น ให้เปิดไฟล์ <code>lapis_ore.png</code> ในโปรแกรมแต่งภาพ แล้วเปลี่ยนขนาดความสูงของ Canvas ให้เป็น
+            <strong>96
+                พิกเซล</strong> (ความกว้างคงไว้ที่ 16 เท่าเดิม)
+        </p>
+
+        <h3>3. วาดเฟรมเพิ่ม</h3>
+        <p>
+            ตอนนี้เรามีพื้นที่ว่างยาวๆ สำหรับ 6 เฟรมแล้ว ให้คุณวาดลวดลายเพิ่มลงไปอีก 5 เฟรมที่เหลือครับ
+            (ตัวอย่างเช่น ทำให้แร่ลาพิสค่อยๆ กะพริบแสงวิบวับ)
+        </p>
+
+        <p>
+            นี่คือตัวอย่างไฟล์ที่แก้ไขเสร็จแล้วครับ:
+            <img class="article-image"
+                src="https://learn.microsoft.com/en-us/minecraft/creator/documents/media/createanimatedblocktexture/lapis_ore_edited.png?view=minecraft-bedrock-stable"
+                width="80">
+        </p>
+
+        <h3>4. นำไปใช้งาน</h3>
+        <p>
+            นำไฟล์ที่แก้ไขแล้วไปวางในโฟลเดอร์ <code>textures/blocks</code> ของ Animation Pack ของคุณ
+            และอย่าลืมเปลี่ยนชื่อจาก <code>lapis_ore_EDITED.png</code> ให้กลายเป็น <code>lapis_ore.png</code> ด้วยนะครับ
+        </p>
+        <p>
+            เสร็จแล้วก็เข้าเกมไปดูผลงานบล็อกลาพิสวิบวับของคุณได้เลย!
+        </p>
+
+        <h2>การใส่อนิเมชันให้บล็อกลูกเต๋า</h2>
+        <p>
+            หากคุณจำบทเรียน <a href="/tutorial/advanced_custom_blocks/advanced_custom_blocks.html"
+                style="color: #a5d6ff;">Advanced
+                Custom
+                Blocks</a> ได้
+            คุณน่าจะมีบล็อกลูกเต๋าสีแดงอยู่ในมือ ซึ่งเมื่อวางลงไปแล้วจะดูเหมือนลูกเต๋าจริงๆ
+        </p>
+        <p>
+            ในตัวอย่างนี้ เราจะมาทำให้บล็อกนั้น <strong>มีชีวิต</strong> ขึ้นมาครับ โดยการทำให้มันเปลี่ยนหน้าลูกเต๋า
+            (Scroll)
+            วนไปเรื่อยๆ
+            ในขณะที่ผู้เล่นถือมันอยู่ในมือหรือใน Hotbar
+        </p>
+
+        <div
+            style="background-color: #2b2b2b; padding: 15px; border-radius: 8px; border-left: 4px solid #f0ad4e; margin: 15px 0;">
+            <p style="margin: 0;">
+                <strong>ข้อสังเกต:</strong> เนื่องจากวิธีการแสดงผล Texture ของไอเท็มใน Hotbar ทำให้ทั้ง 3 ด้านที่มองเห็น
+                จะแสดงเลขเดียวกันพร้อมกันหมด ในขณะที่มันเปลี่ยนเลขจาก 1 ไปถึง 6 ครับ
+            </p>
+        </div>
+
+        <h3>1. เตรียมไฟล์</h3>
+        <p>
+            คุณจะต้องใช้ Resource Pack และ Behavior Pack ของ <strong>Custom Die block</strong> ที่ทำเสร็จสมบูรณ์แล้ว
+            (ต้องใช้ทั้งคู่ถึงจะทำงานได้นะครับ)
+        </p>
+
+        <h3>2. แก้ไข JSON</h3>
+        <p>
+            ให้ไปที่ <code>resource pack > textures</code> ในโฟลเดอร์งานของคุณ จากนั้นเปิดไฟล์
+            <code>flipbook_texture.json</code>
+            (หรือสร้างใหม่ถ้ายังไม่มี) แล้วเพิ่มโค้ดนี้ลงไปครับ:
+        </p>
+
+        <div class="code-wrapper">
+            <pre><span class="token-punct">[</span>
+          <span class="token-punct">{</span>
+            <span class="token-key">"flipbook_texture"</span><span class="token-punct">:</span> <span class="token-string">"textures/blocks/die_red"</span><span class="token-punct">,</span>
+            <span class="token-key">"atlas_tile"</span><span class="token-punct">:</span> <span class="token-string">"die_red"</span><span class="token-punct">,</span>
+            <span class="token-key">"frames"</span><span class="token-punct">:</span> <span class="token-punct">[</span> <span class="token-number">0</span><span class="token-punct">,</span> <span class="token-number">1</span><span class="token-punct">,</span> <span class="token-number">2</span><span class="token-punct">,</span> <span class="token-number">3</span><span class="token-punct">,</span> <span class="token-number">4</span><span class="token-punct">,</span> <span class="token-number">5</span> <span class="token-punct">]</span><span class="token-punct">,</span>
+            <span class="token-key">"ticks_per_frame"</span><span class="token-punct">:</span> <span class="token-number">20</span><span class="token-punct">,</span>
+            <span class="token-key">"blend_frames"</span><span class="token-punct">:</span> <span class="token-boolean">false</span>
+          <span class="token-punct">}</span>
+        <span class="token-punct">]</span></pre>
+            <button class="copy-btn">คัดลอก</button>
+        </div>
+
+        <h3>3. เปลี่ยนรูปภาพ</h3>
+        <p>
+            เดิมทีไฟล์ <code>die_red.png</code> ของเราเป็นแค่รูปสี่เหลี่ยมจัตุรัสรูปเดียว
+            แต่ตอนนี้เราต้องเปลี่ยนให้มันเป็น
+            <strong>แถบยาว (Strip)</strong>
+            ที่มีเลข 1 ถึง 6 เรียงต่อกันลงมาครับ
+        </p>
+        <p>
+            ให้เข้าไปที่โฟลเดอร์ <code>textures/blocks</code> และแทนที่ไฟล์ <code>die_red.png</code> เดิม
+            ด้วยไฟล์ด้านล่างนี้:
+        </p>
+
+        <img class="article-image"
+            src="https://learn.microsoft.com/en-us/minecraft/creator/documents/media/createanimatedblocktexture/die_red.png?view=minecraft-bedrock-stable"
+            width="80">
+
+
+
+        <h3>4. ทดสอบ</h3>
+        <p>
+            เมื่อเปิดใช้งานทั้ง Resource Pack และ Behavior Pack ในโลก Creative Mode แล้ว ให้พิมพ์คำสั่งเพื่อเสกลูกเต๋า:
+        </p>
+        <div class="code-wrapper">
+            <pre>/give @s demo:die</pre>
+            <button class="copy-btn">คัดลอก</button>
+        </div>
+        <p>
+            ลองสังเกตดูที่บล็อกสีแดงในมือของคุณดูสิครับ ตอนนี้มันน่าจะกำลังเปลี่ยนตัวเลขไปเรื่อยๆ แล้ว!
+        </p>
+
+        <hr style="border: 0; border-top: 1px solid #444; margin: 30px 0;">
+
+        <div style="margin-top: 40px;">
+
+
+
+            <h2>อนิเมชันแบบหลายหน้า</h2>
+            <p>
+                ในหัวข้อนี้ เราจะพูดถึงเฉพาะ <strong>Command Block แบบปกติ (Vanilla)</strong> สีส้มเท่านั้นนะครับ
+                จะไม่รวมถึงแบบ <em>Conditional</em>, <em>Chain</em> (สีเขียว), หรือพวกที่มีคำว่า <em>mipmap</em> ในชื่อ
+                เพราะหลักการทำอนิเมชันของพวกมันเหมือนกันหมดครับ
+            </p>
+            <p>
+                ที่ผมต้องบอกไว้ก่อนก็เพื่อว่า เวลาที่คุณเข้าไปขุดคุ้ยหาโค้ดในไฟล์ <code>flipbook_texture.json</code>
+                หรือหารูปภาพในโฟลเดอร์ของ Vanilla sample pack คุณจะได้มองหาชื่อไฟล์ที่ตรงกับบรรทัด
+                <code>"flipbook_texture":</code>
+                ในโค้ดได้ถูกตัวครับ
+            </p>
+
+            <h3>สำรวจลวดลาย</h3>
+            <p>
+                ถ้าคุณลองสังเกต Command Block แบบใกล้ๆ คุณจะเห็นว่า <strong>ด้านหน้า, ด้านหลัง, และด้านข้าง</strong>
+                มีรูปทรงลวดลายที่แตกต่างกัน และมีจุดไฟกะพริบที่ไม่เหมือนกันด้วย
+            </p>
+
+            <ul>
+                <li>
+                    <strong>ด้านหน้า (Front):</strong> มีลวดลายเป็นรูปวงกลมตรงกลาง
+                </li>
+                <li>
+                    <strong>ด้านข้างทั้ง 4 (Sides):</strong> มีลวดลายเป็นรูปลูกศรชี้ไปทิศทางเดียวกัน
+                </li>
+            </ul>
+
+
+            <ul>
+                <li>
+                    <strong>ด้านหลัง (Back):</strong> มีลวดลายเป็นรูปสี่เหลี่ยม
+                </li>
+            </ul>
+
+
+            <h3>โค้ดกำหนดค่า</h3>
+            <p>
+                เฟรมต่างๆ ถูกนำไปแปะลงบน Command Block ด้วยโค้ดชุดนี้ครับ (สังเกตว่ามีการแยก Block 3 ชุด สำหรับ 3 ส่วน):
+            </p>
+
+            <div class="code-wrapper">
+                <pre><span class="token-punct">{</span>
+              <span class="token-key">"flipbook_texture"</span><span class="token-punct">:</span> <span class="token-string">"textures/blocks/command_block_front"</span><span class="token-punct">,</span>
+              <span class="token-key">"atlas_tile"</span><span class="token-punct">:</span> <span class="token-string">"command_block_front"</span><span class="token-punct">,</span>
+              <span class="token-key">"ticks_per_frame"</span><span class="token-punct">:</span> <span class="token-number">10</span>
+            <span class="token-punct">}</span><span class="token-punct">,</span>
+            <span class="token-punct">{</span>
+              <span class="token-key">"flipbook_texture"</span><span class="token-punct">:</span> <span class="token-string">"textures/blocks/command_block_back"</span><span class="token-punct">,</span>
+              <span class="token-key">"atlas_tile"</span><span class="token-punct">:</span> <span class="token-string">"command_block_back"</span><span class="token-punct">,</span>
+              <span class="token-key">"ticks_per_frame"</span><span class="token-punct">:</span> <span class="token-number">10</span>
+            <span class="token-punct">}</span><span class="token-punct">,</span>
+            <span class="token-punct">{</span>
+              <span class="token-key">"flipbook_texture"</span><span class="token-punct">:</span> <span class="token-string">"textures/blocks/command_block_side"</span><span class="token-punct">,</span>
+              <span class="token-key">"atlas_tile"</span><span class="token-punct">:</span> <span class="token-string">"command_block_side"</span><span class="token-punct">,</span>
+              <span class="token-key">"ticks_per_frame"</span><span class="token-punct">:</span> <span class="token-number">10</span>
+            <span class="token-punct">}</span></pre>
+                <button class="copy-btn">คัดลอก</button>
+            </div>
+
+            <h3>ตัวอย่างไฟล์กราฟิก</h3>
+            <p>
+                เพื่อให้เห็นภาพชัดเจน นี่คือหน้าตาของไฟล์ Texture ทั้ง 3 ส่วนที่ถูกแก้ไขให้เป็นแถบยาว (Flipbook strip)
+                แล้ว:
+            </p>
+
+            <table
+                style="width: 100%; text-align: center; background-color: #2b2b2b; border-collapse: separate; border-spacing: 10px;">
+                <tr>
+                    <td style="background-color: #1e1e1e; padding: 10px; border-radius: 8px;">
+                        <p style="margin-top: 0; font-weight: bold;">ด้านหน้า (Front)</p>
+                        <p style="font-size: 0.8rem; color: #aaa;">command_block_front.png</p>
+
+                    </td>
+                    <td style="background-color: #1e1e1e; padding: 10px; border-radius: 8px;">
+                        <p style="margin-top: 0; font-weight: bold;">ด้านหลัง (Back)</p>
+                        <p style="font-size: 0.8rem; color: #aaa;">command_block_back.png</p>
+
+                    </td>
+                    <td style="background-color: #1e1e1e; padding: 10px; border-radius: 8px;">
+                        <p style="margin-top: 0; font-weight: bold;">ด้านข้าง (Side)</p>
+                        <p style="font-size: 0.8rem; color: #aaa;">command_block_side.png</p>
+
+                    </td>
+                </tr>
+            </table>
+
+            <h3>ผลลัพธ์สุดท้าย</h3>
+            <p>
+                เมื่อนำไฟล์ทั้งหมดมารวมกันใน Resource Pack บล็อก Command Block ของเราก็จะขยับได้รอบทิศทางแบบนี้ครับ:
+            </p>
+
+    </article>
+
+    <footer>
+        <h2>ช่องทางติดต่อ</h2>
+        <div class="social-container">
+            <a class="social-icons" href="https://www.facebook.com/FPGTVMC/">
+                <img src="../../image/facebook-svgrepo-com.png" alt="Facebook">
+            </a>
+            <a class="social-icons" href="https://www.youtube.com/@MCFirsting">
+                <img src="../../image/youtube-fill-svgrepo-com.png" alt="YouTube">
+            </a>
+            <a class="social-icons" href="https://discord.gg/tnqZCfz4wz">
+                <img src="../../image/discord-svgrepo-com.png" alt="Discord">
+            </a>
+            <a class="social-icons" href="https://github.com/MCFirsting">
+                <img src="../../image/github-svgrepo-com.png" alt="GitHub">
+            </a>
+            <a class="social-icons" href="https://www.tiktok.com/@mc_firsting">
+                <img src="../../image/tiktok-svgrepo-com.png" alt="TikTok">
+            </a>
+        </div>
+    </footer>
+
+    <script src="../getting_started/getting_started.js"></script>
+</body>
+
+</html>
