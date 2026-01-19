@@ -33,7 +33,7 @@
             และข่าวดีคือ <strong>คุณไม่จำเป็นต้องใช้โปรแกรมทำอนิเมชันภายนอกเลยครับ!</strong>
         </p>
 
-        <h3>หลักการทำงาน (The Flipbook Style)</h3>
+        <h3>หลักการทำงาน</h3>
         <p>
             เราจะใช้สไตล์ที่เรียกว่า <strong>"Flipbook animation" (อนิเมชันสมุดพลิก)</strong> ครับ
             เคยเห็น (หรือเคยทำ) ภาพวาดการ์ตูนตรงมุมสมุดหนังสือเรียนไหมครับ? ที่พอเรากรีดกระดาษเร็วๆ
@@ -45,8 +45,6 @@
             ภาพลวงตาของการเคลื่อนไหวจะเกิดขึ้นจากความเร็วในการเปลี่ยนเฟรม
             และความเนียนของการเชื่อมต่อระหว่างเฟรมเหล่านั้น
         </p>
-
-
 
         <h3>การจัดเก็บไฟล์</h3>
         <p>
@@ -83,23 +81,14 @@
         <h2>โครงสร้าง Resource Pack สำหรับอนิเมชัน</h2>
         <p>นี่คือโครงสร้างพื้นฐานและเนื้อหาภายในสำหรับ Animation Pack ที่เรากำลังจะสร้างกันครับ:</p>
 
-        <div class="code-wrapper">
-            <pre>
-        resource_pack/
-            textures/
-                blocks/
-                    block_name.png
-                flipbook_texture.json
-            manifest.json
-        </pre>
-        </div>
+        <img class="article-image" src="/tutorial/animated_block_texture/image/Navigate Animated Block Texture.png">
 
         <p>
             ลองเปิด Resource Pack จากตัวอย่าง <strong>Vanilla Minecraft sample packs</strong> ดูนะครับ
         </p>
         <ol>
             <li>
-                เข้าไปที่โฟลเดอร์ <code>textures</code> แล้วตามด้วย <code>blocks</code>
+                เข้าไปที่โฟลเดอร์ <code>textures</code> > <code>blocks</code>
                 ตรงนี้แหละครับคือที่อยู่ของไฟล์ภาพ
                 <code>.png</code> ของบล็อกต่างๆ
             </li>
@@ -112,7 +101,7 @@
 
         <h3>ตัวอย่างการตั้งค่า</h3>
 
-        <h4>1. Sculk (สคัลค์)</h4>
+        <h4>1. Sculk</h4>
         <p>ตัวอย่างแบบง่าย มีการกำหนดความเร็วในการเปลี่ยนเฟรม</p>
         <div class="code-wrapper">
             <pre><span class="token-punct">{</span>
@@ -120,6 +109,7 @@
             <span class="token-key">"atlas_tile"</span><span class="token-punct">:</span> <span class="token-string">"sculk"</span><span class="token-punct">,</span>
             <span class="token-key">"ticks_per_frame"</span><span class="token-punct">:</span> <span class="token-number">20</span>
         <span class="token-punct">}</span></pre>
+            <button class="copy-btn">คัดลอก</button>
         </div>
 
         <h4>2. Bubble Column (เสาฟองอากาศ)</h4>
@@ -134,6 +124,7 @@
             <span class="token-key">"frames"</span><span class="token-punct">:</span> <span class="token-punct">[</span> <span class="token-number">31</span><span class="token-punct">,</span> <span class="token-number">30</span><span class="token-punct">,</span> <span class="token-number">29</span><span class="token-punct">,</span> <span class="token-comment">/* ...ละไว้... */</span> <span class="token-number">2</span><span class="token-punct">,</span> <span class="token-number">1</span><span class="token-punct">,</span> <span class="token-number">0</span> <span class="token-punct">]</span><span class="token-punct">,</span>
             <span class="token-key">"blend_frames"</span><span class="token-punct">:</span> <span class="token-boolean">false</span>
         <span class="token-punct">}</span></pre>
+            <button class="copy-btn">คัดลอก</button>
         </div>
 
         <h4>3. Respawn Anchor Top (ด้านบนของ Respawn Anchor)</h4>
@@ -145,6 +136,7 @@
             <span class="token-key">"atlas_tile_variant"</span><span class="token-punct">:</span> <span class="token-number">2</span><span class="token-punct">,</span>
             <span class="token-key">"frames"</span><span class="token-punct">:</span> <span class="token-punct">[</span> <span class="token-number">0</span><span class="token-punct">,</span> <span class="token-number">1</span><span class="token-punct">,</span> <span class="token-number">2</span><span class="token-punct">,</span> <span class="token-comment">/* ...เรียงไปจนถึง... */</span> <span class="token-number">31</span> <span class="token-punct">]</span>
         <span class="token-punct">}</span></pre>
+            <button class="copy-btn">คัดลอก</button>
         </div>
 
         <h3>คุณสมบัติของ Flipbook Texture</h3>
@@ -154,8 +146,8 @@
             style="width: 100%; border-collapse: collapse; margin-top: 15px; background-color: #2b2b2b; color: #fff;">
             <thead>
                 <tr style="background-color: #4facfe; color: #000;">
-                    <th style="padding: 10px; text-align: left; border: 1px solid #444;">ชื่อคุณสมบัติ (Name)</th>
-                    <th style="padding: 10px; text-align: left; border: 1px solid #444;">คำอธิบาย (Description)</th>
+                    <th style="padding: 10px; text-align: left; border: 1px solid #444;">ชื่อคุณสมบัติ</th>
+                    <th style="padding: 10px; text-align: left; border: 1px solid #444;">คำอธิบาย</th>
                 </tr>
             </thead>
             <tbody>
@@ -213,7 +205,7 @@
             ปรับเปลี่ยนมันนิดหน่อย แล้วมาดูการเปลี่ยนแปลงกันครับ
         </p>
 
-        <h3>1. สร้างไฟล์กำหนดค่า (JSON)</h3>
+        <h3>1. สร้างไฟล์กำหนดค่า JSON</h3>
         <p>
             เข้าไปที่โฟลเดอร์ <code>textures</code> ใน <code>My_RESOURCE_Pack</code> ของคุณ
             จากนั้นสร้างไฟล์ข้อความใหม่ชื่อ <code>flipbook_texture.json</code> และใส่โค้ดนี้ลงไปครับ:
@@ -469,14 +461,11 @@
                 <li>
                     <strong>ด้านข้างทั้ง 4 (Sides):</strong> มีลวดลายเป็นรูปลูกศรชี้ไปทิศทางเดียวกัน
                 </li>
-            </ul>
-
-
-            <ul>
                 <li>
                     <strong>ด้านหลัง (Back):</strong> มีลวดลายเป็นรูปสี่เหลี่ยม
                 </li>
             </ul>
+
 
 
             <h3>โค้ดกำหนดค่า</h3>
@@ -512,20 +501,20 @@
             <table
                 style="width: 100%; text-align: center; background-color: #2b2b2b; border-collapse: separate; border-spacing: 10px;">
                 <tr>
-                    <td style="background-color: #1e1e1e; padding: 10px; border-radius: 8px;">
-                        <p style="margin-top: 0; font-weight: bold;">ด้านหน้า (Front)</p>
-                        <p style="font-size: 0.8rem; color: #aaa;">command_block_front.png</p>
-
+                    <p style="margin-top: 0; font-weight: bold;">ด้านหน้า (Front)</p>
+                    <p style="font-size: 0.8rem; color: #aaa;">command_block_front.png</p>
+                    <img src="https://learn.microsoft.com/en-us/minecraft/creator/documents/media/createanimatedblocktexture/command_block_front.png?view=minecraft-bedrock-stable"
+                        width="50">
                     </td>
-                    <td style="background-color: #1e1e1e; padding: 10px; border-radius: 8px;">
-                        <p style="margin-top: 0; font-weight: bold;">ด้านหลัง (Back)</p>
-                        <p style="font-size: 0.8rem; color: #aaa;">command_block_back.png</p>
-
+                    <p style="margin-top: 0; font-weight: bold;">ด้านหลัง (Back)</p>
+                    <p style="font-size: 0.8rem; color: #aaa;">command_block_back.png</p>
+                    <img src="https://learn.microsoft.com/en-us/minecraft/creator/documents/media/createanimatedblocktexture/command_block_back.png?view=minecraft-bedrock-stable"
+                        width="50">
                     </td>
-                    <td style="background-color: #1e1e1e; padding: 10px; border-radius: 8px;">
-                        <p style="margin-top: 0; font-weight: bold;">ด้านข้าง (Side)</p>
-                        <p style="font-size: 0.8rem; color: #aaa;">command_block_side.png</p>
-
+                    <p style="margin-top: 0; font-weight: bold;">ด้านข้าง (Side)</p>
+                    <p style="font-size: 0.8rem; color: #aaa;">command_block_side.png</p>
+                    <img src="https://learn.microsoft.com/en-us/minecraft/creator/documents/media/createanimatedblocktexture/command_block_side.png?view=minecraft-bedrock-stable"
+                        width="50">
                     </td>
                 </tr>
             </table>
