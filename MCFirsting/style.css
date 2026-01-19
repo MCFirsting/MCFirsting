@@ -7,7 +7,7 @@
 body {
     background-color: #171615;
     color: #ffffff;
-    font-family: "MinecraftTen", sans-serif;
+    font-family: "MinecraftTen", "NotoSansMerged-Regular";
     margin: 0;
     padding-top: 70px;
     /* เว้นที่ให้ Navbar */
@@ -16,11 +16,22 @@ body {
 /* Fonts */
 @font-face {
     font-family: "MinecraftTen";
-    src: url("fonts/MinecraftTen-VGORe.ttf");
+    src: url("fonts/Minecraft-Ten-ed29a1bbe6a620b83378.otf");
+}
+
+@font-face {
+    font-family: "NotoSansMerged-Regular";
+    src: url("fonts/NotoSansMerged-Regular-5df70ade1ecaa8cdc5e2.ttf");
+}
+
+@font-face {
+    font-family: "Minecraft-Seven";
+    src: url("fonts/Minecraft-Seven-66398119c2c20ee73019.otf");
 }
 
 /* Navbar */
 .navbar {
+    font-family: "MinecraftTen";
     position: fixed;
     top: 0;
     left: 0;
@@ -30,10 +41,13 @@ body {
     display: flex;
     align-items: center;
     justify-content: space-between;
-    background-image: linear-gradient(to bottom, rgb(255, 106, 0), rgb(255, 149, 0));
     padding: 0 20px;
     z-index: 1000;
-    box-shadow: 0px 3px 4px rgba(0, 0, 0, 0.5);
+    background: rgba(23, 22, 21, 0.8);
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
+    border-bottom: 1px solid rgba(255, 255, 255, 0.3);
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 9.1);
 }
 
 .logo img {
@@ -52,13 +66,13 @@ body {
 
 .nav-links a {
     text-decoration: none;
-    color: rgb(0, 0, 0);
+    color: rgb(255, 255, 255);
     font-size: 24px;
     transition: color 0.3s;
 }
 
 .nav-links a:hover {
-    color: #ffffff;
+    color: #ff7300;
 }
 
 /* Layout Utilities */
@@ -266,7 +280,7 @@ footer {
 .doc-subtitle {
     font-size: 1.2rem;
     color: #cccccc;
-    font-family: sans-serif;
+    font-family: "NotoSansMerged-Regular", sans-serif;
     /* ใช้อักษรปกติให้อ่านง่ายสำหรับคำอธิบาย */
 }
 

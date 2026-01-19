@@ -5,7 +5,7 @@
 body {
     background-color: #171615;
     color: #ffffff;
-    font-family: sans-serif;
+    font-family: "Minecraft-Seven", "NotoSansMerged-Regular";
     display: flex;
     flex-direction: column;
     min-height: 100vh;
@@ -14,8 +14,13 @@ body {
 }
 
 @font-face {
-    font-family: "MinecraftTen";
-    src: url("fonts/MinecraftTen-VGORe.ttf");
+    font-family: "NotoSansMerged-Regular";
+    src: url("fonts/NotoSansMerged-Regular-5df70ade1ecaa8cdc5e2.ttf");
+}
+
+@font-face {
+    font-family: "Minecraft-Seven";
+    src: url("fonts/Minecraft-Seven-66398119c2c20ee73019.otf");
 }
 
 a {
@@ -24,18 +29,23 @@ a {
 
 
 .navbar {
+    font-family: "MinecraftTen";
     position: fixed;
     top: 0;
     left: 0;
     width: 100%;
+    /* แก้จาก 99% เป็น 100% */
     height: 70px;
     display: flex;
     align-items: center;
     justify-content: space-between;
-    background-image: linear-gradient(to bottom, rgb(255, 106, 0), rgb(255, 149, 0));
     padding: 0 20px;
     z-index: 1000;
-    box-shadow: 0px 3px 4px #000000;
+    background: rgba(23, 22, 21, 0.8);
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
+    border-bottom: 1px solid rgba(255, 255, 255, 0.3);
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 9.1);
 }
 
 #logo_mcfirsting {
@@ -54,14 +64,14 @@ a {
 }
 
 .nav-links a {
-    color: rgb(0, 0, 0);
-    font-family: "MinecraftTen";
+    text-decoration: none;
+    color: rgb(255, 255, 255);
     font-size: 24px;
     transition: color 0.3s;
 }
 
 .nav-links a:hover {
-    color: #ffffff;
+    color: #ff7300;
 }
 
 
@@ -74,7 +84,7 @@ a {
 }
 
 .doc-header h1 {
-    font-family: "MinecraftTen";
+    font-family: "Minecraft-Seven";
     font-size: 2.5rem;
     color: #ff9500;
     text-transform: uppercase;
@@ -91,7 +101,7 @@ a {
 }
 
 .article-container h2 {
-    font-family: "MinecraftTen";
+    font-family: "Minecraft-Seven";
     font-size: 1.8rem;
     color: #ff9500;
     border-bottom: 1px solid #444;
@@ -100,7 +110,7 @@ a {
 }
 
 .article-container h3 {
-    font-family: "MinecraftTen";
+    font-family: "Minecraft-Seven";
     font-size: 1.4rem;
     color: #fff;
     margin-top: 30px;
@@ -198,7 +208,7 @@ a {
     padding: 5px 10px;
     border-radius: 4px;
     cursor: pointer;
-    font-family: sans-serif;
+    font-family: "Minecraft-Seven", "NotoSansMerged-Regular";
     font-size: 0.8rem;
 }
 
@@ -216,7 +226,7 @@ footer {
 }
 
 footer h2 {
-    font-family: "MinecraftTen";
+    font-family: "Minecraft-Seven";
     margin-bottom: 20px;
 }
 
@@ -254,7 +264,7 @@ footer h2 {
 body {
     background-color: #171615;
     color: #ffffff;
-    font-family: sans-serif;
+    font-family: "MinecraftSeven", "NotoSansMerged-Regular";
     display: flex;
     flex-direction: column;
     min-height: 100vh;
@@ -270,7 +280,12 @@ body {
 
 @font-face {
     font-family: "MinecraftTen";
-    src: url("fonts/MinecraftTen-VGORe.ttf");
+    src: url("fonts/Minecraft-Ten-ed29a1bbe6a620b83378.otf");
+}
+
+@font-face {
+    font-family: "NotoSansMerged-Regular";
+    src: url("fonts/NotoSansMerged-Regular-5df70ade1ecaa8cdc5e2.ttf");
 }
 
 a {
@@ -279,18 +294,23 @@ a {
 
 
 .navbar {
+    font-family: "MinecraftTen";
     position: fixed;
     top: 0;
     left: 0;
     width: 100%;
+    /* แก้จาก 99% เป็น 100% */
     height: 70px;
     display: flex;
     align-items: center;
     justify-content: space-between;
-    background-image: linear-gradient(to bottom, rgb(255, 106, 0), rgb(255, 149, 0));
     padding: 0 20px;
     z-index: 1000;
-    box-shadow: 0px 3px 4px #000000;
+    background: rgba(23, 22, 21, 0.8);
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
+    border-bottom: 1px solid rgba(255, 255, 255, 0.3);
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 9.1);
 }
 
 #logo_mcfirsting {
@@ -309,14 +329,14 @@ a {
 }
 
 .nav-links a {
-    color: rgb(0, 0, 0);
-    font-family: "MinecraftTen";
+    text-decoration: none;
+    color: rgb(255, 255, 255);
     font-size: 24px;
     transition: color 0.3s;
 }
 
 .nav-links a:hover {
-    color: #ffffff;
+    color: #ff7300;
 }
 
 
@@ -350,7 +370,7 @@ a {
 }
 
 .article-container h2 {
-    font-family: "MinecraftTen";
+    font-family: "Minecraft-Seven";
     font-size: 1.8rem;
     color: #ff9500;
     border-bottom: 1px solid #444;
@@ -359,7 +379,7 @@ a {
 }
 
 .article-container h3 {
-    font-family: "MinecraftTen";
+    font-family: "Minecraft-Seven";
     font-size: 1.4rem;
     color: #fff;
     margin-top: 30px;
@@ -466,7 +486,7 @@ a {
     padding: 5px 10px;
     border-radius: 4px;
     cursor: pointer;
-    font-family: sans-serif;
+    font-family: "MinecraftTen", "NotoSansMerged-Regular";
     font-size: 0.8rem;
 }
 
