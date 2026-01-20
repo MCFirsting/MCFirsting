@@ -57,6 +57,8 @@
             แต่ละเฟรมคือสี่เหลี่ยมขนาด 16x16 พิกเซล โค้ดอนิเมชันภายในเกมจะกำหนดหมายเลขให้แต่ละสี่เหลี่ยม
             โดยเริ่มนับจากด้านบนสุดเป็น <strong>เฟรมที่ 0</strong>
         </p>
+
+        <img class="article-image" src="image/sculk_frames_numbered.png" alt="Sculk Frames Number">
         <p>
             โดยปกติแล้ว บล็อกทั้ง 6 ด้านจะแสดงเฟรมเดียวกันพร้อมกัน
             แต่เดี๋ยวเราจะมาคุยกันเรื่องการใส่อนิเมชันที่แตกต่างกันในแต่ละด้านทีหลังครับ
@@ -81,7 +83,8 @@
         <h2>โครงสร้าง Resource Pack สำหรับอนิเมชัน</h2>
         <p>นี่คือโครงสร้างพื้นฐานและเนื้อหาภายในสำหรับ Animation Pack ที่เรากำลังจะสร้างกันครับ:</p>
 
-        <img class="article-image" src="/tutorial/animated_block_texture/image/Navigate Animated Block Texture.png">
+        <img class="article-image" src="/tutorial/animated_block_texture/image/Navigate Animated Block Texture.png"
+            alt="Navigate Animated Block Texture">
 
         <p>
             ลองเปิด Resource Pack จากตัวอย่าง <strong>Vanilla Minecraft sample packs</strong> ดูนะครับ
@@ -93,7 +96,7 @@
                 <code>.png</code> ของบล็อกต่างๆ
             </li>
             <li>
-                เปิดไฟล์ <code>flipbook_texture.json</code> ขึ้นมาดูเนื้อหาข้างใน คุณจะเห็นรายชื่อ Texture แบบ Flipbook
+                เปิดไฟล์ <code>flipbook_textures.json</code> ขึ้นมาดูเนื้อหาข้างใน คุณจะเห็นรายชื่อ Texture แบบ Flipbook
                 จำนวนมาก
                 ลองสังเกตดูนะครับว่า Texture แต่ละอันมีการตั้งค่าที่แตกต่างกันออกไป
             </li>
@@ -145,7 +148,7 @@
         <table
             style="width: 100%; border-collapse: collapse; margin-top: 15px; background-color: #2b2b2b; color: #fff;">
             <thead>
-                <tr style="background-color: #4facfe; color: #000;">
+                <tr style="background-color: #444; color: #ffffff;">
                     <th style="padding: 10px; text-align: left; border: 1px solid #444;">ชื่อคุณสมบัติ</th>
                     <th style="padding: 10px; text-align: left; border: 1px solid #444;">คำอธิบาย</th>
                 </tr>
@@ -192,8 +195,8 @@
                 (บล็อกดินสีเขียว)</strong>
             ที่ทำเสร็จแล้ว (จากบทเรียน <a href="/tutorial/resource_packs/resource_packs.html"
                 style="color: #a5d6ff;">การสร้าง Resource Pack</a>)
-            หรือถ้าหาไม่เจอ ก็สามารถดาวน์โหลดได้จาก <a href="https://github.com/microsoft/minecraft-samples"
-                target="_blank" style="color: #a5d6ff;">Minecraft pack samples</a> ครับ
+            หรือสามารถดาวน์โหลดได้จาก <a href="https://github.com/microsoft/minecraft-samples" target="_blank"
+                style="color: #a5d6ff;">Minecraft pack samples</a> ครับ
         </p>
 
 
@@ -208,7 +211,7 @@
         <h3>1. สร้างไฟล์กำหนดค่า JSON</h3>
         <p>
             เข้าไปที่โฟลเดอร์ <code>textures</code> ใน <code>My_RESOURCE_Pack</code> ของคุณ
-            จากนั้นสร้างไฟล์ข้อความใหม่ชื่อ <code>flipbook_texture.json</code> และใส่โค้ดนี้ลงไปครับ:
+            จากนั้นสร้างไฟล์ข้อความใหม่ชื่อ <code>flipbook_textures.json</code> และใส่โค้ดนี้ลงไปครับ:
         </p>
 
         <div class="code-wrapper">
@@ -240,7 +243,8 @@
 
         <h3>3. แก้ไขรูปภาพ</h3>
         <p>
-            ให้เปิดไฟล์ <code>sculk.png</code> ในโปรแกรมแต่งภาพ (เช่น Paint.net, Photoshop, หรือ Pixel Studio)
+            ให้เปิดไฟล์ <code>sculk.png</code> ในโปรแกรมแต่งภาพ เช่น (Paint.net, Photoshop, Pixel
+            Studio) หรือ Blockbench
             แล้วลองแก้ไขลวดลายในแต่ละเฟรมให้ดูแตกต่างกันเล็กน้อยครับ
         </p>
 
@@ -255,7 +259,8 @@
             แล้วลองวางบล็อก Sculk ดูครับ มันควรจะขยับเปลี่ยนรูปร่างหน้าตาตามที่คุณวาดไว้ แบบนี้:
         </p>
 
-        <hr style="border: 0; border-top: 1px solid #444; margin: 30px 0;">
+        <img class="article-image" src="/tutorial/animated_block_texture/image/placed_edited_sculk_block.gif"
+            alt="Placed Edited Sculk Block" width="300">
 
         <p>
             ตอนนี้เราเริ่มเข้าใจแล้วว่า Flipbook animation ทำงานยังไงกับบล็อกที่มีอนิเมชันอยู่แล้ว
@@ -263,18 +268,15 @@
         </p>
 
 
-
-
         <h2>การใส่อนิเมชันให้บล็อกปกติ: แร่ลาพิส Lapis Lazuli Ore</h2>
         <p>
             คราวนี้เราจะมาต่อยอดจากเดิม โดยการเพิ่มอนิเมชันให้กับบล็อกที่ปกติแล้วไม่มีอนิเมชันอย่าง <strong>"แร่ลาพิส"
-                (Lapis
-                Ore)</strong> กันครับ
+                (Lapis Ore)</strong> กันครับ
         </p>
 
         <h3>1. อัปเดตไฟล์ JSON</h3>
         <p>
-            ให้แทนที่เนื้อหาเดิมในไฟล์ <code>flipbook_texture.json</code> ด้วยโค้ดชุดใหม่นี้ครับ:
+            ให้แทนที่เนื้อหาเดิมในไฟล์ <code>flipbook_textures.json</code> ด้วยโค้ดชุดใหม่นี้ครับ:
         </p>
 
         <div class="code-wrapper">
@@ -310,7 +312,9 @@
             รูปภาพดั้งเดิมของแร่ลาพิส (Vanilla lapis ore) นั้นมีขนาด <strong>16 x 16 พิกเซล</strong> หน้าตาแบบนี้ครับ:
         </p>
 
-
+        <img class="article-image"
+            src="https://learn.microsoft.com/en-us/minecraft/creator/documents/media/createanimatedblocktexture/lapis_ore.png?view=minecraft-bedrock-stable"
+            width="80">
 
         <p>
             แต่ในเมื่อเรากำหนดในโค้ด JSON ว่าจะมี <strong>6 เฟรม</strong> เราจำเป็นต้องขยายความสูงของรูปภาพ (Canvas
@@ -322,10 +326,11 @@
                 <strong>สูตรคำนวณ:</strong> 16 พิกเซล (ความสูงเดิม) x 6 (จำนวนเฟรม) = <strong>96 พิกเซล</strong>
             </p>
         </div>
+        <img class="article-image" src="/tutorial/animated_block_texture/image/lapis_ore_16_by_96.png"
+            alt="Lapis Ore 16 by 96">
         <p>
             ดังนั้น ให้เปิดไฟล์ <code>lapis_ore.png</code> ในโปรแกรมแต่งภาพ แล้วเปลี่ยนขนาดความสูงของ Canvas ให้เป็น
-            <strong>96
-                พิกเซล</strong> (ความกว้างคงไว้ที่ 16 เท่าเดิม)
+            <strong>96 พิกเซล</strong> (ความกว้างคงไว้ที่ 16 เท่าเดิม)
         </p>
 
         <h3>3. วาดเฟรมเพิ่ม</h3>
@@ -349,6 +354,8 @@
         <p>
             เสร็จแล้วก็เข้าเกมไปดูผลงานบล็อกลาพิสวิบวับของคุณได้เลย!
         </p>
+        <img class="article-image" src="/tutorial/animated_block_texture/image/placed_animated_lapis_ore.png"
+            alt="Placed Animated Lapis Ore" width="300">
 
         <h2>การใส่อนิเมชันให้บล็อกลูกเต๋า</h2>
         <p>
@@ -382,7 +389,7 @@
         <h3>2. แก้ไข JSON</h3>
         <p>
             ให้ไปที่ <code>resource pack > textures</code> ในโฟลเดอร์งานของคุณ จากนั้นเปิดไฟล์
-            <code>flipbook_texture.json</code>
+            <code>flipbook_textures.json</code>
             (หรือสร้างใหม่ถ้ายังไม่มี) แล้วเพิ่มโค้ดนี้ลงไปครับ:
         </p>
 
@@ -429,11 +436,12 @@
             ลองสังเกตดูที่บล็อกสีแดงในมือของคุณดูสิครับ ตอนนี้มันน่าจะกำลังเปลี่ยนตัวเลขไปเรื่อยๆ แล้ว!
         </p>
 
+        <img class="article-image" src="/tutorial/animated_block_texture/image/placed_animated_die_block.png"
+            alt="Placed Animated Die Block">
+
         <hr style="border: 0; border-top: 1px solid #444; margin: 30px 0;">
 
         <div style="margin-top: 40px;">
-
-
 
             <h2>อนิเมชันแบบหลายหน้า</h2>
             <p>
@@ -442,7 +450,7 @@
                 เพราะหลักการทำอนิเมชันของพวกมันเหมือนกันหมดครับ
             </p>
             <p>
-                ที่ผมต้องบอกไว้ก่อนก็เพื่อว่า เวลาที่คุณเข้าไปขุดคุ้ยหาโค้ดในไฟล์ <code>flipbook_texture.json</code>
+                ที่ผมต้องบอกไว้ก่อนก็เพื่อว่า เวลาที่คุณเข้าไปขุดคุ้ยหาโค้ดในไฟล์ <code>flipbook_textures.json</code>
                 หรือหารูปภาพในโฟลเดอร์ของ Vanilla sample pack คุณจะได้มองหาชื่อไฟล์ที่ตรงกับบรรทัด
                 <code>"flipbook_texture":</code>
                 ในโค้ดได้ถูกตัวครับ
@@ -466,7 +474,11 @@
                 </li>
             </ul>
 
+            <img class="article-image" src="/tutorial/animated_block_texture/image/placed_command_block_front.png"
+                width="300" alt="Placed Command Block Front">
 
+            <img class="article-image" src="/tutorial/animated_block_texture/image/placed_command_block_back.png"
+                width="300" alt="Placed Command Block Back">
 
             <h3>โค้ดกำหนดค่า</h3>
             <p>
@@ -524,12 +536,15 @@
                 เมื่อนำไฟล์ทั้งหมดมารวมกันใน Resource Pack บล็อก Command Block ของเราก็จะขยับได้รอบทิศทางแบบนี้ครับ:
             </p>
 
+            <img class="article-image" src="/tutorial/animated_block_texture/image/placed_edited_command_blocks.png"
+                alt="Placed Edited Command Blocks">
+
     </article>
 
     <footer>
         <h2>ช่องทางติดต่อ</h2>
         <div class="social-container">
-            <a class="social-icons" href="https://www.facebook.com/FPGTVMC/">
+            <a class="social-icons" href="https://www.facebook.com/AddonInsiderTH">
                 <img src="../../image/facebook-svgrepo-com.png" alt="Facebook">
             </a>
             <a class="social-icons" href="https://www.youtube.com/@MCFirsting">
