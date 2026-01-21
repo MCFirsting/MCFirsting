@@ -1,5 +1,6 @@
 {
     "accessibility.openChatEditedFiles": true,
     "chat.checkpoints.showFileChanges": true,
-    "chat.customAgentInSubagent.enabled": true
+    "chat.customAgentInSubagent.enabled": true,
+    "editor.formatOnSave": true
 }
