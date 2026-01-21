@@ -1,0 +1,241 @@
+<!DOCTYPE html>
+<html lang="th">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Variations Block Texture</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+    <nav class="navbar">
+        <div class="logo">
+            <a href="../../index.html"><img id="logo_mcfirsting" src="../../image/mcfirsting_logo.png" alt="Logo"></a>
+        </div>
+        <ul class="nav-links">
+            <li><a href="../../tutorial.html">Tutorial</a></li>
+            <li><a href="../../shop.html">Shop</a></li>
+        </ul>
+    </nav>
+
+    <header class="doc-header">
+        <div class="container">
+            <h1>การสร้าง Texture แบบสุ่มลวดลาย Variations Block Texture</h1>
+            <p style="text-align: center; color: #aaa;">เทคนิคการกำหนดน้ำหนักให้ Texture เพื่อพื้นผิวที่ดูเป็นธรรมชาติ
+            </p>
+        </div>
+    </header>
+
+    <article class="article-container">
+
+        <p>
+            <strong>Variations Textures</strong> คือเทคนิคการกำหนด Texture ที่ไม่ซ้ำกันให้กับบล็อกชนิดเดียวกัน
+            โดยระบบจะสุ่มเลือกจากชุดของภาพ (Array)
+            ตามน้ำหนัก (Weight) ที่เรากำหนด และอ้างอิงจากตำแหน่ง (Position) ของบล็อกนั้นๆ ในโลกเกม
+        </p>
+
+        <img class="article-image" src="/tutorial/variation_block_texture/image/Screenshot Dirt Variations.png"
+            alt="Dirt Variations">
+
+        <p>
+            ในบทเรียนนี้ คุณจะได้เรียนรู้วิธีสร้าง Variations Block Textures
+            เพื่อช่วยให้พื้นผิวหรือสภาพแวดล้อมในโลกของคุณดู <strong>เป็นธรรมชาติและสมจริงยิ่งขึ้น</strong>
+            (ไม่ดูเป็นตารางซ้ำๆ จนเกินไป)
+        </p>
+
+        <div
+            style="background-color: #2b2b2b; padding: 15px; border-radius: 8px; border-left: 4px solid #ff9500; margin: 20px 0;">
+            <h4 style="margin-top: 0; color: #ff9500;">สิ่งที่ต้องเตรียมตัวก่อนเริ่ม</h4>
+            <p>ขอแนะนำให้คุณศึกษาบทเรียนเหล่านี้มาก่อนนะครับ:</p>
+            <ul>
+                <li><a href="../getting_started/getting_started.html" style="color: #a5d6ff;">การเริ่มต้นพัฒนา
+                        Add-ons</a></li>
+                <li><a href="../resource_packs/resource_packs.html" style="color: #a5d6ff;">ความรู้เบื้องต้นเรื่อง
+                        Resource Pack</a></li>
+                <li><a href="../custom_blocks/custom_blocks.html" style="color: #a5d6ff;">การสร้าง Custom Block</a></li>
+            </ul>
+        </div>
+
+        <h2>การสร้าง Texture</h2>
+        <p>
+            ในการสร้าง Variations Texture คุณเพียงแค่ต้องกำหนดค่าในไฟล์ <code>terrain_texture.json</code> ของ Resource
+            Pack ครับ
+            โดย Texture ที่อยู่ในอาร์เรย์ <code>variations</code> จะต้องมีค่า <strong>weight (น้ำหนัก)</strong>
+            กำกับไว้เสมอ
+        </p>
+        <p>
+            หากไม่มีการกำหนดค่า weight เกมจะเลือก Texture <strong>ตัวแรก</strong> ในอาร์เรย์มาแสดงเสมอ
+            โดยไม่สนใจตำแหน่งของบล็อกครับ
+        </p>
+
+        <div
+            style="background-color: #2b2b2b; padding: 15px; border-radius: 8px; border-left: 4px solid #f0ad4e; margin: 20px 0;">
+            <h4 style="margin-top: 0; color: #f0ad4e;">หมายเหตุ</h4>
+            <ul>
+                <li>อาร์เรย์ variations สามารถบรรจุ Texture ได้สูงสุดไม่เกิน <strong>256 รูป</strong></li>
+                <li>ค่า <code>"weight"</code> ต้องอยู่ระหว่าง <strong>0.05 ถึง 1,000,000</strong></li>
+            </ul>
+        </div>
+
+        <p>นี่คือตัวอย่างภาพและการตั้งค่า Texture ของดิน (Dirt) แบบสุ่มลวดลายครับ:</p>
+
+        <img src="/tutorial/variation_block_texture/image/dirt_0.png" width="100" alt="Dirt Variation 0">
+        <img src="/tutorial/variation_block_texture/image/dirt_1.png" width="100" alt="Dirt Variation 1">
+        <img src="/tutorial/variation_block_texture/image/dirt_2.png" width="100" alt="Dirt Variation 2">
+        <img src="/tutorial/variation_block_texture/image/dirt_3.png" width="100" alt="Dirt Variation 3">
+        <img src="/tutorial/variation_block_texture/image/dirt_4.png" width="100" alt="Dirt Variation 4">
+        <img src="/tutorial/variation_block_texture/image/dirt_5.png" width="100" alt="Dirt Variation 5">
+        <img src="/tutorial/variation_block_texture/image/dirt_6.png" width="100" alt="Dirt Variation 6">
+        <img src="/tutorial/variation_block_texture/image/dirt_7.png" width="100" alt="Dirt Variation 7">
+        <img src="/tutorial/variation_block_texture/image/dirt_8.png" width="100" alt="Dirt Variation 8">
+        <img src="/tutorial/variation_block_texture/image/dirt_9.png" width="100" alt="Dirt Variation 9">
+
+        <div class="code-wrapper">
+            <pre><span class="token-punct">{</span>
+          <span class="token-key">"resource_pack_name"</span><span class="token-punct">:</span> <span class="token-string">"vanilla"</span><span class="token-punct">,</span>
+          <span class="token-key">"texture_name"</span><span class="token-punct">:</span> <span class="token-string">"atlas.terrain"</span><span class="token-punct">,</span>
+          <span class="token-key">"padding"</span><span class="token-punct">:</span> <span class="token-number">8</span><span class="token-punct">,</span>
+          <span class="token-key">"num_mip_levels"</span><span class="token-punct">:</span> <span class="token-number">4</span><span class="token-punct">,</span>
+          <span class="token-key">"texture_data"</span><span class="token-punct">:</span> <span class="token-punct">{</span>
+            <span class="token-key">"dirt_variations"</span><span class="token-punct">:</span> <span class="token-punct">{</span>
+              <span class="token-key">"textures"</span><span class="token-punct">:</span> <span class="token-punct">{</span>
+                <span class="token-key">"variations"</span><span class="token-punct">:</span> <span class="token-punct">[</span>
+                  <span class="token-punct">{</span> <span class="token-key">"path"</span><span class="token-punct">:</span> <span class="token-string">"textures/blocks/dirt_0"</span><span class="token-punct">,</span> <span class="token-key">"weight"</span><span class="token-punct">:</span> <span class="token-number">10</span> <span class="token-punct">}</span><span class="token-punct">,</span>
+                  <span class="token-punct">{</span> <span class="token-key">"path"</span><span class="token-punct">:</span> <span class="token-string">"textures/blocks/dirt_1"</span><span class="token-punct">,</span> <span class="token-key">"weight"</span><span class="token-punct">:</span> <span class="token-number">10</span> <span class="token-punct">}</span><span class="token-punct">,</span>
+                  <span class="token-punct">{</span> <span class="token-key">"path"</span><span class="token-punct">:</span> <span class="token-string">"textures/blocks/dirt_2"</span><span class="token-punct">,</span> <span class="token-key">"weight"</span><span class="token-punct">:</span> <span class="token-number">10</span> <span class="token-punct">}</span><span class="token-punct">,</span>
+                  <span class="token-punct">{</span> <span class="token-key">"path"</span><span class="token-punct">:</span> <span class="token-string">"textures/blocks/dirt_3"</span><span class="token-punct">,</span> <span class="token-key">"weight"</span><span class="token-punct">:</span> <span class="token-number">10</span> <span class="token-punct">}</span><span class="token-punct">,</span>
+                  <span class="token-punct">{</span> <span class="token-key">"path"</span><span class="token-punct">:</span> <span class="token-string">"textures/blocks/dirt_4"</span><span class="token-punct">,</span> <span class="token-key">"weight"</span><span class="token-punct">:</span> <span class="token-number">10</span> <span class="token-punct">}</span><span class="token-punct">,</span>
+                  <span class="token-punct">{</span> <span class="token-key">"path"</span><span class="token-punct">:</span> <span class="token-string">"textures/blocks/dirt_5"</span><span class="token-punct">,</span> <span class="token-key">"weight"</span><span class="token-punct">:</span> <span class="token-number">10</span> <span class="token-punct">}</span><span class="token-punct">,</span>
+                  <span class="token-punct">{</span> <span class="token-key">"path"</span><span class="token-punct">:</span> <span class="token-string">"textures/blocks/dirt_6"</span><span class="token-punct">,</span> <span class="token-key">"weight"</span><span class="token-punct">:</span> <span class="token-number">10</span> <span class="token-punct">}</span><span class="token-punct">,</span>
+                  <span class="token-punct">{</span> <span class="token-key">"path"</span><span class="token-punct">:</span> <span class="token-string">"textures/blocks/dirt_7"</span><span class="token-punct">,</span> <span class="token-key">"weight"</span><span class="token-punct">:</span> <span class="token-number">10</span> <span class="token-punct">}</span><span class="token-punct">,</span>
+                  <span class="token-punct">{</span> <span class="token-key">"path"</span><span class="token-punct">:</span> <span class="token-string">"textures/blocks/dirt_8"</span><span class="token-punct">,</span> <span class="token-key">"weight"</span><span class="token-punct">:</span> <span class="token-number">10</span> <span class="token-punct">}</span><span class="token-punct">,</span>
+                  <span class="token-punct">{</span> <span class="token-key">"path"</span><span class="token-punct">:</span> <span class="token-string">"textures/blocks/dirt_9"</span><span class="token-punct">,</span> <span class="token-key">"weight"</span><span class="token-punct">:</span> <span class="token-number">10</span> <span class="token-punct">}</span>
+                <span class="token-punct">]</span>
+              <span class="token-punct">}</span>
+            <span class="token-punct">}</span>
+          <span class="token-punct">}</span>
+        <span class="token-punct">}</span></pre>
+            <button class="copy-btn">คัดลอก</button>
+        </div>
+
+        <p>
+            จากอาร์เรย์ด้านบน เรามี Texture ดิน 10 รูป (เบอร์ 0-9) และแต่ละรูปมีน้ำหนักเท่ากันคือ 10
+            ซึ่งหมายความว่าแต่ละรูปมีโอกาส <strong>10% เท่าๆ กัน</strong> ที่จะถูกสุ่มเลือกมาแสดงผลครับ
+        </p>
+
+        <h2>การนำ Texture ไปใช้กับ Custom Block</h2>
+        <p>
+            หลังจากที่เรานิยาม Texture แบบ Variation ไว้แล้ว (ใน Resource Pack) ขั้นตอนต่อไปคือการสร้างไฟล์นิยามบล็อกใน
+            <strong>Behavior Pack</strong> ครับ
+        </p>
+        <p>
+            ให้สร้างไฟล์ JSON ขึ้นมา (เช่น <code>dirt_variations.json</code> ในโฟลเดอร์ <code>blocks</code>)
+            และใส่โค้ดดังนี้:
+        </p>
+
+        <div class="code-wrapper">
+            <pre><span class="token-punct">{</span> 
+          <span class="token-key">"format_version"</span><span class="token-punct">:</span> <span class="token-string">"1.21.110"</span><span class="token-punct">,</span> 
+          <span class="token-key">"minecraft:block"</span><span class="token-punct">:</span> <span class="token-punct">{</span>
+            <span class="token-key">"description"</span><span class="token-punct">:</span> <span class="token-punct">{</span>
+              <span class="token-key">"identifier"</span><span class="token-punct">:</span> <span class="token-string">"demo:dirt_variations"</span>
+            <span class="token-punct">}</span><span class="token-punct">,</span>
+            <span class="token-key">"components"</span><span class="token-punct">:</span> <span class="token-punct">{</span>
+              <span class="token-key">"minecraft:geometry"</span><span class="token-punct">:</span> <span class="token-string">"minecraft:geometry.full_block"</span><span class="token-punct">,</span>
+              <span class="token-key">"minecraft:material_instances"</span><span class="token-punct">:</span> <span class="token-punct">{</span>
+                <span class="token-key">"*"</span><span class="token-punct">:</span> <span class="token-punct">{</span>
+                  <span class="token-key">"texture"</span><span class="token-punct">:</span> <span class="token-string">"dirt_variations"</span><span class="token-punct">,</span>
+                  <span class="token-key">"render_method"</span><span class="token-punct">:</span> <span class="token-string">"opaque"</span>
+                <span class="token-punct">}</span>
+              <span class="token-punct">}</span><span class="token-punct">,</span>
+              <span class="token-key">"minecraft:item_visual"</span><span class="token-punct">:</span> <span class="token-punct">{</span>
+                <span class="token-key">"geometry"</span><span class="token-punct">:</span> <span class="token-string">"minecraft:geometry.full_block"</span><span class="token-punct">,</span>
+                <span class="token-key">"material_instances"</span><span class="token-punct">:</span> <span class="token-punct">{</span>
+                  <span class="token-key">"*"</span><span class="token-punct">:</span> <span class="token-punct">{</span>
+                    <span class="token-key">"texture"</span><span class="token-punct">:</span> <span class="token-string">"dirt_variations"</span><span class="token-punct">,</span>
+                    <span class="token-key">"render_method"</span><span class="token-punct">:</span> <span class="token-string">"opaque"</span>
+                  <span class="token-punct">}</span>
+                <span class="token-punct">}</span>
+              <span class="token-punct">}</span>
+            <span class="token-punct">}</span>
+          <span class="token-punct">}</span>
+        <span class="token-punct">}</span></pre>
+            <button class="copy-btn">คัดลอก</button>
+        </div>
+
+        <p>
+            สังเกตที่บรรทัด <code>"texture": "dirt_variations"</code> นะครับ ตรงนี้แหละคือการบอกให้บล็อกนี้ใช้ชุด
+            Texture
+            แบบสุ่มที่เรากำหนดไว้ก่อนหน้านี้
+        </p>
+
+        <p>และนี่คือหน้าตาของ Custom Block ของเราเมื่อวางเรียงกันลงไปในเกมครับ!</p>
+
+        <img class="article-image" src="/tutorial/variation_block_texture/image/Demo Dirt Variations.png"
+            alt="Demo Dirt Variations">
+
+        <h2>การแก้ไขปัญหาเบื้องต้น</h2>
+        <p>
+            มีข้อควรจำบางประการเกี่ยวกับ Variations Textures บน Custom Blocks ที่คุณควรทราบครับ:
+        </p>
+
+        <ul>
+            <li>
+                <strong>เวอร์ชันต้องถึง:</strong> ไฟล์ JSON ของบล็อก (ใน Behavior Pack) ต้องมีค่า
+                <code>format_version</code>
+                มากกว่าหรือเท่ากับ <strong>1.21.110</strong> มิฉะนั้นฟีเจอร์นี้จะไม่ทำงาน และเกมจะเลือก Texture
+                รูปแรกในอาร์เรย์มาแสดงเสมอ
+            </li>
+            <li>
+                <strong>ต้องเปิดการทดลอง:</strong> โลก (World) ของคุณจะต้องเปิดใช้งานตัวเลือกการทดลอง <strong>Upcoming
+                    Creator
+                    Features</strong> ด้วย
+            </li>
+        </ul>
+
+        <h3>ลูกเล่นเพิ่มเติม</h3>
+        <ul>
+            <li>
+                <strong>ภาพเคลื่อนไหวก็ทำได้:</strong> Texture ที่อยู่ในอาร์เรย์ <code>variations</code> สามารถเป็น
+                Texture
+                แบบเคลื่อนไหว (Animated) ได้ด้วยนะครับ!
+            </li>
+        </ul>
+
+        <div
+            style="background-color: #2b2b2b; padding: 15px; border-radius: 8px; border-left: 4px solid #4facfe; margin: 20px 0;">
+            <h4 style="margin-top: 0; color: #4facfe;">เคล็ดลับ</h4>
+            <p style="margin-bottom: 0;">
+                ลองเข้าไปดูบทเรียน <a href="../animated_block_texture/animated_block_texture.html"
+                    style="color: #a5d6ff;">การสร้าง Texture เคลื่อนไหว (Create an Animated Block Texture)</a>
+                เพื่อเรียนรู้วิธีทำได้เลยครับ
+            </p>
+        </div>
+    </article>
+
+    <footer>
+        <h2>ช่องทางติดต่อ</h2>
+        <div class="social-container">
+            <a class="social-icons" href="https://www.facebook.com/AddonInsiderTH">
+                <img src="../../image/facebook-svgrepo-com.png" alt="Facebook">
+            </a>
+            <a class="social-icons" href="https://www.youtube.com/@MCFirsting">
+                <img src="../../image/youtube-fill-svgrepo-com.png" alt="YouTube">
+            </a>
+            <a class="social-icons" href="https://discord.gg/tnqZCfz4wz">
+                <img src="../../image/discord-svgrepo-com.png" alt="Discord">
+            </a>
+            <a class="social-icons" href="https://github.com/MCFirsting">
+                <img src="../../image/github-svgrepo-com.png" alt="GitHub">
+            </a>
+            <a class="social-icons" href="https://www.tiktok.com/@mc_firsting">
+                <img src="../../image/tiktok-svgrepo-com.png" alt="TikTok">
+            </a>
+        </div>
+    </footer>
+
+    <script src="../getting_started/getting_started.js"></script>
+</body>
+
+</html>
