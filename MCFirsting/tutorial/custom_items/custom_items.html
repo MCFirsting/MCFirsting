@@ -1,0 +1,1098 @@
+<!DOCTYPE html>
+<html lang="th">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Custom Items</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+</head>
+
+<body>
+    <nav class="navbar">
+        <div class="logo">
+            <a href="../../index.html"><img id="logo_mcfirsting" src="../../image/mcfirsting_logo.png" alt="Logo"></a>
+        </div>
+        <ul class="nav-links">
+            <li><a href="../../tutorial.html">Tutorial</a></li>
+            <li><a href="../../shop.html">Shop</a></li>
+        </ul>
+    </nav>
+
+    <header class="doc-header">
+        <div class="container">
+            <h1>การสร้างไอเท็มแบบกำหนดเอง Custom Items</h1>
+            <p style="text-align: center; color: #aaa;">เปลี่ยนไอเดียให้เป็นไอเท็มในมือคุณ</p>
+        </div>
+    </header>
+
+    <article class="article-container">
+
+        <p>
+            เช่นเดียวกับที่คุณสามารถสร้างบล็อกและสิ่งมีชีวิต (Entities) ขึ้นมาเองได้ คุณก็สามารถสร้าง <strong>ไอเท็ม
+                (Items)</strong>
+            แบบกำหนดเองใน Minecraft ได้เช่นกันครับ!
+        </p>
+        <p>
+            ในบทช่วยสอนนี้ เราจะมาดูวิธีการทำกันครับ ว่าไอเท็มแต่ละประเภทต้องใช้ไฟล์แบบไหน
+            ต้องนำไฟล์เหล่านั้นไปวางไว้ตรงไหนใน Resource Pack และ Behavior Pack
+            รวมถึงต้องสร้างหรือแก้ไขไฟล์ JSON ตัวไหนบ้าง
+        </p>
+
+        <div
+            style="background-color: #3e2a2a; padding: 15px; border-radius: 8px; border-left: 4px solid #ff5555; margin: 25px 0;">
+            <h4 style="margin-top: 0; color: #ff5555;">⚠️ ข้อควรระวัง</h4>
+            <p>
+                เช่นเดียวกับ Entity และ Block ครับ ไฟล์สำหรับไอเท็มนั้นจะมี <strong>ชื่อเฉพาะ (หรือนามสกุลไฟล์)</strong>
+                ที่กำหนดไว้
+                และจำเป็นต้องถูกวางไว้ใน <strong>โฟลเดอร์หรือโฟลเดอร์ย่อยที่ถูกต้อง</strong> อย่างเคร่งครัด
+            </p>
+            <p style="margin-bottom: 0;">
+                หาก Add-ons ไอเท็มใหม่ของคุณใช้งานไม่ได้ สิ่งแรกที่ควรทำคือ
+                <strong>ตรวจสอบอีกครั้งว่าวางไฟล์ทุกอย่างถูกที่หรือไม่!</strong>
+            </p>
+        </div>
+
+        <div
+            style="background-color: #2b2b2b; padding: 15px; border-radius: 8px; border-left: 4px solid #4facfe; margin: 20px 0;">
+            <h4 style="margin-top: 0; color: #4facfe;">สิ่งที่ควรรู้ก่อนเริ่ม</h4>
+            <p>คุณควรทำความคุ้นเคยกับบทเรียนเหล่านี้มาก่อนที่จะเริ่มทำ Custom Items นะครับ:</p>
+            <ul style="line-height: 1.6;">
+                <li><a href="../getting_started/getting_started.html" style="color: #a5d6ff;">การเริ่มต้นพัฒนา
+                        Add-ons</a></li>
+                <li><a href="../resource_packs/resource_packs.html" style="color: #a5d6ff;">ความรู้เบื้องต้นเรื่อง
+                        Resource Pack</a></li>
+                <li><a href="../behavior_packs/behavior_packs.html" style="color: #a5d6ff;">ความรู้เบื้องต้นเรื่อง
+                        Behavior Pack</a></li>
+                <li><a href="../custom_blocks/custom_blocks.html" style="color: #a5d6ff;">การสร้าง Custom Block</a></li>
+            </ul>
+        </div>
+
+        <p>
+            นอกจากนี้ คุณอาจจะลองเข้าไปดูโครงสร้างไฟล์และโฟลเดอร์ของ <strong>Vanilla Minecraft Add-On Packs</strong>
+            (แพ็กต้นฉบับของเกม)
+            เพื่อดูตัวอย่างประกอบความเข้าใจได้อีกด้วยครับ
+        </p>
+
+        <hr style="border: 0; border-top: 1px solid #444; margin: 30px 0;">
+
+        <h2>ลงมือสร้างไอเท็มกันเถอะ!</h2>
+        <p>
+            เราจะมาลองสร้างไอเท็ม 4 อย่างที่ไม่มีอยู่ใน Minecraft ปกติ (Vanilla) กันครับ
+            โดยจะเรียงลำดับตามความซับซ้อนดังนี้:
+        </p>
+        <ol>
+            <li><strong>Goo</strong> (น้ำเมือก)</li>
+            <li><strong>Wrench</strong> (ประแจ)</li>
+            <li><strong>Crown</strong> (มงกุฎ)</li>
+            <li><strong>Custom Chestplate with Vanilla Armor Trim</strong>
+                (เกราะอกแบบสร้างเองที่รองรับระบบลวดลายชุดเกราะ)</li>
+        </ol>
+        <p>
+            และในตอนท้าย เราจะพูดถึงการทำไอเท็มแบบ <strong>ย้อมสีได้ (Dyeable custom items)</strong> กันด้วยครับ
+        </p>
+        <p>
+            คุณสามารถเลือกสร้าง Add-ons Packs แยกสำหรับแต่ละไอเท็ม หรือจะรวมหลายไอเท็มไว้ในแพ็กชุดเดียวกันก็ได้ครับ
+        </p>
+
+        <h3>กระบวนการทำงานทั่วไป</h3>
+        <p>นี่คือขั้นตอนมาตรฐานที่เราจะใช้ในการสร้างไอเท็มแต่ละชิ้นครับ:</p>
+        <ol>
+            <li>สร้างโฟลเดอร์ <strong>Behavior Pack</strong> และ <strong>Resource Pack</strong></li>
+            <li>สร้างโครงสร้างโฟลเดอร์และไฟล์สำหรับไอเท็มที่ต้องการ รวมถึงไฟล์ <code>manifest.json</code></li>
+            <li>คัดลอก (Copy) และวาง (Paste) เนื้อหาโค้ดของไอเท็มจากบทเรียนลงไปในไฟล์</li>
+            <li>ดาวน์โหลดและบันทึกไฟล์รูปภาพลงในตำแหน่งที่ถูกต้อง</li>
+            <li>คัดลอกหรือย้ายแพ็กที่เสร็จแล้วไปไว้ในโฟลเดอร์ <code>development_behavior_pack</code> และ
+                <code>development_resource_pack</code> ในโฟลเดอร์ <code>com.mojang</code> ของเครื่องคุณ
+            </li>
+            <li>เปิดเกม <strong>Minecraft: Bedrock Edition</strong></li>
+            <li>สร้างโลกใหม่ (Create World) โดยเปิดใช้งาน Behavior Pack และ Resource Pack ที่เราสร้าง</li>
+            <li>เลือกโหมด Creative หรือ Survival (ที่เปิด Cheats ไว้)</li>
+            <li>เข้าสู่โลกเกมและใช้คำสั่ง <code>/give @s demo:&lt;ชื่อไอเท็ม&gt;</code> เพื่อเสกไอเท็มของคุณออกมา</li>
+        </ol>
+
+        <div
+            style="background-color: #2b2b2b; padding: 15px; border-radius: 8px; border-left: 4px solid #4facfe; margin: 20px 0;">
+            <h4 style="margin-top: 0; color: #4facfe;">เคล็ดลับ</h4>
+            <p style="margin-bottom: 0;">
+                แม้ว่าในบทเรียนนี้เราจะเตรียมไฟล์รูปภาพและโมเดลไว้ให้แล้ว
+                แต่คุณสามารถแก้ไขหรือสร้างใหม่ทั้งหมดได้ด้วยโปรแกรม
+                <strong>Blockbench</strong> หรือโปรแกรมแก้ไขอื่นๆ ได้ตามใจชอบเลยครับ
+            </p>
+        </div>
+
+        <h3>ไฟล์ Manifest</h3>
+        <p>
+            ไฟล์ <code>manifest.json</code> ของแต่ละโปรเจกต์จะใช้แม่แบบที่คล้ายคลึงกัน (เหมือนกับในบทเรียน Resource Pack
+            และ
+            Behavior Pack ก่อนหน้านี้)
+            <strong>แต่อย่าลืมสร้าง UUID ใหม่สำหรับโปรเจกต์ของคุณเองด้วยนะครับ!</strong>
+        </p>
+
+        <h4>ตัวอย่าง Behavior Pack manifest.json:</h4>
+        <div class="code-wrapper">
+            <pre><span class="token-punct">{</span>
+          <span class="token-key">"format_version"</span><span class="token-punct">:</span> <span class="token-number">2</span><span class="token-punct">,</span>
+          <span class="token-key">"header"</span><span class="token-punct">:</span> <span class="token-punct">{</span>
+            <span class="token-key">"description"</span><span class="token-punct">:</span> <span class="token-string">"Custom Item Behavior Pack"</span><span class="token-punct">,</span>
+            <span class="token-key">"name"</span><span class="token-punct">:</span> <span class="token-string">"Custom Item Behavior Pack"</span><span class="token-punct">,</span>
+            <span class="token-key">"uuid"</span><span class="token-punct">:</span> <span class="token-string">"&lt;ADD YOUR OWN UUID&gt;"</span><span class="token-punct">,</span>
+            <span class="token-key">"version"</span><span class="token-punct">:</span> <span class="token-punct">[</span><span class="token-number">1</span><span class="token-punct">,</span> <span class="token-number">0</span><span class="token-punct">,</span> <span class="token-number">1</span><span class="token-punct">]</span><span class="token-punct">,</span>
+            <span class="token-key">"min_engine_version"</span><span class="token-punct">:</span> <span class="token-punct">[</span><span class="token-number">1</span><span class="token-punct">,</span> <span class="token-number">21</span><span class="token-punct">,</span> <span class="token-number">80</span><span class="token-punct">]</span>
+          <span class="token-punct">}</span><span class="token-punct">,</span>
+          <span class="token-key">"modules"</span><span class="token-punct">:</span> <span class="token-punct">[</span>
+            <span class="token-punct">{</span>
+              <span class="token-key">"description"</span><span class="token-punct">:</span> <span class="token-string">"Custom Item Behavior Pack"</span><span class="token-punct">,</span>
+              <span class="token-key">"type"</span><span class="token-punct">:</span> <span class="token-string">"data"</span><span class="token-punct">,</span>
+              <span class="token-key">"uuid"</span><span class="token-punct">:</span> <span class="token-string">"&lt;ADD YOUR OWN UUID&gt;"</span><span class="token-punct">,</span>
+              <span class="token-key">"version"</span><span class="token-punct">:</span> <span class="token-punct">[</span><span class="token-number">1</span><span class="token-punct">,</span> <span class="token-number">0</span><span class="token-punct">,</span> <span class="token-number">1</span><span class="token-punct">]</span>
+            <span class="token-punct">}</span>
+          <span class="token-punct">]</span>
+        <span class="token-punct">}</span></pre>
+            <button class="copy-btn">คัดลอก</button>
+        </div>
+
+        <h4>ตัวอย่าง Resource Pack manifest.json:</h4>
+        <div class="code-wrapper">
+            <pre><span class="token-punct">{</span>
+          <span class="token-key">"format_version"</span><span class="token-punct">:</span> <span class="token-number">2</span><span class="token-punct">,</span>
+          <span class="token-key">"header"</span><span class="token-punct">:</span> <span class="token-punct">{</span>
+            <span class="token-key">"description"</span><span class="token-punct">:</span> <span class="token-string">"Custom Item Resource Pack"</span><span class="token-punct">,</span>
+            <span class="token-key">"name"</span><span class="token-punct">:</span> <span class="token-string">"Custom Item Resource Pack"</span><span class="token-punct">,</span>
+            <span class="token-key">"uuid"</span><span class="token-punct">:</span> <span class="token-string">"&lt;ADD YOUR OWN UUID&gt;"</span><span class="token-punct">,</span>
+            <span class="token-key">"version"</span><span class="token-punct">:</span> <span class="token-punct">[</span><span class="token-number">1</span><span class="token-punct">,</span> <span class="token-number">0</span><span class="token-punct">,</span> <span class="token-number">1</span><span class="token-punct">]</span><span class="token-punct">,</span>
+            <span class="token-key">"min_engine_version"</span><span class="token-punct">:</span> <span class="token-punct">[</span><span class="token-number">1</span><span class="token-punct">,</span> <span class="token-number">21</span><span class="token-punct">,</span> <span class="token-number">80</span><span class="token-punct">]</span>
+          <span class="token-punct">}</span><span class="token-punct">,</span>
+          <span class="token-key">"modules"</span><span class="token-punct">:</span> <span class="token-punct">[</span>
+            <span class="token-punct">{</span>
+              <span class="token-key">"description"</span><span class="token-punct">:</span> <span class="token-string">"Custom Item Resource Pack"</span><span class="token-punct">,</span>
+              <span class="token-key">"type"</span><span class="token-punct">:</span> <span class="token-string">"resources"</span><span class="token-punct">,</span>
+              <span class="token-key">"uuid"</span><span class="token-punct">:</span> <span class="token-string">"&lt;ADD YOUR OWN UUID&gt;"</span><span class="token-punct">,</span>
+              <span class="token-key">"version"</span><span class="token-punct">:</span> <span class="token-punct">[</span><span class="token-number">1</span><span class="token-punct">,</span> <span class="token-number">0</span><span class="token-punct">,</span> <span class="token-number">1</span><span class="token-punct">]</span>
+            <span class="token-punct">}</span>
+          <span class="token-punct">]</span>
+        <span class="token-punct">}</span></pre>
+            <button class="copy-btn">คัดลอก</button>
+        </div>
+
+
+
+
+        <hr style="border: 0; border-top: 1px solid #444; margin: 40px 0;">
+
+        <h2>1. Goo (น้ำเมือก)</h2>
+        <p>
+            <strong>Goo</strong> เป็นไอเท็มแบบกำหนดเองที่ง่ายที่สุดครับ คือคุณไม่ได้สวมใส่หรือกินมัน
+            มันก็แค่กำมือของน้ำเมือกแปลกๆ เท่านั้นเอง
+            แต่มันมีประโยชน์มากสำหรับตรวจสอบว่า Add-ons Packs ของคุณทำงานได้ปกติหรือไม่ และเอาไว้ทดลองเรื่องขนาดกอง
+            (Stack size) และชื่อที่แสดงในเกม (Display name) ครับ
+        </p>
+
+        <h3>การตั้งค่า Behavior Pack</h3>
+        <p>
+            ให้สร้างไฟล์ชื่อ <code>goo.json</code> ในโฟลเดอร์ <code>development_behavior_pack/items/</code>
+            แล้วคัดลอก JSON ด้านล่างนี้ไปวางครับ:
+        </p>
+
+        <div class="code-wrapper">
+            <pre><span class="token-punct">{</span>
+          <span class="token-key">"format_version"</span><span class="token-punct">:</span> <span class="token-string">"1.21.80"</span><span class="token-punct">,</span>
+          <span class="token-key">"minecraft:item"</span><span class="token-punct">:</span> <span class="token-punct">{</span>
+            <span class="token-key">"description"</span><span class="token-punct">:</span> <span class="token-punct">{</span>
+              <span class="token-key">"identifier"</span><span class="token-punct">:</span> <span class="token-string">"demo:goo"</span><span class="token-punct">,</span>
+              <span class="token-key">"category"</span><span class="token-punct">:</span> <span class="token-string">"Items"</span>
+            <span class="token-punct">}</span><span class="token-punct">,</span>
+            <span class="token-key">"components"</span><span class="token-punct">:</span> <span class="token-punct">{</span>
+              <span class="token-key">"minecraft:max_stack_size"</span><span class="token-punct">:</span> <span class="token-number">16</span><span class="token-punct">,</span>
+              <span class="token-key">"minecraft:icon"</span><span class="token-punct">:</span> <span class="token-punct">{</span>
+                <span class="token-key">"texture"</span><span class="token-punct">:</span> <span class="token-string">"demo:goo"</span>
+              <span class="token-punct">}</span><span class="token-punct">,</span>
+              <span class="token-key">"minecraft:display_name"</span><span class="token-punct">:</span> <span class="token-punct">{</span>
+                <span class="token-key">"value"</span><span class="token-punct">:</span> <span class="token-string">"Weird Goo"</span>
+              <span class="token-punct">}</span>
+            <span class="token-punct">}</span>
+          <span class="token-punct">}</span>
+        <span class="token-punct">}</span></pre>
+            <button class="copy-btn">คัดลอก</button>
+        </div>
+
+        <h3>การตั้งค่า Resource Pack</h3>
+        <p>
+            ในฝั่ง Resource Pack เราต้องกำหนดว่าไอเท็ม <code>demo:goo</code> จะใช้รูปภาพไหน โดยการแก้ไขไฟล์
+            <code>item_texture.json</code>
+            ในโฟลเดอร์ <code>development_resource_pack/textures/</code> ดังนี้ครับ:
+        </p>
+
+        <div class="code-wrapper">
+            <pre><span class="token-punct">{</span>
+          <span class="token-key">"resource_pack_name"</span><span class="token-punct">:</span> <span class="token-string">"Goo Resource Pack"</span><span class="token-punct">,</span>
+          <span class="token-key">"texture_data"</span><span class="token-punct">:</span> <span class="token-punct">{</span>
+            <span class="token-key">"demo:goo"</span><span class="token-punct">:</span> <span class="token-punct">{</span>
+              <span class="token-key">"textures"</span><span class="token-punct">:</span> <span class="token-string">"textures/items/goo"</span>
+            <span class="token-punct">}</span>
+          <span class="token-punct">}</span>
+        <span class="token-punct">}</span></pre>
+            <button class="copy-btn">คัดลอก</button>
+        </div>
+
+        <h4>รูปภาพ Texture</h4>
+        <p>นี่คือไฟล์ PNG สำหรับใช้เป็น Texture ของ Goo ครับ:</p>
+
+        <img src="https://learn.microsoft.com/en-gb/minecraft/creator/documents/media/addcustomitems/goo.png?view=minecraft-bedrock-stable"
+            width="80" alt="Goo Texture">
+
+        <p>
+            ให้คัดลอกไฟล์ภาพที่ดาวน์โหลดมาไปวางไว้ที่โฟลเดอร์ <code>development_resource_pack/textures/items/</code>
+            นะครับ
+        </p>
+
+        <h3>ผลลัพธ์</h3>
+        <p>
+            หลังจากที่คุณสร้าง Packs ทั้งสองส่วนเสร็จแล้ว ให้เข้าไปในเกม Minecraft และลองเสก Goo ให้ตัวเอง
+
+        <div class="code-wrapper">
+            <pre>/give @s demo:goo</pre>
+            <button class="copy-btn">คัดลอก</button>
+        </div>
+        หน้าตามันควรจะออกมาเป็นแบบนี้ครับ:
+        </p>
+
+
+        <hr style="border: 0; border-top: 1px solid #444; margin: 40px 0;">
+
+        <h2>2. Wrench (ประแจยักษ์)</h2>
+        <p>
+            ประแจยักษ์สุดเท่! ความพิเศษของไอเท็มนี้คือมันมีไฟล์ Texture แยกกันครับ คือไฟล์สำหรับแสดงในช่องเก็บของ
+            (Hotbar) แบบ
+            2D
+            และไฟล์สำหรับแสดงเป็นโมเดล 3D เวลาที่คุณถือมันอยู่ในมือ
+        </p>
+
+        <h3>การตั้งค่า Behavior Pack</h3>
+        <p>
+            ให้สร้างไฟล์ <code>wrench.json</code> ในโฟลเดอร์ <code>development_behavior_pack/items/</code>
+            แล้ววางโค้ดนี้ลงไปครับ:
+        </p>
+
+        <div class="code-wrapper">
+            <pre><span class="token-punct">{</span>
+          <span class="token-key">"format_version"</span><span class="token-punct">:</span> <span class="token-string">"1.21.80"</span><span class="token-punct">,</span>
+          <span class="token-key">"minecraft:item"</span><span class="token-punct">:</span> <span class="token-punct">{</span>
+            <span class="token-key">"description"</span><span class="token-punct">:</span> <span class="token-punct">{</span>
+              <span class="token-key">"identifier"</span><span class="token-punct">:</span> <span class="token-string">"demo:wrench"</span><span class="token-punct">,</span>
+              <span class="token-key">"category"</span><span class="token-punct">:</span> <span class="token-string">"Items"</span>
+            <span class="token-punct">}</span><span class="token-punct">,</span>
+            <span class="token-key">"components"</span><span class="token-punct">:</span> <span class="token-punct">{</span>
+              <span class="token-key">"minecraft:max_stack_size"</span><span class="token-punct">:</span> <span class="token-number">16</span><span class="token-punct">,</span>
+              <span class="token-key">"minecraft:icon"</span><span class="token-punct">:</span> <span class="token-punct">{</span>
+                <span class="token-key">"texture"</span><span class="token-punct">:</span> <span class="token-string">"demo:wrench"</span>
+              <span class="token-punct">}</span><span class="token-punct">,</span>
+              <span class="token-key">"minecraft:wearable"</span><span class="token-punct">:</span> <span class="token-punct">{</span>
+                <span class="token-key">"dispensable"</span><span class="token-punct">:</span> <span class="token-boolean">true</span><span class="token-punct">,</span>
+                <span class="token-key">"slot"</span><span class="token-punct">:</span> <span class="token-string">"slot.weapon.offhand"</span>
+              <span class="token-punct">}</span>
+            <span class="token-punct">}</span>
+          <span class="token-punct">}</span>
+        <span class="token-punct">}</span></pre>
+            <button class="copy-btn">คัดลอก</button>
+        </div>
+
+        <h3>การตั้งค่า Resource Pack</h3>
+        <p>สำหรับ Wrench เราต้องสร้างไฟล์หลายส่วนใน Resource Pack เพื่อประกอบร่างมันเข้าด้วยกันครับ</p>
+
+        <h4>1. ไฟล์ Attachable (กำหนดการยึดติดกับตัวละคร)</h4>
+        <p>
+            สร้างไฟล์ <code>wrench.player.json</code> ในโฟลเดอร์ <code>development_resource_pack/attachables/</code>
+            (ถ้าไม่มีโฟลเดอร์ attachables ให้สร้างขึ้นมาใหม่ครับ):
+        </p>
+
+        <div class="code-wrapper">
+            <pre><span class="token-punct">{</span>
+          <span class="token-key">"format_version"</span><span class="token-punct">:</span> <span class="token-string">"1.20.30"</span><span class="token-punct">,</span>
+          <span class="token-key">"minecraft:attachable"</span><span class="token-punct">:</span> <span class="token-punct">{</span>
+            <span class="token-key">"description"</span><span class="token-punct">:</span> <span class="token-punct">{</span>
+              <span class="token-key">"identifier"</span><span class="token-punct">:</span> <span class="token-string">"demo:wrench"</span><span class="token-punct">,</span>
+              <span class="token-key">"item"</span><span class="token-punct">:</span> <span class="token-punct">{</span> <span class="token-string">"demo:wrench"</span><span class="token-punct">:</span> <span class="token-string">"query.is_owner_identifier_any('minecraft:player')"</span> <span class="token-punct">}</span><span class="token-punct">,</span>
+              <span class="token-key">"materials"</span><span class="token-punct">:</span> <span class="token-punct">{</span>
+                <span class="token-key">"default"</span><span class="token-punct">:</span> <span class="token-string">"entity"</span><span class="token-punct">,</span>
+                <span class="token-key">"enchanted"</span><span class="token-punct">:</span> <span class="token-string">"entity_alphatest_glint"</span>
+              <span class="token-punct">}</span><span class="token-punct">,</span>
+              <span class="token-key">"textures"</span><span class="token-punct">:</span> <span class="token-punct">{</span>
+                <span class="token-key">"default"</span><span class="token-punct">:</span> <span class="token-string">"textures/items/wrench"</span><span class="token-punct">,</span>
+                <span class="token-key">"enchanted"</span><span class="token-punct">:</span> <span class="token-string">"textures/misc/enchanted_item_glint"</span>
+              <span class="token-punct">}</span><span class="token-punct">,</span>
+              <span class="token-key">"geometry"</span><span class="token-punct">:</span> <span class="token-punct">{</span>
+                <span class="token-key">"default"</span><span class="token-punct">:</span> <span class="token-string">"geometry.wrench"</span>
+              <span class="token-punct">}</span><span class="token-punct">,</span>
+              <span class="token-key">"animations"</span><span class="token-punct">:</span> <span class="token-punct">{</span>
+                <span class="token-key">"hold_first_person"</span><span class="token-punct">:</span> <span class="token-string">"animation.steve_head.hold_first_person"</span><span class="token-punct">,</span>
+                <span class="token-key">"hold_third_person"</span><span class="token-punct">:</span> <span class="token-string">"animation.steve_head.hold_third_person"</span>
+              <span class="token-punct">}</span><span class="token-punct">,</span>
+              <span class="token-key">"scripts"</span><span class="token-punct">:</span> <span class="token-punct">{</span>
+                <span class="token-key">"animate"</span><span class="token-punct">:</span> <span class="token-punct">[</span>
+                  <span class="token-punct">{</span>
+                    <span class="token-key">"hold_first_person"</span><span class="token-punct">:</span> <span class="token-string">"context.is_first_person == 1.0"</span>
+                  <span class="token-punct">}</span><span class="token-punct">,</span>
+                  <span class="token-punct">{</span>
+                    <span class="token-key">"hold_third_person"</span><span class="token-punct">:</span> <span class="token-string">"context.is_first_person == 0.0"</span>
+                  <span class="token-punct">}</span>
+                <span class="token-punct">]</span>
+              <span class="token-punct">}</span><span class="token-punct">,</span>
+              <span class="token-key">"render_controllers"</span><span class="token-punct">:</span> <span class="token-punct">[</span><span class="token-string">"controller.render.item_default"</span><span class="token-punct">]</span>
+            <span class="token-punct">}</span>
+          <span class="token-punct">}</span>
+        <span class="token-punct">}</span></pre>
+            <button class="copy-btn">คัดลอก</button>
+        </div>
+
+        <h4>2. ไฟล์โมเดล 3D Geometry</h4>
+        <p>
+            สร้างไฟล์ <code>wrench.geo.json</code> ในโฟลเดอร์ <code>development_resource_pack/models/entity/</code>
+            (สร้างโฟลเดอร์ models และ entity ซ้อนกันตามลำดับ):
+        </p>
+
+        <div class="code-wrapper">
+            <pre><span class="token-punct">{</span>
+          <span class="token-key">"format_version"</span><span class="token-punct">:</span> <span class="token-string">"1.16.0"</span><span class="token-punct">,</span>
+          <span class="token-key">"minecraft:geometry"</span><span class="token-punct">:</span> <span class="token-punct">[</span>
+            <span class="token-punct">{</span>
+              <span class="token-key">"description"</span><span class="token-punct">:</span> <span class="token-punct">{</span>
+                <span class="token-key">"identifier"</span><span class="token-punct">:</span> <span class="token-string">"geometry.wrench"</span><span class="token-punct">,</span>
+                <span class="token-key">"texture_width"</span><span class="token-punct">:</span> <span class="token-number">32</span><span class="token-punct">,</span>
+                <span class="token-key">"texture_height"</span><span class="token-punct">:</span> <span class="token-number">32</span><span class="token-punct">,</span>
+                <span class="token-key">"visible_bounds_width"</span><span class="token-punct">:</span> <span class="token-number">3</span><span class="token-punct">,</span>
+                <span class="token-key">"visible_bounds_height"</span><span class="token-punct">:</span> <span class="token-number">4</span><span class="token-punct">,</span>
+                <span class="token-key">"visible_bounds_offset"</span><span class="token-punct">:</span> <span class="token-punct">[</span><span class="token-number">0</span><span class="token-punct">,</span> <span class="token-number">1</span><span class="token-punct">,</span> <span class="token-number">0</span><span class="token-punct">]</span>
+              <span class="token-punct">}</span><span class="token-punct">,</span>
+              <span class="token-key">"bones"</span><span class="token-punct">:</span> <span class="token-punct">[</span>
+                <span class="token-punct">{</span>
+                  <span class="token-key">"name"</span><span class="token-punct">:</span> <span class="token-string">"bb_main"</span><span class="token-punct">,</span>
+                  <span class="token-key">"pivot"</span><span class="token-punct">:</span> <span class="token-punct">[</span><span class="token-number">0.1</span><span class="token-punct">,</span> <span class="token-number">19</span><span class="token-punct">,</span> <span class="token-number">-6</span><span class="token-punct">]</span><span class="token-punct">,</span>
+                  <span class="token-key">"rotation"</span><span class="token-punct">:</span> <span class="token-punct">[</span><span class="token-number">125</span><span class="token-punct">,</span> <span class="token-number">0</span><span class="token-punct">,</span> <span class="token-number">0</span><span class="token-punct">]</span><span class="token-punct">,</span>
+                  <span class="token-key">"binding"</span><span class="token-punct">:</span> <span class="token-string">"q.item_slot_to_bone_name(context.item_slot)"</span><span class="token-punct">,</span>
+                  <span class="token-key">"cubes"</span><span class="token-punct">:</span> <span class="token-punct">[</span>
+                    <span class="token-punct">{</span><span class="token-key">"origin"</span><span class="token-punct">:</span> <span class="token-punct">[</span><span class="token-number">-0.9</span><span class="token-punct">,</span> <span class="token-number">9</span><span class="token-punct">,</span> <span class="token-number">-8</span><span class="token-punct">]</span><span class="token-punct">,</span> <span class="token-key">"size"</span><span class="token-punct">:</span> <span class="token-punct">[</span><span class="token-number">2</span><span class="token-punct">,</span> <span class="token-number">16</span><span class="token-punct">,</span> <span class="token-number">3</span><span class="token-punct">]</span><span class="token-punct">,</span> <span class="token-key">"uv"</span><span class="token-punct">:</span> <span class="token-punct">[</span><span class="token-number">0</span><span class="token-punct">,</span> <span class="token-number">13</span><span class="token-punct">]</span><span class="token-punct">}</span><span class="token-punct">,</span>
+                    <span class="token-punct">{</span><span class="token-key">"origin"</span><span class="token-punct">:</span> <span class="token-punct">[</span><span class="token-number">-0.9</span><span class="token-punct">,</span> <span class="token-number">25</span><span class="token-punct">,</span> <span class="token-number">-11</span><span class="token-punct">]</span><span class="token-punct">,</span> <span class="token-key">"size"</span><span class="token-punct">:</span> <span class="token-punct">[</span><span class="token-number">2</span><span class="token-punct">,</span> <span class="token-number">4</span><span class="token-punct">,</span> <span class="token-number">9</span><span class="token-punct">]</span><span class="token-punct">,</span> <span class="token-key">"uv"</span><span class="token-punct">:</span> <span class="token-punct">[</span><span class="token-number">0</span><span class="token-punct">,</span> <span class="token-number">0</span><span class="token-punct">]</span><span class="token-punct">}</span><span class="token-punct">,</span>
+                    <span class="token-punct">{</span><span class="token-key">"origin"</span><span class="token-punct">:</span> <span class="token-punct">[</span><span class="token-number">-0.9</span><span class="token-punct">,</span> <span class="token-number">29</span><span class="token-punct">,</span> <span class="token-number">-5</span><span class="token-punct">]</span><span class="token-punct">,</span> <span class="token-key">"size"</span><span class="token-punct">:</span> <span class="token-punct">[</span><span class="token-number">2</span><span class="token-punct">,</span> <span class="token-number">2</span><span class="token-punct">,</span> <span class="token-number">3</span><span class="token-punct">]</span><span class="token-punct">,</span> <span class="token-key">"uv"</span><span class="token-punct">:</span> <span class="token-punct">[</span><span class="token-number">13</span><span class="token-punct">,</span> <span class="token-number">0</span><span class="token-punct">]</span><span class="token-punct">}</span><span class="token-punct">,</span>
+                    <span class="token-punct">{</span><span class="token-key">"origin"</span><span class="token-punct">:</span> <span class="token-punct">[</span><span class="token-number">-0.9</span><span class="token-punct">,</span> <span class="token-number">29</span><span class="token-punct">,</span> <span class="token-number">-11</span><span class="token-punct">]</span><span class="token-punct">,</span> <span class="token-key">"size"</span><span class="token-punct">:</span> <span class="token-punct">[</span><span class="token-number">2</span><span class="token-punct">,</span> <span class="token-number">1</span><span class="token-punct">,</span> <span class="token-number">3</span><span class="token-punct">]</span><span class="token-punct">,</span> <span class="token-key">"uv"</span><span class="token-punct">:</span> <span class="token-punct">[</span><span class="token-number">10</span><span class="token-punct">,</span> <span class="token-number">13</span><span class="token-punct">]</span><span class="token-punct">}</span><span class="token-punct">,</span>
+                    <span class="token-punct">{</span><span class="token-key">"origin"</span><span class="token-punct">:</span> <span class="token-punct">[</span><span class="token-number">-0.9</span><span class="token-punct">,</span> <span class="token-number">30</span><span class="token-punct">,</span> <span class="token-number">-10</span><span class="token-punct">]</span><span class="token-punct">,</span> <span class="token-key">"size"</span><span class="token-punct">:</span> <span class="token-punct">[</span><span class="token-number">2</span><span class="token-punct">,</span> <span class="token-number">1</span><span class="token-punct">,</span> <span class="token-number">2</span><span class="token-punct">]</span><span class="token-punct">,</span> <span class="token-key">"uv"</span><span class="token-punct">:</span> <span class="token-punct">[</span><span class="token-number">10</span><span class="token-punct">,</span> <span class="token-number">17</span><span class="token-punct">]</span><span class="token-punct">}</span><span class="token-punct">,</span>
+                    <span class="token-punct">{</span><span class="token-key">"origin"</span><span class="token-punct">:</span> <span class="token-punct">[</span><span class="token-number">-0.9</span><span class="token-punct">,</span> <span class="token-number">31</span><span class="token-punct">,</span> <span class="token-number">-5</span><span class="token-punct">]</span><span class="token-punct">,</span> <span class="token-key">"size"</span><span class="token-punct">:</span> <span class="token-punct">[</span><span class="token-number">2</span><span class="token-punct">,</span> <span class="token-number">1</span><span class="token-punct">,</span> <span class="token-number">3</span><span class="token-punct">]</span><span class="token-punct">,</span> <span class="token-key">"uv"</span><span class="token-punct">:</span> <span class="token-punct">[</span><span class="token-number">13</span><span class="token-punct">,</span> <span class="token-number">5</span><span class="token-punct">]</span><span class="token-punct">}</span><span class="token-punct">,</span>
+                    <span class="token-punct">{</span><span class="token-key">"origin"</span><span class="token-punct">:</span> <span class="token-punct">[</span><span class="token-number">-0.9</span><span class="token-punct">,</span> <span class="token-number">32</span><span class="token-punct">,</span> <span class="token-number">-5</span><span class="token-punct">]</span><span class="token-punct">,</span> <span class="token-key">"size"</span><span class="token-punct">:</span> <span class="token-punct">[</span><span class="token-number">2</span><span class="token-punct">,</span> <span class="token-number">1</span><span class="token-punct">,</span> <span class="token-number">2</span><span class="token-punct">]</span><span class="token-punct">,</span> <span class="token-key">"uv"</span><span class="token-punct">:</span> <span class="token-punct">[</span><span class="token-number">0</span><span class="token-punct">,</span> <span class="token-number">6</span><span class="token-punct">]</span><span class="token-punct">}</span><span class="token-punct">,</span>
+                    <span class="token-punct">{</span><span class="token-key">"origin"</span><span class="token-punct">:</span> <span class="token-punct">[</span><span class="token-number">-0.9</span><span class="token-punct">,</span> <span class="token-number">31</span><span class="token-punct">,</span> <span class="token-number">-9</span><span class="token-punct">]</span><span class="token-punct">,</span> <span class="token-key">"size"</span><span class="token-punct">:</span> <span class="token-punct">[</span><span class="token-number">2</span><span class="token-punct">,</span> <span class="token-number">1</span><span class="token-punct">,</span> <span class="token-number">1</span><span class="token-punct">]</span><span class="token-punct">,</span> <span class="token-key">"uv"</span><span class="token-punct">:</span> <span class="token-punct">[</span><span class="token-number">17</span><span class="token-punct">,</span> <span class="token-number">19</span><span class="token-punct">]</span><span class="token-punct">}</span><span class="token-punct">,</span>
+                    <span class="token-punct">{</span><span class="token-key">"origin"</span><span class="token-punct">:</span> <span class="token-punct">[</span><span class="token-number">-0.9</span><span class="token-punct">,</span> <span class="token-number">33</span><span class="token-punct">,</span> <span class="token-number">-5</span><span class="token-punct">]</span><span class="token-punct">,</span> <span class="token-key">"size"</span><span class="token-punct">:</span> <span class="token-punct">[</span><span class="token-number">2</span><span class="token-punct">,</span> <span class="token-number">1</span><span class="token-punct">,</span> <span class="token-number">1</span><span class="token-punct">]</span><span class="token-punct">,</span> <span class="token-key">"uv"</span><span class="token-punct">:</span> <span class="token-punct">[</span><span class="token-number">16</span><span class="token-punct">,</span> <span class="token-number">17</span><span class="token-punct">]</span><span class="token-punct">}</span><span class="token-punct">,</span>
+                    <span class="token-punct">{</span><span class="token-key">"origin"</span><span class="token-punct">:</span> <span class="token-punct">[</span><span class="token-number">-0.9</span><span class="token-punct">,</span> <span class="token-number">24</span><span class="token-punct">,</span> <span class="token-number">-5</span><span class="token-punct">]</span><span class="token-punct">,</span> <span class="token-key">"size"</span><span class="token-punct">:</span> <span class="token-punct">[</span><span class="token-number">2</span><span class="token-punct">,</span> <span class="token-number">1</span><span class="token-punct">,</span> <span class="token-number">2</span><span class="token-punct">]</span><span class="token-punct">,</span> <span class="token-key">"uv"</span><span class="token-punct">:</span> <span class="token-punct">[</span><span class="token-number">0</span><span class="token-punct">,</span> <span class="token-number">3</span><span class="token-punct">]</span><span class="token-punct">}</span><span class="token-punct">,</span>
+                    <span class="token-punct">{</span><span class="token-key">"origin"</span><span class="token-punct">:</span> <span class="token-punct">[</span><span class="token-number">-0.9</span><span class="token-punct">,</span> <span class="token-number">24</span><span class="token-punct">,</span> <span class="token-number">-10</span><span class="token-punct">]</span><span class="token-punct">,</span> <span class="token-key">"size"</span><span class="token-punct">:</span> <span class="token-punct">[</span><span class="token-number">2</span><span class="token-punct">,</span> <span class="token-number">1</span><span class="token-punct">,</span> <span class="token-number">2</span><span class="token-punct">]</span><span class="token-punct">,</span> <span class="token-key">"uv"</span><span class="token-punct">:</span> <span class="token-punct">[</span><span class="token-number">0</span><span class="token-punct">,</span> <span class="token-number">0</span><span class="token-punct">]</span><span class="token-punct">}</span><span class="token-punct">,</span>
+                    <span class="token-punct">{</span><span class="token-key">"origin"</span><span class="token-punct">:</span> <span class="token-punct">[</span><span class="token-number">-0.9</span><span class="token-punct">,</span> <span class="token-number">23</span><span class="token-punct">,</span> <span class="token-number">-5</span><span class="token-punct">]</span><span class="token-punct">,</span> <span class="token-key">"size"</span><span class="token-punct">:</span> <span class="token-punct">[</span><span class="token-number">2</span><span class="token-punct">,</span> <span class="token-number">1</span><span class="token-punct">,</span> <span class="token-number">1</span><span class="token-punct">]</span><span class="token-punct">,</span> <span class="token-key">"uv"</span><span class="token-punct">:</span> <span class="token-punct">[</span><span class="token-number">17</span><span class="token-punct">,</span> <span class="token-number">13</span><span class="token-punct">]</span><span class="token-punct">}</span><span class="token-punct">,</span>
+                    <span class="token-punct">{</span><span class="token-key">"origin"</span><span class="token-punct">:</span> <span class="token-punct">[</span><span class="token-number">-0.9</span><span class="token-punct">,</span> <span class="token-number">23</span><span class="token-punct">,</span> <span class="token-number">-9</span><span class="token-punct">]</span><span class="token-punct">,</span> <span class="token-key">"size"</span><span class="token-punct">:</span> <span class="token-punct">[</span><span class="token-number">2</span><span class="token-punct">,</span> <span class="token-number">1</span><span class="token-punct">,</span> <span class="token-number">1</span><span class="token-punct">]</span><span class="token-punct">,</span> <span class="token-key">"uv"</span><span class="token-punct">:</span> <span class="token-punct">[</span><span class="token-number">7</span><span class="token-punct">,</span> <span class="token-number">13</span><span class="token-punct">]</span><span class="token-punct">}</span>
+                  <span class="token-punct">]</span>
+                <span class="token-punct">}</span>
+              <span class="token-punct">]</span>
+            <span class="token-punct">}</span>
+          <span class="token-punct">]</span>
+        <span class="token-punct">}</span></pre>
+            <button class="copy-btn">คัดลอก</button>
+        </div>
+
+        <h4>3. ไฟล์รูปภาพ</h4>
+        <p>เราต้องการไฟล์ 2 รูปครับ ให้ดาวน์โหลดแล้วนำไปวางที่โฟลเดอร์
+            <code>development_resource_pack/textures/items</code>
+        </p>
+
+        <p>
+            <strong>1. ไอคอน (wrench_ico.png):</strong> สำหรับแสดงในช่องเก็บของ
+            <br>
+            <img src="https://learn.microsoft.com/en-gb/minecraft/creator/documents/media/addcustomitems/wrench_ico.png?view=minecraft-bedrock-stable"
+                alt="wrench_ico.png" width="80">
+        </p>
+
+        <p>
+            <strong>2. สกินโมเดล (wrench.png):</strong> สำหรับแสดงบนโมเดล 3D
+            <br>
+
+            <img src="https://learn.microsoft.com/en-gb/minecraft/creator/documents/media/addcustomitems/wrench.png?view=minecraft-bedrock-stable"
+                alt="wrench_ico.png" width="80">
+        </p>
+
+        <h4>4. กำหนด Texture ไอเท็ม</h4>
+        <p>
+            สุดท้าย ให้กลับไปแก้ไขไฟล์ <code>item_texture.json</code> ในโฟลเดอร์ <code>textures</code>
+            เพื่อเพิ่มการอ้างอิงของ
+            wrench เข้าไปครับ:
+        </p>
+
+        <div class="code-wrapper">
+            <pre><span class="token-punct">{</span>
+          <span class="token-key">"resource_pack_name"</span><span class="token-punct">:</span> <span class="token-string">"Wrench Resource Pack"</span><span class="token-punct">,</span>
+          <span class="token-key">"texture_data"</span><span class="token-punct">:</span> <span class="token-punct">{</span>
+            <span class="token-key">"demo:wrench"</span><span class="token-punct">:</span> <span class="token-punct">{</span>
+              <span class="token-key">"textures"</span><span class="token-punct">:</span> <span class="token-string">"textures/items/wrench_ico"</span>
+            <span class="token-punct">}</span>
+          <span class="token-punct">}</span>
+        <span class="token-punct">}</span></pre>
+            <button class="copy-btn">คัดลอก</button>
+        </div>
+        <p><em>(สังเกตว่าในไฟล์นี้เราลิงก์ไปที่ <code>wrench_ico</code> นะครับ
+                เพราะเราต้องการให้ไอคอนในช่องเก็บของเป็นรูป 2D
+                ส่วนโมเดล 3D มันจะไปดึงรูป <code>wrench</code> จากไฟล์ attachables เองครับ)</em></p>
+
+        <h3>ผลลัพธ์ของ Wrench</h3>
+        <p>
+            เมื่อเข้าเกมแล้วเสก <code>demo:wrench</code> ออกมา คุณจะเห็นว่าในมือตัวละครถือประแจยักษ์ 3D เท่ๆ แบบนี้ครับ:
+        </p>
+
+
+
+
+        <hr style="border: 0; border-top: 1px solid #444; margin: 40px 0;">
+
+        <h2>3. Crown (มงกุฎ)</h2>
+        <p>
+            เราจะมาสร้างมงกุฎราชากันครับ โดยใช้คุณสมบัติการสวมใส่แบบหมวก (Helmet) แต่เปลี่ยนรูปร่างหน้าตาใหม่หมด
+        </p>
+
+        <h3>การตั้งค่า Behavior Pack</h3>
+        <p>
+            สร้างไฟล์ <code>crown.json</code> ในโฟลเดอร์ <code>development_behavior_pack/items/</code>
+            และวางโค้ดนี้ครับ:
+        </p>
+
+        <div class="code-wrapper">
+            <pre><span class="token-punct">{</span>
+          <span class="token-key">"format_version"</span><span class="token-punct">:</span> <span class="token-string">"1.21.80"</span><span class="token-punct">,</span>
+          <span class="token-key">"minecraft:item"</span><span class="token-punct">:</span> <span class="token-punct">{</span>
+            <span class="token-key">"description"</span><span class="token-punct">:</span> <span class="token-punct">{</span>
+              <span class="token-key">"identifier"</span><span class="token-punct">:</span> <span class="token-string">"demo:crown"</span><span class="token-punct">,</span>
+              <span class="token-key">"category"</span><span class="token-punct">:</span> <span class="token-string">"Items"</span>
+            <span class="token-punct">}</span><span class="token-punct">,</span>
+            <span class="token-key">"components"</span><span class="token-punct">:</span> <span class="token-punct">{</span>
+              <span class="token-key">"minecraft:max_stack_size"</span><span class="token-punct">:</span> <span class="token-number">1</span><span class="token-punct">,</span>
+              <span class="token-key">"minecraft:icon"</span><span class="token-punct">:</span> <span class="token-punct">{</span>
+                <span class="token-key">"texture"</span><span class="token-punct">:</span> <span class="token-string">"demo:crown"</span>
+              <span class="token-punct">}</span><span class="token-punct">,</span>
+              <span class="token-key">"minecraft:wearable"</span><span class="token-punct">:</span> <span class="token-punct">{</span>
+                <span class="token-key">"dispensable"</span><span class="token-punct">:</span> <span class="token-boolean">true</span><span class="token-punct">,</span>
+                <span class="token-key">"slot"</span><span class="token-punct">:</span> <span class="token-string">"slot.armor.head"</span>
+              <span class="token-punct">}</span>
+            <span class="token-punct">}</span>
+          <span class="token-punct">}</span>
+        <span class="token-punct">}</span></pre>
+            <button class="copy-btn">คัดลอก</button>
+        </div>
+
+        <h3>การตั้งค่า Resource Pack</h3>
+        <p>ในส่วนนี้เราต้องจัดการไฟล์ 3 ส่วนหลักๆ คือ Attachable, Geometry (โมเดล), และ Texture ครับ</p>
+
+        <h4>1. ไฟล์ Attachable (crown.player.json)</h4>
+        <p>
+            สร้างไฟล์ <code>crown.player.json</code> ในโฟลเดอร์ <code>development_resource_pack/attachables/</code>:
+        </p>
+        <p><em>(สังเกตส่วน scripts นะครับ มีการสั่งปิดเลเยอร์หมวกเดิม <code>variable.helmet_layer_visible = 0.0;</code>
+                เพื่อไม่ให้ภาพซ้อนกัน)</em></p>
+
+        <div class="code-wrapper">
+            <pre><span class="token-punct">{</span>
+          <span class="token-key">"format_version"</span><span class="token-punct">:</span> <span class="token-string">"1.19.80"</span><span class="token-punct">,</span>
+          <span class="token-key">"minecraft:attachable"</span><span class="token-punct">:</span> <span class="token-punct">{</span>
+            <span class="token-key">"description"</span><span class="token-punct">:</span> <span class="token-punct">{</span>
+              <span class="token-key">"identifier"</span><span class="token-punct">:</span> <span class="token-string">"demo:crown_hat.player"</span><span class="token-punct">,</span>
+              <span class="token-key">"item"</span><span class="token-punct">:</span> <span class="token-punct">{</span> <span class="token-string">"demo:crown"</span><span class="token-punct">:</span> <span class="token-string">"query.is_owner_identifier_any('minecraft:player')"</span> <span class="token-punct">}</span><span class="token-punct">,</span>
+              <span class="token-key">"materials"</span><span class="token-punct">:</span> <span class="token-punct">{</span>
+                <span class="token-key">"default"</span><span class="token-punct">:</span> <span class="token-string">"armor"</span><span class="token-punct">,</span>
+                <span class="token-key">"enchanted"</span><span class="token-punct">:</span> <span class="token-string">"armor_enchanted"</span>
+              <span class="token-punct">}</span><span class="token-punct">,</span>
+              <span class="token-key">"textures"</span><span class="token-punct">:</span> <span class="token-punct">{</span>
+                <span class="token-key">"default"</span><span class="token-punct">:</span> <span class="token-string">"textures/items/crown_minecraft"</span><span class="token-punct">,</span>
+                <span class="token-key">"enchanted"</span><span class="token-punct">:</span> <span class="token-string">"textures/misc/enchanted_item_glint"</span>
+              <span class="token-punct">}</span><span class="token-punct">,</span>
+              <span class="token-key">"geometry"</span><span class="token-punct">:</span> <span class="token-punct">{</span>
+                <span class="token-key">"default"</span><span class="token-punct">:</span> <span class="token-string">"geometry.crown"</span>
+              <span class="token-punct">}</span><span class="token-punct">,</span>
+              <span class="token-key">"scripts"</span><span class="token-punct">:</span> <span class="token-punct">{</span>
+                <span class="token-key">"parent_setup"</span><span class="token-punct">:</span> <span class="token-string">"variable.helmet_layer_visible = 0.0;"</span>
+              <span class="token-punct">}</span><span class="token-punct">,</span>
+              <span class="token-key">"render_controllers"</span><span class="token-punct">:</span> <span class="token-punct">[</span><span class="token-string">"controller.render.armor"</span><span class="token-punct">]</span>
+            <span class="token-punct">}</span>
+          <span class="token-punct">}</span>
+        <span class="token-punct">}</span></pre>
+            <button class="copy-btn">คัดลอก</button>
+        </div>
+
+        <h4>2. ไฟล์โมเดล (crown.geo.json)</h4>
+        <p>
+            สร้างไฟล์ <code>crown.geo.json</code> ในโฟลเดอร์ <code>development_resource_pack/models/entity/</code>:
+        </p>
+
+        <div class="code-wrapper">
+            <pre><span class="token-punct">{</span>
+          <span class="token-key">"format_version"</span><span class="token-punct">:</span> <span class="token-string">"1.16.0"</span><span class="token-punct">,</span>
+          <span class="token-key">"minecraft:geometry"</span><span class="token-punct">:</span> <span class="token-punct">[</span>
+            <span class="token-punct">{</span>
+              <span class="token-key">"description"</span><span class="token-punct">:</span> <span class="token-punct">{</span>
+                <span class="token-key">"identifier"</span><span class="token-punct">:</span> <span class="token-string">"geometry.crown"</span><span class="token-punct">,</span>
+                <span class="token-key">"texture_width"</span><span class="token-punct">:</span> <span class="token-number">32</span><span class="token-punct">,</span>
+                <span class="token-key">"texture_height"</span><span class="token-punct">:</span> <span class="token-number">32</span><span class="token-punct">,</span>
+                <span class="token-key">"visible_bounds_width"</span><span class="token-punct">:</span> <span class="token-number">2</span><span class="token-punct">,</span>
+                <span class="token-key">"visible_bounds_height"</span><span class="token-punct">:</span> <span class="token-number">3.5</span><span class="token-punct">,</span>
+                <span class="token-key">"visible_bounds_offset"</span><span class="token-punct">:</span> <span class="token-punct">[</span><span class="token-number">0</span><span class="token-punct">,</span> <span class="token-number">1.25</span><span class="token-punct">,</span> <span class="token-number">0</span><span class="token-punct">]</span>
+              <span class="token-punct">}</span><span class="token-punct">,</span>
+              <span class="token-key">"bones"</span><span class="token-punct">:</span> <span class="token-punct">[</span>
+                <span class="token-punct">{</span>
+                  <span class="token-key">"name"</span><span class="token-punct">:</span> <span class="token-string">"Crownbase"</span><span class="token-punct">,</span>
+                  <span class="token-key">"pivot"</span><span class="token-punct">:</span> <span class="token-punct">[</span><span class="token-number">0</span><span class="token-punct">,</span> <span class="token-number">0</span><span class="token-punct">,</span> <span class="token-number">0</span><span class="token-punct">]</span><span class="token-punct">,</span>
+                  <span class="token-key">"binding"</span><span class="token-punct">:</span> <span class="token-string">"q.item_slot_to_bone_name(context.item_slot)"</span><span class="token-punct">,</span>
+                  <span class="token-key">"cubes"</span><span class="token-punct">:</span> <span class="token-punct">[</span>
+                    <span class="token-punct">{</span><span class="token-key">"origin"</span><span class="token-punct">:</span> <span class="token-punct">[</span><span class="token-number">-3</span><span class="token-punct">,</span> <span class="token-number">31</span><span class="token-punct">,</span> <span class="token-number">-6.4</span><span class="token-punct">]</span><span class="token-punct">,</span> <span class="token-key">"size"</span><span class="token-punct">:</span> <span class="token-punct">[</span><span class="token-number">6</span><span class="token-punct">,</span> <span class="token-number">3</span><span class="token-punct">,</span> <span class="token-number">2</span><span class="token-punct">]</span><span class="token-punct">,</span> <span class="token-key">"uv"</span><span class="token-punct">:</span> <span class="token-punct">[</span><span class="token-number">1</span><span class="token-punct">,</span> <span class="token-number">0</span><span class="token-punct">]</span><span class="token-punct">}</span><span class="token-punct">,</span>
+                    <span class="token-punct">{</span><span class="token-key">"origin"</span><span class="token-punct">:</span> <span class="token-punct">[</span><span class="token-number">-5</span><span class="token-punct">,</span> <span class="token-number">31</span><span class="token-punct">,</span> <span class="token-number">-6.4</span><span class="token-punct">]</span><span class="token-punct">,</span> <span class="token-key">"size"</span><span class="token-punct">:</span> <span class="token-punct">[</span><span class="token-number">6</span><span class="token-punct">,</span> <span class="token-number">3</span><span class="token-punct">,</span> <span class="token-number">2</span><span class="token-punct">]</span><span class="token-punct">,</span> <span class="token-key">"pivot"</span><span class="token-punct">:</span> <span class="token-punct">[</span><span class="token-number">-1</span><span class="token-punct">,</span> <span class="token-number">31</span><span class="token-punct">,</span> <span class="token-number">-1.4</span><span class="token-punct">]</span><span class="token-punct">,</span> <span class="token-key">"rotation"</span><span class="token-punct">:</span> <span class="token-punct">[</span><span class="token-number">0</span><span class="token-punct">,</span> <span class="token-number">90</span><span class="token-punct">,</span> <span class="token-number">0</span><span class="token-punct">]</span><span class="token-punct">,</span> <span class="token-key">"uv"</span><span class="token-punct">:</span> <span class="token-punct">[</span><span class="token-number">0</span><span class="token-punct">,</span> <span class="token-number">0</span><span class="token-punct">]</span><span class="token-punct">}</span><span class="token-punct">,</span>
+                    <span class="token-punct">{</span><span class="token-key">"origin"</span><span class="token-punct">:</span> <span class="token-punct">[</span><span class="token-number">-3</span><span class="token-punct">,</span> <span class="token-number">31</span><span class="token-punct">,</span> <span class="token-number">1.6</span><span class="token-punct">]</span><span class="token-punct">,</span> <span class="token-key">"size"</span><span class="token-punct">:</span> <span class="token-punct">[</span><span class="token-number">6</span><span class="token-punct">,</span> <span class="token-number">3</span><span class="token-punct">,</span> <span class="token-number">2</span><span class="token-punct">]</span><span class="token-punct">,</span> <span class="token-key">"pivot"</span><span class="token-punct">:</span> <span class="token-punct">[</span><span class="token-number">1</span><span class="token-punct">,</span> <span class="token-number">31</span><span class="token-punct">,</span> <span class="token-number">-1.4</span><span class="token-punct">]</span><span class="token-punct">,</span> <span class="token-key">"rotation"</span><span class="token-punct">:</span> <span class="token-punct">[</span><span class="token-number">0</span><span class="token-punct">,</span> <span class="token-number">90</span><span class="token-punct">,</span> <span class="token-number">0</span><span class="token-punct">]</span><span class="token-punct">,</span> <span class="token-key">"uv"</span><span class="token-punct">:</span> <span class="token-punct">[</span><span class="token-number">0</span><span class="token-punct">,</span> <span class="token-number">0</span><span class="token-punct">]</span><span class="token-punct">}</span><span class="token-punct">,</span>
+                    <span class="token-punct">{</span><span class="token-key">"origin"</span><span class="token-punct">:</span> <span class="token-punct">[</span><span class="token-number">-3</span><span class="token-punct">,</span> <span class="token-number">31</span><span class="token-punct">,</span> <span class="token-number">4.6</span><span class="token-punct">]</span><span class="token-punct">,</span> <span class="token-key">"size"</span><span class="token-punct">:</span> <span class="token-punct">[</span><span class="token-number">6</span><span class="token-punct">,</span> <span class="token-number">3</span><span class="token-punct">,</span> <span class="token-number">2</span><span class="token-punct">]</span><span class="token-punct">,</span> <span class="token-key">"uv"</span><span class="token-punct">:</span> <span class="token-punct">[</span><span class="token-number">1</span><span class="token-punct">,</span> <span class="token-number">0</span><span class="token-punct">]</span><span class="token-punct">}</span><span class="token-punct">,</span>
+                    <span class="token-punct">{</span><span class="token-key">"origin"</span><span class="token-punct">:</span> <span class="token-punct">[</span><span class="token-number">3</span><span class="token-punct">,</span> <span class="token-number">31</span><span class="token-punct">,</span> <span class="token-number">-5.4</span><span class="token-punct">]</span><span class="token-punct">,</span> <span class="token-key">"size"</span><span class="token-punct">:</span> <span class="token-punct">[</span><span class="token-number">2</span><span class="token-punct">,</span> <span class="token-number">3</span><span class="token-punct">,</span> <span class="token-number">2</span><span class="token-punct">]</span><span class="token-punct">,</span> <span class="token-key">"uv"</span><span class="token-punct">:</span> <span class="token-punct">[</span><span class="token-number">24</span><span class="token-punct">,</span> <span class="token-number">0</span><span class="token-punct">]</span><span class="token-punct">}</span><span class="token-punct">,</span>
+                    <span class="token-punct">{</span><span class="token-key">"origin"</span><span class="token-punct">:</span> <span class="token-punct">[</span><span class="token-number">3</span><span class="token-punct">,</span> <span class="token-number">31</span><span class="token-punct">,</span> <span class="token-number">2.6</span><span class="token-punct">]</span><span class="token-punct">,</span> <span class="token-key">"size"</span><span class="token-punct">:</span> <span class="token-punct">[</span><span class="token-number">2</span><span class="token-punct">,</span> <span class="token-number">3</span><span class="token-punct">,</span> <span class="token-number">2</span><span class="token-punct">]</span><span class="token-punct">,</span> <span class="token-key">"uv"</span><span class="token-punct">:</span> <span class="token-punct">[</span><span class="token-number">22</span><span class="token-punct">,</span> <span class="token-number">23</span><span class="token-punct">]</span><span class="token-punct">}</span><span class="token-punct">,</span>
+                    <span class="token-punct">{</span>
+                      <span class="token-key">"origin"</span><span class="token-punct">:</span> <span class="token-punct">[</span><span class="token-number">-5</span><span class="token-punct">,</span> <span class="token-number">31</span><span class="token-punct">,</span> <span class="token-number">-5.4</span><span class="token-punct">]</span><span class="token-punct">,</span>
+                      <span class="token-key">"size"</span><span class="token-punct">:</span> <span class="token-punct">[</span><span class="token-number">2</span><span class="token-punct">,</span> <span class="token-number">3</span><span class="token-punct">,</span> <span class="token-number">2</span><span class="token-punct">]</span><span class="token-punct">,</span>
+                      <span class="token-key">"uv"</span><span class="token-punct">:</span> <span class="token-punct">{</span>
+                        <span class="token-key">"north"</span><span class="token-punct">:</span> <span class="token-punct">{</span><span class="token-key">"uv"</span><span class="token-punct">:</span> <span class="token-punct">[</span><span class="token-number">18</span><span class="token-punct">,</span> <span class="token-number">22</span><span class="token-punct">]</span><span class="token-punct">,</span> <span class="token-key">"uv_size"</span><span class="token-punct">:</span> <span class="token-punct">[</span><span class="token-number">2</span><span class="token-punct">,</span> <span class="token-number">3</span><span class="token-punct">]</span><span class="token-punct">}</span><span class="token-punct">,</span>
+                        <span class="token-key">"east"</span><span class="token-punct">:</span> <span class="token-punct">{</span><span class="token-key">"uv"</span><span class="token-punct">:</span> <span class="token-punct">[</span><span class="token-number">16</span><span class="token-punct">,</span> <span class="token-number">22</span><span class="token-punct">]</span><span class="token-punct">,</span> <span class="token-key">"uv_size"</span><span class="token-punct">:</span> <span class="token-punct">[</span><span class="token-number">2</span><span class="token-punct">,</span> <span class="token-number">3</span><span class="token-punct">]</span><span class="token-punct">}</span><span class="token-punct">,</span>
+                        <span class="token-key">"south"</span><span class="token-punct">:</span> <span class="token-punct">{</span><span class="token-key">"uv"</span><span class="token-punct">:</span> <span class="token-punct">[</span><span class="token-number">22</span><span class="token-punct">,</span> <span class="token-number">22</span><span class="token-punct">]</span><span class="token-punct">,</span> <span class="token-key">"uv_size"</span><span class="token-punct">:</span> <span class="token-punct">[</span><span class="token-number">2</span><span class="token-punct">,</span> <span class="token-number">3</span><span class="token-punct">]</span><span class="token-punct">}</span><span class="token-punct">,</span>
+                        <span class="token-key">"west"</span><span class="token-punct">:</span> <span class="token-punct">{</span><span class="token-key">"uv"</span><span class="token-punct">:</span> <span class="token-punct">[</span><span class="token-number">20</span><span class="token-punct">,</span> <span class="token-number">22</span><span class="token-punct">]</span><span class="token-punct">,</span> <span class="token-key">"uv_size"</span><span class="token-punct">:</span> <span class="token-punct">[</span><span class="token-number">2</span><span class="token-punct">,</span> <span class="token-number">3</span><span class="token-punct">]</span><span class="token-punct">}</span><span class="token-punct">,</span>
+                        <span class="token-key">"up"</span><span class="token-punct">:</span> <span class="token-punct">{</span><span class="token-key">"uv"</span><span class="token-punct">:</span> <span class="token-punct">[</span><span class="token-number">18</span><span class="token-punct">,</span> <span class="token-number">20</span><span class="token-punct">]</span><span class="token-punct">,</span> <span class="token-key">"uv_size"</span><span class="token-punct">:</span> <span class="token-punct">[</span><span class="token-number">2</span><span class="token-punct">,</span> <span class="token-number">2</span><span class="token-punct">]</span><span class="token-punct">}</span><span class="token-punct">,</span>
+                        <span class="token-key">"down"</span><span class="token-punct">:</span> <span class="token-punct">{</span><span class="token-key">"uv"</span><span class="token-punct">:</span> <span class="token-punct">[</span><span class="token-number">20</span><span class="token-punct">,</span> <span class="token-number">22</span><span class="token-punct">]</span><span class="token-punct">,</span> <span class="token-key">"uv_size"</span><span class="token-punct">:</span> <span class="token-punct">[</span><span class="token-number">2</span><span class="token-punct">,</span> <span class="token-number">-2</span><span class="token-punct">]</span><span class="token-punct">}</span>
+                      <span class="token-punct">}</span>
+                    <span class="token-punct">}</span><span class="token-punct">,</span>
+                    <span class="token-punct">{</span><span class="token-key">"origin"</span><span class="token-punct">:</span> <span class="token-punct">[</span><span class="token-number">-5</span><span class="token-punct">,</span> <span class="token-number">31</span><span class="token-punct">,</span> <span class="token-number">2.6</span><span class="token-punct">]</span><span class="token-punct">,</span> <span class="token-key">"size"</span><span class="token-punct">:</span> <span class="token-punct">[</span><span class="token-number">2</span><span class="token-punct">,</span> <span class="token-number">3</span><span class="token-punct">,</span> <span class="token-number">2</span><span class="token-punct">]</span><span class="token-punct">,</span> <span class="token-key">"uv"</span><span class="token-punct">:</span> <span class="token-punct">[</span><span class="token-number">20</span><span class="token-punct">,</span> <span class="token-number">10</span><span class="token-punct">]</span><span class="token-punct">}</span>
+                  <span class="token-punct">]</span>
+                <span class="token-punct">}</span><span class="token-punct">,</span>
+                <span class="token-punct">{</span>
+                  <span class="token-key">"name"</span><span class="token-punct">:</span> <span class="token-string">"crownprongs"</span><span class="token-punct">,</span>
+                  <span class="token-key">"pivot"</span><span class="token-punct">:</span> <span class="token-punct">[</span><span class="token-number">0</span><span class="token-punct">,</span> <span class="token-number">0</span><span class="token-punct">,</span> <span class="token-number">0</span><span class="token-punct">]</span><span class="token-punct">,</span>
+                  <span class="token-key">"binding"</span><span class="token-punct">:</span> <span class="token-string">"q.item_slot_to_bone_name(context.item_slot)"</span><span class="token-punct">,</span>
+                  <span class="token-key">"cubes"</span><span class="token-punct">:</span> <span class="token-punct">[</span>
+                    <span class="token-punct">{</span><span class="token-key">"origin"</span><span class="token-punct">:</span> <span class="token-punct">[</span><span class="token-number">-5</span><span class="token-punct">,</span> <span class="token-number">34</span><span class="token-punct">,</span> <span class="token-number">-5.4</span><span class="token-punct">]</span><span class="token-punct">,</span> <span class="token-key">"size"</span><span class="token-punct">:</span> <span class="token-punct">[</span><span class="token-number">2</span><span class="token-punct">,</span> <span class="token-number">3</span><span class="token-punct">,</span> <span class="token-number">2</span><span class="token-punct">]</span><span class="token-punct">,</span> <span class="token-key">"uv"</span><span class="token-punct">:</span> <span class="token-punct">[</span><span class="token-number">8</span><span class="token-punct">,</span> <span class="token-number">20</span><span class="token-punct">]</span><span class="token-punct">}</span><span class="token-punct">,</span>
+                    <span class="token-punct">{</span><span class="token-key">"origin"</span><span class="token-punct">:</span> <span class="token-punct">[</span><span class="token-number">3</span><span class="token-punct">,</span> <span class="token-number">34</span><span class="token-punct">,</span> <span class="token-number">2.6</span><span class="token-punct">]</span><span class="token-punct">,</span> <span class="token-key">"size"</span><span class="token-punct">:</span> <span class="token-punct">[</span><span class="token-number">2</span><span class="token-punct">,</span> <span class="token-number">3</span><span class="token-punct">,</span> <span class="token-number">2</span><span class="token-punct">]</span><span class="token-punct">,</span> <span class="token-key">"uv"</span><span class="token-punct">:</span> <span class="token-punct">[</span><span class="token-number">20</span><span class="token-punct">,</span> <span class="token-number">5</span><span class="token-punct">]</span><span class="token-punct">}</span><span class="token-punct">,</span>
+                    <span class="token-punct">{</span><span class="token-key">"origin"</span><span class="token-punct">:</span> <span class="token-punct">[</span><span class="token-number">3</span><span class="token-punct">,</span> <span class="token-number">34</span><span class="token-punct">,</span> <span class="token-number">-5.4</span><span class="token-punct">]</span><span class="token-punct">,</span> <span class="token-key">"size"</span><span class="token-punct">:</span> <span class="token-punct">[</span><span class="token-number">2</span><span class="token-punct">,</span> <span class="token-number">3</span><span class="token-punct">,</span> <span class="token-number">2</span><span class="token-punct">]</span><span class="token-punct">,</span> <span class="token-key">"uv"</span><span class="token-punct">:</span> <span class="token-punct">[</span><span class="token-number">0</span><span class="token-punct">,</span> <span class="token-number">20</span><span class="token-punct">]</span><span class="token-punct">}</span><span class="token-punct">,</span>
+                    <span class="token-punct">{</span><span class="token-key">"origin"</span><span class="token-punct">:</span> <span class="token-punct">[</span><span class="token-number">-5</span><span class="token-punct">,</span> <span class="token-number">34</span><span class="token-punct">,</span> <span class="token-number">2.6</span><span class="token-punct">,</span> <span class="token-key">"size"</span><span class="token-punct">:</span> <span class="token-punct">[</span><span class="token-number">2</span><span class="token-punct">,</span> <span class="token-number">3</span><span class="token-punct">,</span> <span class="token-number">2</span><span class="token-punct">]</span><span class="token-punct">,</span> <span class="token-key">"uv"</span><span class="token-punct">:</span> <span class="token-punct">[</span><span class="token-number">16</span><span class="token-punct">,</span> <span class="token-number">15</span><span class="token-punct">]</span><span class="token-punct">}</span>
+                  <span class="token-punct">]</span>
+                <span class="token-punct">}</span><span class="token-punct">,</span>
+                <span class="token-punct">{</span>
+                  <span class="token-key">"name"</span><span class="token-punct">:</span> <span class="token-string">"crownextraprongs"</span><span class="token-punct">,</span>
+                  <span class="token-key">"pivot"</span><span class="token-punct">:</span> <span class="token-punct">[</span><span class="token-number">0</span><span class="token-punct">,</span> <span class="token-number">0</span><span class="token-punct">,</span> <span class="token-number">0</span><span class="token-punct">]</span><span class="token-punct">,</span>
+                  <span class="token-key">"binding"</span><span class="token-punct">:</span> <span class="token-string">"q.item_slot_to_bone_name(context.item_slot)"</span><span class="token-punct">,</span>
+                  <span class="token-key">"cubes"</span><span class="token-punct">:</span> <span class="token-punct">[</span>
+                    <span class="token-punct">{</span><span class="token-key">"origin"</span><span class="token-punct">:</span> <span class="token-punct">[</span><span class="token-number">-1</span><span class="token-punct">,</span> <span class="token-number">34</span><span class="token-punct">,</span> <span class="token-number">-6.4</span><span class="token-punct">]</span><span class="token-punct">,</span> <span class="token-key">"size"</span><span class="token-punct">:</span> <span class="token-punct">[</span><span class="token-number">2</span><span class="token-punct">,</span> <span class="token-number">3</span><span class="token-punct">,</span> <span class="token-number">2</span><span class="token-punct">]</span><span class="token-punct">,</span> <span class="token-key">"uv"</span><span class="token-punct">:</span> <span class="token-punct">[</span><span class="token-number">8</span><span class="token-punct">,</span> <span class="token-number">15</span><span class="token-punct">]</span><span class="token-punct">}</span><span class="token-punct">,</span>
+                    <span class="token-punct">{</span><span class="token-key">"origin"</span><span class="token-punct">:</span> <span class="token-punct">[</span><span class="token-number">-6</span><span class="token-punct">,</span> <span class="token-number">34</span><span class="token-punct">,</span> <span class="token-number">-1.4</span><span class="token-punct">]</span><span class="token-punct">,</span> <span class="token-key">"size"</span><span class="token-punct">:</span> <span class="token-punct">[</span><span class="token-number">2</span><span class="token-punct">,</span> <span class="token-number">3</span><span class="token-punct">,</span> <span class="token-number">2</span><span class="token-punct">]</span><span class="token-punct">,</span> <span class="token-key">"uv"</span><span class="token-punct">:</span> <span class="token-punct">[</span><span class="token-number">0</span><span class="token-punct">,</span> <span class="token-number">15</span><span class="token-punct">]</span><span class="token-punct">}</span><span class="token-punct">,</span>
+                    <span class="token-punct">{</span><span class="token-key">"origin"</span><span class="token-punct">:</span> <span class="token-punct">[</span><span class="token-number">-1</span><span class="token-punct">,</span> <span class="token-number">34</span><span class="token-punct">,</span> <span class="token-number">4.6</span><span class="token-punct">]</span><span class="token-punct">,</span> <span class="token-key">"size"</span><span class="token-punct">:</span> <span class="token-punct">[</span><span class="token-number">2</span><span class="token-punct">,</span> <span class="token-number">3</span><span class="token-punct">,</span> <span class="token-number">2</span><span class="token-punct">]</span><span class="token-punct">,</span> <span class="token-key">"uv"</span><span class="token-punct">:</span> <span class="token-punct">[</span><span class="token-number">12</span><span class="token-punct">,</span> <span class="token-number">10</span><span class="token-punct">]</span><span class="token-punct">}</span><span class="token-punct">,</span>
+                    <span class="token-punct">{</span><span class="token-key">"origin"</span><span class="token-punct">:</span> <span class="token-punct">[</span><span class="token-number">4</span><span class="token-punct">,</span> <span class="token-number">34</span><span class="token-punct">,</span> <span class="token-number">-1.4</span><span class="token-punct">]</span><span class="token-punct">,</span> <span class="token-key">"size"</span><span class="token-punct">:</span> <span class="token-punct">[</span><span class="token-number">2</span><span class="token-punct">,</span> <span class="token-number">3</span><span class="token-punct">,</span> <span class="token-number">2</span><span class="token-punct">]</span><span class="token-punct">,</span> <span class="token-key">"uv"</span><span class="token-punct">:</span> <span class="token-punct">[</span><span class="token-number">12</span><span class="token-punct">,</span> <span class="token-number">5</span><span class="token-punct">]</span><span class="token-punct">}</span>
+                  <span class="token-punct">]</span>
+                <span class="token-punct">}</span><span class="token-punct">,</span>
+                <span class="token-punct">{</span>
+                  <span class="token-key">"name"</span><span class="token-punct">:</span> <span class="token-string">"crownjewels"</span><span class="token-punct">,</span>
+                  <span class="token-key">"pivot"</span><span class="token-punct">:</span> <span class="token-punct">[</span><span class="token-number">0</span><span class="token-punct">,</span> <span class="token-number">0</span><span class="token-punct">,</span> <span class="token-number">0</span><span class="token-punct">]</span><span class="token-punct">,</span>
+                  <span class="token-key">"binding"</span><span class="token-punct">:</span> <span class="token-string">"q.item_slot_to_bone_name(context.item_slot)"</span><span class="token-punct">,</span>
+                  <span class="token-key">"cubes"</span><span class="token-punct">:</span> <span class="token-punct">[</span>
+                    <span class="token-punct">{</span><span class="token-key">"origin"</span><span class="token-punct">:</span> <span class="token-punct">[</span><span class="token-number">-7</span><span class="token-punct">,</span> <span class="token-number">32</span><span class="token-punct">,</span> <span class="token-number">-1.4</span><span class="token-punct">]</span><span class="token-punct">,</span> <span class="token-key">"size"</span><span class="token-punct">:</span> <span class="token-punct">[</span><span class="token-number">1</span><span class="token-punct">,</span> <span class="token-number">1</span><span class="token-punct">,</span> <span class="token-number">2</span><span class="token-punct">]</span><span class="token-punct">,</span> <span class="token-key">"uv"</span><span class="token-punct">:</span> <span class="token-punct">[</span><span class="token-number">6</span><span class="token-punct">,</span> <span class="token-number">25</span><span class="token-punct">]</span><span class="token-punct">}</span><span class="token-punct">,</span>
+                    <span class="token-punct">{</span><span class="token-key">"origin"</span><span class="token-punct">:</span> <span class="token-punct">[</span><span class="token-number">5</span><span class="token-punct">,</span> <span class="token-number">32</span><span class="token-punct">,</span> <span class="token-number">-2.4</span><span class="token-punct">]</span><span class="token-punct">,</span> <span class="token-key">"size"</span><span class="token-punct">:</span> <span class="token-punct">[</span><span class="token-number">1</span><span class="token-punct">,</span> <span class="token-number">1</span><span class="token-punct">,</span> <span class="token-number">2</span><span class="token-punct">]</span><span class="token-punct">,</span> <span class="token-key">"pivot"</span><span class="token-punct">:</span> <span class="token-punct">[</span><span class="token-number">0</span><span class="token-punct">,</span> <span class="token-number">31</span><span class="token-punct">,</span> <span class="token-number">-1.4</span><span class="token-punct">]</span><span class="token-punct">,</span> <span class="token-key">"rotation"</span><span class="token-punct">:</span> <span class="token-punct">[</span><span class="token-number">0</span><span class="token-punct">,</span> <span class="token-number">90</span><span class="token-punct">,</span> <span class="token-number">0</span><span class="token-punct">]</span><span class="token-punct">,</span> <span class="token-key">"uv"</span><span class="token-punct">:</span> <span class="token-punct">[</span><span class="token-number">0</span><span class="token-punct">,</span> <span class="token-number">25</span><span class="token-punct">]</span><span class="token-punct">}</span><span class="token-punct">,</span>
+                    <span class="token-punct">{</span><span class="token-key">"origin"</span><span class="token-punct">:</span> <span class="token-punct">[</span><span class="token-number">-6</span><span class="token-punct">,</span> <span class="token-number">32</span><span class="token-punct">,</span> <span class="token-number">0.6</span><span class="token-punct">]</span><span class="token-punct">,</span> <span class="token-key">"size"</span><span class="token-punct">:</span> <span class="token-punct">[</span><span class="token-number">1</span><span class="token-punct">,</span> <span class="token-number">1</span><span class="token-punct">,</span> <span class="token-number">2</span><span class="token-punct">]</span><span class="token-punct">,</span> <span class="token-key">"pivot"</span><span class="token-punct">:</span> <span class="token-punct">[</span><span class="token-number">0</span><span class="token-punct">,</span> <span class="token-number">31</span><span class="token-punct">,</span> <span class="token-number">1.6</span><span class="token-punct">]</span><span class="token-punct">,</span> <span class="token-key">"rotation"</span><span class="token-punct">:</span> <span class="token-punct">[</span><span class="token-number">0</span><span class="token-punct">,</span> <span class="token-number">90</span><span class="token-punct">,</span> <span class="token-number">0</span><span class="token-punct">]</span><span class="token-punct">,</span> <span class="token-key">"uv"</span><span class="token-punct">:</span> <span class="token-punct">[</span><span class="token-number">22</span><span class="token-punct">,</span> <span class="token-number">18</span><span class="token-punct">]</span><span class="token-punct">}</span><span class="token-punct">,</span>
+                    <span class="token-punct">{</span><span class="token-key">"origin"</span><span class="token-punct">:</span> <span class="token-punct">[</span><span class="token-number">6</span><span class="token-punct">,</span> <span class="token-number">32</span><span class="token-punct">,</span> <span class="token-number">-1.4</span><span class="token-punct">]</span><span class="token-punct">,</span> <span class="token-key">"size"</span><span class="token-punct">:</span> <span class="token-punct">[</span><span class="token-number">1</span><span class="token-punct">,</span> <span class="token-number">1</span><span class="token-punct">,</span> <span class="token-number">2</span><span class="token-punct">]</span><span class="token-punct">,</span> <span class="token-key">"uv"</span><span class="token-punct">:</span> <span class="token-punct">[</span><span class="token-number">24</span><span class="token-punct">,</span> <span class="token-number">15</span><span class="token-punct">]</span><span class="token-punct">}</span>
+                  <span class="token-punct">]</span>
+                <span class="token-punct">}</span>
+              <span class="token-punct">]</span>
+            <span class="token-punct">}</span>
+          <span class="token-punct">]</span>
+        <span class="token-punct">}</span></pre>
+            <button class="copy-btn">คัดลอก</button>
+        </div>
+
+        <h4>3. ไฟล์รูปภาพ</h4>
+        <p>ให้ดาวน์โหลดรูปภาพทั้ง 2 รูป และนำไปวางที่ <code>development_resource_pack/textures/items</code> ครับ</p>
+
+        <p>
+            <strong>1. ไอคอนมงกุฎ (crown.png):</strong> สำหรับโชว์ในช่องเก็บของ
+            <br>
+
+            <img src="https://learn.microsoft.com/en-gb/minecraft/creator/documents/media/addcustomitems/crown_ico.png?view=minecraft-bedrock-stable"
+                width="80" alt="crown icon">
+        </p>
+
+        <p>
+            <strong>2. สกินมงกุฎ (crown_minecraft.png):</strong> ลวดลายสำหรับโมเดล 3D
+            <br>
+            <img src="https://learn.microsoft.com/en-gb/minecraft/creator/documents/media/addcustomitems/crown_minecraft.png?view=minecraft-bedrock-stable"
+                width="80" alt="crown skin">
+
+        </p>
+
+        <h4>4. กำหนด Texture ไอเท็ม (item_texture.json)</h4>
+        <p>แก้ไขไฟล์ <code>development_resource_pack/textures/item_texture.json</code>:</p>
+
+        <div class="code-wrapper">
+            <pre><span class="token-punct">{</span>
+          <span class="token-key">"resource_pack_name"</span><span class="token-punct">:</span> <span class="token-string">"crown_resource_pack"</span><span class="token-punct">,</span>
+          <span class="token-key">"texture_data"</span><span class="token-punct">:</span> <span class="token-punct">{</span>
+            <span class="token-key">"demo:crown"</span><span class="token-punct">:</span> <span class="token-punct">{</span>
+              <span class="token-key">"textures"</span><span class="token-punct">:</span> <span class="token-string">"textures/items/crown"</span>
+            <span class="token-punct">}</span>
+          <span class="token-punct">}</span>
+        <span class="token-punct">}</span></pre>
+            <button class="copy-btn">คัดลอก</button>
+        </div>
+
+        <h3>ผลลัพธ์ของ Crown</h3>
+        <p>
+            เมื่อทำเสร็จแล้ว เข้าเกมไปเสกมงกุฎมาใส่
+        <div class="code-wrapper">
+            <pre>/give @s demo:crown</pre>
+            <button class="copy-btn">คัดลอก</button>
+        </div>
+        ตัวละครของคุณก็จะดูสง่างามแบบนี้ครับ:
+        </p>
+
+        <hr style="border: 0; border-top: 1px solid #444; margin: 40px 0;">
+
+        <h2>4. เกราะอกแบบกำหนดเองพร้อมลวดลาย</h2>
+        <p>
+            หากคุณสร้างเกราะอกขึ้นมาเอง ไม่ว่าจะทำด้วยมือหรือใช้ <em>Minecraft Item Wizard</em> คุณสามารถทำให้มันรองรับ
+            <strong>Armor Trims</strong> (ลวดลายชุดเกราะ)
+            ทั้งหมดที่มีในเวอร์ชัน 1.20.70 ได้ครับ แถมคุณยังสามารถแก้ไขลวดลายของ Trim
+            เพื่อให้เข้ากับรูปทรงเกราะของคุณได้อีกด้วย!
+        </p>
+
+        <div
+            style="background-color: #2b2b2b; padding: 15px; border-radius: 8px; border-left: 4px solid #f0ad4e; margin: 20px 0;">
+            <h4 style="margin-top: 0; color: #f0ad4e;">หมายเหตุ</h4>
+            <p style="margin-bottom: 0;">
+                เพื่อที่จะใช้ Armor Trim บนชุดเกราะของคุณ คุณต้องกำหนดค่า <code>format_version</code> ในไฟล์ item และ
+                attachable
+                ให้เป็นเวอร์ชันอย่างต่ำ <strong>1.20.60</strong> นะครับ
+            </p>
+        </div>
+
+        <h3>การตั้งค่า Behavior Pack</h3>
+        <p>
+            สร้างไฟล์ <code>custom_chestplate.item.json</code> ในโฟลเดอร์ <code>development_behavior_pack/items/</code>
+            และวางโค้ดนี้ครับ:
+        </p>
+
+        <div class="code-wrapper">
+            <pre><span class="token-punct">{</span><br> <span class="token-key">"format_version"</span><span class="token-punct">:</span><span class="token-string">"1.20.60"</span><span class="token-punct">,</span> 
+              <span class="token-key">"minecraft:item"</span><span class="token-punct">:</span> <span class="token-punct">{</span> 
+                <span class="token-key">"description"</span><span class="token-punct">:</span> <span class="token-punct">{</span> 
+                  <span class="token-key">"identifier"</span><span class="token-punct">:</span> <span class="token-string">"demo:custom_chestplate"</span><span class="token-punct">,</span> 
+                  <span class="token-key">"menu_category"</span><span class="token-punct">:</span> <span class="token-punct">{</span> 
+                    <span class="token-key">"category"</span><span class="token-punct">:</span> <span class="token-string">"equipment"</span><span class="token-punct">,</span> 
+                    <span class="token-key">"group"</span><span class="token-punct">:</span> <span class="token-string">"itemGroup.name.chestplate"</span> 
+                  <span class="token-punct">}</span>
+                <span class="token-punct">}</span><span class="token-punct">,</span>
+                <span class="token-key">"components"</span><span class="token-punct">:</span> <span class="token-punct">{</span> 
+                  <span class="token-key">"minecraft:max_stack_size"</span><span class="token-punct">:</span> <span class="token-number">1</span><span class="token-punct">,</span> 
+                  <span class="token-key">"minecraft:icon"</span><span class="token-punct">:</span> <span class="token-punct">{</span> 
+                    <span class="token-key">"textures"</span><span class="token-punct">:</span> <span class="token-punct">{</span> 
+                      <span class="token-key">"default"</span><span class="token-punct">:</span> <span class="token-string">"custom_chestplate"</span> <span class="token-punct">}</span> 
+                  <span class="token-punct">}</span><span class="token-punct">,</span> 
+                  <span class="token-key">"minecraft:wearable"</span><span class="token-punct">:</span> <span class="token-punct">{</span> 
+                    <span class="token-key">"protection"</span><span class="token-punct">:</span> <span class="token-number">10</span><span class="token-punct">,</span> 
+                    <span class="token-key">"slot"</span><span class="token-punct">:</span> <span class="token-string">"slot.armor.chest"</span> 
+                  <span class="token-punct">}</span><span class="token-punct">,</span> 
+                  <span class="token-key">"minecraft:durability"</span><span class="token-punct">:</span> <span class="token-punct">{</span> 
+                    <span class="token-key">"damage_chance"</span><span class="token-punct">:</span> <span class="token-punct">{</span> 
+                      <span class="token-key">"min"</span><span class="token-punct">:</span> <span class="token-number">10</span><span class="token-punct">,</span> 
+                      <span class="token-key">"max"</span><span class="token-punct">:</span> <span class="token-number">50</span> 
+                  <span class="token-punct">}</span><span class="token-punct">,</span> 
+                    <span class="token-key">"max_durability"</span><span class="token-punct">:</span> <span class="token-number">1560</span> 
+                  <span class="token-punct">}</span><span class="token-punct">,</span> 
+                  <span class="token-key">"minecraft:repairable"</span><span class="token-punct">:</span> <span class="token-punct">{</span> 
+                    <span class="token-key">"repair_items"</span><span class="token-punct">:</span> <span class="token-punct">[</span> 
+                      <span class="token-punct">{</span> 
+                        <span class="token-key">"items"</span><span class="token-punct">:</span> <span class="token-punct">[</span><span class="token-string">"pink_dye"</span><span class="token-punct">]</span><span class="token-punct">,</span> 
+                        <span class="token-key">"repair_amount"</span><span class="token-punct">:</span> <span class="token-number">390</span> 
+                      <span class="token-punct">}</span> 
+                    <span class="token-punct">]</span> 
+                  <span class="token-punct">}</span><span class="token-punct">,</span> 
+                  <span class="token-key">"minecraft:tags"</span><span class="token-punct">:</span> <span class="token-punct">{</span> 
+                    <span class="token-key">"tags"</span><span class="token-punct">:</span> <span class="token-punct">[</span> 
+                      <span class="token-string">"minecraft:is_armor"</span><span class="token-punct">,</span> 
+                      <span class="token-string">"minecraft:trimmable_armors"</span> 
+                    <span class="token-punct">]</span> 
+                  <span class="token-punct">}</span> 
+                <span class="token-punct">}</span> 
+              <span class="token-punct">}</span> 
+            <span class="token-punct">}</span></pre>
+            <button class="copy-btn">คัดลอก</button>
+        </div>
+
+        <h3>การตั้งค่า Resource Pack</h3>
+        <p>เราต้องจัดการไฟล์ 3 ส่วนเช่นเคยครับ</p>
+
+        <h4>1. ไฟล์ Attachable (custom_chestplate.attachable.json)</h4>
+        <p>
+            สร้างไฟล์นี้ใน <code>development_resource_pack/attachables/</code> ครับ
+            ไฟล์นี้จะทำหน้าที่กำหนดว่าเกราะจะใช้โมเดลไหน
+            รวมถึงพาเลตสีและรูปแบบของ Armor Trim ที่จะนำมาใช้ด้วย
+        </p>
+
+        <div class="code-wrapper">
+            <pre><span class="token-punct">{</span>
+              <span class="token-key">"format_version"</span><span class="token-punct">:</span> <span class="token-string">"1.20.60"</span><span class="token-punct">,</span> 
+              <span class="token-key">"minecraft:attachable"</span><span class="token-punct">:</span> <span class="token-punct">{</span> 
+                <span class="token-key">"description"</span><span class="token-punct">:</span> <span class="token-punct">{</span> 
+                  <span class="token-key">"identifier"</span><span class="token-punct">:</span> <span class="token-string">"demo:custom_chestplate"</span><span class="token-punct">,</span> 
+                  <span class="token-key">"render_controllers"</span><span class="token-punct">:</span> <span class="token-punct">[</span><span class="token-string">"controller.render.armor"</span><span class="token-punct">]</span><span class="token-punct">,</span> 
+                  <span class="token-key">"materials"</span><span class="token-punct">:</span> <span class="token-punct">{</span> 
+                    <span class="token-key">"default"</span><span class="token-punct">:</span> <span class="token-string">"entity_alphatest"</span><span class="token-punct">,</span> 
+                    <span class="token-key">"enchanted"</span><span class="token-punct">:</span> <span class="token-string">"entity_alphatest_glint"</span> 
+                  <span class="token-punct">}</span><span class="token-punct">,</span> 
+                  <span class="token-key">"textures"</span><span class="token-punct">:</span> <span class="token-punct">{</span> 
+                    <span class="token-key">"default"</span><span class="token-punct">:</span> <span class="token-string">"textures/entity/attachable/custom_chestplate"</span><span class="token-punct">,</span>
+                    <span class="token-key">"enchanted"</span><span class="token-punct">:</span> <span class="token-string">"textures/misc/enchanted_item_glint"</span><span class="token-punct">,</span> 
+                    <span class="token-key">"wild_trim"</span><span class="token-punct">:</span> <span class="token-string">"textures/models/armor/custom_wild"</span><span class="token-punct">,</span> 
+                    <span class="token-key">"iron_palette"</span><span class="token-punct">:</span> <span class="token-string">"textures/trims/color_palettes/diamond_darker"</span>
+                  <span class="token-punct">}</span><span class="token-punct">,</span> 
+                  <span class="token-key">"geometry"</span><span class="token-punct">:</span> <span class="token-punct">{</span> 
+                    <span class="token-key">"default"</span><span class="token-punct">:</span> <span class="token-string">"geometry.custom_chestplate"</span>
+                  <span class="token-punct">}</span>
+                <span class="token-punct">}</span>
+              <span class="token-punct">}</span>
+            <span class="token-punct">}</span></pre>
+            <button class="copy-btn">คัดลอก</button>
+        </div>
+
+        <h4>2. ไฟล์โมเดล (custom_chestplate.geo.json)</h4>
+        <p>
+            สร้างไฟล์นี้ใน <code>development_resource_pack/models/entity/</code> ครับ
+            ไฟล์นี้จะกำหนดรูปร่างของเกราะที่จะให้
+            Texture และ Armor Trim มาเกาะครับ
+        </p>
+
+        <div class="code-wrapper">
+            <pre><span class="token-punct">{</span>
+              <span class="token-key">"format_version"</span><span class="token-punct">:</span> <span class="token-string">"1.16.0"</span><span class="token-punct">,</span> 
+              <span class="token-key">"minecraft:geometry"</span><span class="token-punct">:</span> <span class="token-punct">[</span> 
+                <span class="token-punct">{</span> 
+                  <span class="token-key">"description"</span><span class="token-punct">:</span> <span class="token-punct">{</span> 
+                    <span class="token-key">"identifier"</span><span class="token-punct">:</span> <span class="token-string">"geometry.custom_chestplate"</span><span class="token-punct">,</span> 
+                    <span class="token-key">"texture_width"</span><span class="token-punct">:</span> <span class="token-number">32</span><span class="token-punct">,</span> 
+                    <span class="token-key">"texture_height"</span><span class="token-punct">:</span> <span class="token-number">32</span><span class="token-punct">,</span> 
+                    <span class="token-key">"visible_bounds_width"</span><span class="token-punct">:</span> <span class="token-number">3</span><span class="token-punct">,</span> 
+                    <span class="token-key">"visible_bounds_height"</span><span class="token-punct">:</span> <span class="token-number">2.5</span><span class="token-punct">,</span> 
+                    <span class="token-key">"visible_bounds_offset"</span><span class="token-punct">:</span> <span class="token-punct">[</span><span class="token-number">0</span><span class="token-punct">,</span> <span class="token-number">0.75</span><span class="token-punct">,</span> <span class="token-number">0</span><span class="token-punct">]</span> 
+                  <span class="token-punct">}</span><span class="token-punct">,</span> 
+                  <span class="token-key">"bones"</span><span class="token-punct">:</span> <span class="token-punct">[</span> 
+                    <span class="token-punct">{</span> 
+                      <span class="token-key">"name"</span><span class="token-punct">:</span> <span class="token-string">"body"</span><span class="token-punct">,</span> 
+                      <span class="token-key">"pivot"</span><span class="token-punct">:</span> <span class="token-punct">[</span><span class="token-number">0</span><span class="token-punct">,</span> <span class="token-number">14</span><span class="token-punct">,</span> <span class="token-number">0</span><span class="token-punct">]</span> 
+                    <span class="token-punct">}</span><span class="token-punct">,</span> 
+                    <span class="token-punct">{</span> 
+                      <span class="token-key">"name"</span><span class="token-punct">:</span> <span class="token-string">"chestplate"</span><span class="token-punct">,</span> 
+                      <span class="token-key">"parent"</span><span class="token-punct">:</span> <span class="token-string">"body"</span><span class="token-punct">,</span> 
+                      <span class="token-key">"pivot"</span><span class="token-punct">:</span> <span class="token-punct">[</span><span class="token-number">0</span><span class="token-punct">,</span> <span class="token-number">0</span><span class="token-punct">,</span> <span class="token-number">0</span><span class="token-punct">]</span><span class="token-punct">,</span> 
+                      <span class="token-key">"binding"</span><span class="token-punct">:</span> <span class="token-string">"'body'"</span><span class="token-punct">,</span> 
+                      <span class="token-key">"cubes"</span><span class="token-punct">:</span> <span class="token-punct">[</span> 
+                        <span class="token-punct">{</span><span class="token-key">"origin"</span><span class="token-punct">:</span> <span class="token-punct">[</span><span class="token-number">-4</span><span class="token-punct">,</span> <span class="token-number">2</span><span class="token-punct">,</span> <span class="token-number">-2</span><span class="token-punct">]</span><span class="token-punct">,</span> <span class="token-key">"size"</span><span class="token-punct">:</span> <span class="token-punct">[</span><span class="token-number">8</span><span class="token-punct">,</span> <span class="token-number">12</span><span class="token-punct">,</span> <span class="token-number">4</span><span class="token-punct">]</span><span class="token-punct">,</span> <span class="token-key">"inflate"</span><span class="token-punct">:</span> <span class="token-number">1.01</span><span class="token-punct">,</span> <span class="token-key">"uv"</span><span class="token-punct">:</span> <span class="token-punct">[</span><span class="token-number">0</span><span class="token-punct">,</span> <span class="token-number">0</span><span class="token-punct">]</span><span class="token-punct">}</span> 
+                      <span class="token-punct">]</span> 
+                    <span class="token-punct">}</span><span class="token-punct">,</span> 
+                    <span class="token-punct">{</span> 
+                      <span class="token-key">"name"</span><span class="token-punct">:</span> <span class="token-string">"arm_right"</span><span class="token-punct">,</span> 
+                      <span class="token-key">"pivot"</span><span class="token-punct">:</span> <span class="token-punct">[</span><span class="token-number">-5</span><span class="token-punct">,</span> <span class="token-number">12</span><span class="token-punct">,</span> <span class="token-number">0</span><span class="token-punct">]</span> 
+                    <span class="token-punct">}</span><span class="token-punct">,</span>
+                    <span class="token-punct">{</span> 
+                      <span class="token-key">"name"</span><span class="token-punct">:</span> <span class="token-string">"arm_plate_right"</span><span class="token-punct">,</span> 
+                      <span class="token-key">"parent"</span><span class="token-punct">:</span> <span class="token-string">"arm_right"</span><span class="token-punct">,</span> 
+                      <span class="token-key">"pivot"</span><span class="token-punct">:</span> <span class="token-punct">[</span><span class="token-number">-5</span><span class="token-punct">,</span> <span class="token-number">12</span><span class="token-punct">,</span> <span class="token-number">0</span><span class="token-punct">]</span><span class="token-punct">,</span> 
+                      <span class="token-key">"binding"</span><span class="token-punct">:</span> <span class="token-string">"'rightarm'"</span><span class="token-punct">,</span> 
+                      <span class="token-key">"cubes"</span><span class="token-punct">:</span> <span class="token-punct">[</span> 
+                        <span class="token-punct">{</span><span class="token-key">"origin"</span><span class="token-punct">:</span> <span class="token-punct">[</span><span class="token-number">-8</span><span class="token-punct">,</span> <span class="token-number">2</span><span class="token-punct">,</span> <span class="token-number">-2</span><span class="token-punct">]</span><span class="token-punct">,</span> <span class="token-key">"size"</span><span class="token-punct">:</span> <span class="token-punct">[</span><span class="token-number">4</span><span class="token-punct">,</span> <span class="token-number">12</span><span class="token-punct">,</span> <span class="token-number">4</span><span class="token-punct">]</span><span class="token-punct">,</span> <span class="token-key">"inflate"</span><span class="token-punct">:</span> <span class="token-number">1</span><span class="token-punct">,</span> <span class="token-key">"uv"</span><span class="token-punct">:</span> <span class="token-punct">[</span><span class="token-number">0</span><span class="token-punct">,</span> <span class="token-number">16</span><span class="token-punct">]</span><span class="token-punct">}</span> 
+                      <span class="token-punct">]</span> 
+                    <span class="token-punct">}</span><span class="token-punct">,</span> 
+                    <span class="token-punct">{</span> 
+                      <span class="token-key">"name"</span><span class="token-punct">:</span> <span class="token-string">"arm_left"</span><span class="token-punct">,</span> 
+                      <span class="token-key">"pivot"</span><span class="token-punct">:</span> <span class="token-punct">[</span><span class="token-number">5</span><span class="token-punct">,</span> <span class="token-number">12</span><span class="token-punct">,</span> <span class="token-number">0</span><span class="token-punct">]</span> 
+                    <span class="token-punct">}</span><span class="token-punct">,</span> 
+                    <span class="token-punct">{</span> 
+                      <span class="token-key">"name"</span><span class="token-punct">:</span> <span class="token-string">"arm_plate_left"</span><span class="token-punct">,</span> 
+                      <span class="token-key">"parent"</span><span class="token-punct">:</span> <span class="token-string">"arm_left"</span><span class="token-punct">,</span> 
+                      <span class="token-key">"pivot"</span><span class="token-punct">:</span> <span class="token-punct">[</span><span class="token-number">5</span><span class="token-punct">,</span> <span class="token-number">12</span><span class="token-punct">,</span> <span class="token-number">0</span><span class="token-punct">]</span><span class="token-punct">,</span> 
+                      <span class="token-key">"binding"</span><span class="token-punct">:</span> <span class="token-string">"'leftarm'"</span><span class="token-punct">,</span> 
+                      <span class="token-key">"cubes"</span><span class="token-punct">:</span> <span class="token-punct">[</span> 
+                        <span class="token-punct">{</span><span class="token-key">"origin"</span><span class="token-punct">:</span> <span class="token-punct">[</span><span class="token-number">4</span><span class="token-punct">,</span> <span class="token-number">2</span><span class="token-punct">,</span> <span class="token-number">-2</span><span class="token-punct">]</span><span class="token-punct">,</span> <span class="token-key">"size"</span><span class="token-punct">:</span> <span class="token-punct">[</span><span class="token-number">4</span><span class="token-punct">,</span> <span class="token-number">12</span><span class="token-punct">,</span> <span class="token-number">4</span><span class="token-punct">]</span><span class="token-punct">,</span> <span class="token-key">"inflate"</span><span class="token-punct">:</span> <span class="token-number">1</span><span class="token-punct">,</span> <span class="token-key">"uv"</span><span class="token-punct">:</span> <span class="token-punct">[</span><span class="token-number">0</span><span class="token-punct">,</span> <span class="token-number">16</span><span class="token-punct">]</span><span class="token-punct">,</span> <span class="token-key">"mirror"</span><span class="token-punct">:</span> <span class="token-boolean">true</span><span class="token-punct">}</span> 
+                      <span class="token-punct">]</span> 
+                    <span class="token-punct">}</span> 
+                  <span class="token-punct">]</span> 
+                <span class="token-punct">}</span> 
+              <span class="token-punct">]</span> 
+            <span class="token-punct">}</span></pre>
+            <button class="copy-btn">คัดลอก</button>
+        </div>
+
+        <h4>3. ไฟล์รูปภาพ</h4>
+        <p>สำหรับไอเท็มนี้เรามีภาพ 3 ภาพครับ ดาวน์โหลดแล้ววางในโฟลเดอร์ที่ถูกต้องตามนี้เลย:</p>
+
+        <p>
+            <strong>1. ไอคอนเกราะ (custom_chestplate.png):</strong> วางที่
+            <code>development_resource_pack/textures/items/</code>
+            <br>
+
+            <img src="https://learn.microsoft.com/en-gb/minecraft/creator/documents/media/addcustomitems/custom_chestplate_ico.png?view=minecraft-bedrock-stable"
+                width="80" alt="Custom Chestplate Icon">
+        </p>
+
+        <p>
+            <strong>2. สกินเกราะ (custom_chestplate.png):</strong> วางที่
+            <code>development_resource_pack/textures/entity/attachable/</code>
+            <br>
+
+            <img src="https://learn.microsoft.com/en-gb/minecraft/creator/documents/media/addcustomitems/custom_chestplate.png?view=minecraft-bedrock-stable"
+                width="80" alt="Custom Chestplate Texture">
+        </p>
+
+        <p>
+            <strong>3. ลาย Trim แบบ Wild (custom_wild.png):</strong> วางที่
+            <code>development_resource_pack/textures/models/armor/</code>
+            <br>
+
+            <img src="https://learn.microsoft.com/en-gb/minecraft/creator/documents/media/addcustomitems/custom_wild.png?view=minecraft-bedrock-stable"
+                width="80" alt="Custom Wild Trim Texture">
+        </p>
+
+        <h4>4. กำหนด Texture ไอเท็ม</h4>
+        <p>
+            สุดท้าย แก้ไขไฟล์ <code>development_resource_pack/textures/item_texture.json</code> ครับ:
+        </p>
+
+        <div class="code-wrapper">
+            <pre><span class="token-punct">{</span>
+                <span class="token-key">"texture_data"</span><span class="token-punct">:</span> <span class="token-punct">{</span>
+                    <span class="token-key">"custom_chestplate"</span><span class="token-punct">:</span> <span class="token-punct">{</span>
+                        <span class="token-key">"textures"</span><span class="token-punct">:</span> <span class="token-string">"textures/items/custom_chestplate.png"</span>
+                    <span class="token-punct">}</span>
+                <span class="token-punct">}</span>
+            <span class="token-punct">}</span></pre>
+            <button class="copy-btn">คัดลอก</button>
+        </div>
+
+        <h3>ผลลัพธ์</h3>
+        <p>
+            เมื่อคุณเสกเกราะมาใส่
+        <div class="code-wrapper">
+            <pre>/give @s demo:custom_chestplate</pre>
+            <button class="copy-btn">คัดลอก</button>
+        </div>
+        มันจะดูเป็นแบบนี้ครับ:
+        </p>
+
+        <p>
+            และถ้าคุณลองนำ <strong>Wild Armor Trim Template</strong> มารวมกับเกราะของคุณที่โต๊ะ Smithing Table
+            แล้วใส่กลับเข้าไปใหม่ มันจะดูเท่ขึ้นแบบนี้เลยครับ:
+        </p>
+
+        <hr style="border: 0; border-top: 1px solid #444; margin: 40px 0;">
+
+        <h2>5. ไอเท็มแบบย้อมสีได้ (Dyeable custom items)</h2>
+        <p>
+            ตอนนี้ไอเท็มแบบกำหนดเองสามารถนำไปย้อมสีในหม้อปรุงยา (Cauldrons) ได้แล้วครับ!
+            แต่มีข้อกำหนดว่า <code>format_version</code> ของไฟล์ไอเท็มและ attachable จะต้องเป็นเวอร์ชัน
+            <strong>1.21.30</strong>
+            หรือสูงกว่าเท่านั้น
+        </p>
+
+        <p>
+            <em>ในหัวข้อนี้ เราจะสมมติว่าคุณทำ "เกราะอกแบบกำหนดเอง" จากหัวข้อที่แล้วเสร็จเรียบร้อยแล้วนะครับ ให้ Copy
+                Add-ons Pack ชุดนั้นมาเพื่อแก้ไขต่อได้เลย</em>
+        </p>
+
+        <h3>1. แก้ไข Behavior Pack</h3>
+        <p>
+            เปิดไฟล์ <code>custom_chestplate.item.json</code> ใน Behavior Pack ขึ้นมาแก้ไขดังนี้ครับ:
+        </p>
+        <ol>
+            <li>เปลี่ยน <code>format_version</code> ให้เป็น <code>"1.21.30"</code></li>
+            <li>แก้ไขส่วน <code>minecraft:icon</code> ให้รองรับทั้งแบบปกติ (default) และแบบย้อมสี (dyed)</li>
+            <li>เพิ่ม component <code>minecraft:dyeable</code> เข้าไป (กำหนดสีเริ่มต้นด้วย Hex code เช่น
+                <code>#175882</code>)
+            </li>
+        </ol>
+
+        <p>ไฟล์ JSON ฉบับสมบูรณ์จะมีหน้าตาแบบนี้ครับ:</p>
+        <div class="code-wrapper">
+            <pre><span class="token-punct">{</span> 
+          <span class="token-key">"format_version"</span><span class="token-punct">:</span> <span class="token-string">"1.21.30"</span><span class="token-punct">,</span> 
+          <span class="token-key">"minecraft:item"</span><span class="token-punct">:</span> <span class="token-punct">{</span> 
+            <span class="token-key">"description"</span><span class="token-punct">:</span> <span class="token-punct">{</span> 
+              <span class="token-key">"identifier"</span><span class="token-punct">:</span> <span class="token-string">"demo:custom_chestplate"</span><span class="token-punct">,</span> 
+              <span class="token-key">"menu_category"</span><span class="token-punct">:</span> <span class="token-punct">{</span> 
+                <span class="token-key">"category"</span><span class="token-punct">:</span> <span class="token-string">"equipment"</span><span class="token-punct">,</span> 
+                <span class="token-key">"group"</span><span class="token-punct">:</span> <span class="token-string">"itemGroup.name.chestplate"</span> 
+              <span class="token-punct">}</span>
+            <span class="token-punct">}</span><span class="token-punct">,</span>
+            <span class="token-key">"components"</span><span class="token-punct">:</span> <span class="token-punct">{</span> 
+              <span class="token-key">"minecraft:max_stack_size"</span><span class="token-punct">:</span> <span class="token-number">1</span><span class="token-punct">,</span> 
+              <span class="token-key">"minecraft:icon"</span><span class="token-punct">:</span> <span class="token-punct">{</span>
+                <span class="token-key">"textures"</span><span class="token-punct">:</span> <span class="token-punct">{</span>
+                  <span class="token-key">"default"</span><span class="token-punct">:</span> <span class="token-string">"custom_chestplate_icon"</span><span class="token-punct">,</span>
+                  <span class="token-key">"dyed"</span><span class="token-punct">:</span> <span class="token-string">"custom_chestplate_icon_gray"</span>
+                <span class="token-punct">}</span>
+              <span class="token-punct">}</span><span class="token-punct">,</span>
+              <span class="token-key">"minecraft:wearable"</span><span class="token-punct">:</span> <span class="token-punct">{</span>
+                <span class="token-key">"protection"</span><span class="token-punct">:</span> <span class="token-number">10</span><span class="token-punct">,</span> 
+                <span class="token-key">"slot"</span><span class="token-punct">:</span> <span class="token-string">"slot.armor.chest"</span> 
+              <span class="token-punct">}</span><span class="token-punct">,</span> 
+              <span class="token-key">"minecraft:durability"</span><span class="token-punct">:</span> <span class="token-punct">{</span> 
+                <span class="token-key">"damage_chance"</span><span class="token-punct">:</span> <span class="token-punct">{</span> 
+                  <span class="token-key">"min"</span><span class="token-punct">:</span> <span class="token-number">10</span><span class="token-punct">,</span> 
+                  <span class="token-key">"max"</span><span class="token-punct">:</span> <span class="token-number">50</span> 
+              <span class="token-punct">}</span><span class="token-punct">,</span> 
+                <span class="token-key">"max_durability"</span><span class="token-punct">:</span> <span class="token-number">1560</span> 
+              <span class="token-punct">}</span><span class="token-punct">,</span> 
+              <span class="token-key">"minecraft:repairable"</span><span class="token-punct">:</span> <span class="token-punct">{</span> 
+                <span class="token-key">"repair_items"</span><span class="token-punct">:</span> <span class="token-punct">[</span> 
+                  <span class="token-punct">{</span> 
+                    <span class="token-key">"items"</span><span class="token-punct">:</span> <span class="token-punct">[</span><span class="token-string">"pink_dye"</span><span class="token-punct">]</span><span class="token-punct">,</span> 
+                    <span class="token-key">"repair_amount"</span><span class="token-punct">:</span> <span class="token-number">390</span> 
+                  <span class="token-punct">}</span> 
+                <span class="token-punct">]</span> 
+              <span class="token-punct">}</span><span class="token-punct">,</span> 
+              <span class="token-key">"minecraft:tags"</span><span class="token-punct">:</span> <span class="token-punct">{</span> 
+                <span class="token-key">"tags"</span><span class="token-punct">:</span> <span class="token-punct">[</span> 
+                  <span class="token-string">"minecraft:is_armor"</span><span class="token-punct">,</span> 
+                  <span class="token-string">"minecraft:trimmable_armors"</span> 
+                <span class="token-punct">]</span> 
+              <span class="token-punct">}</span><span class="token-punct">,</span>
+              <span class="token-key">"minecraft:dyeable"</span><span class="token-punct">:</span> <span class="token-punct">{</span>
+                <span class="token-key">"default_color"</span><span class="token-punct">:</span>  <span class="token-string">"#175882"</span>
+              <span class="token-punct">}</span>
+            <span class="token-punct">}</span> 
+          <span class="token-punct">}</span> 
+        <span class="token-punct">}</span></pre>
+            <button class="copy-btn">คัดลอก</button>
+        </div>
+        <p><em>(ถ้าคุณไม่ต้องการให้มีสีเริ่มต้น ก็สามารถลบส่วน default_color ออกได้ครับ
+                ไอเท็มจะแสดงสีปกติจนกว่าจะถูกย้อม)</em>
+        </p>
+
+        <h3>2. เตรียมไฟล์รูปภาพ TGA</h3>
+        <p>
+            เพื่อให้ไอคอนสามารถเปลี่ยนสีได้ถูกต้อง เราจำเป็นต้องใช้ไฟล์ไอคอนเวอร์ชัน <strong>ขาว-ดำ</strong>
+            และต้องเป็นนามสกุล <strong>.tga</strong> ครับ
+        </p>
+        <p>
+            <strong>วิธีทำ:</strong> ให้เอารูปไอคอนเดิมมาแปลงเป็นขาวดำในโปรแกรมแต่งภาพ แล้วบันทึกไฟล์เป็นนามสกุล
+            <code>.tga</code>
+            (ตั้งชื่อไฟล์ว่า <code>custom_chestplate_icon_grayscale.tga</code>) แล้วนำไปใส่ในโฟลเดอร์ Texture ของคุณครับ
+        </p>
+
+        <h3>3. แก้ไข Resource Pack - Attachable</h3>
+        <p>
+            แก้ไขไฟล์ <code>custom_chestplate.attachable.json</code> โดยเปลี่ยน version เป็น <code>1.21.30</code>
+            และปรับปรุงส่วนต่างๆ ดังนี้:
+        </p>
+        <ul>
+            <li><strong>render_controllers:</strong> เปลี่ยนให้ชี้ไปที่ controller ตัวใหม่ที่เราจะสร้าง</li>
+            <li><strong>materials:</strong> เพิ่ม material สำหรับตอนย้อมสี (dyed)</li>
+            <li><strong>textures:</strong> เพิ่ม texture ไฟล์ .tga สำหรับตอนย้อมสี</li>
+            <li><strong>scripts:</strong> เพิ่มตัวแปรเพื่อเช็คว่าเกราะถูกย้อมสีอยู่หรือไม่</li>
+        </ul>
+
+        <div class="code-wrapper">
+            <pre><span class="token-punct">{</span>
+          <span class="token-key">"format_version"</span><span class="token-punct">:</span> <span class="token-string">"1.21.30"</span><span class="token-punct">,</span> 
+          <span class="token-key">"minecraft:attachable"</span><span class="token-punct">:</span> <span class="token-punct">{</span> 
+            <span class="token-key">"description"</span><span class="token-punct">:</span> <span class="token-punct">{</span> 
+              <span class="token-key">"identifier"</span><span class="token-punct">:</span> <span class="token-string">"demo:custom_chestplate"</span><span class="token-punct">,</span> 
+              <span class="token-key">"render_controllers"</span><span class="token-punct">:</span> <span class="token-punct">[</span><span class="token-string">"controller.render.custom_chestplate"</span><span class="token-punct">]</span><span class="token-punct">,</span> 
+              <span class="token-key">"materials"</span><span class="token-punct">:</span> <span class="token-punct">{</span> 
+                <span class="token-key">"default"</span><span class="token-punct">:</span> <span class="token-string">"armor"</span><span class="token-punct">,</span> 
+                <span class="token-key">"dyed"</span><span class="token-punct">:</span> <span class="token-string">"entity_alphatest_change_color"</span>
+              <span class="token-punct">}</span><span class="token-punct">,</span> 
+              <span class="token-key">"textures"</span><span class="token-punct">:</span> <span class="token-punct">{</span> 
+                <span class="token-key">"default"</span><span class="token-punct">:</span> <span class="token-string">"textures/items/custom_chestplate.png"</span><span class="token-punct">,</span>
+                <span class="token-key">"dyed"</span><span class="token-punct">:</span> <span class="token-string">"textures/items/custom_chestplate_grayscale.tga"</span>
+              <span class="token-punct">}</span><span class="token-punct">,</span> 
+              <span class="token-key">"geometry"</span><span class="token-punct">:</span> <span class="token-punct">{</span> 
+                <span class="token-key">"default"</span><span class="token-punct">:</span> <span class="token-string">"geometry.custom_chestplate"</span>
+              <span class="token-punct">}</span><span class="token-punct">,</span>
+              <span class="token-key">"scripts"</span><span class="token-punct">:</span> <span class="token-punct">{</span>
+                <span class="token-key">"pre_animation"</span><span class="token-punct">:</span> <span class="token-punct">[</span>
+                  <span class="token-string">"variable.is_dyed = query.armor_color_slot(1, 0) != 1.0 || query.armor_color_slot(1, 1) != 1.0 || query.armor_color_slot(1, 2) != 1.0"</span>
+                <span class="token-punct">]</span>
+              <span class="token-punct">}</span>
+            <span class="token-punct">}</span>
+          <span class="token-punct">}</span>
+        <span class="token-punct">}</span></pre>
+            <button class="copy-btn">คัดลอก</button>
+        </div>
+
+        <h3>4. สร้าง Render Controller</h3>
+        <p>
+            ใน Resource Pack ให้สร้างโฟลเดอร์ชื่อ <code>render_controllers</code> และสร้างไฟล์ใหม่ชื่อ
+            <code>custom_chestplate.render_controllers.json</code> ใส่โค้ดนี้ครับ:
+        </p>
+        <p><em>(ไฟล์นี้ทำหน้าที่สลับ Material และ Texture ระหว่างแบบปกติและแบบย้อมสี ตามตัวแปร variable.is_dyed
+                ที่เราเขียนสคริปต์ไว้)</em></p>
+
+        <div class="code-wrapper">
+            <pre><span class="token-punct">{</span>
+          <span class="token-key">"format_version"</span><span class="token-punct">:</span> <span class="token-string">"1.8.0"</span><span class="token-punct">,</span>
+          <span class="token-key">"render_controllers"</span><span class="token-punct">:</span> <span class="token-punct">{</span>
+            <span class="token-key">"controller.render.custom_chestplate"</span><span class="token-punct">:</span> <span class="token-punct">{</span>
+              <span class="token-key">"geometry"</span><span class="token-punct">:</span> <span class="token-string">"Geometry.default"</span><span class="token-punct">,</span>
+              <span class="token-key">"materials"</span><span class="token-punct">:</span> <span class="token-punct">[</span> <span class="token-punct">{</span> <span class="token-key">"*"</span><span class="token-punct">:</span> <span class="token-string">"variable.is_dyed ? Material.dyed : Material.default"</span> <span class="token-punct">}</span>
+        <span class="token-punct">]</span><span class="token-punct">,</span>
+              <span class="token-key">"textures"</span><span class="token-punct">:</span> <span class="token-punct">[</span>
+                <span class="token-string">"variable.is_dyed ? Texture.dyed : Texture.default"</span>
+              <span class="token-punct">]</span>
+            <span class="token-punct">}</span>
+          <span class="token-punct">}</span>
+        <span class="token-punct">}</span></pre>
+            <button class="copy-btn">คัดลอก</button>
+        </div>
+
+        <h3>5. อัปเดต Item Texture Definition</h3>
+        <p>
+            สุดท้าย แก้ไขไฟล์ <code>development_resource_pack/textures/item_texture.json</code> ให้รู้จัก Texture
+            ทั้งสองแบบครับ:
+        </p>
+
+        <div class="code-wrapper">
+            <pre><span class="token-punct">{</span>
+          <span class="token-key">"texture_data"</span><span class="token-punct">:</span> <span class="token-punct">{</span>
+            <span class="token-key">"custom_chestplate"</span><span class="token-punct">:</span> <span class="token-punct">{</span>
+              <span class="token-key">"textures"</span><span class="token-punct">:</span> <span class="token-string">"textures/items/custom_chestplate.png"</span>
+            <span class="token-punct">}</span><span class="token-punct">,</span>
+            <span class="token-key">"custom_chestplate_icon_gray"</span><span class="token-punct">:</span> <span class="token-punct">{</span>
+              <span class="token-key">"textures"</span><span class="token-punct">:</span> <span class="token-string">"textures/items/custom_chestplate_icon_grayscale.tga"</span>
+            <span class="token-punct">}</span>
+          <span class="token-punct">}</span>
+        <span class="token-punct">}</span></pre>
+            <button class="copy-btn">คัดลอก</button>
+        </div>
+
+        <h3>ผลลัพธ์</h3>
+        <p>
+            เมื่อคุณแก้ไขและบันทึกไฟล์ทั้งหมดแล้ว ให้เข้าเกมแล้วนำเกราะอกของคุณไปจุ่มลงในหม้อปรุงยา (Cauldron)
+            ที่ใส่น้ำย้อมสีไว้
+            เกราะของคุณก็จะเปลี่ยนสีได้สวยงามแบบนี้ครับ!
+        </p>
+    </article>
+
+    <footer>
+        <h2>ช่องทางติดต่อ</h2>
+        <div class="social-container">
+            <a class="social-icons" href="https://www.facebook.com/AddonInsiderTH">
+                <img src="../../image/facebook-svgrepo-com.png" alt="Facebook">
+            </a>
+            <a class="social-icons" href="https://www.youtube.com/@MCFirsting">
+                <img src="../../image/youtube-fill-svgrepo-com.png" alt="YouTube">
+            </a>
+            <a class="social-icons" href="https://discord.gg/tnqZCfz4wz">
+                <img src="../../image/discord-svgrepo-com.png" alt="Discord">
+            </a>
+            <a class="social-icons" href="https://github.com/MCFirsting">
+                <img src="../../image/github-svgrepo-com.png" alt="GitHub">
+            </a>
+            <a class="social-icons" href="https://www.tiktok.com/@mc_firsting">
+                <img src="../../image/tiktok-svgrepo-com.png" alt="TikTok">
+            </a>
+        </div>
+    </footer>
+</body>
+
+</html>
