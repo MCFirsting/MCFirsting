@@ -1,0 +1,434 @@
+<!DOCTYPE html>
+<html lang="th">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Recipes</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+    <nav class="navbar">
+        <div class="logo">
+            <a href="../../index.html"><img id="logo_mcfirsting" src="../../image/mcfirsting_logo.png" alt="Logo"></a>
+        </div>
+        <ul class="nav-links">
+            <li><a href="../../tutorial.html">Tutorial</a></li>
+            <li><a href="../../shop.html">Shop</a></li>
+        </ul>
+    </nav>
+
+    <header class="doc-header">
+        <div class="container">
+            <h1>การสร้างสูตรคราฟต์ Recipes</h1>
+            <p style="text-align: center; color: #aaa;">ปรุงแต่งจินตนาการให้กลายเป็นไอเท็มจริง</p>
+        </div>
+    </header>
+
+    <article class="article-container">
+
+        <div style="text-align: center; margin-bottom: 30px;">
+            <i class="fa-solid fa-book-open" style="font-size: 4rem; color: #8e44ad;"></i>
+        </div>
+
+        <p>
+            <strong>สูตรการคราฟต์ (Recipes)</strong> ใน Minecraft นั้นมีความคล้ายคลึงกับสูตรอาหารในชีวิตจริงมากครับ
+            คือเราต้องรวบรวมส่วนประกอบต่างๆ เตรียมพวกมันด้วยวิธีที่เฉพาะเจาะจง
+            และในที่สุดเราก็จะได้สิ่งใหม่ที่ยอดเยี่ยมออกมา
+        </p>
+        <p>
+            ข้อแตกต่างหลักคือใน Minecraft สูตรเหล่านี้ไม่ได้จำกัดอยู่แค่เรื่องอาหารการกินเท่านั้น
+            แต่เรายังใช้มันเพื่อสร้างเฟอร์นิเจอร์, ทรัพยากรที่ซับซ้อน, และสิ่งอื่นๆ อีกมากมาย!
+        </p>
+        <p>
+            ในบทความนี้ เราจะมาดูส่วนประกอบพื้นฐานของสูตรคราฟต์ และทำความรู้จักกับสูตรประเภทต่างๆ
+            เพื่อช่วยให้คุณเริ่มต้นใช้งานได้ทันทีครับ
+        </p>
+
+        <h2>พารามิเตอร์ของสูตร Recipe Parameters</h2>
+        <p>
+            พารามิเตอร์ของสูตรเปรียบเสมือนบล็อกพื้นฐานที่ประกอบกันขึ้นมาเป็นสูตรคราฟต์ครับ
+            ถ้าจะเปรียบเทียบกับเรื่องอาหารเมื่อครู่ สิ่งเหล่านี้ก็คือ <strong>"ส่วนผสม"</strong> ของเรานั่นเอง!
+            แม้ว่าทุกสูตรจะมีพารามิเตอร์ แต่ก็ไม่ใช่ทุกสูตรที่จะใช้พารามิเตอร์ชุดเดียวกันนะครับ
+        </p>
+
+        <div style="overflow-x: auto;">
+            <table
+                style="width: 100%; border-collapse: collapse; margin-top: 20px; background-color: #252525; border-radius: 8px; overflow: hidden;">
+                <thead>
+                    <tr style="background-color: #1a1a1a; text-align: left;">
+                        <th style="padding: 15px; border-bottom: 2px solid #444; color: #4facfe;">ชื่อ</th>
+                        <th style="padding: 15px; border-bottom: 2px solid #444; color: #fff;">คำอธิบาย</th>
+                        <th style="padding: 15px; border-bottom: 2px solid #444; color: #aaa;">ประเภทที่ใช้</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr style="border-bottom: 1px solid #333;">
+                        <td style="padding: 12px; color: #a5d6ff;"><strong>Input</strong></td>
+                        <td style="padding: 12px; color: #ddd;">กำหนดไอเท็มวัตถุดิบที่ใช้ในการสร้าง</td>
+                        <td style="padding: 12px; color: #aaa;">Furnace; Potion</td>
+                    </tr>
+                    <tr style="border-bottom: 1px solid #333; background-color: #2a2a2a;">
+                        <td style="padding: 12px; color: #a5d6ff;"><strong>Output</strong></td>
+                        <td style="padding: 12px; color: #ddd;">กำหนดไอเท็มผลลัพธ์ที่จะได้จากสูตรนั้นๆ</td>
+                        <td style="padding: 12px; color: #aaa;">Furnace; Potion</td>
+                    </tr>
+                    <tr style="border-bottom: 1px solid #333;">
+                        <td style="padding: 12px; color: #a5d6ff;"><strong>Tags</strong></td>
+                        <td style="padding: 12px; color: #ddd;">กำหนดกลุ่มของไอเท็ม (Tag) ที่สามารถใช้ในสูตรนี้ได้</td>
+                        <td style="padding: 12px; color: #aaa;">All (ทั้งหมด)</td>
+                    </tr>
+                    <tr style="border-bottom: 1px solid #333; background-color: #2a2a2a;">
+                        <td style="padding: 12px; color: #a5d6ff;"><strong>Pattern</strong></td>
+                        <td style="padding: 12px; color: #ddd;">
+                            ตัวแทนของไอเท็มและการจัดวางรูปแบบที่จำเป็นเพื่อให้ได้ผลลัพธ์ตามต้องการ</td>
+                        <td style="padding: 12px; color: #aaa;">Shaped</td>
+                    </tr>
+                    <tr style="border-bottom: 1px solid #333;">
+                        <td style="padding: 12px; color: #a5d6ff;"><strong>Key</strong></td>
+                        <td style="padding: 12px; color: #ddd;">กำหนดไอเท็ม Minecraft ให้จับคู่กับตัวอักษร (Key)
+                            ที่คุณใช้ใน
+                            Pattern</td>
+                        <td style="padding: 12px; color: #aaa;">Shaped</td>
+                    </tr>
+                    <tr style="border-bottom: 1px solid #333; background-color: #2a2a2a;">
+                        <td style="padding: 12px; color: #a5d6ff;"><strong>Priority</strong></td>
+                        <td style="padding: 12px; color: #ddd;">กำหนดระดับความสำคัญของสูตร (ตัวเลขยิ่งต่ำ
+                            ยิ่งมีความสำคัญสูง)
+                        </td>
+                        <td style="padding: 12px; color: #aaa;">Shaped; Shapeless</td>
+                    </tr>
+                    <tr style="border-bottom: 1px solid #333;">
+                        <td style="padding: 12px; color: #a5d6ff;"><strong>Result</strong></td>
+                        <td style="padding: 12px; color: #ddd;">เมื่อใส่วัตถุดิบถูกต้องตาม Pattern
+                            ไอเท็มเหล่านี้คือผลลัพธ์ที่จะออกมา</td>
+                        <td style="padding: 12px; color: #aaa;">Shaped; Shapeless; Smithing Transform</td>
+                    </tr>
+                    <tr style="border-bottom: 1px solid #333; background-color: #2a2a2a;">
+                        <td style="padding: 12px; color: #a5d6ff;"><strong>Ingredients</strong></td>
+                        <td style="padding: 12px; color: #ddd;">กำหนดไอเท็มที่ต้องใช้ในสูตร
+                            (โดยไม่สนใจตำแหน่งการวางในตารางคราฟต์)</td>
+                        <td style="padding: 12px; color: #aaa;">Shapeless</td>
+                    </tr>
+                    <tr style="border-bottom: 1px solid #333;">
+                        <td style="padding: 12px; color: #a5d6ff;"><strong>Reagent</strong></td>
+                        <td style="padding: 12px; color: #ddd;">กำหนดไอเท็มที่จะนำมาผสมกับ Potion ในเครื่องปรุงยา
+                            (Brewing
+                            Stand)</td>
+                        <td style="padding: 12px; color: #aaa;">Potion</td>
+                    </tr>
+                    <tr style="border-bottom: 1px solid #333; background-color: #2a2a2a;">
+                        <td style="padding: 12px; color: #a5d6ff;"><strong>Addition</strong></td>
+                        <td style="padding: 12px; color: #ddd;">กำหนดไอเท็มที่ใช้เสริมเพื่อทำการแปลงสภาพ
+                            (Transformation)</td>
+                        <td style="padding: 12px; color: #aaa;">Smithing Transform</td>
+                    </tr>
+                    <tr style="border-bottom: 1px solid #333;">
+                        <td style="padding: 12px; color: #a5d6ff;"><strong>Base</strong></td>
+                        <td style="padding: 12px; color: #ddd;">กำหนดไอเท็มหลักที่จะถูกแปลงสภาพ</td>
+                        <td style="padding: 12px; color: #aaa;">Smithing Transform</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+
+        <h2>แท็กของสูตร Recipe Tags</h2>
+        <p>
+            <strong>Recipe tags</strong> ช่วยให้คุณสามารถจัดกลุ่มองค์ประกอบที่คล้ายคลึงกันเข้าด้วยกันได้ครับ
+        </p>
+        <p>
+            ตัวอย่างเช่น คุณสามารถรวมบันไดไม้ชนิดต่างๆ
+            เข้าด้วยกันเพื่อสร้างสูตรคราฟต์ที่สามารถปรับเปลี่ยนไปตามพารามิเตอร์ที่หลากหลายได้
+            (กล่าวคือ สามารถใช้วัตถุดิบในกลุ่มเดียวกันชนิดไหนก็ได้มาใช้แทนกันในสูตร)
+        </p>
+        <p>
+            คุณสามารถดูข้อมูลเพิ่มเติมเกี่ยวกับ Recipe tags ได้ที่ <a
+                href="https://learn.microsoft.com/en-us/minecraft/creator/reference/content/recipereference/examples/recipedefinitions/tagsrecipeinput?view=minecraft-bedrock-stable"
+                target="_blank" style="color: #a5d6ff;">บทความนี้ (ภาษาอังกฤษ)</a> ครับ
+        </p>
+        <hr style="border: 0; border-top: 1px solid #444; margin: 40px 0;">
+        
+        <h2>ประเภทของสูตร Recipe Types</h2>
+        
+        <h3>1. Shaped vs. Shapeless Recipes</h3>
+        
+        <h4>Shaped Recipes (สูตรแบบมีรูปร่าง)</h4>
+        <p>
+            ผู้เล่นจะใช้ <strong>Shaped Recipes</strong> บนโต๊ะคราฟต์ (Crafting Table) โดยต้องวาง <strong>ส่วนประกอบ
+                (Components)</strong>
+            ของสูตรลงในตำแหน่งตามรูปแบบ (Pattern) ที่กำหนดเป๊ะๆ เพื่อสร้างผลลัพธ์ที่ต้องการ
+            ในฐานะผู้สร้าง คุณสามารถใช้ Resource และ Behavior packs เพื่อปรับแต่งการจัดวางและผลลัพธ์ให้เหมาะกับโลกของคุณได้ครับ
+        </p>
+        
+        <div
+            style="background-color: #2b2b2b; padding: 15px; border-radius: 8px; border-left: 4px solid #f0ad4e; margin: 20px 0;">
+            <h4 style="margin-top: 0; color: #f0ad4e;">📝 หมายเหตุ</h4>
+            <p style="margin-bottom: 0;">
+                ขนาดสูตรสูงสุดที่รองรับคือ <strong>3x3</strong> ดังนั้นอะไรก็ตามที่เกินจากตัวอักษรที่ 3 ใน Pattern
+                จะถูกมองข้ามไปครับ
+            </p>
+        </div>
+        
+        <h4>Shapeless Recipes (สูตรแบบไร้รูปร่าง)</h4>
+        <p>
+            <strong>Shapeless recipes</strong> คือสูตรที่ไม่ต้องการรูปแบบการวางที่ตายตัว ขอแค่มีวัตถุดิบครบก็พอ
+            คุณสามารถสร้างหรือแก้ไขสูตรเหล่านี้ได้เช่นกัน แต่พารามิเตอร์ที่ใช้จะแตกต่างกันเล็กน้อยครับ
+        </p>
+        
+        <p><strong>ตารางเปรียบเทียบพารามิเตอร์ (Shaped vs Shapeless)</strong></p>
+        <div style="overflow-x: auto;">
+            <table
+                style="width: 100%; border-collapse: collapse; margin-top: 10px; background-color: #252525; border-radius: 8px; overflow: hidden;">
+                <thead>
+                    <tr style="background-color: #1a1a1a; text-align: left;">
+                        <th style="padding: 12px; border-bottom: 2px solid #444; color: #4facfe;">ชื่อ</th>
+                        <th style="padding: 12px; border-bottom: 2px solid #444; color: #fff;">คำอธิบาย</th>
+                        <th style="padding: 12px; border-bottom: 2px solid #444; color: #aaa;">ประเภท</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr style="border-bottom: 1px solid #333;">
+                        <td style="padding: 10px; color: #a5d6ff;">Tags</td>
+                        <td style="padding: 10px; color: #ddd;">กำหนดไอเท็มที่ใช้ในสูตรได้ (กลุ่ม)</td>
+                        <td style="padding: 10px; color: #aaa;">ทั้งคู่</td>
+                    </tr>
+                    <tr style="border-bottom: 1px solid #333; background-color: #2a2a2a;">
+                        <td style="padding: 10px; color: #a5d6ff;">Pattern</td>
+                        <td style="padding: 10px; color: #ddd;">ตัวแทนไอเท็มและการจัดวางรูปแบบ</td>
+                        <td style="padding: 10px; color: #aaa;">Shaped</td>
+                    </tr>
+                    <tr style="border-bottom: 1px solid #333;">
+                        <td style="padding: 10px; color: #a5d6ff;">Key</td>
+                        <td style="padding: 10px; color: #ddd;">จับคู่ตัวอักษรใน Pattern กับไอเท็ม Minecraft</td>
+                        <td style="padding: 10px; color: #aaa;">Shaped</td>
+                    </tr>
+                    <tr style="border-bottom: 1px solid #333; background-color: #2a2a2a;">
+                        <td style="padding: 10px; color: #a5d6ff;">Ingredients</td>
+                        <td style="padding: 10px; color: #ddd;">กำหนดไอเท็มที่ต้องใช้ (ไม่สนตำแหน่งการวาง)</td>
+                        <td style="padding: 10px; color: #aaa;">Shapeless</td>
+                    </tr>
+                    <tr style="border-bottom: 1px solid #333;">
+                        <td style="padding: 10px; color: #a5d6ff;">Priority</td>
+                        <td style="padding: 10px; color: #ddd;">ระดับความสำคัญ (เลขยิ่งน้อย ยิ่งสำคัญมาก)</td>
+                        <td style="padding: 10px; color: #aaa;">ทั้งคู่</td>
+                    </tr>
+                    <tr style="border-bottom: 1px solid #333; background-color: #2a2a2a;">
+                        <td style="padding: 10px; color: #a5d6ff;">Result</td>
+                        <td style="padding: 10px; color: #ddd;">ผลลัพธ์ที่จะได้เมื่อใส่วัตถุดิบถูกต้อง</td>
+                        <td style="padding: 10px; color: #aaa;">ทั้งคู่</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+        
+        <hr style="border: 0; border-top: 1px dashed #444; margin: 30px 0;">
+        
+        <h3>2. สูตรเตาเผา Furnace Recipes</h3>
+        <p>
+            คือสูตรที่ต้องใช้ <strong>เตาเผา (Furnace)</strong> ในการสร้างผลลัพธ์ เมื่อผู้เล่นใส่ไอเท็มที่ถูกต้องลงไป
+            (ตามที่คุณกำหนดเป็น <code>Input</code> ในไฟล์ JSON)
+            มันจะเปลี่ยนสภาพกลายเป็น <code>Output</code> ที่กำหนดไว้ครับ
+        </p>
+        <div style="overflow-x: auto;">
+            <table
+                style="width: 100%; border-collapse: collapse; margin-top: 10px; background-color: #252525; border-radius: 8px; overflow: hidden;">
+                <thead>
+                    <tr style="background-color: #1a1a1a; text-align: left;">
+                        <th style="padding: 12px; border-bottom: 2px solid #444; color: #4facfe;">ชื่อ</th>
+                        <th style="padding: 12px; border-bottom: 2px solid #444; color: #fff;">คำอธิบาย</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr style="border-bottom: 1px solid #333;">
+                        <td style="padding: 10px; color: #a5d6ff;">Tags</td>
+                        <td style="padding: 10px; color: #ddd;">กำหนดไอเท็มที่ใช้ในสูตรได้</td>
+                    </tr>
+                    <tr style="border-bottom: 1px solid #333; background-color: #2a2a2a;">
+                        <td style="padding: 10px; color: #a5d6ff;">Input</td>
+                        <td style="padding: 10px; color: #ddd;">กำหนดไอเท็มวัตถุดิบที่จะนำมาเผา</td>
+                    </tr>
+                    <tr style="border-bottom: 1px solid #333;">
+                        <td style="padding: 10px; color: #a5d6ff;">Output</td>
+                        <td style="padding: 10px; color: #ddd;">กำหนดไอเท็มผลลัพธ์ที่ได้จากการเผา</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+        
+        <hr style="border: 0; border-top: 1px dashed #444; margin: 30px 0;">
+        
+        <h3>3. สูตรปรุงยา Potion Brewing Recipes</h3>
+        <p>
+            การปรุงยาต้องใช้ทั้ง <strong>Potion Brewing Mix (ส่วนผสมยา)</strong> และ <strong>Potion Brewing Container
+                (ภาชนะใส่ยา)</strong>
+            ซึ่งทำที่แท่นปรุงยา (Brewing Station) คุณสามารถปรับแต่งพารามิเตอร์เหล่านี้ได้ผ่าน Resource และ Behavior packs ครับ
+        </p>
+        <div style="overflow-x: auto;">
+            <table
+                style="width: 100%; border-collapse: collapse; margin-top: 10px; background-color: #252525; border-radius: 8px; overflow: hidden;">
+                <thead>
+                    <tr style="background-color: #1a1a1a; text-align: left;">
+                        <th style="padding: 12px; border-bottom: 2px solid #444; color: #4facfe;">ชื่อ</th>
+                        <th style="padding: 12px; border-bottom: 2px solid #444; color: #fff;">คำอธิบาย</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr style="border-bottom: 1px solid #333;">
+                        <td style="padding: 10px; color: #a5d6ff;">Tags</td>
+                        <td style="padding: 10px; color: #ddd;">กำหนดไอเท็มที่ใช้ในสูตรได้</td>
+                    </tr>
+                    <tr style="border-bottom: 1px solid #333; background-color: #2a2a2a;">
+                        <td style="padding: 10px; color: #a5d6ff;">Input</td>
+                        <td style="padding: 10px; color: #ddd;">กำหนดไอเท็มตั้งต้น (เช่น ขวดน้ำ หรือยาพื้นฐาน)</td>
+                    </tr>
+                    <tr style="border-bottom: 1px solid #333;">
+                        <td style="padding: 10px; color: #a5d6ff;">Reagent</td>
+                        <td style="padding: 10px; color: #ddd;">กำหนดไอเท็มที่จะนำมาผสม (ตัวทำปฏิกิริยา) ใส่ด้านบนของแท่นปรุงยา
+                        </td>
+                    </tr>
+                    <tr style="border-bottom: 1px solid #333; background-color: #2a2a2a;">
+                        <td style="padding: 10px; color: #a5d6ff;">Output</td>
+                        <td style="padding: 10px; color: #ddd;">กำหนดไอเท็มผลลัพธ์ที่ได้</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+        
+        <hr style="border: 0; border-top: 1px dashed #444; margin: 30px 0;">
+        
+        <h3>4. สูตรการแปลงสภาพ Smithing Transform Recipes</h3>
+        <p>
+            ผู้เล่นใช้สูตรนี้ที่ <strong>โต๊ะตีเหล็ก (Smithing Table)</strong> เพื่อแปลงสภาพไอเท็มให้กลายเป็นอีกอย่างหนึ่ง
+            โดยที่ <strong>ยังคงคุณสมบัติเดิมของไอเท็มนั้นไว้</strong> (เช่น การอัปเกรดเกราะ Diamond เป็น Netherite โดยที่
+            Enchantment ไม่หาย)
+        </p>
+        <div style="overflow-x: auto;">
+            <table
+                style="width: 100%; border-collapse: collapse; margin-top: 10px; background-color: #252525; border-radius: 8px; overflow: hidden;">
+                <thead>
+                    <tr style="background-color: #1a1a1a; text-align: left;">
+                        <th style="padding: 12px; border-bottom: 2px solid #444; color: #4facfe;">ชื่อ</th>
+                        <th style="padding: 12px; border-bottom: 2px solid #444; color: #fff;">คำอธิบาย</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr style="border-bottom: 1px solid #333;">
+                        <td style="padding: 10px; color: #a5d6ff;">Base</td>
+                        <td style="padding: 10px; color: #ddd;">กำหนดไอเท็มหลักที่จะถูกแปลงสภาพ</td>
+                    </tr>
+                    <tr style="border-bottom: 1px solid #333; background-color: #2a2a2a;">
+                        <td style="padding: 10px; color: #a5d6ff;">Addition</td>
+                        <td style="padding: 10px; color: #ddd;">กำหนดไอเท็มเสริมที่ใช้ในการแปลงสภาพ (เช่น Netherite Ingot)</td>
+                    </tr>
+                    <tr style="border-bottom: 1px solid #333;">
+                        <td style="padding: 10px; color: #a5d6ff;">Result</td>
+                        <td style="padding: 10px; color: #ddd;">ผลลัพธ์ที่จะได้เมื่อใส่วัตถุดิบครบถ้วน</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+        
+        <hr style="border: 0; border-top: 1px dashed #444; margin: 30px 0;">
+        
+        <h3>5. สูตรตกแต่งลวดลาย Smithing Trim Recipes</h3>
+        <p>
+            ผู้เล่นใช้สูตรนี้ที่ <strong>โต๊ะตีเหล็ก (Smithing Table)</strong> เช่นกัน แต่เพื่อจุดประสงค์ในการเพิ่ม
+            <strong>ลวดลายสีสัน (Color Trim)</strong> ให้กับไอเท็ม โดยที่ยังคงคุณสมบัติเดิมของไอเท็มนั้นไว้ครับ
+        </p>
+
+        <hr style="border: 0; border-top: 1px solid #444; margin: 40px 0;">
+        
+        <h2>การปลดล็อกสูตร Recipe Unlocking</h2>
+        <p>
+            ตั้งแต่เวอร์ชัน 1.20.10 เป็นต้นมา ผู้เล่นสามารถ <strong>"ปลดล็อก"</strong> สูตรคราฟต์ได้ครับ
+            ซึ่งมีตั้งแต่ของพื้นฐาน (เช่น พลั่วไม้) ไปจนถึงไอเท็มที่ซับซ้อนและทรงพลังที่สุดใน Minecraft (เช่น แร่เพชร
+            หรือแอปเปิ้ลทองชาร์จ)!
+        </p>
+        <p>
+            ในฐานะส่วนหนึ่งของกระบวนการออกแบบไอเท็มและสูตร คุณสามารถกำหนดเงื่อนไขในการปลดล็อกไอเท็มได้โดยใช้เองค์ประกอบ
+            <code>unlock</code> ในไฟล์ JSON ของสูตรครับ
+        </p>
+        
+        <div
+            style="background-color: #2b2b2b; padding: 15px; border-radius: 8px; border-left: 4px solid #4facfe; margin: 20px 0;">
+            <h4 style="margin-top: 0; color: #4facfe;">💡 เคล็ดลับ</h4>
+            <p style="margin-bottom: 0;">
+                คุณสามารถเลือกกลยุทธ์การปลดล็อกสูตรได้ 2 แบบครับ คือ
+                <strong>1. การค้นพบไอเท็ม</strong> หรือ
+                <strong>2. บริบทเฉพาะในโลกเกม</strong>
+            </p>
+        </div>
+        
+        <h3>ตัวอย่างการปลดล็อก</h3>
+        
+        <h4>1. ปลดล็อกด้วยไอเท็ม</h4>
+        <p>
+            เราใช้ <code>item</code> เพื่อระบุไอเท็มที่จะทำให้เกิดการปลดล็อก และสามารถเพิ่มแท็ก <code>data</code>
+            เพื่อกรองชนิดของไอเท็มให้เจาะจงลงไปได้ครับ
+        </p>
+        <p><strong>ตัวอย่าง: ไม้แปรรูปอะคาเซีย (Acacia Planks)</strong></p>
+        <div class="code-wrapper">
+            <pre><span class="token-key">"unlock"</span><span class="token-punct">:</span> <span class="token-punct">[</span>
+            <span class="token-punct">{</span>
+              <span class="token-key">"item"</span><span class="token-punct">:</span> <span class="token-string">"minecraft:wood"</span><span class="token-punct">,</span>
+              <span class="token-key">"data"</span><span class="token-punct">:</span> <span class="token-number">4</span>
+            <span class="token-punct">}</span>
+          <span class="token-punct">]</span></pre>
+            <button class="copy-btn">คัดลอก</button>
+        </div>
+        <p><em>(ความหมาย: เมื่อผู้เล่นเก็บไม้ Acacia ได้ สูตร Acacia Planks จะถูกปลดล็อก)</em></p>
+        
+        <h4>2. ปลดล็อกด้วยบริบท (Context)</h4>
+        <p>
+            การใช้ <code>context</code> จะขึ้นอยู่กับสถานการณ์ของผู้เล่น โดยมีค่าที่ใช้ได้ 3 แบบดังนี้:
+        </p>
+        <ul>
+            <li><strong>AlwaysUnlocked:</strong> ปลดล็อกทันทีเสมอ (เหมาะสำหรับสูตรพื้นฐานที่ใครๆ ก็ควรรู้)</li>
+            <li><strong>PlayerInWater:</strong> ปลดล็อกเมื่อผู้เล่นลงน้ำครั้งแรก</li>
+            <li><strong>PlayerHasManyItems:</strong> ปลดล็อกเมื่อผู้เล่นมีไอเท็มในตัวมากกว่า 10 ชิ้น</li>
+        </ul>
+        
+        <p><strong>ตัวอย่าง: โต๊ะคราฟต์ (Crafting table)</strong></p>
+        <div class="code-wrapper">
+            <pre><span class="token-key">"unlock"</span><span class="token-punct">:</span> <span class="token-punct">{</span>
+            <span class="token-key">"context"</span><span class="token-punct">:</span> <span class="token-string">"AlwaysUnlocked"</span>
+          <span class="token-punct">}</span></pre>
+            <button class="copy-btn">คัดลอก</button>
+        </div>
+        
+        <p><strong>ตัวอย่าง: หีบสมบัติ (Chest)</strong></p>
+        <div class="code-wrapper">
+            <pre><span class="token-key">"unlock"</span><span class="token-punct">:</span> <span class="token-punct">{</span>
+            <span class="token-key">"context"</span><span class="token-punct">:</span> <span class="token-string">"PlayerHasManyItems"</span>
+          <span class="token-punct">}</span></pre>
+            <button class="copy-btn">คัดลอก</button>
+        </div>
+
+    </article>
+
+    <footer>
+        <h2>ช่องทางติดต่อ</h2>
+        <div class="social-container">
+            <a class="social-icons" href="https://www.facebook.com/AddonInsiderTH">
+                <img src="../../image/facebook-svgrepo-com.png" alt="Facebook">
+            </a>
+            <a class="social-icons" href="https://www.youtube.com/@MCFirsting">
+                <img src="../../image/youtube-fill-svgrepo-com.png" alt="YouTube">
+            </a>
+            <a class="social-icons" href="https://discord.gg/tnqZCfz4wz">
+                <img src="../../image/discord-svgrepo-com.png" alt="Discord">
+            </a>
+            <a class="social-icons" href="https://github.com/MCFirsting">
+                <img src="../../image/github-svgrepo-com.png" alt="GitHub">
+            </a>
+            <a class="social-icons" href="https://www.tiktok.com/@mc_firsting">
+                <img src="../../image/tiktok-svgrepo-com.png" alt="TikTok">
+            </a>
+        </div>
+    </footer>
+
+
+</body>
+
+</html>
