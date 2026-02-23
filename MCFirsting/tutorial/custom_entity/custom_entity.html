@@ -173,7 +173,7 @@
             <span class="token-key">"is_spawnable"</span><span class="token-punct">:</span> <span class="token-number">true</span><span class="token-punct">,</span>
             <span class="token-key">"is_summonable"</span><span class="token-punct">:</span> <span class="token-number">true</span>
         <span class="token-punct">}</span><span class="token-punct">,</span>
-        <span class="token-key">"components"</span><span class="token-punct">:</span> <span class="token-punct">{</span>
+        <span class="token-key">"Components"</span><span class="token-punct">:</span> <span class="token-punct">{</span>
             <span class="token-key">"minecraft:physics"</span><span class="token-punct">:</span> <span class="token-punct">{</span><span class="token-punct">}</span>
         <span class="token-punct">}</span>
     <span class="token-punct">}</span>
@@ -187,7 +187,7 @@
             </li>
             <li><code>is_spawnable</code>: อนุญาตให้มีไข่สปาวน์ใน Creative Mode</li>
             <li><code>is_summonable</code>: อนุญาตให้เรียกด้วยคำสั่ง <code>/summon</code></li>
-            <li><code>minecraft:physics</code>: คอมโพเนนต์พื้นฐานที่ทำให้ Entity มีแรงโน้มถ่วงและชนกับบล็อกได้</li>
+            <li><code>minecraft:physics</code>: Componentsพื้นฐานที่ทำให้ Entity มีแรงโน้มถ่วงและชนกับบล็อกได้</li>
         </ul>
 
         <h2>ส่วนที่ 2: Resource Pack</h2>
@@ -343,7 +343,7 @@
         </p>
 
         <div class="code-wrapper">
-            <pre>        <span class="token-key">"components"</span><span class="token-punct">:</span> <span class="token-punct">{</span>
+            <pre>        <span class="token-key">"Components"</span><span class="token-punct">:</span> <span class="token-punct">{</span>
                         <span class="token-key">"minecraft:physics"</span><span class="token-punct">:</span> <span class="token-punct">{</span><span class="token-punct">}</span><span class="token-punct">,</span>
                         <span class="token-key">"minecraft:nameable"</span><span class="token-punct">:</span> <span class="token-punct">{</span><span class="token-punct">}</span><span class="token-punct">,</span>
                         <span class="token-key">"minecraft:movement"</span><span class="token-punct">:</span> <span class="token-punct">{</span>
@@ -729,7 +729,7 @@
         <p>
             ในตัวอย่างนี้ เราจะใช้ค่า <code>query.variant</code> เพื่อเลือก Texture จากอาร์เรย์ ซึ่งค่า Variant ของ
             Mob
-            สามารถเปลี่ยนได้ผ่านคอมโพเนนต์ <code>minecraft:variant</code> ในไฟล์ Behavior
+            สามารถเปลี่ยนได้ผ่านComponents <code>minecraft:variant</code> ในไฟล์ Behavior
         </p>
         <div class="code-wrapper">
             <pre><span class="token-key">"textures"</span><span class="token-punct">:</span> <span class="token-punct">[</span> <span class="token-string">"Array.variant[ query.variant ]"</span> <span class="token-punct">]</span></pre>
@@ -827,7 +827,7 @@
 
         <h3>การควบคุมประชากร Population Control</h3>
         <p>
-            เกมจะมี "บ่อพัก" (Pools) ของเอนทิตีที่แตกต่างกัน เมื่อบ่อพักที่กำหนดไว้เต็ม
+            เกมจะมี "บ่อพัก" (Pools) ของentityที่แตกต่างกัน เมื่อบ่อพักที่กำหนดไว้เต็ม
             เกมจะไม่สปาวน์ม็อบในกลุ่มนั้นเพิ่มอีก
             โดยมี 3 ตัวเลือกหลักคือ:
         </p>

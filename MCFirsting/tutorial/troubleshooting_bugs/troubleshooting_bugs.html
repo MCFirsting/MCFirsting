@@ -1,0 +1,542 @@
+<!DOCTYPE html>
+<html lang="th">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Troubleshooting Bugs</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+    <nav class="navbar">
+        <div class="logo">
+            <a href="../../index.html"><img id="logo_mcfirsting" src="../../image/mcfirsting_logo.png" alt="Logo"></a>
+        </div>
+        <ul class="nav-links">
+            <li><a href="../../tutorial.html">Tutorial</a></li>
+            <li><a href="../../shop.html">Shop</a></li>
+        </ul>
+    </nav>
+
+    <header class="doc-header">
+        <div class="container">
+            <h1 class="doc-title">การแก้ไขปัญหาและบั๊กใน Add-Ons<br></h1>
+            <p class="doc-subtitle" style="text-align: center; color: #aaa;">คู่มือรับมือข้อผิดพลาดกวนใจ เพื่อให้
+                Add-ons
+                ของคุณทำงานได้อย่างสมบูรณ์</p>
+        </div>
+    </header>
+
+    <article class="article-container">
+
+        <div style="text-align: center; margin-bottom: 30px;">
+            <i class="fa-solid fa-bug-slash" style="font-size: 4rem; color: #ff9500;"></i>
+        </div>
+
+        <p>
+            ผู้สร้าง Add-ons ทุกคนล้วนต้องเผชิญกับ <strong>บั๊ก (Bugs)</strong> ครับ
+            คู่มือฉบับสมบูรณ์นี้ได้รวบรวมปัญหาที่พบบ่อยที่สุด ที่คุณจะต้องเจอเมื่อสร้าง Add-ons
+            สำหรับ <strong>Minecraft: Bedrock Edition</strong>
+        </p>
+        <p>
+            เนื้อหาในนี้จะอธิบายว่า <strong>ทำไมมันถึงเกิดขึ้น</strong> และแสดงวิธี <strong>แก้ไข (Fix)</strong>
+            รวมถึงวิธี <strong>ป้องกัน (Prevent)</strong> ไม่ให้มันเกิดซ้ำขึ้นอีก
+        </p>
+        <p>
+            จงใช้บทความนี้เป็น <strong>แหล่งอ้างอิงหลัก</strong>
+            ของคุณทุกครั้งที่มีบางอย่างในเกมทำงานไม่ปกติครับ!
+        </p>
+
+
+
+
+        <hr style="border: 0; border-top: 1px dashed #444; margin: 30px 0;">
+
+        <h2>รายการตรวจสอบเบื้องต้น</h2>
+        <p>
+            ก่อนที่จะเจาะลึกไปที่ปัญหาเฉพาะเจาะจง ลองตรวจสอบตามรายการเช็คลิสต์ด่วนนี้ดูก่อนครับ:
+        </p>
+
+        <div
+            style="background-color: #252525; padding: 20px; border-radius: 8px; border-left: 4px solid #ff9500; margin: 20px 0;">
+            <ul style="line-height: 1.8; margin-bottom: 0;">
+                <li>
+                    <strong>ตรวจสอบ Content Log:</strong> บั๊กส่วนใหญ่มักจะสร้างข้อความแจ้งเตือนข้อผิดพลาด (Error
+                    messages)
+                    ไว้ให้เราดูครับ
+                </li>
+                <li>
+                    <strong>ตรวจสอบไวยากรณ์ (JSON Syntax):</strong> แนะนำให้ใช้โปรแกรมอย่าง VS Code
+                    ที่มีฟังก์ชันตรวจสอบ JSON เพื่อหาจุดผิดพิมพ์ตก
+                </li>
+                <li>
+                    <strong>ยืนยันตำแหน่งไฟล์:</strong> ตรวจดูให้แน่ใจว่าวางไฟล์ถูกโฟลเดอร์
+                    และตั้งชื่อไฟล์ถูกต้องครบถ้วน
+                </li>
+                <li>
+                    <strong>จับคู่ Identifiers ให้ตรงเป๊ะ:</strong> ระบบจะแยกแยะตัวพิมพ์เล็ก/ใหญ่
+                    ดังนั้นต้องพิมพ์ให้ตรงกันเป๊ะๆ และอย่าลืมใส่ Namespaces (เช่น <code>demo:</code>) ด้วยครับ
+                </li>
+                <li>
+                    <strong>โหลดข้อมูลใหม่ให้ถูกต้อง:</strong> พิมพ์คำสั่ง <code>/reload</code> ในเกม
+                    หรือกดออกแล้วเข้าโลกใหม่ เพื่อให้เกมอัปเดตไฟล์ล่าสุด
+                </li>
+                <li>
+                    <strong>ล้างแคชหากจำเป็น:</strong> บางครั้งข้อมูลเก่าๆ อาจยังตกค้างอยู่
+                    ทำให้ไฟล์ใหม่ไม่ยอมทำงาน
+                </li>
+            </ul>
+        </div>
+
+        <hr style="border: 0; border-top: 1px dashed #444; margin: 40px 0;">
+
+        <h2>การตั้งค่าสภาพแวดล้อมสำหรับการแก้บั๊ก</h2>
+
+        <h3>เปิดใช้งาน Content Log</h3>
+        <p>
+            <strong>Content Log</strong> ควรเป็นหนึ่งในเครื่องมือแก้บั๊กหลักที่คุณนึกถึงเสมอครับ
+            คุณสามารถเปิดใช้งานมันได้ในหน้าต่างการตั้งค่า Creator ภายในเกม Minecraft
+            ลองเข้าไปอ่านบทความเกี่ยวกับ <a
+                href="https://learn.microsoft.com/en-us/minecraft/creator/documents/contenterrorlog" target="_blank"
+                style="color: #ff9500;">Content Error Log</a> เพื่อดูรายละเอียดแบบเต็มๆ
+            เกี่ยวกับวิธีใช้งานได้เลยครับ!
+        </p>
+
+        <div
+            style="background-color: #2b2b2b; padding: 15px; border-radius: 8px; border-left: 4px solid #fefe00; margin: 20px 0;">
+            <p style="margin: 0; color: #ddd;">
+                <em>*เมื่อเปิดใช้งานแล้ว หาก Add-ons ของคุณมีข้อผิดพลาด
+                    เกมจะมีหน้าต่างเด้งขึ้นมาบอกว่าไฟล์ไหนบรรทัดไหนที่มีปัญหา
+                    ช่วยลดเวลาคลำหาจุดผิดได้มหาศาลครับ</em>
+            </p>
+        </div>
+
+        <h3>ตั้งค่า IDE ของคุณ</h3>
+        <p>
+            หากคุณใช้โปรแกรม <strong>Visual Studio Code (VS Code)</strong> เป็น IDE ในการเขียนโค้ด
+            คุณควรติดตั้งส่วนเสริมเฉพาะสำหรับ Minecraft เอาไว้ด้วยครับ
+        </p>
+        <p>
+            ส่วนเสริมที่เราแนะนำให้ติดตั้งเพื่อช่วยจับผิดโครงสร้าง JSON คือ:
+        </p>
+        <ul style="line-height: 1.8;">
+            <li><code><a href="https://marketplace.visualstudio.com/items?itemName=mojang-studios.minecraft-debugger" style="color:#ff9500;">Minecraft Debugger</a></code>
+            </li>
+            <li><code> <a href="https://marketplace.visualstudio.com/items?itemName=BlockceptionLtd.blockceptionvscodeminecraftbedrockdevelopmentextension" style="color:#ff9500;">Blockception's Minecraft Bedrock Development</a></code>
+            </li>
+        </ul>
+        <p>
+            เครื่องมือเหล่านี้จะช่วยขีดเส้นใต้สีแดงเตือนคุณทันทีที่พิมพ์วงเล็บตก หรือใส่เครื่องหมายลูกน้ำ (Comma)
+            ผิดที่ครับ!
+        </p>
+
+        <hr style="border: 0; border-top: 1px dashed #444; margin: 40px 0;">
+
+        <h2>คำสั่งที่เป็นประโยชน์สำหรับการทดสอบ</h2>
+        <p>
+            การใช้คำสั่งในเกมอย่างถูกต้องจะช่วยให้คุณจำลองสถานการณ์และหาจุดผิดพลาดได้ไวขึ้น นี่คือรายการคำสั่งที่สายทำ
+            Add-ons
+            ควรจำไว้ครับ:
+        </p>
+
+        <div style="background-color: #252525; padding: 20px; border-radius: 8px; margin: 20px 0;">
+            <ul style="line-height: 2.2; margin-bottom: 0; list-style-type: none; padding-left: 0;">
+                <li>
+                    <code
+                        style="background-color: #1e1e1e; padding: 6px 10px; border-radius: 4px; color: #ff9500; font-family: monospace; font-weight: bold; font-size: 1.1em;">/reload</code>
+                    <span style="color: #ddd; margin-left: 10px;">โหลด Behavior และ Resource packs ใหม่
+                        (อัปเดตไฟล์โดยไม่ต้องออกเข้าโลกใหม่)</span>
+                </li>
+                <li style="border-bottom: 1px solid #333; margin: 8px 0;"></li>
+                <li>
+                    <code
+                        style="background-color: #1e1e1e; padding: 6px 10px; border-radius: 4px; color: #ff9500; font-family: monospace;">/give @s namespace:item_name</code>
+                    <span style="color: #ddd; margin-left: 10px;">ทดสอบเสกไอเท็ม</span>
+                </li>
+                <li>
+                    <code
+                        style="background-color: #1e1e1e; padding: 6px 10px; border-radius: 4px; color: #ff9500; font-family: monospace;">/summon namespace:entity_name</code>
+                    <span style="color: #ddd; margin-left: 10px;">ทดสอบเสก Entity</span>
+                </li>
+                <li>
+                    <code
+                        style="background-color: #1e1e1e; padding: 6px 10px; border-radius: 4px; color: #ff9500; font-family: monospace;">/setblock ~ ~ ~ namespace:block</code>
+                    <span style="color: #ddd; margin-left: 10px;">ทดสอบวางบล็อก</span>
+                </li>
+                <li>
+                    <code
+                        style="background-color: #1e1e1e; padding: 6px 10px; border-radius: 4px; color: #ff9500; font-family: monospace;">/function my_function</code>
+                    <span style="color: #ddd; margin-left: 10px;">ทดสอบฟังก์ชัน</span>
+                </li>
+                <li style="border-bottom: 1px solid #333; margin: 8px 0;"></li>
+                <li>
+                    <code
+                        style="background-color: #1e1e1e; padding: 6px 10px; border-radius: 4px; color: #ff9500; font-family: monospace;">/script profiler start</code>
+                    <span style="color: #ddd; margin-left: 10px;">เริ่มเก็บข้อมูลประสิทธิภาพของสคริปต์</span>
+                </li>
+                <li>
+                    <code
+                        style="background-color: #1e1e1e; padding: 6px 10px; border-radius: 4px; color: #ff9500; font-family: monospace;">/script profiler stop</code>
+                    <span style="color: #ddd; margin-left: 10px;">หยุดเก็บข้อมูลและดูผลลัพธ์</span>
+                </li>
+            </ul>
+        </div>
+
+        <hr style="border: 0; border-top: 1px dashed #444; margin: 40px 0;">
+
+        <h2>ข้อผิดพลาดด้านไวยากรณ์และ JSON (Syntax Errors)</h2>
+        <p>
+            ข้อผิดพลาดทางไวยากรณ์ของ JSON (Syntax Errors) เป็นปัญหาที่พบบ่อยที่สุด และมักจะเป็นปัญหาที่
+            <strong>แก้ไขได้ง่ายที่สุด</strong> เมื่อคุณรู้ว่าต้องโฟกัสที่จุดไหนครับ
+            โปรแกรมอย่าง Visual Studio Code จะเน้น (Highlight) จุดที่ผิดพลาดเหล่านี้ให้คุณเห็นโดยอัตโนมัติ
+            หากคุณเปิดใช้งานตัวตรวจสอบ JSON เอาไว้:
+        </p>
+
+        <div style="background-color: #2b2b2b; padding: 20px; border-radius: 8px; margin: 20px 0;">
+            <ul style="line-height: 1.8; margin-bottom: 0;">
+                <li style="margin-bottom: 15px;">
+                    <strong style="color: #ff9500;">การลืมใส่หรือใส่ลูกน้ำเกิน:</strong>
+                    <br>กฎของ JSON บังคับให้ต้องมีเครื่องหมายลูกน้ำ (Commas <code>,</code>) คั่นระหว่างคุณสมบัติ
+                    ทั้งหมด <strong>ยกเว้นตัวสุดท้าย</strong> ที่อยู่ใน Object <code>{}</code> หรือ Array
+                    <code>[]</code> ครับ
+                </li>
+                <li style="margin-bottom: 15px;">
+                    <strong style="color: #ff9500;">วงเล็บไม่ครบคู่:</strong>
+                    <br>เมื่อคุณเปิดวงเล็บปีกกา <code>{</code> หรือวงเล็บก้ามปู <code>[</code> คุณจะต้องปิดมันด้วย
+                    <code>}</code> และ <code>]</code> ในลำดับที่ถูกต้องเสมอ (เปิดตัวไหนหลังสุด ต้องปิดตัวนั้นก่อน)
+                </li>
+                <li>
+                    <strong style="color: #ff9500;">ตัวอักษรที่ไม่ถูกต้อง:</strong>
+                    <br>ระวังตัวอักษร Unicode ที่ซ่อนอยู่, ตัวอักษรที่ใช้ผิดรูปแบบ (เช่น เผลอก๊อปปี้
+                    "เครื่องหมายคำพูดแบบโค้ง"
+                    มาจากโปรแกรมออฟฟิศอย่าง Word แทนที่จะใช้แบบตรง <code>" "</code>),
+                    หรือการแอบใส่คอมเมนต์ (JSON comments) ลงในไฟล์บางประเภทที่ไม่รองรับการคอมเมนต์ครับ
+                </li>
+            </ul>
+        </div>
+
+        <hr style="border: 0; border-top: 1px dashed #444; margin: 40px 0;">
+
+        <h2>ปัญหาเกี่ยวกับชื่อและ Identifier</h2>
+        <p>
+            การตั้งชื่อและการอ้างอิงชื่อในไฟล์ต่างๆ ต้องมีความสม่ำเสมอและไม่ซ้ำซ้อนกับของเดิมครับ
+            ลองตรวจสอบจุดเหล่านี้ดู:
+        </p>
+
+        <div style="background-color: #2b2b2b; padding: 20px; border-radius: 8px; margin: 20px 0;">
+            <ul style="line-height: 1.8; margin-bottom: 0;">
+                <li style="margin-bottom: 15px;">
+                    <strong style="color: #ff9500;">UUID ต้องไม่ซ้ำกัน:</strong>
+                    <br>คุณต้องตรวจสอบให้แน่ใจว่าแพ็กของคุณใช้ <strong>UUIDs ที่ไม่ซ้ำกัน (Unique UUIDs)</strong> ในไฟล์
+                    <code>manifest.json</code> ไม่อย่างนั้นเกมอาจจะสับสนหรือโหลดแพ็กไม่ขึ้นครับ
+                </li>
+                <li style="margin-bottom: 15px;">
+                    <strong style="color: #ff9500;">Identifier ต้องตรงกันเป๊ะ:</strong>
+                    <br>Identifier ที่ตั้งไว้ใน Resource packs และ Behavior packs จะต้องตรงกันทุกประการ
+                    <em>(โปรดจำไว้ว่า Identifier นั้นแยกแยะตัวพิมพ์เล็ก-ใหญ่ หรือ <strong>Case-sensitive</strong> ด้วย:
+                        ดังนั้น
+                        <code>custom_mob</code> กับ <code>Custom_Mob</code> ถือว่าเป็นคนละตัวกันเลยนะครับ!)</em>
+                </li>
+                <li style="margin-bottom: 15px;">
+                    <strong style="color: #ff9500;">ใช้ Namespaces เสมอ:</strong>
+                    <br>การใช้ Namespaces (เช่น <code>myaddon:custom_sword</code>)
+                    จะช่วยหลีกเลี่ยงการทับซ้อนกับไอเท็มของเกมหลักหรือ Add-ons ตัวอื่นๆ ครับ
+                </li>
+                <li>
+                    <strong style="color: #ff9500;">เลี่ยงชื่อสงวน:</strong>
+                    <br>หลีกเลี่ยงการใช้ชื่อที่ถูกสงวนไว้สำหรับเนื้อหาต้นฉบับของเกม (Vanilla content)
+                    เพื่อไม่ให้ไปเขียนทับหรือทำให้ระบบของเกมรวนครับ
+                </li>
+            </ul>
+        </div>
+
+
+        <hr style="border: 0; border-top: 1px dashed #444; margin: 40px 0;">
+
+        <h2>บั๊กเกี่ยวกับ Entity</h2>
+        <p>ปัญหาเกี่ยวกับการสร้างและตั้งค่า Custom Entity ที่พบบ่อย มีดังนี้ครับ:</p>
+
+        <div
+            style="background-color: #2b2b2b; padding: 20px; border-radius: 8px; border-left: 4px solid #ff9500; margin: 25px 0;">
+            <h3 style="margin-top: 0; color: #ff9500;">1. Entity ทะลุโลก</h3>
+            <p><strong>อาการ:</strong> Entity แบบกำหนดเองเกิดมาปุ๊บก็ร่วงหล่นลงไปใน Void ทันที</p>
+            <p><strong>สาเหตุ:</strong> ขาด Physics Component</p>
+            <p><strong>วิธีแก้:</strong> เพิ่มโค้ดต่อไปนี้ลงในส่วน <code>"Components"</code> ในไฟล์ Behavior
+                ของ Entity</p>
+            <div class="code-wrapper" style="margin-top: 10px;">
+                <pre><span class="token-key">"Components"</span><span class="token-punct">:</span> <span class="token-punct">{</span>
+            <span class="token-key">"minecraft:physics"</span><span class="token-punct">:</span> <span class="token-punct">{</span>
+                <span class="token-key">"has_gravity"</span><span class="token-punct">:</span> <span class="token-boolean">true</span><span class="token-punct">,</span>
+                <span class="token-key">"has_collision"</span><span class="token-punct">:</span> <span class="token-boolean">true</span>
+            <span class="token-punct">}</span>
+        <span class="token-punct">}</span></pre>
+                <button class="copy-btn">คัดลอก</button>
+            </div>
+        </div>
+
+        <div
+            style="background-color: #2b2b2b; padding: 20px; border-radius: 8px; border-left: 4px solid #ff9500; margin: 25px 0;">
+            <h3 style="margin-top: 0; color: #ff9500;">2. Entity ไม่ขยับ</h3>
+            <p><strong>อาการ:</strong> Entity เกิดมาได้แต่ยืนนิ่งสนิท ไม่ไปไหน</p>
+            <p><strong>สาเหตุและวิธีแก้ที่พบบ่อย:</strong></p>
+            <ul style="line-height: 1.8;">
+                <li>
+                    <strong>ขาด Components การเคลื่อนที่:</strong>
+                    <div class="code-wrapper" style="margin: 10px 0;">
+                        <pre><span class="token-key">"Components"</span><span class="token-punct">:</span> <span class="token-punct">{</span>
+            <span class="token-key">"minecraft:movement"</span><span class="token-punct">:</span> <span class="token-punct">{</span> <span class="token-key">"value"</span><span class="token-punct">:</span> <span class="token-number">0.25</span> <span class="token-punct">}</span><span class="token-punct">,</span>
+            <span class="token-key">"minecraft:movement.basic"</span><span class="token-punct">:</span> <span class="token-punct">{</span><span class="token-punct">}</span><span class="token-punct">,</span>
+            <span class="token-key">"minecraft:navigation.walk"</span><span class="token-punct">:</span> <span class="token-punct">{</span>
+                <span class="token-key">"can_path_over_water"</span><span class="token-punct">:</span> <span class="token-boolean">true</span>
+            <span class="token-punct">}</span>
+        <span class="token-punct">}</span></pre>
+                        <button class="copy-btn">คัดลอก</button>
+                    </div>
+                </li>
+                <li>
+                    <strong>ไม่มีเป้าหมาย AI:</strong> ให้เพิ่ม Components พฤติกรรม
+                    เช่น
+                    <div class="code-wrapper" style="margin: 10px 0;">
+                        <pre><span class="token-key">"minecraft:behavior.random_stroll"</span><span class="token-punct">:</span> <span class="token-punct">{</span>
+            <span class="token-key">"priority"</span><span class="token-punct">:</span> <span class="token-number">6</span><span class="token-punct">,</span>
+            <span class="token-key">"speed_multiplier"</span><span class="token-punct">:</span> <span class="token-number">1.0</span>
+        <span class="token-punct">}</span></pre>
+                        <button class="copy-btn">คัดลอก</button>
+                    </div>
+                </li>
+                <li><strong>ความเร็วการเคลื่อนที่เป็นศูนย์:</strong> ตรวจสอบว่าค่า
+                    <code>value</code>
+                    ของ movement มีค่ามากกว่า 0
+                </li>
+            </ul>
+        </div>
+
+        <div
+            style="background-color: #2b2b2b; padding: 20px; border-radius: 8px; border-left: 4px solid #ff9500; margin: 25px 0;">
+            <h3 style="margin-top: 0; color: #ff9500;">3. Entity ไม่มี Textures (ลายตารางสีชมพูดำ)</h3>
+            <p><strong>อาการ:</strong> Entity ปรากฏตัวพร้อมกับลวดลายตารางสีชมพูสลับดำ ซึ่งบ่งบอกว่า Textures
+                หายไป</p>
+            <p><strong>ขั้นตอนการตรวจสอบ:</strong></p>
+            <ul style="line-height: 1.8;">
+                <li>ตรวจสอบ <strong>Texture Path</strong> ในไฟล์ Client Entity
+                    ว่าระบุตำแหน่งไฟล์ถูกต้องตรงกับของจริงหรือไม่</li>
+                <li>ตรวจสอบ <strong>Identifiers</strong> ของ Behavior และ Resource pack ว่าตรงกันเป๊ะ</li>
+                <li>ตรวจสอบให้แน่ใจว่าไฟล์ Textures เป็นไฟล์ <strong>PNG ที่ถูกต้อง</strong>
+                    (ไม่ใช่แค่เอาไฟล์อื่นมารีเนมเปลี่ยนนามสกุล)</li>
+                <li>ตรวจสอบ <strong>Render Controller</strong> ว่าได้อ้างอิงชื่อ Textures ถูกต้องหรือไม่</li>
+            </ul>
+        </div>
+
+        <div
+            style="background-color: #2b2b2b; padding: 20px; border-radius: 8px; border-left: 4px solid #ff9500; margin: 25px 0;">
+            <h3 style="margin-top: 0; color: #ff9500;">4. Entity ไม่เกิดเองตามธรรมชาติ
+            </h3>
+            <p><strong>อาการ:</strong> Entity ปรากฏตัวได้แค่จากการใช้ไข่เกิด (Spawn egg) หรือคำสั่งเท่านั้น</p>
+            <p><strong>สาเหตุ:</strong> ขาดไฟล์ หรือตั้งค่ากฎการเกิด (Spawn Rules) ผิดพลาด</p>
+            <p><strong>วิธีแก้:</strong> สร้างไฟล์ Spawn Rule ขึ้นมา (ในโฟลเดอร์ `spawn_rules`) ตัวอย่างเช่น:
+            </p>
+            <div class="code-wrapper" style="margin-top: 10px;">
+                <pre><span class="token-punct">{</span>
+            <span class="token-key">"format_version"</span><span class="token-punct">:</span> <span class="token-string">"1.8.0"</span><span class="token-punct">,</span>
+            <span class="token-key">"minecraft:spawn_rules"</span><span class="token-punct">:</span> <span class="token-punct">{</span>
+                <span class="token-key">"description"</span><span class="token-punct">:</span> <span class="token-punct">{</span>
+                    <span class="token-key">"identifier"</span><span class="token-punct">:</span> <span class="token-string">"mypack:my_entity"</span><span class="token-punct">,</span>
+                    <span class="token-key">"population_control"</span><span class="token-punct">:</span> <span class="token-string">"animal"</span>
+                <span class="token-punct">}</span><span class="token-punct">,</span>
+                <span class="token-key">"conditions"</span><span class="token-punct">:</span> <span class="token-punct">[</span>
+                    <span class="token-punct">{</span>
+                        <span class="token-key">"minecraft:spawns_on_surface"</span><span class="token-punct">:</span> <span class="token-punct">{</span><span class="token-punct">}</span><span class="token-punct">,</span>
+                        <span class="token-key">"minecraft:brightness_filter"</span><span class="token-punct">:</span> <span class="token-punct">{</span>
+                            <span class="token-key">"min"</span><span class="token-punct">:</span> <span class="token-number">7</span><span class="token-punct">,</span>
+                            <span class="token-key">"max"</span><span class="token-punct">:</span> <span class="token-number">15</span>
+                        <span class="token-punct">}</span><span class="token-punct">,</span>
+                        <span class="token-key">"minecraft:weight"</span><span class="token-punct">:</span> <span class="token-punct">{</span>
+                            <span class="token-key">"default"</span><span class="token-punct">:</span> <span class="token-number">50</span>
+                        <span class="token-punct">}</span>
+                    <span class="token-punct">}</span>
+                <span class="token-punct">]</span>
+            <span class="token-punct">}</span>
+        <span class="token-punct">}</span></pre>
+                <button class="copy-btn">คัดลอก</button>
+            </div>
+        </div>
+
+        <div
+            style="background-color: #2b2b2b; padding: 20px; border-radius: 8px; border-left: 4px solid #ff9500; margin: 25px 0;">
+            <h3 style="margin-top: 0; color: #ff9500;">5. Components Groups ไม่ทำงาน</h3>
+            <p><strong>อาการ:</strong> ฟีเจอร์ต่างๆ ที่ตั้งไว้ใน Component Groups ไม่ยอมแสดงผล</p>
+            <p><strong>ปัญหา:</strong> Component Groups จำเป็นต้องมี <strong>เหตุการณ์ (Events)</strong>
+                เป็นตัวกระตุ้นให้มันทำงานครับ</p>
+            <div class="code-wrapper" style="margin-top: 10px;">
+                <pre><span class="token-key">"component_groups"</span><span class="token-punct">:</span> <span class="token-punct">{</span>
+            <span class="token-key">"angry_mode"</span><span class="token-punct">:</span> <span class="token-punct">{</span>
+                <span class="token-key">"minecraft:attack"</span><span class="token-punct">:</span> <span class="token-punct">{</span> <span class="token-key">"damage"</span><span class="token-punct">:</span> <span class="token-number">10</span> <span class="token-punct">}</span>
+            <span class="token-punct">}</span>
+        <span class="token-punct">}</span><span class="token-punct">,</span>
+        <span class="token-key">"events"</span><span class="token-punct">:</span> <span class="token-punct">{</span>
+            <span class="token-key">"become_angry"</span><span class="token-punct">:</span> <span class="token-punct">{</span>
+                <span class="token-key">"add"</span><span class="token-punct">:</span> <span class="token-punct">{</span>
+                    <span class="token-key">"component_groups"</span><span class="token-punct">:</span> <span class="token-punct">[</span><span class="token-string">"angry_mode"</span><span class="token-punct">]</span>
+                <span class="token-punct">}</span>
+            <span class="token-punct">}</span>
+        <span class="token-punct">}</span></pre>
+                <button class="copy-btn">คัดลอก</button>
+            </div>
+            <p style="margin-top: 10px; color: #ddd;"><em>*คุณต้องกระตุ้น Trigger Event นี้ผ่านเงื่อนไขบางอย่าง เช่น
+                    เหตุการณ์ตอนเกิด (Spawn event), การตรวจจับ (Sensor), หรือการโต้ตอบ (Interaction) ด้วยครับ</em></p>
+        </div>
+
+        <div
+            style="background-color: #2b2b2b; padding: 20px; border-radius: 8px; border-left: 4px solid #ff9500; margin: 25px 0;">
+            <h3 style="margin-top: 0; color: #ff9500;">6. อนิเมชันไม่เล่น</h3>
+            <p><strong>อาการ:</strong> Entity แข็งทื่อ ไม่มีอนิเมชัน หรือเล่นอนิเมชันผิดท่า</p>
+            <p><strong>รายการตรวจสอบ:</strong></p>
+            <ul style="line-height: 1.8;">
+                <li>ตรวจสอบว่ามี <strong>Animation controller</strong> อยู่จริง และถูกอ้างอิงไว้ในไฟล์
+                    Client Entity แล้ว</li>
+                <li>ตรวจสอบว่าไฟล์ Animation มี <strong>Identifiers</strong> ที่ถูกต้องตรงกัน</li>
+                <li>การเปลี่ยนสถานะ (State transitions) ใน Controller ใช้ <strong>Query
+                        Conditions</strong>
+                    ที่ถูกต้อง</li>
+                <li>มีการอ้างอิง Animation ด้วย <strong>ชื่อย่อที่ถูกต้อง</strong> ในส่วนของ
+                    <code>"animations"</code> หรือ <code>"scripts"</code>
+                </li>
+            </ul>
+        </div>
+
+        <hr style="border: 0; border-top: 1px dashed #444; margin: 40px 0;">
+
+        <h2>บั๊กเกี่ยวกับ Blocks</h2>
+        <p>ปัญหาเกี่ยวกับการสร้างCustom Blocksง (Custom Blocks) ที่พบได้บ่อย มีดังนี้ครับ:</p>
+
+        <div
+            style="background-color: #2b2b2b; padding: 20px; border-radius: 8px; border-left: 4px solid #ff9500; margin: 25px 0;">
+            <h3 style="margin-top: 0; color: #ff9500;">1. Blocks ไม่มี Texture</h3>
+            <p><strong>อาการ:</strong> บล็อกแสดงผลเป็นสีทึบๆ สีเดียว หรือลวดลาย Texture หายไป</p>
+            <p><strong>รายการตรวจสอบ:</strong></p>
+            <ul style="line-height: 1.8;">
+                <li>ตรวจสอบไฟล์ <code>terrain_texture.json</code> ว่ามีรายการ (Entry) ระบุถึงเทกเจอร์ของคุณแล้ว</li>
+                <li>ชื่อ Texture ในไฟล์ Block JSON ต้อง <strong>ตรงกัน</strong> กับชื่อที่ตั้งไว้ใน
+                    <code>terrain_texture</code>
+                </li>
+                <li>ไฟล์ภาพ Texture มีอยู่จริงตาม (Path) ที่ระบุเอาไว้</li>
+                <li>ขนาดของ Texture ต้องเป็น 16x16, 32x32, 64x64 เป็นต้น</li>
+            </ul>
+        </div>
+
+        <div
+            style="background-color: #2b2b2b; padding: 20px; border-radius: 8px; border-left: 4px solid #ff9500; margin: 25px 0;">
+            <h3 style="margin-top: 0; color: #ff9500;">2. Blocks ไม่ดรอปไอเท็ม</h3>
+            <p><strong>อาการ:</strong> เมื่อทุบหรือขุด Custom Blocks แล้ว ไม่มีอะไรดรอปออกมาเลย</p>
+            <p><strong>วิธีแก้:</strong> ตรวจสอบให้แน่ใจว่าคุณได้อ้างอิงตารางของดรอป (Loot table) และไฟล์ Loot
+                table
+                นั้นมีอยู่จริงในแพ็กครับ</p>
+
+            <p style="margin-bottom: 5px;">ในไฟล์ Block JSON ส่วน <code>"components"</code>:</p>
+            <div class="code-wrapper" style="margin-top: 0;">
+                <pre><span class="token-key">"components"</span><span class="token-punct">:</span> <span class="token-punct">{</span>
+          <span class="token-key">"minecraft:loot"</span><span class="token-punct">:</span> <span class="token-string">"loot_tables/blocks/my_block.json"</span>
+        <span class="token-punct">}</span></pre>
+            </div>
+
+            <p style="margin-bottom: 5px; margin-top: 15px;">ตัวอย่างตาราง Loot table แบบง่าย
+                (<code>loot_tables/blocks/my_block.json</code>):</p>
+            <div class="code-wrapper" style="margin-top: 0;">
+                <pre><span class="token-punct">{</span>
+          <span class="token-key">"pools"</span><span class="token-punct">:</span> <span class="token-punct">[</span>
+            <span class="token-punct">{</span>
+              <span class="token-key">"rolls"</span><span class="token-punct">:</span> <span class="token-number">1</span><span class="token-punct">,</span>
+              <span class="token-key">"entries"</span><span class="token-punct">:</span> <span class="token-punct">[</span>
+                <span class="token-punct">{</span>
+                  <span class="token-key">"type"</span><span class="token-punct">:</span> <span class="token-string">"item"</span><span class="token-punct">,</span>
+                  <span class="token-key">"name"</span><span class="token-punct">:</span> <span class="token-string">"mypack:my_block"</span>
+                <span class="token-punct">}</span>
+              <span class="token-punct">]</span>
+            <span class="token-punct">}</span>
+          <span class="token-punct">]</span>
+        <span class="token-punct">}</span></pre>
+                <button class="copy-btn">คัดลอก</button>
+            </div>
+        </div>
+
+        <div
+            style="background-color: #2b2b2b; padding: 20px; border-radius: 8px; border-left: 4px solid #ff9500; margin: 25px 0;">
+            <h3 style="margin-top: 0; color: #ff9500;">3. Custom Geometry ไม่แสดง
+            </h3>
+            <p><strong>อาการ:</strong> Blocks แสดงผลเป็นลูกบาศก์เริ่มต้น (Default cube) แทนที่จะเป็นโมเดลแบบกำหนดเอง
+                (Custom model) ที่เราตั้งไว้</p>
+            <p><strong>รายการตรวจสอบ:</strong></p>
+            <ul style="line-height: 1.8;">
+                <li>ไฟล์ Geometry ถูกเก็บไว้ในโฟลเดอร์ <code>models/blocks/</code> ถูกต้องหรือไม่</li>
+                <li>Identifier ของ Geometry ตรงกันกับที่อ้างอิงไว้ในไฟล์ Block JSON หรือไม่</li>
+                <li>ไฟล์ Block JSON ใช้ไวยากรณ์อ้างอิง (Syntax) ที่ถูกต้อง ดังนี้:</li>
+            </ul>
+            <div class="code-wrapper" style="margin-top: 10px;">
+                <pre><span class="token-key">"minecraft:geometry"</span><span class="token-punct">:</span> <span class="token-punct">{</span>
+          <span class="token-key">"identifier"</span><span class="token-punct">:</span> <span class="token-string">"geometry.my_custom_block"</span>
+        <span class="token-punct">}</span></pre>
+            </div>
+        </div>
+
+        <div
+            style="background-color: #2b2b2b; padding: 20px; border-radius: 8px; border-left: 4px solid #ff9500; margin: 25px 0;">
+            <h3 style="margin-top: 0; color: #ff9500;">4. สถานะ Blocks ไม่ยอมเปลี่ยน</h3>
+            <p><strong>อาการ:</strong> การสลับรูปแบบบล็อก (Block permutations) ไม่ทำงานอย่างที่ควรจะเป็น</p>
+            <p><strong>สาเหตุที่พบบ่อย:</strong></p>
+            <ul style="line-height: 1.8;">
+                <li>ไม่ได้กำหนดค่าสถานะ (State values) เอาไว้ในส่วน <code>description</code></li>
+                <li>เขียนไวยากรณ์คำสั่งเงื่อนไข (Condition query syntax) ผิดพลาด</li>
+                <li>ไม่ได้ใช้เหตุการณ์ (Event) เพื่อสั่งตั้งค่าสถานะอย่างถูกต้อง</li>
+            </ul>
+            <div class="code-wrapper" style="margin-top: 15px;">
+                <pre><span class="token-punct">{</span>
+          <span class="token-key">"description"</span><span class="token-punct">:</span> <span class="token-punct">{</span>
+            <span class="token-key">"identifier"</span><span class="token-punct">:</span> <span class="token-string">"mypack:my_block"</span><span class="token-punct">,</span>
+            <span class="token-key">"states"</span><span class="token-punct">:</span> <span class="token-punct">{</span>
+              <span class="token-key">"mypack:active"</span><span class="token-punct">:</span> <span class="token-punct">[</span><span class="token-boolean">false</span><span class="token-punct">,</span> <span class="token-boolean">true</span><span class="token-punct">]</span>
+            <span class="token-punct">}</span>
+          <span class="token-punct">}</span><span class="token-punct">,</span>
+          <span class="token-key">"permutations"</span><span class="token-punct">:</span> <span class="token-punct">[</span>
+            <span class="token-punct">{</span>
+              <span class="token-key">"condition"</span><span class="token-punct">:</span> <span class="token-string">"query.block_state('mypack:active') == true"</span><span class="token-punct">,</span>
+              <span class="token-key">"components"</span><span class="token-punct">:</span> <span class="token-punct">{</span> <span class="token-comment">... </span><span class="token-punct">}</span>
+            <span class="token-punct">}</span>
+          <span class="token-punct">]</span>
+        <span class="token-punct">}</span></pre>
+                <button class="copy-btn">คัดลอก</button>
+            </div>
+        </div>
+
+    </article>
+
+    <footer>
+        <h2>ช่องทางติดต่อ</h2>
+        <div class="social-container">
+            <a class="social-icons" href="https://www.facebook.com/AddonInsiderTH">
+                <img src="../../image/facebook-svgrepo-com.png" alt="Facebook">
+            </a>
+            <a class="social-icons" href="https://www.youtube.com/@MCFirsting">
+                <img src="../../image/youtube-fill-svgrepo-com.png" alt="YouTube">
+            </a>
+            <a class="social-icons" href="https://discord.gg/tnqZCfz4wz">
+                <img src="../../image/discord-svgrepo-com.png" alt="Discord">
+            </a>
+            <a class="social-icons" href="https://github.com/MCFirsting">
+                <img src="../../image/github-svgrepo-com.png" alt="GitHub">
+            </a>
+            <a class="social-icons" href="https://www.tiktok.com/@mc_firsting">
+                <img src="../../image/tiktok-svgrepo-com.png" alt="TikTok">
+            </a>
+        </div>
+    </footer>
+
+    <script>
+        window.addEventListener("scroll", function () {
+            var header = document.querySelector(".navbar");
+            header.classList.toggle("sticky", window.scrollY > 0);
+        });
+    </script>
+</body>
+
+</html>

@@ -36,8 +36,8 @@
         <ul>
             <li>การใช้โปรแกรม <strong>Blockbench</strong> เพื่อออกแบบรูปทรง (Geometry) และลวดลาย (Texture) </li>
             <li>การเพิ่มรูปทรงของบล็อกที่มีรูปร่างหรือขนาดแตกต่างไปจากสี่เหลี่ยมปกติ (16x16x16)</li>
-            <li>การใช้คอมโพเนนต์ <code>minecraft:geometry</code> เพื่ออ้างอิงรูปทรงที่เราสร้างขึ้นเอง</li>
-            <li>การใช้คอมโพเนนต์ <code>minecraft:material_instances</code> เพื่อกำหนด Texture ให้กับรูปทรงนั้น</li>
+            <li>การใช้Components <code>minecraft:geometry</code> เพื่ออ้างอิงรูปทรงที่เราสร้างขึ้นเอง</li>
+            <li>การใช้Components <code>minecraft:material_instances</code> เพื่อกำหนด Texture ให้กับรูปทรงนั้น</li>
         </ul>
 
         <img class="article-image" src="/tutorial/advanced_custom_blocks/image/Screenshot Advanced Custom Blocks.png"
@@ -56,7 +56,7 @@
 
         <p>
             ก่อนหน้านี้เราได้สร้าง "บล็อกลูกเต๋า" กันไปแล้ว ซึ่งเป็นวิธีที่ใช้ไฟล์และเขียน JSON น้อยที่สุดเท่าที่จะทำได้
-            แต่คราวนี้ เราจะมาสำรวจความเป็นไปได้ใหม่ๆ ที่น่าตื่นเต้นยิ่งกว่าเดิม โดยใช้ JSON components
+            แต่คราวนี้ เราจะมาสำรวจความเป็นไปได้ใหม่ๆ ที่น่าตื่นเต้นยิ่งกว่าเดิม โดยใช้ JSON Components
             ใน Behavior Pack ที่ชื่อว่า <code>geometry</code> และ <code>material_instances</code> กันครับ!
         </p>
         <p>โครงสร้างไฟล์ของคุณควรจะเป็นแบบนี้:</p>
@@ -67,7 +67,7 @@
 
         <h2>บล็อกซูชิ Sushi Blocks</h2>
         <p>
-            ในโปรเจกต์นี้ เราจะมาสร้างบล็อกแบบกำหนดเองโดยใช้ Geometry และ Material Instances
+            ในโปรเจกต์นี้ เราจะมาสร้างCustom Blocksงโดยใช้ Geometry และ Material Instances
             ซึ่งผลลัพธ์ที่เราจะทำกันก็คือ...
             <strong>ซูชิ (Sushi)</strong> ครับ!
         </p>
@@ -311,7 +311,7 @@
             <span class="token-key">"description"</span><span class="token-punct">:</span> <span class="token-punct">{</span>
               <span class="token-key">"identifier"</span><span class="token-punct">:</span> <span class="token-string">"demo:salmon_roll"</span>
             <span class="token-punct">}</span><span class="token-punct">,</span>
-            <span class="token-key">"components"</span><span class="token-punct">:</span> <span class="token-punct">{</span>
+            <span class="token-key">"Components"</span><span class="token-punct">:</span> <span class="token-punct">{</span>
               <span class="token-key">"minecraft:geometry"</span><span class="token-punct">:</span> <span class="token-string">"geometry.sushi"</span><span class="token-punct">,</span>
               <span class="token-key">"minecraft:material_instances"</span><span class="token-punct">:</span><span class="token-punct">{</span>
                 <span class="token-key">"north"</span><span class="token-punct">:</span> <span class="token-punct">{</span> 
@@ -375,7 +375,7 @@
             <span class="token-key">"description"</span><span class="token-punct">:</span> <span class="token-punct">{</span>
               <span class="token-key">"identifier"</span><span class="token-punct">:</span> <span class="token-string">"demo:salmon_roll"</span>
             <span class="token-punct">}</span><span class="token-punct">,</span>
-            <span class="token-key">"components"</span><span class="token-punct">:</span> <span class="token-punct">{</span>
+            <span class="token-key">"Components"</span><span class="token-punct">:</span> <span class="token-punct">{</span>
               <span class="token-key">"minecraft:geometry"</span><span class="token-punct">:</span> <span class="token-string">"geometry.sushi"</span><span class="token-punct">,</span>
               <span class="token-key">"minecraft:material_instances"</span><span class="token-punct">:</span> <span class="token-punct">{</span>
                 <span class="token-key">"north"</span><span class="token-punct">:</span> <span class="token-string">"sushi_side"</span><span class="token-punct">,</span>
