@@ -1,0 +1,382 @@
+<!DOCTYPE html>
+<html lang="th">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Custom Sounds</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+    <nav class="navbar">
+        <div class="logo">
+            <a href="../../index.html"><img id="logo_mcfirsting" src="../../image/mcfirsting_logo.png" alt="Logo"></a>
+        </div>
+        <ul class="nav-links">
+            <li><a href="../../tutorial.html">Tutorial</a></li>
+            <li><a href="../../shop.html">Shop</a></li>
+        </ul>
+    </nav>
+
+    <header class="doc-header">
+        <div class="container">
+            <h1>เสียงแบบกำหนดเอง Custom Sounds</h1>
+            <p style="text-align: center; color: #aaa;">เพิ่มมิติใหม่ให้โลก Minecraft ด้วยเสียงของคุณเอง</p>
+        </div>
+    </header>
+
+    <article class="article-container">
+
+        <div style="text-align: center; margin-bottom: 30px;">
+            <i class="fa-solid fa-music" style="font-size: 4rem; color: #ff9500;"></i>
+        </div>
+
+        <p>
+            เสียงเป็นวิธีที่ยอดเยี่ยมในการเพิ่มความรู้สึกอินและดื่มด่ำ (Immersion) ไปกับคอนเทนต์ของคุณครับ
+            ไม่ว่าจะเป็นเสียงบล็อก, สัตว์, หรือแผ่นเพลง (Music disc) ที่แสนจะสำคัญ เสียงต่างๆ ที่คุณได้ยินขณะเล่น
+            Minecraft จะดึงคุณให้ดำดิ่งเข้าสู่ประสบการณ์นั้นๆ
+        </p>
+        <p>
+            ในบทช่วยสอนนี้ เราจะมาเพิ่มเสียงแบบกำหนดเองที่จะเล่น <strong>เมื่อเราเปิดหีบสมบัติ (Chest)</strong> กันครับ
+            ซึ่งจะช่วยเพิ่มความดื่มด่ำและสะท้อนเอกลักษณ์เฉพาะตัวให้กับโลกของคุณได้เป็นอย่างดี
+        </p>
+
+        <img class="article-image" src="/tutorial/custom_sounds/image/Screenshot Custom Sounds.png"
+            alt="Screenshot Custom Sounds">
+
+        <div
+            style="background-color: #2b2b2b; padding: 15px; border-radius: 8px; border-left: 4px solid #ff9500; margin: 25px 0;">
+            <h4 style="margin-top: 0; color: #ff9500;">สิ่งที่ควรรู้ก่อนเริ่ม</h4>
+            <p>เราขอแนะนำให้คุณทำความเข้าใจบทเรียนต่อไปนี้ให้เสร็จสิ้นก่อนเริ่มบทช่วยสอนนี้นะครับ:</p>
+            <ul style="line-height: 1.6;">
+                <li><a href="../getting_started/getting_started.html" style="color: #ff9500;">การเริ่มต้นพัฒนา
+                        Add-ons</a></li>
+                <li><a href="/tutorial/resource_packs/resource_packs.html"
+                        style="color: #ff9500;">ความรู้เบื้องต้นเรื่อง Resource Packs</a></li>
+                <li><a href="/tutorial/behavior_packs/behavior_packs.html"
+                        style="color: #ff9500;">ความรู้เบื้องต้นเรื่อง Behavior Packs</a></li>
+            </ul>
+            <p style="margin-bottom: 0; margin-top: 10px;">
+                <em>*นอกจากนี้ คุณจะต้องดาวน์โหลด <strong><a href="https://github.com/Mojang/bedrock-samples/releases"
+                            style="color:#ff9500;">Resource Pack</a> </strong>
+                    (แพ็กต้นฉบับของเกม)
+                    เตรียมเอาไว้ด้วยนะครับ</em>
+            </p>
+        </div>
+
+        <hr style="border: 0; border-top: 1px solid #444; margin: 30px 0;">
+
+        <h2>สร้าง Resource Pack</h2>
+
+        <h3>การตั้งค่าโฟลเดอร์เสียง</h3>
+        <p>
+            ตอนนี้หลังจากที่สมมติว่าคุณได้สร้างโครงสร้างพื้นฐานของ Resource Pack ไว้เรียบร้อยแล้ว
+            ก็ถึงเวลาเตรียมสถานที่สำหรับเก็บไฟล์เสียงของเรากันครับ
+        </p>
+
+        <p>ให้ทำตามขั้นตอนดังนี้เพื่อเข้าไปยังโฟลเดอร์ <code>com.mojang</code> ใน File Explorer:</p>
+        <ol style="line-height: 1.8;">
+            <li>กดปุ่ม <strong>Win + R</strong> บนคีย์บอร์ดเพื่อเปิดหน้าต่าง <strong>Run</strong></li>
+            <li>
+                หากคุณใช้เกม Minecraft รุ่นปกติ ให้คัดลอกข้อความด้านล่างนี้ไปวางในช่อง
+                <strong>Open:</strong>
+                <div class="code-wrapper">
+                    <pre>%appdata%\Minecraft Bedrock\users\shared\games\com.mojang</pre>
+                    <button class="copy-btn">คัดลอก</button>
+                </div>
+                หรือถ้าคุณใช้ Minecraft รุ่นพรีวิว (Preview) ให้คัดลอกข้อความด้านล่างนี้ไปวางในช่อง
+                <strong>Open:</strong>
+                <div class="code-wrapper">
+                    <pre>%appdata%\Minecraft Bedrock Preview\users\shared\games\com.mojang</pre>
+                    <button class="copy-btn">คัดลอก</button>
+                </div>
+            </li>
+            <li>คลิก <strong>OK</strong></li>
+            <li>เปิดเข้าไปในโฟลเดอร์ <code>development_resource_packs</code></li>
+            <li>เปิดเข้าไปในโฟลเดอร์แพ็กของคุณ (ในตัวอย่างนี้สมมติว่าชื่อ <code>custom_sound_pack</code>)</li>
+            <li>สร้างโฟลเดอร์ใหม่และตั้งชื่อว่า <strong><code>sounds</code></strong></li>
+        </ol>
+
+        <p>เมื่อทำเสร็จแล้ว โครงสร้างไฟล์และโฟลเดอร์ของคุณจะมีหน้าตาประมาณนี้ครับ:</p>
+        <img class="article-image" src="image/Navigate Custom Sounds.png" alt="Navigate Custom Sounds">
+        </div>
+        <p>
+            คุณจะต้องสร้างโฟลเดอร์ย่อยเพิ่มเติมข้างในนี้อีกในภายหลัง
+        </p>
+
+        <hr style="border: 0; border-top: 1px dashed #444; margin: 30px 0;">
+
+        <h3>การค้นหาเสียงที่ใช่</h3>
+        <p>
+            สถานที่เก็บไฟล์พร้อมแล้ว ตอนนี้ก็ถึงเวลาเตรียมไฟล์เสียงแบบกำหนดเองของคุณให้พร้อมครับ!
+            ในตัวอย่างนี้ เราจะใช้โปรแกรม <strong>Audacity</strong>
+            แต่อันที่จริงคุณสามารถใช้ซอฟต์แวร์จัดการเสียงตัวไหนก็ได้ครับ
+            ตราบใดที่มันสามารถส่งออกไฟล์ (Export) ออกมาเป็นรูปแบบ <strong>.ogg</strong> ได้
+        </p>
+        <p>
+            คุณสามารถเลือกที่จะบันทึกเสียงใหม่ผ่านโปรแกรมของคุณ
+            หรือจะเปิดไฟล์เสียงที่มีอยู่ในคอมพิวเตอร์ขึ้นมาแก้ไขก็ได้ครับ
+            เมื่อเปิดไฟล์ในโปรแกรมและปรับแต่งจนพอใจแล้ว จะต้อง Export มันออกมาเป็นไฟล์ <code>.ogg</code>
+            (หากใช้โปรแกรม Audacity สามารถทำได้โดยไปที่เมนู <strong>File > Export > Export as OGG</strong> ครับ)
+        </p>
+        <p>
+            สำหรับบทช่วยสอนนี้ เราจะทำการส่งออกไฟล์เสียงแบบกำหนดเองของเราโดยตั้งชื่อว่า <code>chestopen.ogg</code> ครับ
+            (ส่วนเหตุผลที่ต้องตั้งชื่อนี้ เดี๋ยวเราจะได้ทราบกันในขั้นตอนต่อไปครับ)
+        </p>
+
+        <div
+            style="background-color: #2b2b2b; padding: 15px; border-radius: 8px; border-left: 4px solid #ff9500; margin: 20px 0; text-align: center;">
+            <p style="margin-top: 0; color: #ddd;">หากคุณยังไม่มีไฟล์เสียง และต้องการไฟล์ตัวอย่างเพื่อนำไปใช้ทดลองทำตาม
+                สามารถดาวน์โหลดได้ที่นี่ครับ:</p>
+            <a href="/tutorial/custom_sounds/sound/chestopen.ogg" target="_blank"
+                style="display: inline-block; background-color: #ff9500; color: white; padding: 10px 20px; border-radius: 5px; text-decoration: none; font-weight: bold;">
+                <i class="fa-solid fa-file-audio" style="margin-right: 8px;"></i> ดาวน์โหลดไฟล์ตัวอย่าง (.ogg)
+            </a>
+        </div>
+
+        <hr style="border: 0; border-top: 1px solid #444; margin: 40px 0;">
+
+        <h2>จัดหาที่อยู่ให้ไฟล์เสียง</h2>
+        <p>
+            ขอแสดงความยินดีด้วยครับ ทุกอย่างกำลังไปได้สวยเลย ตอนนี้คุณมีเสียงที่ต้องการจะแทนที่
+            มีไฟล์เสียงใหม่เตรียมไว้พร้อมแล้ว
+            และตั้งค่า Resource Pack เสร็จเรียบร้อยแล้ว ถึงเวลามาดูกันว่าไฟล์เสียงของคุณควรจะไปอยู่ตรงไหนครับ
+        </p>
+
+        <p>
+            ในโฟลเดอร์ของ <a href="https://github.com/Mojang/bedrock-samples/releases" target="_blank"
+                style="color: #ff9500;">Vanilla Resource Pack</a> (แพ็กต้นฉบับของเกม) จะรวบรวมไฟล์เสียงทุกอย่างใน
+            Minecraft
+            แบบปกติเอาไว้ครับ
+            การเข้าไปดูในโฟลเดอร์เหล่านั้น จะเป็นตัวอย่างชั้นดีให้คุณรู้ว่าต้องจัดโครงสร้าง Resource Pack
+            ของคุณอย่างไรถึงจะไปแทนที่เสียงที่ต้องการได้
+        </p>
+
+        <p>
+            จากจุดนี้ คุณ<em>อาจจะ</em>ค่อยๆ เลื่อนหาไฟล์เสียงเปิดหีบจากรายชื่อเสียงทั้งหมดในเกมทีละไฟล์ก็ได้
+            แต่เราแนะนำให้ใช้ปุ่ม <strong>CTRL+F</strong> เพื่อค้นหาชื่อไฟล์จะเร็วกว่ามากครับ
+            สำหรับตัวอย่างของเรา ไฟล์ที่เรากำลังตามหาคือไฟล์เปิดหีบสมบัติ ซึ่งบังเอิญว่ามันตั้งอยู่ใน Path:
+            <code>sounds/random/chestopen</code> พอดีครับ
+        </p>
+
+        <h3>นำไฟล์ไปวางให้ถูกที่</h3>
+        <p>
+            ตอนนี้เรารู้แล้วว่าต้องเอาไฟล์เสียงแบบกำหนดเองไปวางไว้ที่ไหน ให้ทำตามนี้เลยครับ:
+        </p>
+        <ol>
+            <li>เข้าไปที่ <code>com.mojang > development_resource_packs > custom_sound_pack > sounds</code></li>
+            <li>ภายในโฟลเดอร์ <code>sounds</code> ให้สร้างโฟลเดอร์ใหม่ชื่อว่า <strong><code>random</code></strong></li>
+            <li>นำไฟล์ <strong><code>chestopen.ogg</code></strong> ของคุณไปใส่ไว้ในโฟลเดอร์ <code>random</code>
+                นั้นได้เลยครับ
+            </li>
+        </ol>
+
+        <h3>การแทนที่เสียงอื่นๆ</h3>
+        <p>
+            หากคุณต้องการแทนที่เสียงอื่นๆ ก็แค่หาไฟล์นั้นใน Vanilla Resource Pack ให้เจอ
+            แล้วจำลองโครงสร้างโฟลเดอร์แบบเดียวกันขึ้นมาใน Resource Pack ของคุณครับ
+            ตัวอย่างเช่น ถ้าคุณต้องการเปลี่ยนเสียงฝนตกในโลกของคุณ คุณก็ต้องสร้างโฟลเดอร์ย่อยเรียงซ้อนกันตามนี้:
+        </p>
+
+        <div class="code-wrapper" style="margin: 15px 0; background-color: #1e1e1e; padding: 15px; border-radius: 8px;">
+            <code>com.mojang > development_resource_packs > custom_sound_pack > sounds > ambient > weather</code>
+        </div>
+
+        <p>
+            จากนั้นภายในโฟลเดอร์ <code>weather</code>
+            คุณก็สามารถใส่ไฟล์เสียงฝนที่คุณต้องการจะนำไปแทนที่ของเดิมได้เลยครับ
+        </p>
+
+        <div
+            style="background-color: #2b2b2b; padding: 15px; border-radius: 8px; border-left: 4px solid #fefe00; margin: 25px 0;">
+            <h4 style="margin-top: 0; color: #fefe00;">⚠️ หมายเหตุ</h4>
+            <p style="margin-bottom: 0;">
+                คุณต้องตั้งชื่อไฟล์เสียงใหม่ให้ <strong>เหมือนกันทุกประการ</strong> กับไฟล์ที่คุณต้องการแทนที่
+                อย่างไรก็ตาม คุณ
+                <strong>ไม่จำเป็น</strong> ต้องใช้นามสกุลไฟล์ (Format) เดียวกันครับ
+                ดังนั้น คุณสามารถใช้ไฟล์ <code>rain1.ogg</code> ของคุณไปแทนที่ไฟล์ <code>rain1.fsb</code> ของเกมได้เลย
+                ตราบใดที่ชื่อไฟล์ก่อนจุดนามสกุลสะกดตรงกันเป๊ะๆ ครับ
+            </p>
+        </div>
+
+        <hr style="border: 0; border-top: 1px dashed #444; margin: 40px 0;">
+
+        <h2>ทดสอบเสียงของคุณ</h2>
+        <p>
+            งานหนักผ่านพ้นไปแล้วครับ! ตอนนี้ก็ถึงเวลามาทดสอบเสียงแบบกำหนดเองของเรากัน
+            ในการทดสอบเสียง ให้คุณสร้างโลกทดสอบ (Test world) ใหม่ในเกม โดยเปิดใช้งานแพ็ก
+            <strong>custom_sound_pack</strong>
+            ของคุณ
+            และอย่าลืมเปิดตั้งค่า <strong>Cheats เป็น ON</strong> ไว้ด้วยนะครับ เพื่อให้เราสามารถใช้คำสั่ง
+            <code>/give</code>
+            ได้
+        </p>
+
+        <h3>ขั้นตอนการทดสอบ:</h3>
+        <ol style="line-height: 1.8;">
+            <li>เข้าสู่โลกที่คุณสร้างไว้ และเปิดกล่องแชท (Chat box) ขึ้นมา</li>
+            <li>
+                พิมพ์คำสั่งต่อไปนี้เพื่อเสกหีบสมบัติให้ตัวเอง:
+                <div class="code-wrapper">
+                    <pre>/give @s chest</pre>
+                    <button class="copy-btn">คัดลอก</button>
+                </div>
+            </li>
+            <li>วางหีบสมบัติลงบนพื้นแล้วลอง <strong>เปิดหีบ</strong> ดูครับ</li>
+        </ol>
+
+        <p>
+            การเปิดหีบสมบัติควรจะทำให้เสียงแบบกำหนดเองของคุณเล่นขึ้นมาทันทีครับ!
+        </p>
+
+        <hr style="border: 0; border-top: 1px solid #444; margin: 40px 0;">
+
+        <h2>การเพิ่มเสียงใหม่</h2>
+        <p>
+            แค่เสียงฝนตก 4 แบบยังไม่จุใจใช่ไหมครับ? ถ้างั้นเรามาค้นพบวิธีเพิ่มเสียงใหม่เอี่ยมลงใน Minecraft กันเลยดีกว่า
+            สำหรับภารกิจนี้ เราจะต้องเจาะลึกเข้าไปในไฟล์ <code>sounds.json</code> และ
+            <code>sound_definitions.json</code> ครับ
+        </p>
+        <p>
+            หากคุณยังไม่มีไฟล์เหล่านี้ ให้สร้างไฟล์ตามที่อยู่ด้านล่างนี้ได้เลย:
+        </p>
+        <ul>
+            <li>สร้าง <code>sounds.json</code> ไว้ที่
+                <code>com.mojang > development_resource_packs > custom_sound_pack</code>
+            </li>
+            <li>สร้าง <code>sound_definitions.json</code> ไว้ที่
+                <code>com.mojang > development_resource_packs > custom_sound_pack > <strong>sounds</strong></code>
+            </li>
+        </ul>
+        <p>
+            <em>(คุณสามารถใช้ไฟล์ sounds.json ตัวอย่างจาก <a
+                    href="https://github.com/Mojang/bedrock-samples/blob/main/resource_pack/sounds/sound_definitions.json"
+                    style="color: #ff9500">Vanilla
+                    Resource Pack</a>
+                เพื่อช่วยค้นหาหมวดหมู่ของเสียงที่คุณต้องการเพิ่มได้ครับ)</em>
+        </p>
+
+        <h3>ทำให้หีบสมบัติสุ่มเสียงได้!</h3>
+        <p>
+            เอาล่ะ แทนที่เราจะแค่แทนที่เสียงเปิดหีบเสียงเดียวเหมือนที่ทำไปก่อนหน้านี้ สมมติว่าเราอยากให้มีเสียง 2
+            เสียงที่แตกต่างกัน
+            และให้เกมสุ่มเล่น 1 เสียงเวลาที่เราเปิดหีบ
+        </p>
+        <p>
+            ให้กลับไปที่โฟลเดอร์
+            <code>com.mojang > development_resource_packs > custom_sound_pack > sounds > random</code>
+            แล้วเปลี่ยนชื่อไฟล์ <code>chestopen.ogg</code> (ที่คุณเพิ่งใส่เข้าไป) เป็น
+            <strong><code>chestopen2.ogg</code></strong> ครับ
+            <em>(แล้วอย่าลืมหาไฟล์ chestopen.ogg อีกเสียงนึงมาใส่คู่กันด้วยนะครับ)</em>
+        </p>
+
+        <h4>1. ตั้งค่าไฟล์ sounds.json</h4>
+        <p>เปิดไฟล์ <code>sounds.json</code> ขึ้นมาแล้วเพิ่มโค้ดต่อไปนี้ลงไปครับ:</p>
+
+        <div class="code-wrapper">
+            <pre><span class="token-punct">{</span>
+            <span class="token-key">"individual_event_sounds"</span> <span class="token-punct">:</span> <span class="token-punct">{</span>
+                <span class="token-key">"events"</span> <span class="token-punct">:</span> <span class="token-punct">{</span>
+                    <span class="token-key">"chest.open"</span> <span class="token-punct">:</span> <span class="token-punct">{</span>
+                        <span class="token-key">"pitch"</span> <span class="token-punct">:</span> <span class="token-punct">[</span> <span class="token-number">0.90</span><span class="token-punct">,</span> <span class="token-number">1.0</span> <span class="token-punct">]</span><span class="token-punct">,</span>
+                        <span class="token-key">"sound"</span> <span class="token-punct">:</span> <span class="token-string">"random.chestopen"</span><span class="token-punct">,</span>
+                        <span class="token-key">"volume"</span> <span class="token-punct">:</span> <span class="token-number">0.50</span>
+                    <span class="token-punct">}</span>
+                <span class="token-punct">}</span>
+            <span class="token-punct">}</span>
+        <span class="token-punct">}</span></pre>
+            <button class="copy-btn">คัดลอก</button>
+        </div>
+
+        <h4>2. ตั้งค่าไฟล์ sound_definitions.json</h4>
+        <p>เปิดไฟล์ <code>sound_definitions.json</code> ขึ้นมาแล้วเพิ่มโค้ดนี้ลงไปครับ (สังเกตว่าใน array
+            <code>"sounds"</code>
+            เราใส่ไว้ทั้ง 2 ไฟล์เลย):
+        </p>
+
+        <div class="code-wrapper">
+            <pre><span class="token-punct">{</span>
+            <span class="token-key">"format_version"</span> <span class="token-punct">:</span> <span class="token-string">"1.20.20"</span><span class="token-punct">,</span>
+            <span class="token-key">"sound_definitions"</span> <span class="token-punct">:</span> <span class="token-punct">{</span>
+                <span class="token-key">"random.chestopen"</span> <span class="token-punct">:</span> <span class="token-punct">{</span>
+                    <span class="token-key">"__use_legacy_max_distance"</span> <span class="token-punct">:</span> <span class="token-string">"true"</span><span class="token-punct">,</span>
+                    <span class="token-key">"category"</span> <span class="token-punct">:</span> <span class="token-string">"block"</span><span class="token-punct">,</span>
+                    <span class="token-key">"max_distance"</span> <span class="token-punct">:</span> <span class="token-keyword">null</span><span class="token-punct">,</span>
+                    <span class="token-key">"min_distance"</span> <span class="token-punct">:</span> <span class="token-keyword">null</span><span class="token-punct">,</span>
+                    <span class="token-key">"sounds"</span> <span class="token-punct">:</span> <span class="token-punct">[</span> 
+                        <span class="token-string">"sounds/random/chestopen"</span><span class="token-punct">,</span>
+                        <span class="token-string">"sounds/random/chestopen2"</span>
+                    <span class="token-punct">]</span>
+                <span class="token-punct">}</span>
+            <span class="token-punct">}</span>
+        <span class="token-punct">}</span></pre>
+            <button class="copy-btn">คัดลอก</button>
+        </div>
+
+        <p>
+            เมื่อเราบันทึกไฟล์แล้วเข้าไปทดสอบเสียงกันอีกครั้งในเกม คุณจะสังเกตเห็นว่าการเปิดหีบ
+            จะสุ่มเล่นเสียงใดเสียงหนึ่งจาก 2 เสียงที่คุณกำหนดไว้ครับ!
+        </p>
+
+        <hr style="border: 0; border-top: 1px dashed #444; margin: 30px 0;">
+
+        <h3>การใช้คำสั่ง /playsound</h3>
+        <p>
+            นอกจากจะผูกเสียงเข้ากับเหตุการณ์ในเกม (In-game events) แล้ว
+            คุณยังสามารถเพิ่มเสียงแบบกำหนดเองที่ไม่ได้เล่นตามเหตุการณ์ใดๆ ได้ด้วยครับ
+        </p>
+        <p>
+            คุณสามารถใช้คำสั่ง <code>/playsound</code> เพื่อเล่นเสียงใดๆ ก็ตามในเกม รวมถึงเสียงที่เพิ่มเข้ามาใหม่ใน
+            Resource Pack ของคุณด้วย
+            แม้ว่าเสียงเหล่านั้นจะไม่ได้ถูกตั้งให้เล่นอัตโนมัติ แต่คุณก็ยังสามารถพิมพ์คำสั่งสั่งเล่นมันด้วยตัวเอง
+            หรือจะประยุกต์ใช้ <strong>Command blocks</strong> เพื่อสั่งเล่นเสียงในเวลาที่เหมาะสม
+            ตามสถานการณ์ในโลกหรือโหมดเกมของคุณก็ได้ครับ
+        </p>
+        <p>
+            หากต้องการเรียนรู้เพิ่มเติมเกี่ยวกับคำสั่ง <code>/playsound</code> คุณสามารถเข้าไปอ่านรายละเอียดได้ที่
+            <a href="https://learn.microsoft.com/en-us/minecraft/creator/commands/commands/playsound" target="_blank"
+                style="color: #ff9500;">เอกสารอ้างอิงคำสั่ง</a> ครับ
+        </p>
+
+        <hr style="border: 0; border-top: 1px solid #444; margin: 40px 0;">
+
+        <div style="text-align: center; margin-bottom: 20px;">
+            <i class="fa-solid fa-party-horn" style="font-size: 3rem; color: #f0ad4e;"></i>
+        </div>
+
+        <h2>บทสรุป</h2>
+        <p>
+            ขอแสดงความยินดีด้วยครับ! คุณได้เพิ่มเสียงแบบกำหนดเองลงในโลกของคุณสำเร็จแล้ว!
+            <br>ตอนนี้คุณสามารถสร้างโลกที่ส่งเสียงในแบบที่คุณอยากได้ยินได้ตามใจชอบเลยครับ
+        </p>
+        <p>
+            คุณสามารถทำให้บล็อกมีเสียงร้องอี๊ดอ๊าดเวลาเดินเหยียบ, ดาบที่กล่าวคำขอโทษเวลาคุณใช้มันโจมตีศัตรู,
+            หรือแม้แต่โลกที่ทุกสรรพสิ่งถูกพากย์เสียงโดย <strong>ตัวคุณเอง!</strong> และเช่นเคยครับ...
+            ขีดจำกัดเพียงอย่างเดียวก็คือจินตนาการของคุณนั่นเอง
+        </p>
+    </article>
+
+    <footer>
+        <h2>ช่องทางติดต่อ</h2>
+        <div class="social-container">
+            <a class="social-icons" href="https://www.facebook.com/AddonInsiderTH">
+                <img src="../../image/facebook-svgrepo-com.png" alt="Facebook">
+            </a>
+            <a class="social-icons" href="https://www.youtube.com/@MCFirsting">
+                <img src="../../image/youtube-fill-svgrepo-com.png" alt="YouTube">
+            </a>
+            <a class="social-icons" href="https://discord.gg/tnqZCfz4wz">
+                <img src="../../image/discord-svgrepo-com.png" alt="Discord">
+            </a>
+            <a class="social-icons" href="https://github.com/MCFirsting">
+                <img src="../../image/github-svgrepo-com.png" alt="GitHub">
+            </a>
+            <a class="social-icons" href="https://www.tiktok.com/@mc_firsting">
+                <img src="../../image/tiktok-svgrepo-com.png" alt="TikTok">
+            </a>
+        </div>
+    </footer>
+</body>
+
+</html>
