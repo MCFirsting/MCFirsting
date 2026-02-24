@@ -152,7 +152,7 @@
                 <li>
                     <code
                         style="background-color: #1e1e1e; padding: 6px 10px; border-radius: 4px; color: #ff9500; font-family: monospace;">/give @s namespace:item_name</code>
-                    <span style="color: #ddd; margin-left: 10px;">ทดสอบเสกไอเท็ม</span>
+                    <span style="color: #ddd; margin-left: 10px;">ทดสอบเสก Items </span>
                 </li>
                 <li>
                     <code
@@ -162,7 +162,7 @@
                 <li>
                     <code
                         style="background-color: #1e1e1e; padding: 6px 10px; border-radius: 4px; color: #ff9500; font-family: monospace;">/setblock ~ ~ ~ namespace:block</code>
-                    <span style="color: #ddd; margin-left: 10px;">ทดสอบวางบล็อก</span>
+                    <span style="color: #ddd; margin-left: 10px;">ทดสอบวาง Blocks </span>
                 </li>
                 <li>
                     <code
@@ -173,7 +173,7 @@
                 <li>
                     <code
                         style="background-color: #1e1e1e; padding: 6px 10px; border-radius: 4px; color: #ff9500; font-family: monospace;">/script profiler start</code>
-                    <span style="color: #ddd; margin-left: 10px;">เริ่มเก็บข้อมูลประสิทธิภาพของสคริปต์</span>
+                    <span style="color: #ddd; margin-left: 10px;">เริ่มเก็บข้อมูลประสิทธิภาพของ Script </span>
                 </li>
                 <li>
                     <code
@@ -241,7 +241,7 @@
                 <li style="margin-bottom: 15px;">
                     <strong style="color: #ff9500;">ใช้ Namespaces เสมอ:</strong>
                     <br>การใช้ Namespaces (เช่น <code>myaddon:custom_sword</code>)
-                    จะช่วยหลีกเลี่ยงการทับซ้อนกับไอเท็มของเกมหลักหรือ Add-ons ตัวอื่นๆ ครับ
+                    จะช่วยหลีกเลี่ยงการทับซ้อนกับ Items ของเกมหลักหรือ Add-ons ตัวอื่นๆ ครับ
                 </li>
                 <li>
                     <strong style="color: #ff9500;">เลี่ยงชื่อสงวน:</strong>
@@ -389,8 +389,8 @@
 
         <div
             style="background-color: #2b2b2b; padding: 20px; border-radius: 8px; border-left: 4px solid #ff9500; margin: 25px 0;">
-            <h3 style="margin-top: 0; color: #ff9500;">6. อนิเมชันไม่เล่น</h3>
-            <p><strong>อาการ:</strong> Entity แข็งทื่อ ไม่มีอนิเมชัน หรือเล่นอนิเมชันผิดท่า</p>
+            <h3 style="margin-top: 0; color: #ff9500;">6. Animation ไม่เล่น</h3>
+            <p><strong>อาการ:</strong> Entity แข็งทื่อ ไม่มี Animation หรือเล่น Animation ผิดท่า</p>
             <p><strong>รายการตรวจสอบ:</strong></p>
             <ul style="line-height: 1.8;">
                 <li>ตรวจสอบว่ามี <strong>Animation controller</strong> อยู่จริง และถูกอ้างอิงไว้ในไฟล์
@@ -413,10 +413,10 @@
         <div
             style="background-color: #2b2b2b; padding: 20px; border-radius: 8px; border-left: 4px solid #ff9500; margin: 25px 0;">
             <h3 style="margin-top: 0; color: #ff9500;">1. Blocks ไม่มี Texture</h3>
-            <p><strong>อาการ:</strong> บล็อกแสดงผลเป็นสีทึบๆ สีเดียว หรือลวดลาย Texture หายไป</p>
+            <p><strong>อาการ:</strong> Blocks แสดงผลเป็นสีทึบๆ สีเดียว หรือลวดลาย Texture หายไป</p>
             <p><strong>รายการตรวจสอบ:</strong></p>
             <ul style="line-height: 1.8;">
-                <li>ตรวจสอบไฟล์ <code>terrain_texture.json</code> ว่ามีรายการ (Entry) ระบุถึงเทกเจอร์ของคุณแล้ว</li>
+                <li>ตรวจสอบไฟล์ <code>terrain_texture.json</code> ว่ามีรายการ (Entry) ระบุถึง Texturesของคุณแล้ว</li>
                 <li>ชื่อ Texture ในไฟล์ Block JSON ต้อง <strong>ตรงกัน</strong> กับชื่อที่ตั้งไว้ใน
                     <code>terrain_texture</code>
                 </li>
@@ -427,7 +427,7 @@
 
         <div
             style="background-color: #2b2b2b; padding: 20px; border-radius: 8px; border-left: 4px solid #ff9500; margin: 25px 0;">
-            <h3 style="margin-top: 0; color: #ff9500;">2. Blocks ไม่ดรอปไอเท็ม</h3>
+            <h3 style="margin-top: 0; color: #ff9500;">2. Blocks ไม่ดรอป Items </h3>
             <p><strong>อาการ:</strong> เมื่อทุบหรือขุด Custom Blocks แล้ว ไม่มีอะไรดรอปออกมาเลย</p>
             <p><strong>วิธีแก้:</strong> ตรวจสอบให้แน่ใจว่าคุณได้อ้างอิงตารางของดรอป (Loot table) และไฟล์ Loot
                 table
@@ -438,6 +438,8 @@
                 <pre><span class="token-key">"components"</span><span class="token-punct">:</span> <span class="token-punct">{</span>
           <span class="token-key">"minecraft:loot"</span><span class="token-punct">:</span> <span class="token-string">"loot_tables/blocks/my_block.json"</span>
         <span class="token-punct">}</span></pre>
+                <button class="copy-btn">คัดลอก</button>
+
             </div>
 
             <p style="margin-bottom: 5px; margin-top: 15px;">ตัวอย่างตาราง Loot table แบบง่าย
@@ -476,13 +478,14 @@
                 <pre><span class="token-key">"minecraft:geometry"</span><span class="token-punct">:</span> <span class="token-punct">{</span>
           <span class="token-key">"identifier"</span><span class="token-punct">:</span> <span class="token-string">"geometry.my_custom_block"</span>
         <span class="token-punct">}</span></pre>
+                <button class="copy-btn">คัดลอก</button>
             </div>
         </div>
 
         <div
             style="background-color: #2b2b2b; padding: 20px; border-radius: 8px; border-left: 4px solid #ff9500; margin: 25px 0;">
             <h3 style="margin-top: 0; color: #ff9500;">4. สถานะ Blocks ไม่ยอมเปลี่ยน</h3>
-            <p><strong>อาการ:</strong> การสลับรูปแบบบล็อก (Block permutations) ไม่ทำงานอย่างที่ควรจะเป็น</p>
+            <p><strong>อาการ:</strong> การสลับรูปแบบ Blocks (Block permutations) ไม่ทำงานอย่างที่ควรจะเป็น</p>
             <p><strong>สาเหตุที่พบบ่อย:</strong></p>
             <ul style="line-height: 1.8;">
                 <li>ไม่ได้กำหนดค่าสถานะ (State values) เอาไว้ในส่วน <code>description</code></li>
@@ -506,6 +509,424 @@
         <span class="token-punct">}</span></pre>
                 <button class="copy-btn">คัดลอก</button>
             </div>
+        </div>
+
+        <hr style="border: 0; border-top: 1px dashed #444; margin: 40px 0;">
+
+        <h2>บั๊กเกี่ยวกับ Items</h2>
+        <p>ปัญหาเกี่ยวกับการสร้างและตั้งค่า Items แบบกำหนดเอง (Custom Items) ที่พบบ่อย มีดังนี้ครับ:</p>
+
+        <div
+            style="background-color: #2b2b2b; padding: 20px; border-radius: 8px; border-left: 4px solid #ff9500; margin: 25px 0;">
+            <h3 style="margin-top: 0; color: #ff9500;">1. Items ไม่อยู่ในช่อง Creative inventory
+                <p><strong>อาการ:</strong> ไม่สามารถหา Items เจอในหน้าต่าง Creative inventory
+                    ทำได้แค่เสกผ่านคำสั่งเท่านั้น
+                </p>
+                <p><strong>วิธีแก้:</strong> เพิ่มหมวดหมู่เมนู (Menu category) เข้าไปในไฟล์ Item JSON ของคุณ</p>
+                <div class="code-wrapper" style="margin-top: 10px;">
+                    <pre><span class="token-key">"description"</span><span class="token-punct">:</span> <span class="token-punct">{</span>
+            <span class="token-key">"identifier"</span><span class="token-punct">:</span> <span class="token-string">"mypack:custom_item"</span><span class="token-punct">,</span>
+            <span class="token-key">"menu_category"</span><span class="token-punct">:</span> <span class="token-punct">{</span>
+                <span class="token-key">"category"</span><span class="token-punct">:</span> <span class="token-string">"equipment"</span><span class="token-punct">,</span>
+                <span class="token-key">"group"</span><span class="token-punct">:</span> <span class="token-string">"itemGroup.name.sword"</span>
+            <span class="token-punct">}</span>
+        <span class="token-punct">}</span></pre>
+                    <button class="copy-btn">คัดลอก</button>
+                </div>
+                <p style="margin-top: 10px; color: #ddd;">
+                    <em>*หมวดหมู่ที่ใช้ได้ ได้แก่: <code>construction</code>, <code>nature</code>,
+                        <code>equipment</code>, <code>items</code>, และ <code>none</code></em>
+                </p>
+        </div>
+
+        <div
+            style="background-color: #2b2b2b; padding: 20px; border-radius: 8px; border-left: 4px solid #ff9500; margin: 25px 0;">
+            <h3 style="margin-top: 0; color: #ff9500;">2. Items แสดง Textures ผิด</h3>
+            <p><strong>อาการ:</strong> Items แสดงผลเป็น Textures เริ่มต้น
+                หรือใช้ Textures ผิดเพี้ยนไปจากที่ตั้งไว้</p>
+            <p><strong>รายการตรวจสอบ:</strong></p>
+            <ul style="line-height: 1.8;">
+                <li>ตรวจสอบว่ามีไฟล์ <code>item_texture.json</code> อยู่ในโฟลเดอร์ <code>textures</code> แล้ว</li>
+                <li>ชื่อ Texturesที่อ้างอิงในไฟล์ Item JSON ต้องตรงกันเป๊ะกับรายการ (Entry) ที่อยู่ใน
+                    <code>item_texture</code>
+                </li>
+                <li>ไฟล์ภาพ Texturesมีอยู่จริงตามพาธที่ระบุเอาไว้</li>
+            </ul>
+            <p style="margin-bottom: 5px;">ตัวอย่างไฟล์ <code>item_texture.json</code>:</p>
+            <div class="code-wrapper" style="margin-top: 0;">
+                <pre><span class="token-punct">{</span>
+            <span class="token-key">"resource_pack_name"</span><span class="token-punct">:</span> <span class="token-string">"My Pack"</span><span class="token-punct">,</span>
+            <span class="token-key">"texture_name"</span><span class="token-punct">:</span> <span class="token-string">"atlas.items"</span><span class="token-punct">,</span>
+            <span class="token-key">"texture_data"</span><span class="token-punct">:</span> <span class="token-punct">{</span>
+                <span class="token-key">"my_item"</span><span class="token-punct">:</span> <span class="token-punct">{</span>
+                    <span class="token-key">"textures"</span><span class="token-punct">:</span> <span class="token-string">"textures/items/my_item"</span>
+                <span class="token-punct">}</span>
+            <span class="token-punct">}</span>
+        <span class="token-punct">}</span></pre>
+                <button class="copy-btn">คัดลอก</button>
+
+            </div>
+        </div>
+
+        <div
+            style="background-color: #2b2b2b; padding: 20px; border-radius: 8px; border-left: 4px solid #ff9500; margin: 25px 0;">
+            <h3 style="margin-top: 0; color: #ff9500;">3. เครื่องมือขุดแร่ทำงานไม่ถูกต้อง
+            </h3>
+            <p><strong>อาการ:</strong> เครื่องมือแบบกำหนดเอง (เช่น Shovel, Pickaxe)
+                ไม่สามารถขุด Blocks ที่ควรจะขุดได้
+                หรือขุดได้ช้าเกินไป</p>
+            <p><strong>วิธีแก้:</strong> ตั้งค่า Digger Component
+                ให้ถูกต้องตามเป้าหมายของเครื่องมือ
+            </p>
+            <div class="code-wrapper" style="margin-top: 10px;">
+                <pre><span class="token-key">"minecraft:digger"</span><span class="token-punct">:</span> <span class="token-punct">{</span>
+          <span class="token-key">"use_efficiency"</span><span class="token-punct">:</span> <span class="token-boolean">true</span><span class="token-punct">,</span>
+          <span class="token-key">"destroy_speeds"</span><span class="token-punct">:</span> <span class="token-punct">[</span>
+            <span class="token-punct">{</span>
+              <span class="token-key">"block"</span><span class="token-punct">:</span> <span class="token-punct">{</span>
+                <span class="token-key">"tags"</span><span class="token-punct">:</span> <span class="token-string">"query.any_tag('stone', 'metal')"</span>
+              <span class="token-punct">}</span><span class="token-punct">,</span>
+              <span class="token-key">"speed"</span><span class="token-punct">:</span> <span class="token-number">8</span>
+            <span class="token-punct">}</span>
+          <span class="token-punct">]</span>
+        <span class="token-punct">}</span></pre>
+                <button class="copy-btn">คัดลอก</button>
+            </div>
+        </div>
+
+
+
+        <hr style="border: 0; border-top: 1px dashed #444; margin: 40px 0;">
+
+        <h2>บั๊กเกี่ยวกับ Script</h2>
+        <p>ปัญหาเกี่ยวกับการเขียน Scripting API ด้วย JavaScript ที่พบบ่อย มีดังนี้ครับ:</p>
+
+        <div
+            style="background-color: #2b2b2b; padding: 20px; border-radius: 8px; border-left: 4px solid #ff9500; margin: 25px 0;">
+            <h3 style="margin-top: 0; color: #ff9500;">1. Script ไม่โหลด</h3>
+            <p><strong>อาการ:</strong> ฟังก์ชันของ Script ไม่ทำงานเลย และไม่มีแจ้งเตือนข้อผิดพลาดใดๆ ใน Log</p>
+            <p><strong>รายการตรวจสอบ:</strong></p>
+            <ul style="line-height: 1.8;">
+                <li>ตรวจสอบในไฟล์ <code>manifest.json</code> ว่ามี Module Script และกำหนด <code>"type": "script"</code>
+                    เอาไว้แล้ว
+                </li>
+                <li>Entry Path ชี้ไปที่ไฟล์ถูกต้อง เช่น <code>"entry": "scripts/main.js"</code></li>
+                <li>ไฟล์ Script มี Syntax JavaScript ที่ถูกต้อง</li>
+                <li>ส่วน <strong>Dependencies</strong> ต้องใช้ <code>module_name</code> เท่านั้น <em>(ห้ามใช้
+                        uuid)</em>:</li>
+            </ul>
+            <div class="code-wrapper" style="margin-top: 10px;">
+                <pre><span class="token-key">"dependencies"</span><span class="token-punct">:</span> <span class="token-punct">[</span>
+            <span class="token-punct">{</span>
+                <span class="token-key">"module_name"</span><span class="token-punct">:</span> <span class="token-string">"@minecraft/server"</span><span class="token-punct">,</span>
+                <span class="token-key">"version"</span><span class="token-punct">:</span> <span class="token-string">"1.17.0"</span>
+            <span class="token-punct">}</span>
+        <span class="token-punct">]</span></pre>
+                <button class="copy-btn">คัดลอก</button>
+            </div>
+        </div>
+
+        <div
+            style="background-color: #2b2b2b; padding: 20px; border-radius: 8px; border-left: 4px solid #ff9500; margin: 25px 0;">
+            <h3 style="margin-top: 0; color: #ff9500;">2. ข้อผิดพลาด "Cannot read property of undefined"</h3>
+            <p><strong>อาการ:</strong> Script Crash และแสดงข้อความ Error นี้ขึ้นมา</p>
+            <p><strong>ปัญหา:</strong> คุณกำลังพยายามเข้าถึงค่าหรือคุณสมบัติ (Properties) จากตัวแปรที่ว่างเปล่า
+                หรือค่าที่ไม่มีอยู่จริง (Undefined values)</p>
+            <div class="code-wrapper" style="margin-top: 10px; border-left: 3px solid #fd3a3a;">
+                <pre><span class="token-comment">// โค้ดนี้จะแครชทันทีถ้าไม่มีผู้เล่นออนไลน์อยู่เลย</span>
+        <span class="token-keyword">const</span> player <span class="token-operator">=</span> world<span class="token-punctuation">.</span><span class="token-function">getAllPlayers</span><span class="token-punctuation">(</span><span class="token-punctuation">)</span><span class="token-punctuation">[</span><span class="token-number">0</span><span class="token-punctuation">]</span><span class="token-punctuation">;</span>
+        <span class="token-keyword">const</span> x <span class="token-operator">=</span> player<span class="token-punctuation">.</span>location<span class="token-punctuation">.</span>x<span class="token-punctuation">;</span>  <span class="token-comment">// Error เกิดตรงนี้เพราะ player คือ undefined</span></pre>
+            </div>
+            <p style="margin-top: 15px;"><strong>วิธีแก้:</strong> ตรวจสอบความถูกต้อง (Validate)
+                เสมอก่อนที่จะดึงค่าไปใช้:</p>
+            <div class="code-wrapper" style="margin-top: 10px;">
+                <pre><span class="token-keyword">const</span> players <span class="token-operator">=</span> world<span class="token-punctuation">.</span><span class="token-function">getAllPlayers</span><span class="token-punctuation">(</span><span class="token-punctuation">)</span><span class="token-punctuation">;</span>
+        <span class="token-keyword">if</span> <span class="token-punctuation">(</span>players<span class="token-punctuation">.</span>length <span class="token-operator">></span> <span class="token-number">0</span><span class="token-punctuation">)</span> <span class="token-punctuation">{</span>
+          <span class="token-keyword">const</span> player <span class="token-operator">=</span> players<span class="token-punctuation">[</span><span class="token-number">0</span><span class="token-punctuation">]</span><span class="token-punctuation">;</span>
+          <span class="token-keyword">const</span> x <span class="token-operator">=</span> player<span class="token-punctuation">.</span>location<span class="token-punctuation">.</span>x<span class="token-punctuation">;</span>
+        <span class="token-punctuation">}</span></pre>
+                <button class="copy-btn">คัดลอก</button>
+            </div>
+        </div>
+
+        <div
+            style="background-color: #2b2b2b; padding: 20px; border-radius: 8px; border-left: 4px solid #ff9500; margin: 25px 0;">
+            <h3 style="margin-top: 0; color: #ff9500;">3. เหตุการณ์ทำงานซ้ำซ้อนหลังการ Reload</h3>
+            <p><strong>อาการ:</strong> เหตุการณ์ (Events) ทำงานหรือถูกกระตุ้นหลายครั้งผิดปกติหลังจากพิมพ์คำสั่ง
+                <code>/reload</code>
+            </p>
+            <p><strong>ปัญหา:</strong> การโหลดซ้ำแต่ละครั้ง จะเป็นการเพิ่มโค้ดการสมัครรับข้อมูล (Subscription)
+                ซ้อนทับเข้าไปเรื่อยๆ</p>
+            <p><strong>วิธีแก้:</strong> ใช้ตัวแปรเช็คสถานะการเริ่มต้น (Initialize check) เพื่อป้องกันการสมัครรับ
+                Event ซ้ำ:</p>
+            <div class="code-wrapper" style="margin-top: 10px;">
+                <pre><span class="token-keyword">let</span> isInitialized <span class="token-operator">=</span> <span class="token-boolean">false</span><span class="token-punctuation">;</span>
+        
+        <span class="token-keyword">function</span> <span class="token-function">initialize</span><span class="token-punctuation">(</span><span class="token-punctuation">)</span> <span class="token-punctuation">{</span>
+          <span class="token-keyword">if</span> <span class="token-punctuation">(</span>isInitialized<span class="token-punctuation">)</span> <span class="token-keyword">return</span><span class="token-punctuation">;</span>
+          
+          world<span class="token-punctuation">.</span>afterEvents<span class="token-punctuation">.</span>playerSpawn<span class="token-punctuation">.</span><span class="token-function">subscribe</span><span class="token-punctuation">(</span>onPlayerSpawn<span class="token-punctuation">)</span><span class="token-punctuation">;</span>
+          isInitialized <span class="token-operator">=</span> <span class="token-boolean">true</span><span class="token-punctuation">;</span>
+        <span class="token-punctuation">}</span>
+        
+        <span class="token-function">initialize</span><span class="token-punctuation">(</span><span class="token-punctuation">)</span><span class="token-punctuation">;</span></pre>
+                <button class="copy-btn">คัดลอก</button>
+            </div>
+        </div>
+
+        <div
+            style="background-color: #2b2b2b; padding: 20px; border-radius: 8px; border-left: 4px solid #ff9500; margin: 25px 0;">
+            <h3 style="margin-top: 0; color: #ff9500;">4. Script รันผ่าน แต่ไม่มีอะไรเกิดขึ้น
+            </h3>
+            <p><strong>อาการ:</strong> Script ไม่มีแจ้งเตือน Error ใดๆ แต่พฤติกรรมที่เราคาดหวังก็ดันไม่ทำงานเหมือนกัน
+            </p>
+            <p><strong>ขั้นตอนการแก้ปัญหา (Debugging Steps):</strong></p>
+            <ul style="line-height: 1.8;">
+                <li>เพิ่มคำสั่ง <code>console.log</code> ลงไปตามจุดต่างๆ เพื่อตรวจดูว่าโค้ดบรรทัดนั้นถูกรันจริงหรือไม่
+                    (Verify
+                    code execution)</li>
+                <li>ตรวจสอบว่าคุณกำลังใช้ประเภทเหตุการณ์ (Event) ถูกต้องหรือไม่ (เช่น การสับสนระหว่าง
+                    <code>beforeEvents</code>
+                    กับ <code>afterEvents</code>)
+                </li>
+                <li>ตรวจสอบชื่อของ Entity/Block ว่าตรงกันเป๊ะรวมถึง Namespace ด้วย</li>
+                <li>ตรวจสอบให้แน่ใจว่าคุณไม่ได้เผลอไปสั่งยกเลิกเหตุการณ์ (Canceling events) โดยไม่ได้ตั้งใจ</li>
+                <li>คุณสามารถเข้าไปอ่านเทคนิคการแก้ปัญหาแบบเจาะลึกได้ในบทความอ้างอิงเรื่อง <strong> <a
+                            href="https://learn.microsoft.com/en-us/minecraft/creator/documents/scripting/debugging-scripts?view=minecraft-bedrock-stable"
+                            style="color: #ff9500;">Debugging
+                            Scripts</a></strong> ครับ</em></li>
+            </ul>
+        </div>
+
+
+        <hr style="border: 0; border-top: 1px dashed #444; margin: 40px 0;">
+
+        <h2>บั๊กเกี่ยวกับสูตรคราฟต์ (Recipe)</h2>
+        <p>ปัญหาเกี่ยวกับการสร้างสูตรคราฟต์ (Crafting recipes) หรือการหลอม Items ที่พบบ่อย มีดังนี้ครับ:</p>
+
+        <div
+            style="background-color: #2b2b2b; padding: 20px; border-radius: 8px; border-left: 4px solid #ff9500; margin: 25px 0;">
+            <h3 style="margin-top: 0; color: #ff9500;">1. สูตรคราฟต์ไม่ทำงาน</h3>
+            <p><strong>อาการ:</strong> ใส่ Items วัตถุดิบลงไปแล้วแต่ไม่ได้ผลลัพธ์ (Output) ออกมา</p>
+            <p><strong>รายการตรวจสอบ:</strong></p>
+            <ul style="line-height: 1.8;">
+                <li>ตรวจสอบว่าไฟล์สูตรคราฟต์ถูกเก็บไว้ในโฟลเดอร์ <code>recipes/</code> แล้วหรือยัง</li>
+                <li>ประเภทของสูตร (Recipe type) ตรงกับวิธีการคราฟต์ที่ต้องการ (เช่น <code>recipe_shaped</code>,
+                    <code>recipe_shapeless</code>)
+                </li>
+                <li><strong>Identifiers</strong> ของ Items มีการใส่ <strong>Namespace</strong> ครบถ้วน (เช่น
+                    <code>mypack:</code>)
+                </li>
+                <li>รูปแบบการวาง (Pattern) และคีย์ (Keys) ถูกต้องและสอดคล้องกัน</li>
+            </ul>
+            <p style="margin-bottom: 5px; margin-top: 15px;">ตัวอย่างสูตรคราฟต์แบบมีรูปทรงที่ถูกต้อง:
+            </p>
+            <div class="code-wrapper" style="margin-top: 0;">
+                <pre><span class="token-punct">{</span>
+          <span class="token-key">"format_version"</span><span class="token-punct">:</span> <span class="token-string">"1.21.40"</span><span class="token-punct">,</span>
+          <span class="token-key">"minecraft:recipe_shaped"</span><span class="token-punct">:</span> <span class="token-punct">{</span>
+            <span class="token-key">"description"</span><span class="token-punct">:</span> <span class="token-punct">{</span>
+              <span class="token-key">"identifier"</span><span class="token-punct">:</span> <span class="token-string">"mypack:custom_recipe"</span>
+            <span class="token-punct">}</span><span class="token-punct">,</span>
+            <span class="token-key">"tags"</span><span class="token-punct">:</span> <span class="token-punct">[</span><span class="token-string">"crafting_table"</span><span class="token-punct">]</span><span class="token-punct">,</span>
+            <span class="token-key">"pattern"</span><span class="token-punct">:</span> <span class="token-punct">[</span>
+              <span class="token-string">"###"</span><span class="token-punct">,</span>
+              <span class="token-string">" | "</span><span class="token-punct">,</span>
+              <span class="token-string">" | "</span>
+            <span class="token-punct">]</span><span class="token-punct">,</span>
+            <span class="token-key">"key"</span><span class="token-punct">:</span> <span class="token-punct">{</span>
+              <span class="token-key">"#"</span><span class="token-punct">:</span> <span class="token-punct">{</span> <span class="token-key">"item"</span><span class="token-punct">:</span> <span class="token-string">"minecraft:diamond"</span> <span class="token-punct">}</span><span class="token-punct">,</span>
+              <span class="token-key">"|"</span><span class="token-punct">:</span> <span class="token-punct">{</span> <span class="token-key">"item"</span><span class="token-punct">:</span> <span class="token-string">"minecraft:stick"</span> <span class="token-punct">}</span>
+            <span class="token-punct">}</span><span class="token-punct">,</span>
+            <span class="token-key">"unlock"</span><span class="token-punct">:</span> <span class="token-punct">[</span>
+              <span class="token-punct">{</span> <span class="token-key">"item"</span><span class="token-punct">:</span> <span class="token-string">"minecraft:diamond"</span> <span class="token-punct">}</span>
+            <span class="token-punct">]</span><span class="token-punct">,</span>
+            <span class="token-key">"result"</span><span class="token-punct">:</span> <span class="token-punct">{</span>
+              <span class="token-key">"item"</span><span class="token-punct">:</span> <span class="token-string">"mypack:custom_sword"</span>
+            <span class="token-punct">}</span>
+          <span class="token-punct">}</span>
+        <span class="token-punct">}</span></pre>
+                <button class="copy-btn">คัดลอก</button>
+            </div>
+        </div>
+
+        <div
+            style="background-color: #2b2b2b; padding: 20px; border-radius: 8px; border-left: 4px solid #ff9500; margin: 25px 0;">
+            <h3 style="margin-top: 0; color: #ff9500;">2. สูตร Furnace ไม่ทำงาน</h3>
+            <p><strong>อาการ:</strong> Items ไม่ยอมเผาหรือหลอม (Smelt) เมื่อใส่ลงในเตา</p>
+            <p><strong>วิธีแก้:</strong> ตรวจสอบว่าคุณใช้ <strong>Tags</strong> ที่ถูกต้องให้ตรงกับประเภทของเตาเผาครับ
+            </p>
+            <div class="code-wrapper" style="margin-top: 10px;">
+                <pre><span class="token-punct">{</span>
+          <span class="token-key">"format_version"</span><span class="token-punct">:</span> <span class="token-string">"1.21.40"</span><span class="token-punct">,</span>
+          <span class="token-key">"minecraft:recipe_furnace"</span><span class="token-punct">:</span> <span class="token-punct">{</span>
+            <span class="token-key">"description"</span><span class="token-punct">:</span> <span class="token-punct">{</span>
+              <span class="token-key">"identifier"</span><span class="token-punct">:</span> <span class="token-string">"mypack:smelt_custom_ore"</span>
+            <span class="token-punct">}</span><span class="token-punct">,</span>
+            <span class="token-key">"tags"</span><span class="token-punct">:</span> <span class="token-punct">[</span><span class="token-string">"furnace"</span><span class="token-punct">,</span> <span class="token-string">"blast_furnace"</span><span class="token-punct">]</span><span class="token-punct">,</span>
+            <span class="token-key">"input"</span><span class="token-punct">:</span> <span class="token-string">"mypack:custom_ore"</span><span class="token-punct">,</span>
+            <span class="token-key">"output"</span><span class="token-punct">:</span> <span class="token-string">"mypack:custom_ingot"</span>
+          <span class="token-punct">}</span>
+        <span class="token-punct">}</span></pre>
+                <button class="copy-btn">คัดลอก</button>
+            </div>
+            <p style="margin-top: 10px; color: #ddd;">
+                <em>*Tags ที่ใช้บ่อย: <code>furnace</code> (เตาเผาปกติ), <code>blast_furnace</code> (เตาหลอมแร่),
+                    <code>smoker</code> (เตารมควันอาหาร), <code>campfire</code> (แคมป์ไฟ)</em>
+            </p>
+        </div>
+
+
+        <hr style="border: 0; border-top: 1px dashed #444; margin: 40px 0;">
+
+        <h2>บั๊กเกี่ยวกับ Loot table</h2>
+        <p>ปัญหาเกี่ยวกับการดรอป Items จาก Entity หรือ Blocks ที่พบบ่อย มีดังนี้ครับ:</p>
+
+        <div
+            style="background-color: #2b2b2b; padding: 20px; border-radius: 8px; border-left: 4px solid #ff9500; margin: 25px 0;">
+            <h3 style="margin-top: 0; color: #ff9500;">1. ของไม่ดรอป</h3>
+            <p><strong>อาการ:</strong> เมื่อฆ่า Entity หรือทุบ Blocks แล้วไม่มีอะไรดรอปออกมาเลย</p>
+            <p><strong>รายการตรวจสอบ:</strong></p>
+            <ul style="line-height: 1.8;">
+                <li>ตรวจสอบว่ามีไฟล์ Loot table อยู่ในโฟลเดอร์ <code>loot_tables/</code> แล้วหรือยัง</li>
+                <li> Entity หรือ Blocks (Entity/block) อ้างอิง Path ของ Loot table ถูกต้อง</li>
+                <li>ไวยากรณ์ (Syntax) ในไฟล์ Loot table ถูกต้องครบถ้วน</li>
+            </ul>
+            <p style="margin-bottom: 5px; margin-top: 15px;">ตัวอย่างตาราง Loot table พื้นฐาน:</p>
+            <div class="code-wrapper" style="margin-top: 0;">
+                <pre><span class="token-punct">{</span>
+          <span class="token-key">"pools"</span><span class="token-punct">:</span> <span class="token-punct">[</span>
+            <span class="token-punct">{</span>
+              <span class="token-key">"rolls"</span><span class="token-punct">:</span> <span class="token-number">1</span><span class="token-punct">,</span>
+              <span class="token-key">"entries"</span><span class="token-punct">:</span> <span class="token-punct">[</span>
+                <span class="token-punct">{</span>
+                  <span class="token-key">"type"</span><span class="token-punct">:</span> <span class="token-string">"item"</span><span class="token-punct">,</span>
+                  <span class="token-key">"name"</span><span class="token-punct">:</span> <span class="token-string">"mypack:custom_item"</span><span class="token-punct">,</span>
+                  <span class="token-key">"weight"</span><span class="token-punct">:</span> <span class="token-number">1</span>
+                <span class="token-punct">}</span>
+              <span class="token-punct">]</span>
+            <span class="token-punct">}</span>
+          <span class="token-punct">]</span>
+        <span class="token-punct">}</span></pre>
+                <button class="copy-btn">คัดลอก</button>
+            </div>
+        </div>
+
+        <div
+            style="background-color: #2b2b2b; padding: 20px; border-radius: 8px; border-left: 4px solid #ff9500; margin: 25px 0;">
+            <h3 style="margin-top: 0; color: #ff9500;">2. ของดรอปตามเงื่อนไขไม่ทำงาน</h3>
+            <p><strong>อาการ:</strong> เงื่อนไข (Conditions) ที่ตั้งไว้ไม่มีผลต่อการดรอปของอย่างที่คาดหวังไว้</p>
+            <p><strong>วิธีแก้:</strong> ตรวจสอบไวยากรณ์ของเงื่อนไข (Condition syntax) ให้ถูกต้อง (สังเกตว่า
+                <code>conditions</code> จะอยู่ในระดับเดียวกับ <code>entries</code> หรือภายในแต่ละ entry ก็ได้
+                ขึ้นอยู่กับเป้าหมาย):
+            </p>
+            <div class="code-wrapper" style="margin-top: 10px;">
+                <pre><span class="token-punct">{</span>
+          <span class="token-key">"pools"</span><span class="token-punct">:</span> <span class="token-punct">[</span>
+            <span class="token-punct">{</span>
+              <span class="token-key">"rolls"</span><span class="token-punct">:</span> <span class="token-number">1</span><span class="token-punct">,</span>
+              <span class="token-key">"entries"</span><span class="token-punct">:</span> <span class="token-punct">[</span>
+                <span class="token-punct">{</span>
+                  <span class="token-key">"type"</span><span class="token-punct">:</span> <span class="token-string">"item"</span><span class="token-punct">,</span>
+                  <span class="token-key">"name"</span><span class="token-punct">:</span> <span class="token-string">"mypack:rare_drop"</span><span class="token-punct">,</span>
+                  <span class="token-key">"weight"</span><span class="token-punct">:</span> <span class="token-number">1</span>
+                <span class="token-punct">}</span>
+              <span class="token-punct">]</span><span class="token-punct">,</span>
+              <span class="token-key">"conditions"</span><span class="token-punct">:</span> <span class="token-punct">[</span>
+                <span class="token-punct">{</span>
+                  <span class="token-key">"condition"</span><span class="token-punct">:</span> <span class="token-string">"random_chance_with_looting"</span><span class="token-punct">,</span>
+                  <span class="token-key">"chance"</span><span class="token-punct">:</span> <span class="token-number">0.1</span><span class="token-punct">,</span>
+                  <span class="token-key">"looting_multiplier"</span><span class="token-punct">:</span> <span class="token-number">0.05</span>
+                <span class="token-punct">}</span>
+              <span class="token-punct">]</span>
+            <span class="token-punct">}</span>
+          <span class="token-punct">]</span>
+        <span class="token-punct">}</span></pre>
+                <button class="copy-btn">คัดลอก</button>
+            </div>
+        </div>
+
+
+        <hr style="border: 0; border-top: 1px dashed #444; margin: 40px 0;">
+
+        <h2>บั๊กด้านประสิทธิภาพ (Performance)</h2>
+        <p>ปัญหาเกี่ยวกับความลื่นไหล การกินทรัพยากรเครื่อง และความเสถียรของเกมที่พบบ่อย มีดังนี้ครับ:</p>
+
+        <div
+            style="background-color: #2b2b2b; padding: 20px; border-radius: 8px; border-left: 4px solid #ff9500; margin: 25px 0;">
+            <h3 style="margin-top: 0; color: #ff9500;">1. โลกโหลดช้า</h3>
+            <p><strong>สาเหตุที่เป็นไปได้:</strong></p>
+            <ul style="line-height: 1.8;">
+                <li>มี Textures เยอะเกินไป หรือไฟล์ภาพมีขนาดใหญ่เกินไป</li>
+                <li>มีการเกิดของ Entity มากเกินไปในขณะโหลดโลก</li>
+                <li>มี Scripts ที่ซับซ้อน ถูกสั่งให้ทำงานทันทีตอนเริ่มต้นโลก</li>
+            </ul>
+            <p><strong>วิธีแก้ปัญหา:</strong></p>
+            <ul style="line-height: 1.8;">
+                <li>ปรับลดขนาดและปรับแต่ง Textures (แนะนำให้ใช้ 16x16 หรือ 32x32 เมื่อเป็นไปได้)</li>
+                <li>เลื่อนการเริ่มต้นทำงานของ Scripts ที่ไม่จำเป็นออกไปก่อน
+                </li>
+                <li>ลดขีดจำกัดความหนาแน่นของ Entity ในกฎการเกิด</li>
+            </ul>
+        </div>
+
+        <div
+            style="background-color: #2b2b2b; padding: 20px; border-radius: 8px; border-left: 4px solid #ff9500; margin: 25px 0;">
+            <h3 style="margin-top: 0; color: #ff9500;">2. เฟรมเรตตกขณะเล่นเกม</h3>
+            <p><strong>สาเหตุที่พบบ่อย:</strong></p>
+            <ul style="line-height: 1.8;">
+                <li>มี Entity กระจุกตัวอยู่เยอะเกินไปในพื้นที่เดียว</li>
+                <li>มี Scripts ที่ถูกสั่งให้ทำงานทุกๆ tick ตลอดเวลา</li>
+                <li>Particle effects มีความซับซ้อนสูงเกินไป</li>
+                <li>มีการอัปเดต Blocks แบบไดนามิกมากเกินไป</li>
+            </ul>
+            <p><strong>วิธีแก้ปัญหา:</strong></p>
+            <div class="code-wrapper" style="margin-top: 10px;">
+                <pre><span class="token-comment">// แทนที่จะให้รันทุกๆ Tick ให้ใช้ Interval แทน</span>
+        system<span class="token-punctuation">.</span><span class="token-function">runInterval</span><span class="token-punctuation">(</span><span class="token-punctuation">(</span><span class="token-punctuation">)</span> <span class="token-operator">=></span> <span class="token-punctuation">{</span>
+          <span class="token-comment">// ใส่ Logic ของคุณที่นี่</span>
+        <span class="token-punctuation">}</span><span class="token-punctuation">,</span> <span class="token-number">20</span><span class="token-punctuation">)</span><span class="token-punctuation">;</span>  <span class="token-comment">// ตั้งค่า 20 Ticks = รันแค่ 1 ครั้งต่อวินาที</span>
+        
+        <span class="token-comment">// จำกัดขอบเขตการประมวลผล</span>
+        <span class="token-keyword">const</span> nearbyEntities <span class="token-operator">=</span> dimension<span class="token-punctuation">.</span><span class="token-function">getEntities</span><span class="token-punctuation">(</span><span class="token-punctuation">{</span>
+          <span class="token-property">location</span><span class="token-punctuation">:</span> player<span class="token-punctuation">.</span>location<span class="token-punctuation">,</span>
+          <span class="token-property">maxDistance</span><span class="token-punctuation">:</span> <span class="token-number">50</span>  <span class="token-comment">// ค้นหาในระยะ 50  Blocks  ไม่ต้องประมวลผลทั้งโลก</span>
+        <span class="token-punctuation">}</span><span class="token-punctuation">)</span><span class="token-punctuation">;</span></pre>
+                <button class="copy-btn">คัดลอก</button>
+            </div>
+        </div>
+
+        <div
+            style="background-color: #2b2b2b; padding: 20px; border-radius: 8px; border-left: 4px solid #ff9500; margin: 25px 0;">
+            <h3 style="margin-top: 0; color: #ff9500;">3. ปัญหาหน่วยความจำของ Scripts</h3>
+            <p><strong>อาการ:</strong> เกมลื่นไหลดีในตอนแรก แต่จะค่อยๆ ช้าลง กระตุก
+                หรือค้างเมื่อเวลาผ่านไปสักพัก</p>
+            <p><strong>สาเหตุที่พบบ่อย:</strong></p>
+            <ul style="line-height: 1.8;">
+                <li>การเก็บข้อมูลลงใน Arrays หรือ Maps ที่ใหญ่ขึ้นเรื่อยๆ โดยไม่มีการเคลียร์ค่าทิ้ง</li>
+                <li>การสมัครรับเหตุการณ์ (Event subscriptions) ค้างไว้และไม่ยอมลบออก (Remove) เมื่อไม่ใช้งานแล้ว</li>
+                <li>การแคช (Caching) ข้อมูลไว้ในหน่วยความจำมากเกินไป</li>
+            </ul>
+            <p><strong>วิธีแก้:</strong></p>
+            <div class="code-wrapper" style="margin-top: 10px;">
+                <pre><span class="token-comment">// เคลียร์ข้อมูลทิ้งเมื่อผู้เล่นออกจากเกม</span>
+        world<span class="token-punctuation">.</span>afterEvents<span class="token-punctuation">.</span>playerLeave<span class="token-punctuation">.</span><span class="token-function">subscribe</span><span class="token-punctuation">(</span><span class="token-punctuation">(</span>event<span class="token-punctuation">)</span> <span class="token-operator">=></span> <span class="token-punctuation">{</span>
+          playerDataMap<span class="token-punctuation">.</span><span class="token-function">delete</span><span class="token-punctuation">(</span>event<span class="token-punctuation">.</span>playerId<span class="token-punctuation">)</span><span class="token-punctuation">;</span>
+        <span class="token-punctuation">}</span><span class="token-punctuation">)</span><span class="token-punctuation">;</span>
+        
+        <span class="token-comment">// จำกัดขนาดของแคช</span>
+        <span class="token-keyword">if</span> <span class="token-punctuation">(</span>cache<span class="token-punctuation">.</span>size <span class="token-operator">></span> <span class="token-number">1000</span><span class="token-punctuation">)</span> <span class="token-punctuation">{</span>
+          <span class="token-keyword">const</span> firstKey <span class="token-operator">=</span> cache<span class="token-punctuation">.</span><span class="token-function">keys</span><span class="token-punctuation">(</span><span class="token-punctuation">)</span><span class="token-punctuation">.</span><span class="token-function">next</span><span class="token-punctuation">(</span><span class="token-punctuation">)</span><span class="token-punctuation">.</span>value<span class="token-punctuation">;</span>
+          cache<span class="token-punctuation">.</span><span class="token-function">delete</span><span class="token-punctuation">(</span>firstKey<span class="token-punctuation">)</span><span class="token-punctuation">;</span>
+        <span class="token-punctuation">}</span></pre>
+                <button class="copy-btn">คัดลอก</button>
+            </div>
+
+            <p style="margin-top: 15px; color: #ddd;">
+                <em>*สามารถศึกษาข้อมูลเพิ่มเติมได้ที่บทความ: <a
+                        href="https://learn.microsoft.com/en-us/minecraft/creator/documents/practices/improvingperformanceandresourceusage?view=minecraft-bedrock-stable"
+                        target="_blank" style="color: #ff9500;">การปรับปรุงประสิทธิภาพและการใช้ทรัพยากร</a></em>
+            </p>
         </div>
 
     </article>
