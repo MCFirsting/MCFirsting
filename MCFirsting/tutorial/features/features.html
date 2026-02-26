@@ -1,0 +1,663 @@
+<!DOCTYPE html>
+<html lang="th">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Introduction to Features</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+    <nav class="navbar">
+        <div class="logo">
+            <a href="../../index.html"><img id="logo_mcfirsting" src="../../image/mcfirsting_logo.png" alt="Logo"></a>
+        </div>
+        <ul class="nav-links">
+            <li><a href="../../tutorial.html">Tutorial</a></li>
+            <li><a href="../../shop.html">Shop</a></li>
+        </ul>
+    </nav>
+
+    <header class="doc-header">
+        <div class="container">
+            <h1 class="doc-title">บทนำเกี่ยวกับ<br>Features</h1>
+            <p class="doc-subtitle" style="text-align: center; color: #aaa;">เติมเต็มโลก Minecraft
+                ของคุณด้วยของตกแต่งและรายละเอียดทางธรรมชาติ</p>
+        </div>
+    </header>
+
+    <article class="article-container">
+
+        <div style="text-align: center; margin-bottom: 30px;">
+            <i class="fa-solid fa-tree" style="font-size: 4rem; color: #4facfe;"></i>
+        </div>
+
+        <p>
+            <strong> Feature</strong> คือของตกแต่งที่ถูกสุ่มกระจายอยู่ทั่วโลกครับ สิ่งต่างๆ
+            เช่น ต้นไม้, พืชพรรณ, ดอกไม้, แหล่งน้ำพุ, แร่ (Ore), และปะการัง ล้วนถูกจัดว่าเป็น Feature ทั้งหมด
+            <br><br>โดยพื้นฐานแล้วหลักการจำง่ายๆ ก็คือ: <strong>ถ้าสิ่งนั้นไม่ใช่ภูมิประเทศ (Terrain) หรือ Entity
+                สิ่งนั้นก็มักจะเป็น Feature ครับ</strong>
+        </p>
+
+        <hr style="border: 0; border-top: 1px dashed #444; margin: 30px 0;">
+
+        <h3>โครงสร้างของ Feature</h3>
+        <p>
+            Feature สามารถอยู่แบบเดี่ยวๆ (Standalone) หรือประกอบขึ้นจาก <strong> Feature ย่อย (Sub-features)</strong>
+            หลายอันรวมกันก็ได้ครับ
+        </p>
+        <p>
+            ในทางปฏิบัติ Feature ส่วนใหญ่ใน Minecraft จะถูกกำหนดและสร้างขึ้นมาเป็น <strong>"สายโซ่" (Chain)</strong>
+            ของ Feature ตั้งแต่สองอันขึ้นไปเชื่อมต่อกัน
+            สายโซ่เหล่านี้มักจะไปจบลงที่ Feature ตัวสุดท้ายซึ่งทำหน้าที่ <strong>วาง Block ลงในโลก</strong> ครับ
+        </p>
+
+        <div
+            style="background-color: #2b2b2b; padding: 20px; border-radius: 8px; border-left: 4px solid #ff9500; margin: 25px 0;">
+            <h4 style="margin-top: 0; color: #ff9500;">การควบคุมลำดับการทำงาน</h4>
+            <p style="margin-bottom: 10px;"> Feature ประเภทอื่นๆ จะถูกนำมาใช้เพื่อควบคุมกระแสการทำงานของสายโซ่ครับ
+                ตัวอย่างเช่น:</p>
+            <ul style="line-height: 1.8; margin-bottom: 0;">
+                <li><strong>แบบมีเงื่อนไข (Conditional):</strong> วาง Feature
+                    นี้ก็ต่อเมื่อตรงตามเงื่อนไขที่กำหนดเท่านั้น
+                </li>
+                <li><strong>แบบเรียงลำดับ (Sequential):</strong> วาง Feature หลายๆ อันตามลำดับขั้นตอน</li>
+                <li><strong>แบบสุ่มกระจาย (Random distribution):</strong>
+                    สุ่มเปอร์เซ็นต์หรือตำแหน่งการเกิดของ Feature นั้นๆ</li>
+            </ul>
+        </div>
+
+        <hr style="border: 0; border-top: 1px dashed #444; margin: 40px 0;">
+
+        <h2>รูปแบบ JSON</h2>
+        <p>
+            Feature ทั้งหมดต้องระบุเวอร์ชันผ่านฟิลด์ <code>"format_version"</code> เสมอครับ
+            ข้อมูลส่วนที่เหลือจะถูกเก็บไว้ใน Objects ย่อยที่เป็นอิสระต่อกัน สำหรับแต่ละประเภท Feature
+            (Feature type) ที่เกมรองรับ
+        </p>
+        <p>
+            ประเภท Feature เหล่านี้จะทำหน้าที่กำหนด Behavior ของ Feature นั้นๆ และประกอบด้วยคุณสมบัติ
+            (Properties)
+            ที่เฉพาะเจาะจงสำหรับพฤติกรรมนั้น
+            และเพื่อให้ไฟล์ทำงานได้ถูกต้อง การกำหนดค่าจะต้องประกอบด้วย Objects ประเภทเหล่านี้
+            <strong>เพียงหนึ่งอันเท่านั้น</strong> ครับ
+            <em>(เช่น ในหนึ่งไฟล์ ต้องเลือกใช้ <code>minecraft:scatter_feature</code> หรือ
+                <code>minecraft:ore_feature</code>
+                อย่างใดอย่างหนึ่งเท่านั้น)</em>
+        </p>
+
+        <h3>ตัวอย่าง</h3>
+        <p style="margin-bottom: 5px;">นี่คือตัวอย่างการใช้ <code>minecraft:scatter_feature</code>
+            เพื่อตั้งค่าให้เกมสุ่มกระจายดอกไม้ครับ:</p>
+        <div class="code-wrapper" style="margin-top: 0;">
+            <pre><span class="token-punct">{</span>
+          <span class="token-key">"format_version"</span><span class="token-punct">:</span> <span class="token-string">"1.21.10"</span><span class="token-punct">,</span>
+          <span class="token-key">"minecraft:scatter_feature"</span><span class="token-punct">:</span> <span class="token-punct">{</span>
+            <span class="token-key">"description"</span><span class="token-punct">:</span> <span class="token-punct">{</span>
+              <span class="token-key">"identifier"</span><span class="token-punct">:</span> <span class="token-string">"example:scatter_flowers_feature"</span>
+            <span class="token-punct">}</span><span class="token-punct">,</span>
+            <span class="token-key">"places_feature"</span><span class="token-punct">:</span> <span class="token-string">"example:flower_feature"</span><span class="token-punct">,</span>
+            <span class="token-key">"distribution"</span><span class="token-punct">:</span> <span class="token-punct">{</span>
+              <span class="token-key">"iterations"</span><span class="token-punct">:</span> <span class="token-number">10</span><span class="token-punct">,</span>
+              <span class="token-key">"scatter_chance"</span><span class="token-punct">:</span> <span class="token-number">50.0</span><span class="token-punct">,</span>
+              <span class="token-key">"x"</span><span class="token-punct">:</span> <span class="token-punct">{</span>
+                <span class="token-key">"distribution"</span><span class="token-punct">:</span> <span class="token-string">"uniform"</span><span class="token-punct">,</span>
+                <span class="token-key">"extent"</span><span class="token-punct">:</span> <span class="token-punct">[</span> <span class="token-number">0</span><span class="token-punct">,</span> <span class="token-number">15</span> <span class="token-punct">]</span>
+              <span class="token-punct">}</span><span class="token-punct">,</span>
+              <span class="token-key">"y"</span><span class="token-punct">:</span> <span class="token-number">64</span><span class="token-punct">,</span>
+              <span class="token-key">"z"</span><span class="token-punct">:</span> <span class="token-punct">{</span>
+                <span class="token-key">"distribution"</span><span class="token-punct">:</span> <span class="token-string">"uniform"</span><span class="token-punct">,</span>
+                <span class="token-key">"extent"</span><span class="token-punct">:</span> <span class="token-punct">[</span> <span class="token-number">0</span><span class="token-punct">,</span> <span class="token-number">15</span> <span class="token-punct">]</span>
+              <span class="token-punct">}</span>
+            <span class="token-punct">}</span>
+          <span class="token-punct">}</span>
+        <span class="token-punct">}</span></pre>
+            <button class="copy-btn">คัดลอก</button>
+        </div>
+
+
+
+        <hr style="border: 0; border-top: 1px solid #444; margin: 40px 0;">
+
+        <h2>การเพิ่ม Features</h2>
+        <p>
+            Feature ต่างๆ จะถูกอ่านจากไฟล์ JSON ที่อยู่ในโฟลเดอร์ย่อย <code>features</code> ของ Behavior packs ครับ
+            ระบบบังคับให้ต้องมี <strong>หนึ่ง Feature ต่อหนึ่งไฟล์</strong>
+            โดยชื่อไฟล์และชื่อของFeatures
+            (Identifier) จะต้องตรงกัน
+        </p>
+        <p>
+            ชื่อ Feature สามารถระบุ <strong>Namespace</strong> ในรูปแบบ <code>"namespace:feature_name"</code>
+            เพื่อช่วยแยกแยะให้ต่างจาก Feature ที่อาจมีชื่อซ้ำกันใน Behavior packs อื่นๆ ได้
+            โดย Namespace นี้จะไม่ถูกนำมาพิจารณาตอนที่ระบบจับคู่ชื่อไฟล์ครับ ตัวอย่างเช่น ในไฟล์ที่ชื่อ
+            <code>my_tree_feature.json</code> การตั้งชื่อ Identifier เป็น <code>"my_tree_feature"</code> หรือ
+            <code>"my_pack_name:my_tree_feature"</code> ล้วนถือว่าถูกต้องตามหลักการ (Valid identifiers) ทั้งคู่ครับ
+        </p>
+        <p>
+            หากมี Behavior packs สองแพ็กกำหนดชื่อ Feature (รวมถึง Namespace) ตรงกันเป๊ะ
+            <strong>Feature จากแพ็กที่อยู่บนสุด จะถูกนำมาใช้งาน</strong>
+            สิ่งนี้ทำให้ผู้เล่นสามารถเขียนทับ (Override) Feature พื้นฐานของตัวเกมได้ครับ
+        </p>
+
+        <h3>การตั้งค่า Behavior Pack</h3>
+        <p>ในการเพิ่ม Features คุณจำเป็นต้องจัดเตรียมโครงสร้างโฟลเดอร์ใน Behavior Pack ดังนี้:</p>
+        <ul style="line-height: 1.8;">
+            <li>ในโฟลเดอร์ Behavior Pack ของคุณ ให้สร้างโฟลเดอร์ <strong><code>features</code></strong> และ
+                <strong><code>feature_rules</code></strong>
+                (สองโฟลเดอร์นี้จะใช้เก็บไฟล์ JSON ทั้งหมดที่กำหนด Feature ของคุณ)
+            </li>
+            <li>ค่า <code>"min_engine_version"</code> ในไฟล์ <code>manifest.json</code> จำเป็นต้องตั้งเป็น
+                <strong>1.20.20</strong> ขึ้นไป
+            </li>
+            <li>ระบบ Feature <strong>ไม่จำเป็น</strong> ต้องใช้ Resource Pack เสมอไป</li>
+        </ul>
+
+        <img class="article-image" src="/tutorial/features/image/Navigate Features.png" width="500" alt="Navigate Feature">
+
+        <div
+            style="background-color: #2b2b2b; padding: 15px; border-radius: 8px; border-left: 4px solid #fefe00; margin: 20px 0;">
+            <p style="margin: 0; color: #ddd;">
+                <em>*อย่างไรก็ตาม หากคุณใช้งาน Structures ภายใน Feature ที่มี Custom
+                    Block หรือ Custom Items คุณจะต้องตั้งค่า Resource Pack เข้ามาเป็น Dependency ด้วยครับ</em>
+            </p>
+        </div>
+
+        <hr style="border: 0; border-top: 1px dashed #444; margin: 40px 0;">
+
+        <h3>Features ที่รองรับ</h3>
+        <p>นี่คือรายชื่อประเภท Features ทั้งหมดที่คุณสามารถใช้งานได้ในปัจจุบันครับ:</p>
+
+        <div style="overflow-x: auto;">
+            <table
+                style="width: 100%; border-collapse: collapse; margin-top: 15px; background-color: #1e1e1e; color: #ddd; font-size: 0.95em;">
+                <thead>
+                    <tr style="background-color: #333;">
+                        <th style="padding: 12px; border: 1px solid #444; text-align: left;">ชื่อ
+                        </th>
+                        <th style="padding: 12px; border: 1px solid #444; text-align: left;">คำอธิบาย</th>
+                    </tr>
+                </thead>
+                <tbody style="line-height: 1.6;">
+                    <tr>
+                        <td style="padding: 10px; border: 1px solid #444;"><code>minecraft:aggregate_feature</code></td>
+                        <td style="padding: 10px; border: 1px solid #444;">กลุ่มของคอลเลกชัน Feature
+                            ที่ทำงานแบบสุ่มลำดับ</td>
+                    </tr>
+                    <tr>
+                        <td style="padding: 10px; border: 1px solid #444;"><code>minecraft:cave_carver_feature</code>
+                        </td>
+                        <td style="padding: 10px; border: 1px solid #444;">เจาะถ้ำ (Carves a cave)
+                            ทะลุโลกในชังก์ปัจจุบัน
+                            และชังก์รอบๆ ในรูปแบบรัศมี 8 Chunk</td>
+                    </tr>
+                    <tr>
+                        <td style="padding: 10px; border: 1px solid #444;"><code>minecraft:fossil_feature</code></td>
+                        <td style="padding: 10px; border: 1px solid #444;">สร้าง Structure โครงกระดูก
+                            ที่ประกอบด้วย Bone Block และ Ore Block แบบ Parameter</td>
+                    </tr>
+                    <tr>
+                        <td style="padding: 10px; border: 1px solid #444;"><code>minecraft:geode_feature</code></td>
+                        <td style="padding: 10px; border: 1px solid #444;">สร้างการก่อตัวของหินเพื่อจำลองรูปแบบของ Geode
+                        </td>
+                    </tr>
+                    <tr>
+                        <td style="padding: 10px; border: 1px solid #444;"><code>minecraft:growing_plant_feature</code>
+                        </td>
+                        <td style="padding: 10px; border: 1px solid #444;">วางต้นพืชที่กำลังเติบโตลงในโลก</td>
+                    </tr>
+                    <tr>
+                        <td style="padding: 10px; border: 1px solid #444;">
+                            <code>minecraft:nether_cave_carver_feature</code>
+                        </td>
+                        <td style="padding: 10px; border: 1px solid #444;">เจาะถ้ำทะลุ Nether ใน Chunk ปัจจุบัน
+                            และ Chunk รอบๆ</td>
+                    </tr>
+                    <tr>
+                        <td style="padding: 10px; border: 1px solid #444;"><code>minecraft:multiface_feature</code></td>
+                        <td style="padding: 10px; border: 1px solid #444;">วาง Block แบบหลายหน้า เช่นบนพื้น/ผนัง/เพดาน
+                        </td>
+                    </tr>
+                    <tr>
+                        <td style="padding: 10px; border: 1px solid #444;"><code>minecraft:ore_feature</code></td>
+                        <td style="padding: 10px; border: 1px solid #444;">วางสายแร่
+                            เพื่อจำลองแหล่งกำเนิดแร่</td>
+                    </tr>
+                    <tr>
+                        <td style="padding: 10px; border: 1px solid #444;"><code>minecraft:scatter_feature</code></td>
+                        <td style="padding: 10px; border: 1px solid #444;">สุ่มกระจาย (Scatters) Features ไปทั่วทั้ง
+                            Chunk
+                        </td>
+                    </tr>
+                    <tr>
+                        <td style="padding: 10px; border: 1px solid #444;"><code>minecraft:search_feature</code></td>
+                        <td style="padding: 10px; border: 1px solid #444;">
+                            กวาดหาพื้นที่เพื่อค้นหาตำแหน่งการวางที่ถูกต้องสำหรับ Feature ที่มันอ้างอิง</td>
+                    </tr>
+                    <tr>
+                        <td style="padding: 10px; border: 1px solid #444;"><code>minecraft:sequence_feature</code></td>
+                        <td style="padding: 10px; border: 1px solid #444;">คอลเลกชันของ Feature
+                            ที่จะทำงานตามลำดับขั้นตอนอย่างเคร่งครัด</td>
+                    </tr>
+                    <tr>
+                        <td style="padding: 10px; border: 1px solid #444;"><code>minecraft:single_block_feature</code>
+                        </td>
+                        <td style="padding: 10px; border: 1px solid #444;">วาง Block เดี่ยวๆ (Single Block) ลงในโลก</td>
+                    </tr>
+                    <tr>
+                        <td style="padding: 10px; border: 1px solid #444;">
+                            <code>minecraft:snap_to_surface_feature</code>
+                        </td>
+                        <td style="padding: 10px; border: 1px solid #444;">ดึงแกน Y
+                            ของตำแหน่งที่จะวางให้ติดกับพื้นหรือเพดาน
+                            ภายในระยะ <code>vertical_search_range</code> ที่กำหนด</td>
+                    </tr>
+                    <tr>
+                        <td style="padding: 10px; border: 1px solid #444;">
+                            <code>minecraft:surface_relative_threshold_feature</code>
+                        </td>
+                        <td style="padding: 10px; border: 1px solid #444;">
+                            ประเมินว่าตำแหน่งอยู่ต่ำกว่าระดับพื้นผิวโลกหรือไม่
+                            และจะวาง Feature หากเป็นเช่นนั้น <em>(ใช้งานได้กับเครื่องกำเนิด Overworld รุ่น 1.18
+                                ขึ้นไปเท่านั้น)</em></td>
+                    </tr>
+                    <tr>
+                        <td style="padding: 10px; border: 1px solid #444;">
+                            <code>minecraft:structure_template_feature</code>
+                        </td>
+                        <td style="padding: 10px; border: 1px solid #444;">วางโครงสร้าง (Structure) ลงในโลก
+                            โครงสร้างต้องเป็นไฟล์ <code>.mcstructure</code> ในโฟลเดอร์ <code>structures</code></td>
+                    </tr>
+                    <tr>
+                        <td style="padding: 10px; border: 1px solid #444;"><code>minecraft:tree_feature</code></td>
+                        <td style="padding: 10px; border: 1px solid #444;">วางรูปแบบต้นไม้ (Tree) ลงในโลก</td>
+                    </tr>
+                    <tr>
+                        <td style="padding: 10px; border: 1px solid #444;">
+                            <code>minecraft:underwater_cave_carver_feature</code>
+                        </td>
+                        <td style="padding: 10px; border: 1px solid #444;">เจาะถ้ำใต้น้ำ (Underwater cave)</td>
+                    </tr>
+                    <tr>
+                        <td style="padding: 10px; border: 1px solid #444;">
+                            <code>minecraft:vegetation_patch_feature</code>
+                        </td>
+                        <td style="padding: 10px; border: 1px solid #444;">สร้างแพตช์พืชพรรณ (Vegetation patch)
+                            <em>(หมายเหตุอ้างอิงจากต้นฉบับ: คำอธิบายเดียวกับ Cave carver)</em>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td style="padding: 10px; border: 1px solid #444;">
+                            <code>minecraft:weighted_random_feature</code>
+                        </td>
+                        <td style="padding: 10px; border: 1px solid #444;">
+                            สุ่มเลือกและวาง Feature โดยอิงจากค่า Weight Value</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+
+        <h3>Feature ที่ไม่รองรับแล้ว</h3>
+
+        <div
+            style="background-color: #3e2a2a; padding: 15px; border-radius: 8px; border-left: 4px solid #ff5555; margin: 20px 0;">
+            <h4 style="margin-top: 0; color: #ff5555;">⚠️ คำเตือน</h4>
+            <p style="margin-bottom: 0; color: #ddd;">
+                Feature เหล่านี้เคยมีอยู่และใช้งานได้ในช่วงการทดลองรุ่นเก่า แต่ปัจจุบัน
+                <strong>ถูกถอดออกและไม่สามารถใช้งานได้แล้วครับ</strong>
+            </p>
+        </div>
+
+        <div style="overflow-x: auto;">
+            <table
+                style="width: 100%; border-collapse: collapse; margin-top: 15px; background-color: #1e1e1e; color: #aaa; font-size: 0.9em;">
+                <thead>
+                    <tr style="background-color: #333;">
+                        <th style="padding: 10px; border: 1px solid #444; text-align: left;">ชื่อ</th>
+                        <th style="padding: 10px; border: 1px solid #444; text-align: left;">คำอธิบาย</th>
+                    </tr>
+                </thead>
+                <tbody style="line-height: 1.6;">
+                    <tr>
+                        <td style="padding: 8px; border: 1px solid #444;"><code>minecraft:beards_and_shavers</code></td>
+                        <td style="padding: 8px; border: 1px solid #444;">ใช้สร้างพื้นที่เคลียร์ให้โล่ง
+                            เพื่อเตรียมพื้นที่ว่างสำหรับวาง Feature</td>
+                    </tr>
+                    <tr>
+                        <td style="padding: 8px; border: 1px solid #444;"><code>minecraft:conditional_list</code></td>
+                        <td style="padding: 8px; border: 1px solid #444;">
+                            วาง Feature อันแรกที่เหมาะสมที่สุดภายในคอลเลกชัน
+                        </td>
+                    </tr>
+                    <tr>
+                        <td style="padding: 8px; border: 1px solid #444;"><code>minecraft:rect_layout</code></td>
+                        <td style="padding: 8px; border: 1px solid #444;">สแกนพื้นผิวของ Chunk และสั่งทำงานการวาง
+                            บนพื้นผิวของทุกๆ คอลัมน์ Block</td>
+                    </tr>
+                    <tr>
+                        <td style="padding: 8px; border: 1px solid #444;"><code>minecraft:scan_surface</code></td>
+                        <td style="padding: 8px; border: 1px solid #444;">สแกนพื้นผิวของ Chunk และสั่งทำงานการวาง
+                            บนพื้นผิวของทุกๆ คอลัมน์ Block</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+
+
+        <hr style="border: 0; border-top: 1px solid #444; margin: 40px 0;">
+
+        <h2>Feature Rules</h2>
+        <p>
+            Feature จำเป็นต้องผูกไว้กับ Biome อย่างน้อยหนึ่งแห่ง เพื่อให้มันสามารถปรากฏขึ้นมาในโลกได้ครับ
+            ในระหว่างการสร้างโลก (World Generation) Biome ต่างๆ จะพยายามวาง Feature ที่ถูกผูกไว้แบบทีละ Chunk
+            ซึ่งเราสามารถผูก Feature เข้ากับ Biome ได้ผ่านการตั้งค่า <strong>Feature Rules</strong> ครับ
+        </p>
+        <p>
+            Feature Rules ซึ่งเราสามารถผูก Feature เข้ากับ Biome ได้ผ่านการตั้งค่า <strong>Feature Rules</strong> ครับ
+            จะเป็นไฟล์ JSON แยกต่างหากที่เก็บไว้ในโฟลเดอร์ <code>feature_rules</code> ของ Behavior Packs
+            โดยใช้กฎการตั้งชื่อไฟล์แบบเดียวกับ Feature
+            กฎหนึ่งไฟล์จะควบคุม Featureเพียง <strong>หนึ่งอันเท่านั้น</strong> และทำหน้าที่เป็นจุดเริ่มต้น (Root)
+            ของสายโซ่ข้อมูล Feature
+        </p>
+        <p>
+            ในการผูก Feature เข้ากับ Biome Objects <code>"conditions"</code> จะต้องมีฟิลด์
+            <code>"minecraft:biome_filter"</code>
+            รวมอยู่ด้วย
+            ซึ่งมันคือรายการของการทดสอบตัวกรอง (Filter) ที่ใช้ตรวจสอบแต่ละ Biome ว่าควรจะให้
+            Feature นี้ไปเกิดหรือไม่
+            ตัวทดสอบที่ใช้บ่อยที่สุดคือ <code>"has_biome_tag"</code> ครับ
+        </p>
+
+        <div
+            style="background-color: #2b2b2b; padding: 15px; border-radius: 8px; border-left: 4px solid #fefe00; margin: 20px 0;">
+            <p style="margin: 0; color: #ddd;">
+                <em>*คุณสามารถหารายชื่อแท็ก Biome สำหรับใช้ในฟิลด์ tag ได้ที่หน้าเอกสาร <a
+                        href="https://learn.microsoft.com/en-us/minecraft/creator/reference/content/entityreference/examples/definitions/nestedtables/biome_filter?view=minecraft-bedrock-stable"
+                        target="_blank" style="color: #ff9500;">Entity Documentation - minecraft:biome_filter</a>
+                    ครับ</em>
+            </p>
+        </div>
+
+        <h3>รอบการวาง Feature (Placement Pass)</h3>
+        <p>
+            คุณสามารถควบคุมได้ว่ากฎของ Feature นี้จะถูกนำไปใช้ในรอบการสร้างโลกช่วงไหนโดยการตั้งค่า
+            <code>"placement_pass"</code>
+            (ทั้งนี้ ลำดับการเกิดภายใน Pass เดียวกันจะไม่ถูกการันตีว่าจะเกิดก่อนหลังครับ) ประเภทของ Placement pass
+            ที่มีให้ใช้งาน ได้แก่:
+        </p>
+        <ul>
+            <li><code>first_pass</code></li>
+            <li><code>before_underground_pass</code></li>
+            <li><code>underground_pass</code></li>
+            <li><code>after_underground_pass</code></li>
+            <li><code>before_surface_pass</code></li>
+            <li><code>surface_pass</code></li>
+            <li><code>after_surface_pass</code></li>
+            <li><code>before_sky_pass</code></li>
+            <li><code>sky_pass</code></li>
+            <li><code>after_sky_pass</code></li>
+            <li><code>final_pass</code></li>
+        </ul>
+
+        <hr style="border: 0; border-top: 1px dashed #444; margin: 30px 0;">
+
+        <h3>ตัวอย่าง: Birch Forest</h3>
+        <p style="margin-bottom: 5px;">นี่คือตัวอย่างการตั้งค่า Feature Rule
+            ให้ Feature ต้น Birch ไปเกิดเฉพาะใน Biome Birch Forest ที่ไม่ใช่แบบกลายพันธุ์:</p>
+        <div class="code-wrapper" style="margin-top: 0;">
+            <pre><span class="token-punct">{</span>
+          <span class="token-key">"format_version"</span><span class="token-punct">:</span> <span class="token-string">"1.13.0"</span><span class="token-punct">,</span>
+          <span class="token-key">"minecraft:feature_rules"</span><span class="token-punct">:</span> <span class="token-punct">{</span>
+            <span class="token-key">"description"</span><span class="token-punct">:</span> <span class="token-punct">{</span>
+              <span class="token-key">"identifier"</span><span class="token-punct">:</span> <span class="token-string">"minecraft:birch_forest_surface_trees_feature"</span><span class="token-punct">,</span>
+              <span class="token-key">"places_feature"</span><span class="token-punct">:</span> <span class="token-string">"minecraft:legacy:birch_forest_tree_feature"</span>
+            <span class="token-punct">}</span><span class="token-punct">,</span>
+            <span class="token-key">"conditions"</span><span class="token-punct">:</span> <span class="token-punct">{</span>
+              <span class="token-key">"placement_pass"</span><span class="token-punct">:</span> <span class="token-string">"surface_pass"</span><span class="token-punct">,</span>
+              <span class="token-key">"minecraft:biome_filter"</span><span class="token-punct">:</span> <span class="token-punct">[</span>
+                <span class="token-punct">{</span>
+                  <span class="token-key">"test"</span><span class="token-punct">:</span> <span class="token-string">"has_biome_tag"</span><span class="token-punct">,</span>
+                  <span class="token-key">"operator"</span><span class="token-punct">:</span> <span class="token-string">"=="</span><span class="token-punct">,</span>
+                  <span class="token-key">"value"</span><span class="token-punct">:</span> <span class="token-string">"forest"</span>
+                <span class="token-punct">}</span><span class="token-punct">,</span>
+                <span class="token-punct">{</span>
+                  <span class="token-key">"all_of"</span><span class="token-punct">:</span> <span class="token-punct">[</span>
+                    <span class="token-punct">{</span>
+                      <span class="token-key">"test"</span><span class="token-punct">:</span> <span class="token-string">"has_biome_tag"</span><span class="token-punct">,</span>
+                      <span class="token-key">"operator"</span><span class="token-punct">:</span> <span class="token-string">"=="</span><span class="token-punct">,</span>
+                      <span class="token-key">"value"</span><span class="token-punct">:</span> <span class="token-string">"birch"</span>
+                    <span class="token-punct">}</span><span class="token-punct">,</span>
+                    <span class="token-punct">{</span>
+                      <span class="token-key">"test"</span><span class="token-punct">:</span> <span class="token-string">"has_biome_tag"</span><span class="token-punct">,</span>
+                      <span class="token-key">"operator"</span><span class="token-punct">:</span> <span class="token-string">"!="</span><span class="token-punct">,</span>
+                      <span class="token-key">"value"</span><span class="token-punct">:</span> <span class="token-string">"mutated"</span>
+                    <span class="token-punct">}</span>
+                  <span class="token-punct">]</span>
+                <span class="token-punct">}</span>
+              <span class="token-punct">]</span>
+            <span class="token-punct">}</span><span class="token-punct">,</span>
+            <span class="token-key">"distribution"</span><span class="token-punct">:</span> <span class="token-punct">{</span>
+              <span class="token-key">"iterations"</span><span class="token-punct">:</span> <span class="token-number">1</span><span class="token-punct">,</span>
+              <span class="token-key">"x"</span><span class="token-punct">:</span> <span class="token-number">0</span><span class="token-punct">,</span>
+              <span class="token-key">"y"</span><span class="token-punct">:</span> <span class="token-number">0</span><span class="token-punct">,</span>
+              <span class="token-key">"z"</span><span class="token-punct">:</span> <span class="token-number">0</span>
+            <span class="token-punct">}</span>
+          <span class="token-punct">}</span>
+        <span class="token-punct">}</span></pre>
+            <button class="copy-btn">คัดลอก</button>
+        </div>
+
+        <h3>โครงสร้างอ้างอิงของ Feature Rule Schema</h3>
+        <p>เพื่อให้เข้าใจภาพรวม นี่คือโครงสร้างพื้นฐานทั้งหมดที่คุณสามารถใช้งานได้ในไฟล์ Feature Rule ครับ:</p>
+
+        <h4 style="margin-top: 30px;">1. คำอธิบายและเงื่อนไขหลัก</h4>
+        <div style="overflow-x: auto;">
+            <table
+                style="width: 100%; border-collapse: collapse; background-color: #1e1e1e; color: #ddd; font-size: 0.95em;">
+                <thead>
+                    <tr style="background-color: #333;">
+                        <th style="padding: 10px; border: 1px solid #444; text-align: left;">Parameter
+
+                        </th>
+                        <th style="padding: 10px; border: 1px solid #444; text-align: center;">จำเป็น</th>
+                        <th style="padding: 10px; border: 1px solid #444; text-align: left;">คำอธิบาย</th>
+                    </tr>
+                </thead>
+                <tbody style="line-height: 1.6;">
+                    <tr>
+                        <td style="padding: 10px; border: 1px solid #444;"><code>identifier</code></td>
+                        <td style="padding: 10px; border: 1px solid #444; text-align: center; color: #ff5555;">บังคับ
+                        </td>
+                        <td style="padding: 10px; border: 1px solid #444;">ชื่อของกฎนี้ (รูปแบบ
+                            <code>namespace:rule_name</code>) ต้องตั้งชื่อให้ตรงกับชื่อไฟล์
+                        </td>
+                    </tr>
+                    <tr>
+                        <td style="padding: 10px; border: 1px solid #444;"><code>places_feature</code></td>
+                        <td style="padding: 10px; border: 1px solid #444; text-align: center; color: #ff5555;">บังคับ
+                        </td>
+                        <td style="padding: 10px; border: 1px solid #444;">อ้างอิงชื่อ Feature identifier
+                            ที่จะถูกสั่งการโดยกฎข้อนี้</td>
+                    </tr>
+                    <tr>
+                        <td style="padding: 10px; border: 1px solid #444;"><code>placement_pass</code></td>
+                        <td style="padding: 10px; border: 1px solid #444; text-align: center; color: #ff5555;">บังคับ
+                        </td>
+                        <td style="padding: 10px; border: 1px solid #444;">ระยะเวลาที่
+                            Feature จะถูกวางเมื่อเทียบกับตัวอื่นๆ (Pass
+                            ที่มาก่อน จะเกิดก่อนอย่างแน่นอน)</td>
+                    </tr>
+                    <tr>
+                        <td style="padding: 10px; border: 1px solid #444;"><code>minecraft:biome_filter</code></td>
+                        <td style="padding: 10px; border: 1px solid #444; text-align: center; color: #fefe00;">ทางเลือก
+                        </td>
+                        <td style="padding: 10px; border: 1px solid #444;">
+                            รายการของเงื่อนไขที่จะตัดสินว่ากฎนี้ถูกผูกเข้ากับ Biome ไหนบ้าง</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+
+        <h4 style="margin-top: 30px;">2. กลุ่มการกรองเงื่อนไข</h4>
+        <p style="font-size: 0.9em; color: #aaa;">ตัวกรอง (Filters) ใช้กำหนดเกณฑ์การทดสอบ
+            คุณสามารถใช้ตัวกรองแบบเดี่ยวหรือรวมเป็นกลุ่มก็ได้</p>
+        <div style="overflow-x: auto;">
+            <table
+                style="width: 100%; border-collapse: collapse; background-color: #1e1e1e; color: #ddd; font-size: 0.95em;">
+                <thead>
+                    <tr style="background-color: #333;">
+                        <th style="padding: 10px; border: 1px solid #444; text-align: left;">
+                            ชื่อกลุ่ม</th>
+                        <th style="padding: 10px; border: 1px solid #444; text-align: left;">คำอธิบายการประเมิน
+                        </th>
+                    </tr>
+                </thead>
+                <tbody style="line-height: 1.6;">
+                    <tr>
+                        <td style="padding: 10px; border: 1px solid #444;"><code>AND</code>, <code>all</code>,
+                            <code>all_of</code>
+                        </td>
+                        <td style="padding: 10px; border: 1px solid #444;">ประเมินทุกๆ การทดสอบในกลุ่มนี้
+                            <strong>ทุกอันต้องเป็นจริง (Pass)</strong> กลุ่มถึงจะถือว่าผ่าน
+                        </td>
+                    </tr>
+                    <tr>
+                        <td style="padding: 10px; border: 1px solid #444;"><code>OR</code>, <code>any</code>,
+                            <code>any_of</code>
+                        </td>
+                        <td style="padding: 10px; border: 1px solid #444;">ประเมินการทดสอบในกลุ่มนี้ หาก
+                            <strong>ผ่านแค่หนึ่งอันหรือมากกว่า</strong> กลุ่มก็ถือว่าผ่าน
+                        </td>
+                    </tr>
+                    <tr>
+                        <td style="padding: 10px; border: 1px solid #444;"><code>NOT</code>, <code>none_of</code></td>
+                        <td style="padding: 10px; border: 1px solid #444;">ประเมินทุกๆ การทดสอบในกลุ่ม
+                            <strong>ทุกอันต้องล้มเหลว
+                                (Fail)</strong> กลุ่มถึงจะถือว่าผ่าน
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+        <p style="font-size: 0.9em; margin-top: 10px; color: #aaa;">*ภายใน Filter Test แต่ละอัน จะประกอบด้วย:
+            <code>test</code>
+            (ชื่อการทดสอบ เช่น has_biome_tag), <code>operator</code> (ตัวดำเนินการ เช่น == หรือ !=), และ
+            <code>value</code>
+            (ค่าที่ใช้เปรียบเทียบ)
+        </p>
+
+        <h4 style="margin-top: 30px;">3. Scatter Distribution</h4>
+        <p style="font-size: 0.9em; color: #aaa;">ใช้ควบคุมตำแหน่งและการกระจาย (Scatter distribution) ของ Object</p>
+        <div style="overflow-x: auto;">
+            <table
+                style="width: 100%; border-collapse: collapse; background-color: #1e1e1e; color: #ddd; font-size: 0.95em;">
+                <thead>
+                    <tr style="background-color: #333;">
+                        <th style="padding: 10px; border: 1px solid #444; text-align: left;">Parameter
+                        </th>
+                        <th style="padding: 10px; border: 1px solid #444; text-align: center;">จำเป็น</th>
+                        <th style="padding: 10px; border: 1px solid #444; text-align: left;">คำอธิบาย</th>
+                    </tr>
+                </thead>
+                <tbody style="line-height: 1.6;">
+                    <tr>
+                        <td style="padding: 10px; border: 1px solid #444;"><code>iterations</code></td>
+                        <td style="padding: 10px; border: 1px solid #444; text-align: center; color: #ff5555;">บังคับ
+                        </td>
+                        <td style="padding: 10px; border: 1px solid #444;">จำนวนครั้งที่ระบบจะพยายามวาง
+                            (พยายามมากชิ้นยิ่งกระจุกตัวกันเยอะ)</td>
+                    </tr>
+                    <tr>
+                        <td style="padding: 10px; border: 1px solid #444;"><code>scatter_chance</code></td>
+                        <td style="padding: 10px; border: 1px solid #444; text-align: center; color: #fefe00;">ทางเลือก
+                        </td>
+                        <td style="padding: 10px; border: 1px solid #444;">ความน่าจะเป็นที่จะเกิดการกระจายนี้
+                            (ใช้เศษส่วนเป็น
+                            <code>numerator</code> และ <code>denominator</code>)
+                        </td>
+                    </tr>
+                    <tr>
+                        <td style="padding: 10px; border: 1px solid #444;"><code>x</code>, <code>y</code>,
+                            <code>z</code>
+                            (Coordinate Range)
+                        </td>
+                        <td style="padding: 10px; border: 1px solid #444; text-align: center; color: #ff5555;">บังคับ
+                        </td>
+                        <td style="padding: 10px; border: 1px solid #444;">กำหนดรูปแบบการกระจายบนแต่ละพิกัด เช่น
+                            <code>distribution</code> (รูปแบบ), <code>extent</code> (ขอบเขต), <code>grid_offset</code>,
+                            <code>step_size</code>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td style="padding: 10px; border: 1px solid #444;"><code>coordinate_eval_order</code></td>
+                        <td style="padding: 10px; border: 1px solid #444; text-align: center; color: #fefe00;">ทางเลือก
+                        </td>
+                        <td style="padding: 10px; border: 1px solid #444;">ลำดับการประเมินพิกัด
+                            หากแกนใดแกนหนึ่งต้องอิงจากแกนอื่น (ค่าตั้งต้น: <code>xzy</code> รองรับ: <code>xyz</code>,
+                            <code>xzy</code>, <code>yxz</code>, <code>yzx</code>, <code>zxy</code>, <code>zyx</code>)
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+        <p style="font-size: 0.9em; margin-top: 10px; color: #aaa;">*รูปแบบของการกระจายสุ่ม (Random Distribution Type)
+            ที่รองรับ
+            ได้แก่: <code>uniform</code>, <code>gaussian</code>, <code>inverse_gaussian</code>, <code>triangle</code>,
+            <code>fixed_grid</code>, <code>jittered_grid</code>
+        </p>
+
+        <hr style="border: 0; border-top: 1px dashed #444; margin: 40px 0;">
+
+        <h2>Feature Samples</h2>
+        <p>
+            Feature ทั้งหมดที่ถูกระบุไว้ในปัจจุบัน (อ้างอิง ณ เวอร์ชัน 1.20.40) ได้ถูกรวบรวมไว้ใน <strong><a
+                    href="https://github.com/microsoft/minecraft-creator-learning/tree/main/feature-samples"
+                    target="_blank" style="color: #ff9500;">Sample Pack</a></strong>
+            เป็นที่เรียบร้อยแล้วครับ
+        </p>
+        <p>
+            คุณสามารถดาวน์โหลดและนำแพ็กนี้ไปเปิดใช้ในโลกของคุณ เสมือนเป็นบทช่วยสอน (Tutorial) ส่วนตัว
+            เพื่อเรียนรู้เพิ่มเติมว่า
+            Feature และ Feature Rules ทำงานร่วมกันอย่างไรในสภาพแวดล้อมจริง
+        </p>
+
+        <div
+            style="background-color: #2b2b2b; padding: 15px; border-radius: 8px; border-left: 4px solid #ff9500; margin: 20px 0;">
+            <p style="margin: 0; color: #ddd;">
+                <em>
+                    *นอกจากนี้ เราขอแนะนำให้คุณลองเข้าไปตรวจสอบในโฟลเดอร์ <code>feature</code> และ
+                    <code>feature_rules</code>
+                    ของ
+                    <strong><a href="https://www.minecraft.net/en-us/download/server/bedrock" target="_blank"
+                            style="color: #ff9500;">Minecraft Dedicated Server</a></strong>
+                    เวอร์ชันล่าสุด เพื่อดูตัวอย่างโค้ด Feature Rules ต้นฉบับจากตัวเกม (Vanilla)
+                    ได้อีกด้วยครับ
+                    การแกะโค้ดของเกมแท้จะช่วยให้คุณเห็นภาพชัดเจนที่สุด!
+                </em>
+            </p>
+        </div>
+    </article>
+
+    <footer>
+        <h2>ช่องทางติดต่อ</h2>
+        <div class="social-container">
+            <a class="social-icons" href="https://www.facebook.com/AddonInsiderTH">
+                <img src="../../image/facebook-svgrepo-com.png" alt="Facebook">
+            </a>
+            <a class="social-icons" href="https://www.youtube.com/@MCFirsting">
+                <img src="../../image/youtube-fill-svgrepo-com.png" alt="YouTube">
+            </a>
+            <a class="social-icons" href="https://discord.gg/tnqZCfz4wz">
+                <img src="../../image/discord-svgrepo-com.png" alt="Discord">
+            </a>
+            <a class="social-icons" href="https://github.com/MCFirsting">
+                <img src="../../image/github-svgrepo-com.png" alt="GitHub">
+            </a>
+            <a class="social-icons" href="https://www.tiktok.com/@mc_firsting">
+                <img src="../../image/tiktok-svgrepo-com.png" alt="TikTok">
+            </a>
+        </div>
+    </footer>
+</body>
+
+</html>
