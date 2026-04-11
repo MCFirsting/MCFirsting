@@ -9,6 +9,7 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
     <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/@emailjs/browser@3/dist/email.min.js"></script>
     <style>
+        /* CSS พื้นฐาน */
         .shop-container {
             min-height: 50vh;
             display: flex;
@@ -29,82 +30,7 @@
             transition: transform 0.3s ease;
         }
 
-        .product-card:hover {
-            transform: translateY(-5px);
-        }
-
-        .product-image-placeholder {
-            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.5);
-            width: 250px;
-            height: 250px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            margin: 0 auto 20px auto;
-            font-size: 5rem;
-            overflow: hidden;
-            border-radius: 8px;
-        }
-
-        .product-image-placeholder img {
-            max-width: 100%;
-            max-height: 100%;
-            object-fit: contain;
-        }
-
-        .product-title {
-            color: #fff;
-            font-size: 1.8rem;
-            margin-bottom: 10px;
-        }
-
-        .product-desc {
-            color: #aaa;
-            font-size: 1rem;
-            line-height: 1.6;
-            margin-bottom: 20px;
-        }
-
-        .product-price {
-            font-size: 2.5rem;
-            color: #ff9500;
-            font-weight: bold;
-            margin-bottom: 25px;
-        }
-
-        .buy-btn {
-            display: inline-block;
-            background-color: #ff9500;
-            color: #111;
-            padding: 15px 40px;
-            border-radius: 8px;
-            text-decoration: none;
-            font-weight: bold;
-            font-size: 1.2rem;
-            transition: background-color 0.2s;
-            cursor: pointer;
-            border: none;
-            font-family: inherit;
-        }
-
-        .buy-btn:hover {
-            background-color: #e08300;
-        }
-
-        .feature-list {
-            text-align: left;
-            color: #ddd;
-            margin-bottom: 25px;
-            line-height: 1.8;
-            list-style-type: none;
-            padding: 0;
-        }
-
-        .feature-list li i {
-            color: #ff9500;
-            margin-right: 10px;
-        }
-
+        /* สไตล์ Modal */
         .modal-overlay {
             display: none;
             position: fixed;
@@ -112,69 +38,133 @@
             left: 0;
             width: 100%;
             height: 100%;
-            background-color: rgba(0, 0, 0, 0.7);
+            background-color: rgba(0, 0, 0, 0.85);
             z-index: 1000;
             justify-content: center;
-            align-items: center;
-            backdrop-filter: blur(5px);
+            align-items: flex-start;
+            padding-top: 50px;
+            overflow-y: auto;
+            backdrop-filter: blur(8px);
         }
 
         .modal-content {
             background-color: #1e1e1e;
-            padding: 30px;
+            padding: 0;
             border-radius: 12px;
-            width: 90%;
-            max-width: 450px;
-            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
-            border-top: 4px solid #ff9500;
+            width: 95%;
+            max-width: 800px;
+            box-shadow: 0 10px 40px rgba(0, 0, 0, 0.5);
+            border: 1px solid #333;
             position: relative;
+            color: #ddd;
+            margin-bottom: 50px;
+        }
+
+        .modal-header {
+            padding: 20px;
+            border-bottom: 1px solid #333;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .modal-body {
+            padding: 30px;
+        }
+
+        /* Preview Section */
+        .preview-section h3 {
+            color: #fff;
+            border-bottom: 1px solid #ff9500;
+            display: inline-block;
+            padding-bottom: 5px;
+            margin-top: 25px;
+            font-size: 1.3rem;
+        }
+
+        .preview-img {
+            width: 100%;
+            border-radius: 8px;
+            margin: 15px 0;
+            border: 1px solid #444;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
+        }
+
+        .feature-box {
+            background: #2a2a2a;
+            padding: 15px;
+            border-radius: 8px;
+            margin: 10px 0;
+            border-left: 4px solid #ff9500;
+        }
+
+        /* ปุ่มต่างๆ */
+        .btn-primary {
+            background-color: #ff9500;
+            color: #111;
+            padding: 15px 25px;
+            border-radius: 6px;
+            font-weight: bold;
+            border: none;
+            cursor: pointer;
+            width: 100%;
+            font-size: 1.1rem;
+            transition: 0.2s;
+            font-family: inherit;
+        }
+
+        .btn-primary:hover {
+            background-color: #e08300;
+            transform: scale(1.02);
         }
 
         .close-modal {
-            position: absolute;
-            top: 15px;
-            right: 20px;
-            color: #aaa;
-            font-size: 1.5rem;
+            color: #888;
+            font-size: 1.8rem;
             cursor: pointer;
-            transition: color 0.2s;
+            transition: 0.2s;
+        }
+
+        .close-modal:hover {
+            color: #ff5555;
         }
 
         .form-group {
-            margin-bottom: 15px;
-            text-align: left;
+            margin-bottom: 20px;
         }
 
         .form-group label {
             display: block;
-            color: #ddd;
-            margin-bottom: 5px;
-            font-size: 0.95rem;
+            margin-bottom: 8px;
+            color: #aaa;
         }
 
         .form-group input {
             width: 100%;
             padding: 12px;
-            background-color: #2b2b2b;
+            background: #2b2b2b;
             border: 1px solid #444;
             color: #fff;
             border-radius: 6px;
-            font-family: inherit;
             box-sizing: border-box;
         }
 
-        .submit-btn {
+        #paymentStep {
+            display: none;
+        }
+
+        .product-image-placeholder {
             width: 100%;
-            background-color: #ff9500;
-            color: #111;
-            padding: 12px;
-            border: none;
-            border-radius: 6px;
-            font-weight: bold;
-            font-size: 1.1rem;
-            cursor: pointer;
-            margin-top: 10px;
-            transition: background-color 0.2s;
+            height: 250px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-bottom: 20px;
+        }
+
+        .product-image-placeholder img {
+            max-width: 250px;
+            filter: drop-shadow(0 10px 15px rgba(0, 0, 0, 0.5));
         }
 
         #sellerPanel {
@@ -190,6 +180,20 @@
             box-shadow: 0 5px 15px rgba(0, 0, 0, 0.5);
             max-width: 300px;
             color: white;
+        }
+
+        .feature-list {
+            text-align: left;
+            color: #ddd;
+            margin-bottom: 25px;
+            line-height: 1.8;
+            list-style-type: none;
+            padding: 0;
+        }
+
+        .feature-list li i {
+            color: #ff9500;
+            margin-right: 10px;
         }
     </style>
 </head>
@@ -215,59 +219,145 @@
     <section class="shop-container">
         <div class="product-card">
             <div class="product-image-placeholder">
-                <img src="/image/thai_icon.png" width="250px" alt="">
+                <img src="/image/Shop/thai_icon.png" alt="Thai Festival Add-on Pro">
             </div>
-            <h2 class="product-title">thai festival add-on pro</h2>
-            <p class="product-desc">
-                สัมผัสประสบการณ์วัฒนธรรมไทยผ่านไอเทมและเทศกาลที่หลากหลาย
-            </p>
+            <h2 class="product-title" style="color: #fff;">thai festival add-on pro</h2>
+            <p class="product-desc" style="color: #aaa; margin-bottom: 20px;">
+                สัมผัสประสบการณ์วัฒนธรรมไทยผ่านไอเทมและเทศกาลที่หลากหลาย</p>
 
-            <ul class="feature-list">
-                <li><i class="fa-solid fa-check"></i> มีหนังสือคู่มือ</li>
-                <li><i class="fa-solid fa-check"></i> รองรับภาษาไทย</li>
-                <li><i class="fa-solid fa-check"></i> มีเควส</li>
-                <li><i class="fa-solid fa-check"></i> มีแผ่นเพลง</li>
-                <li><i class="fa-solid fa-check"></i> ระบบสถานะปืนฉีดน้ำ</li>
-                <li><i class="fa-solid fa-check"></i> ระบบขอพร</li>
-            </ul>
-            <div class="product-price">150 THB</div>
-            <button class="buy-btn" id="openModalBtn">สั่งซื้อ</button>
+            <button class="buy-btn" id="openModalBtn"
+                style="width: 100%; padding: 15px; background: #ff9500; border: none; border-radius: 8px; font-weight: bold; cursor: pointer;">ดูรายละเอียดและสั่งซื้อ</button>
         </div>
     </section>
 
     <div class="modal-overlay" id="checkoutModal">
         <div class="modal-content">
-            <span class="close-modal" id="closeModalBtn"><i class="fa-solid fa-xmark"></i></span>
-            <h2>แจ้งชำระเงิน</h2>
-            <form id="checkoutForm">
-                <div class="form-group">
-                    <label>อีเมล</label>
-                    <input type="email" id="customerEmail" placeholder="example@gmail.com" required>
+            <div class="modal-header">
+                <h2 id="modalTitle" style="margin:0; font-size: 1.4rem; color: #fff;">Thai Festival Add-on Pro</h2>
+                <span class="close-modal" id="closeModalBtn">&times;</span>
+            </div>
+
+            <div class="modal-body">
+                <div id="previewStep" class="preview-section">
+                    <p style="font-size: 1.1rem; line-height: 1.6;">
+                        สัมผัสประสบการณ์วัฒนธรรมไทยผ่านไอเทมและเทศกาลที่หลากหลาย</p>
+
+                    <h3>Tradition Trader</h3>
+                    <img src="/image/Shop/Screenshot Tradition Trader.png" class="preview-img" alt="Trader Preview">
+                    <p>ผู้ขายประเพณี มาพร้อมระบบภารกิจแลกแผ่นเพลงลับ!</p>
+
+                    <h3>Water Gun</h3>
+                    <img src="/image/Shop/Screenshot Water Gun.png" class="preview-img" alt="Water Gun Preview">
+                    <p><strong>ปืนฉีดน้ำหลากสี เล่นสนุก ดับไฟได้จริง ปราบมอนสเตอร์ไฟพร้อมระบบเติมน้ำที่สมจริง
+                    </p>
+
+                    <h3>Water Bowls</h3>
+                    <img src="/image/Shop/Screenshot Water Bowls.png" class="preview-img" alt="Water Bowls Preview">
+                    <p><strong>ขันน้ำหลากสี สาดสนุก ดับไฟได้จริง ปราบมอนสเตอร์ไฟพร้อมระบบเติมน้ำที่สมจริง
+                    </p>
+
+                    <h3>Krathong</h3>
+                    <img src="/image/Shop/Screenshot Krathong.png" class="preview-img" alt="Krathong Preview">
+                    <p><strong>ขอพรลุ้นรับรางวัลและบัพพิเศษจากสายน้ำ</p>
+
+
+                    <h3>Sky Lantern</h3>
+                    <img src="/image/Shop/Screenshot Sky Lantern.png" class="preview-img" alt="Sky Lantern Preview">
+                    <p><strong>ขอพรลุ้นรับรางวัลและบัพพิเศษจากสรวงสวรรค์</p>
+
+                    <h3>Yi Peng Lantern</h3>
+                    <img src="/image/Shop/Screenshot Yi Peng Lantern.png" class="preview-img"
+                        alt="Yi Peng Lantern Preview">
+                    <p><strong>โคมยี่เป้งหลากสี ใช้ประดับสถานที่และให้แสงสว่างได้ในยามค่ำคืน</p>
+
+                    <h3>Buffalo</h3>
+                    <img src="/image/Shop/Screenshot Buffalo.png" class="preview-img" alt="Buffalo Preview">
+                    <p><strong>สัตว์พาหนะที่ซ้อนได้ถึง 2 คน ช่วยปกป้องเจ้าของด้วยการขวิดศัตรูที่เข้าใกล้ ใช้ "Stick"
+                            เพื่อเร่งความเร็วในการเดินทาง</p>
+
+                    <h3>Bunting Flags</h3>
+                    <img src="/image/Shop/Screenshot Bunting Flags.png" class="preview-img" alt="Bunting Flags Preview">
+                    <p><strong>เป็นบล็อกประดับตกแต่งที่ช่วยสร้างบรรยากาศงาน</p>
+
+                    <div class="feature-box">
+                        <h4 style="margin-top: 0; color: #ff9500;">ฟีเจอร์เด่นในเวอร์ชัน Pro:</h4>
+                        <ul style="margin:0; padding-left: 20px; line-height: 1.8;">
+                            <li>มีหนังสือคู่มือ</li>
+                            <li>รองรับภาษาไทย</li>
+                            <li>มีเควส</li>
+                            <li>มีแผ่นเพลง</li>
+                            <li>ระบบสถานะปืนฉีดน้ำ</li>
+                            <li>ระบบขอพร</li>
+                        </ul>
+                        <br>
+                        <h4 style="margin-top: 0; color: #ff9500;">เวอร์ชันที่รองรับ:</h4>
+                        <ul style="margin:0; padding-left: 20px; line-height: 1.8;">
+                            <li>Minecraft Bedrock Edtion 1.21.20 หรือสูงกว่า</li>
+                            <li>เล่นได้ทันที โดยไม่ต้องเปิดโหมดทดลอง</li>
+                        </ul>
+                    </div>
+
+                    <p style="margin-top: 30px; color: #aaa; font-size: 0.95rem; text-align: center;">
+                        กดปุ่มด้านล่างเพื่อดำเนินการชำระเงิน</p>
+                    <button class="btn-primary" onclick="goToPayment()">150 THB</button>
                 </div>
-                <div class="form-group">
-                    <label>โปรไฟล์ Discord</label>
-                    <input type="text" id="discordProfile" placeholder="ชื่อ#1234" required>
+
+                <div id="paymentStep">
+                    <button onclick="goToPreview()"
+                        style="background: none; border: none; color: #ff9500; cursor: pointer; margin-bottom: 20px; font-size: 1rem;"><i
+                            class="fa-solid fa-arrow-left"></i> ย้อนกลับไปดูรายละเอียด</button>
+
+                    <div
+                        style="background: #2a2a2a; padding: 20px; border-radius: 8px; border-left: 4px solid #ff9500; margin-bottom: 25px;">
+                        <h4 style="margin:0 0 10px 0; color: #fff;">ขั้นตอนการชำระเงิน</h4>
+                        <p style="margin:0; font-size: 0.95rem; line-height: 1.5;">กรุณาโอนเต็มจำนวนผ่านซองของขวัญ
+                            TrueMoney แล้วนำลิงก์ซองมาวางในช่องด้านล่างเพื่อยืนยัน</p>
+                    </div>
+
+                    <form id="checkoutForm">
+                        <div class="form-group">
+                            <label><i class="fa-solid fa-envelope"></i> อีเมล (สำหรับรับลิงก์ดาวน์โหลดไฟล์)</label>
+                            <input type="email" id="customerEmail" placeholder="example@gmail.com" required>
+                        </div>
+                        <div class="form-group">
+                            <label><i class="fa-solid fa-gift"></i> ลิงก์ซอง TrueMoney</label>
+                            <input type="url" id="truemoneyLink" placeholder="https://gift.truemoney.com/..." required>
+                        </div>
+                        <button type="submit" class="submit-btn btn-primary"
+                            id="submitOrderBtn">ยืนยันการสั่งซื้อ</button>
+                    </form>
                 </div>
-                <div class="form-group">
-                    <label>ลิงก์ซอง TrueMoney</label>
-                    <input type="url" id="truemoneyLink" placeholder="https://gift.truemoney.com/..." required>
-                </div>
-                <button type="submit" class="submit-btn" id="submitOrderBtn">ยืนยันการสั่งซื้อ</button>
-            </form>
+            </div>
         </div>
     </div>
 
     <div id="sellerPanel">
         <h3 style="color: #ff9500; margin-top:0;">🚀 Seller Quick Send</h3>
         <p style="font-size: 0.85em;">เตรียมส่งไฟล์ให้:<br><strong id="targetEmailLabel">...</strong></p>
-        <button class="submit-btn" id="confirmSendEmailBtn">กดเพื่อส่งไฟล์ทันที</button>
+        <button class="submit-btn" id="confirmSendEmailBtn"
+            style="background: #ff9500; border:none; padding:10px; width:100%; border-radius:5px; font-weight:bold; cursor:pointer;">กดเพื่อส่งไฟล์ทันที</button>
         <button style="background:none; border:none; color:#aaa; cursor:pointer; margin-top:10px; font-size:0.8em;"
             onclick="document.getElementById('sellerPanel').style.display='none'">ยกเลิก</button>
     </div>
 
     <script>
-        const DISCORD_WEBHOOK_URL = "https://discord.com/api/webhooks/1488955494432505998/Kl9wWDF9q_iS-c73Dc4P-M9CJKNNOQ8NdhnGBHqo6uNptr8ubC7XRD9k3v3d-ou0jKDZ";
+        const previewStep = document.getElementById('previewStep');
+        const paymentStep = document.getElementById('paymentStep');
+        const modalTitle = document.getElementById('modalTitle');
 
+        function goToPayment() {
+            previewStep.style.display = 'none';
+            paymentStep.style.display = 'block';
+            modalTitle.innerText = "การชำระเงิน";
+        }
+
+        function goToPreview() {
+            previewStep.style.display = 'block';
+            paymentStep.style.display = 'none';
+            modalTitle.innerText = "Thai Festival Add-on Pro";
+        }
+
+        const DISCORD_WEBHOOK_URL = "https://discord.com/api/webhooks/1488955494432505998/Kl9wWDF9q_iS-c73Dc4P-M9CJKNNOQ8NdhnGBHqo6uNptr8ubC7XRD9k3v3d-ou0jKDZ";
         const EMAILJS_PUBLIC_KEY = "1TXbcvp1eWOCDy0gy";
         const EMAILJS_SERVICE_ID = "service_wxs3m8p";
         const EMAILJS_TEMPLATE_ID = "template_h19ovbi";
@@ -284,61 +374,51 @@
         document.getElementById("checkoutForm").addEventListener("submit", function (e) {
             e.preventDefault();
             const email = document.getElementById("customerEmail").value;
-            const discord = document.getElementById("discordProfile").value;
             const link = document.getElementById("truemoneyLink").value;
-
-            const quickSendLink = `${window.location.origin}${window.location.pathname}?send_to=${encodeURIComponent(email)}&discord=${encodeURIComponent(discord)}`;
+            const quickSendLink = `${window.location.origin}${window.location.pathname}?send_to=${encodeURIComponent(email)}`;
 
             const payload = {
-                content: "🛒 **มีคำสั่งซื้อใหม่!**",
+                content: "🛒 **ออเดอร์ใหม่จากหน้า Preview!**",
                 embeds: [{
                     title: "📦 Thai Festival Add-on Pro",
                     color: 16749824,
                     fields: [
                         { name: "📧 อีเมล", value: email, inline: true },
-                        { name: "💬 Discord", value: discord, inline: true },
-                        { name: "💰 ลิงก์ซอง (ซองหมดอายุใน 1 ชม.)", value: link },
-                        { name: "⚡ ทางลัดส่งไฟล์", value: `[กดที่นี่เพื่อส่งไฟล์หลังได้รับเงิน](${quickSendLink})` }
-                    ]
+                        { name: "💰 ลิงก์ซอง", value: link },
+                        { name: "⚡ ทางลัดส่งไฟล์", value: `[คลิกเพื่อส่งไฟล์ทันที](${quickSendLink})` }
+                    ],
+                    footer: { text: "กรุณาตรวจสอบซองเงินก่อนกดส่ง" }
                 }]
             };
 
             fetch(DISCORD_WEBHOOK_URL, { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify(payload) })
                 .then(() => {
-                    alert("แจ้งชำระเงินเรียบร้อย! รอรับไฟล์ทางอีเมลได้เลยครับ");
+                    alert("แจ้งชำระเงินสำเร็จ! ทีมงานจะตรวจสอบและจัดส่งไฟล์ให้ทางอีเมลครับ");
                     document.getElementById("checkoutModal").style.display = "none";
                 });
         });
 
-        // ระบบส่งเมลหาลูกค้า (คุณเป็นคนกด)
         document.getElementById("confirmSendEmailBtn").addEventListener("click", function () {
             this.disabled = true;
-            this.innerText = "กำลังส่งไฟล์...";
-
-            const urlParams = new URLSearchParams(window.location.search);
-            const customerDiscord = urlParams.get('discord');
-
-            const templateParams = {
+            this.innerText = "กำลังส่ง...";
+            emailjs.send(EMAILJS_SERVICE_ID, EMAILJS_TEMPLATE_ID, {
                 customer_email: adminEmail,
-                customer_name: customerDiscord,
+                customer_name: "คุณลูกค้า",
                 product_name: "Thai Festival Add-on Pro",
                 download_link: "https://drive.google.com/file/d/12jtncPNUyww9YfpRDJ9v4VirDK5WSadn/view?usp=sharing"
-            };
-
-            emailjs.send(EMAILJS_SERVICE_ID, EMAILJS_TEMPLATE_ID, templateParams)
-                .then(() => {
-                    alert("ส่งไฟล์ให้คุณ " + customerDiscord + " เรียบร้อยแล้ว!");
-                    window.location.href = window.location.pathname;
-                }, (err) => {
-                    alert("ส่งเมลล้มเหลว: " + JSON.stringify(err));
-                    this.disabled = false;
-                    this.innerText = "กดเพื่อส่งไฟล์ทันที";
-                });
+            }).then(() => {
+                alert("ส่งไฟล์เรียบร้อยแล้ว!");
+                window.location.href = window.location.pathname;
+            });
         });
 
         const modal = document.getElementById("checkoutModal");
-        document.getElementById("openModalBtn").onclick = () => modal.style.display = "flex";
+        document.getElementById("openModalBtn").onclick = () => {
+            modal.style.display = "flex";
+            goToPreview();
+        };
         document.getElementById("closeModalBtn").onclick = () => modal.style.display = "none";
+        window.onclick = (e) => { if (e.target == modal) modal.style.display = "none"; };
     </script>
 </body>
 
