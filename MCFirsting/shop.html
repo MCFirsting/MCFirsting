@@ -221,7 +221,7 @@
             <div class="product-image-placeholder">
                 <img src="/image/Shop/thai_icon.png" alt="Thai Festival Add-on Pro">
             </div>
-            <h2 class="product-title" style="color: #fff;">thai festival add-on pro</h2>
+            <h2 class="product-title" style="color: #fff;">thai festival add-on</h2>
             <p class="product-desc" style="color: #aaa; margin-bottom: 20px;">
                 สัมผัสประสบการณ์วัฒนธรรมไทยผ่านไอเทมและเทศกาลที่หลากหลาย</p>
 
@@ -233,7 +233,7 @@
     <div class="modal-overlay" id="checkoutModal">
         <div class="modal-content">
             <div class="modal-header">
-                <h2 id="modalTitle" style="margin:0; font-size: 1.4rem; color: #fff;">Thai Festival Add-on Pro</h2>
+                <h2 id="modalTitle" style="margin:0; font-size: 1.4rem; color: #fff;">Thai Festival Add-on</h2>
                 <span class="close-modal" id="closeModalBtn">&times;</span>
             </div>
 
@@ -299,7 +299,7 @@
 
                     <p style="margin-top: 30px; color: #aaa; font-size: 0.95rem; text-align: center;">
                         กดปุ่มด้านล่างเพื่อดำเนินการชำระเงิน</p>
-                    <button class="btn-primary" onclick="goToPayment()">150 THB</button>
+                    <button class="btn-primary" onclick="goToPayment()">99 THB</button>
                 </div>
 
                 <div id="paymentStep">
@@ -401,7 +401,7 @@
             const payload = {
                 content: "🛒 **ออเดอร์ใหม่จากหน้า Preview!**",
                 embeds: [{
-                    title: "📦 Thai Festival Add-on Pro",
+                    title: "📦 Thai Festival Add-on",
                     color: 16749824,
                     fields: [
                         { name: "📧 อีเมล", value: email, inline: true },
@@ -425,7 +425,7 @@
             emailjs.send(EMAILJS_SERVICE_ID, EMAILJS_TEMPLATE_ID, {
                 customer_email: adminEmail,
                 customer_name: "คุณลูกค้า",
-                product_name: "Thai Festival Add-on Pro",
+                product_name: "Thai Festival Add-on",
                 download_link: "https://drive.google.com/file/d/12jtncPNUyww9YfpRDJ9v4VirDK5WSadn/view?usp=sharing"
             }).then(() => {
                 alert("ส่งไฟล์เรียบร้อยแล้ว!");
